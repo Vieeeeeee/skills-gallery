@@ -690,7 +690,7 @@ export function App() {
           setIsAdmin(true);
           showToast('管理模式已解锁！');
         }}
-        correctPasscode="wibi888"
+        correctPasscode={import.meta.env.VITE_ADMIN_PASSCODE || 'wibi888'}
       />
 
       <EditModal

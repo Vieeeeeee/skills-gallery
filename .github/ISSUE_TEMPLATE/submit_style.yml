@@ -1,0 +1,77 @@
+name: 🎨 投稿新视觉风格 (Submit New Style)
+description: 提交您原创或整理的工业级生图 Prompt、画风效果图与参数
+title: "【风格收录】: <风格名称>"
+labels: ["style-submission", "community"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您为 **Prompt & Skill 风格大赏** 贡献精彩的视觉风格！
+        请尽可能详细地填写以下信息，通过审核后将直接收录进主画廊并永久署名您的社交账号。
+  - type: input
+    id: style_name
+    attributes:
+      label: 风格名称 (Style Name)
+      placeholder: "例如：宋代青绿水墨、赛博故障霓虹、冷压手绘水彩插画..."
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: 所属灵感分类 (Category)
+      options:
+        - "国风与水墨"
+        - "水彩与插画"
+        - "动漫与波普"
+        - "极简与解构"
+        - "纸艺与拼贴"
+        - "海报与画册"
+        - "AI 视频与动效"
+        - "自媒体与创作"
+        - "生产力与开发"
+        - "职场与思考"
+        - "法律与政务"
+        - "其他分类"
+    validations:
+      required: true
+  - type: textarea
+    id: prompt
+    attributes:
+      label: 完整生图提示词 (Prompt)
+      description: 包含画面主体描述、光影、渲染器、材质词等，中英文皆可。
+      placeholder: "cinematic lighting, watercolor washes on cold press paper, intricate ink outlines..."
+    validations:
+      required: true
+  - type: textarea
+    id: motion_prompt
+    attributes:
+      label: 可选：运镜/动态视频提示词 (Motion Prompt)
+      description: 若该风格适合做动态视频，请填写即梦/Seedance/Runway 运镜词
+      placeholder: "slow camera push-in, subtle floating ink particles, 4k 60fps..."
+  - type: input
+    id: aspect_ratio
+    attributes:
+      label: 推荐画幅 (Aspect Ratio)
+      placeholder: "3:4 / 1:1 / 16:9 / 9:16"
+  - type: textarea
+    id: sample_images
+    attributes:
+      label: 样例效果图 (Sample Images)
+      description: 请直接将生成的出图拖拽或粘贴到下方文本框中（GitHub 会自动生成图片链接）
+      placeholder: "直接将图片拖进此处即可..."
+    validations:
+      required: true
+  - type: input
+    id: author_name
+    attributes:
+      label: 创作者署名 (Author Handle)
+      description: 您的名字或昵称（将展示在卡片首页）
+      placeholder: "@您的名字"
+    validations:
+      required: true
+  - type: input
+    id: author_link
+    attributes:
+      label: 个人社交主页 (Social / GitHub URL)
+      description: 点击署名跳转的主页（GitHub / 即刻 / X / 小红书 / 博客）
+      placeholder: "https://github.com/your-username"

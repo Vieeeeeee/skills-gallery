@@ -1,0 +1,57 @@
+name: ⚡ 投稿新 Agent Skill / 工具 (Submit New Skill)
+description: 提交针对 Claude Code、Cursor、Codex、Antigravity 的智能体技能或设计工具
+title: "【Skill收录】: <Skill名称>"
+labels: ["skill-submission", "community"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您推荐优质的 Agent Skill 扩展或设计生产力工具！
+  - type: input
+    id: skill_name
+    attributes:
+      label: 技能名称 (Skill Name)
+      placeholder: "例如：apple-design、guizang-ppt-skill、darwin-skill..."
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: 所属分类 (Category)
+      options:
+        - "开源 Skill"
+        - "生产力与开发"
+        - "自媒体与创作"
+        - "设计工具"
+        - "职场与思考"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: 技能功能描述 (Description)
+      description: 用 1~2 句话讲清楚这个技能解决了什么问题，何时触发
+      placeholder: "一键生成 Apple 级别流体动效与界面排版规范..."
+    validations:
+      required: true
+  - type: textarea
+    id: install_command
+    attributes:
+      label: 一键安装指令 (Install Command)
+      placeholder: "npx skills add xxx 或 git clone ..."
+    validations:
+      required: true
+  - type: input
+    id: repo_url
+    attributes:
+      label: 开源代码仓库或官网 (Repository / Website URL)
+      placeholder: "https://github.com/owner/repo"
+    validations:
+      required: true
+  - type: input
+    id: author
+    attributes:
+      label: 开发者 / 推荐人 (Author)
+      placeholder: "@作者名"
+    validations:
+      required: true

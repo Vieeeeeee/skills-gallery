@@ -5,7 +5,7 @@ export function AdminAuthModal({
   isOpen,
   onClose,
   onAuthenticate,
-  correctPasscode = 'wibi888'
+  correctPasscode = (import.meta.env.VITE_ADMIN_PASSCODE || 'wibi888')
 }) {
   const [inputPasscode, setInputPasscode] = useState('');
   const [error, setError] = useState('');

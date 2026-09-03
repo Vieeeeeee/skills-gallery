@@ -1,0 +1,22 @@
+name: 🐛 报告缺陷与问题 (Bug Report)
+description: 提交排版错位、复制异常、图片丢失或性能问题
+title: "【问题反馈】: <简要描述>"
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述 (Description)
+      placeholder: "在什么环境下（如 iOS Safari / 电脑端 Chrome），执行什么操作后遇到了什么问题..."
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 运行设备与浏览器 (Environment)
+      placeholder: "macOS 15.2 / Chrome 132 / iPhone 15 Pro"
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: 截图或录屏 (Screenshot)
+      description: 可直接粘贴截图到这里

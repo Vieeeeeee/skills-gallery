@@ -21,8 +21,17 @@ dist-ssr/
 .idea/
 .vscode/
 
-# Large local backups not meant for git
+# Large local backups and private drafts
 local_backup_fonts/
+backups/
+*.docx
+BLOCKED.md
+PROGRESS.md
+
+# Environment variables
+.env
+.env.local
+.env.*.local
 
 # Logs
 npm-debug.log*
