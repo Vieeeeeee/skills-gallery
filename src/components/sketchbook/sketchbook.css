@@ -210,7 +210,7 @@
   flex: 1 1;
   min-width: 0;
   max-width: min(840px, 86vw);
-  max-height: min(520px, 57vh);
+  max-height: min(480px, 52vh);
   aspect-ratio: 1760 / 1240;
   perspective: 1750px;
   perspective-origin: 50% 46%;

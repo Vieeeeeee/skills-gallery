@@ -114,6 +114,9 @@ export function SketchbookView({
 
       if (isMounted) {
         setPages(spreadList);
+        if (spreadList.length > 0) {
+          setActiveItem(spreadList[0]);
+        }
       }
 
       // Idle-time background preheating for the rest of pages
@@ -264,12 +267,17 @@ export function SketchbookView({
       capIn.style.opacity = inn.toFixed(3);
     }
 
+    function syncActivePage(targetIdx) {
+      const page = pages[targetIdx];
+      if (page) {
+        setActiveItem(page);
+      }
+    }
+
     function caption() {
       if (!capBox) return;
       capBox.textContent = '';
       capOut = capIn = null;
-      const curPage = pages[turn ? turn.to : idx];
-      setActiveItem(curPage);
 
       if (turn) {
         capOut = el('p', 'sb-caption live');
@@ -315,8 +323,8 @@ export function SketchbookView({
 
     function restLoupe() {
       const b = bookBox();
-      lx = b.x + b.w * 0.88;
-      ly = b.y + b.h * 0.855;
+      lx = b.x + b.w * 0.86;
+      ly = b.y + b.h * 0.65;
       placeLoupe();
     }
 
@@ -355,7 +363,7 @@ export function SketchbookView({
       const nx = (b.w / 2 + (lx - b.x - b.w / 2) / view.z) / b.w;
       const ny = (b.h / 2 + (ly - b.y - b.h / 2) / view.z) / b.h;
       if (nx < 0.02 || nx > 0.98 || ny < 0.17 || ny > 0.83) return;
-      lTarget = { x: b.x + b.w * (dir === 'next' ? 0.12 : 0.88), y: b.y + b.h * 0.855 };
+      lTarget = { x: b.x + b.w * (dir === 'next' ? 0.14 : 0.86), y: b.y + b.h * 0.65 };
       kick();
     }
 
@@ -524,14 +532,31 @@ export function SketchbookView({
 
     function commit() {
       if (!turn) return;
-      if (REDUCED) { idx = turn.to; turn = null; paint(); return; }
-      animateTo(1, () => { idx = turn.to; turn = null; paint(); }, 170, 26);
+      const targetIdx = turn.to;
+      if (REDUCED) { 
+        idx = targetIdx; 
+        turn = null; 
+        paint(); 
+        syncActivePage(targetIdx);
+        return; 
+      }
+      animateTo(1, () => { 
+        idx = targetIdx; 
+        turn = null; 
+        paint(); 
+        syncActivePage(targetIdx);
+      }, 170, 26);
       kick();
     }
 
     function cancel() {
       if (!turn) return;
-      animateTo(0, () => { turn = null; paint(); }, 150, 24);
+      const currentIdx = idx;
+      animateTo(0, () => { 
+        turn = null; 
+        paint(); 
+        syncActivePage(currentIdx);
+      }, 150, 24);
       kick();
     }
 
@@ -553,6 +578,7 @@ export function SketchbookView({
       }
       idx = i;
       paint();
+      syncActivePage(i);
     }
 
     // Pointer down on book
@@ -613,7 +639,7 @@ export function SketchbookView({
       if (!lgrab || !book) return;
       const b = bookBox(), R = loupeSize() / 2;
       lx = Math.max(b.x - R * 0.7, Math.min(b.x + b.w + R * 0.7, lgrab.lx0 + (e.clientX - lgrab.cx)));
-      ly = Math.max(b.y - R * 0.7, Math.min(b.y + b.h + R * 1.0, lgrab.ly0 + (e.clientY - lgrab.cy)));
+      ly = Math.max(b.y - R * 0.7, Math.min(b.y + b.h - R * 0.1, lgrab.ly0 + (e.clientY - lgrab.cy)));
       placeLoupe();
     };
 
@@ -661,6 +687,7 @@ export function SketchbookView({
         } else {
           endIntro();
           paint();
+          syncActivePage(idx);
         }
       });
     }
@@ -670,6 +697,7 @@ export function SketchbookView({
       if (coarse || REDUCED) {
         idx = LAND;
         paint();
+        syncActivePage(LAND);
         return;
       }
       const steps = M + LAND;
@@ -709,6 +737,7 @@ export function SketchbookView({
     paint();
     applyView();
     restLoupe();
+    syncActivePage(idx);
     setTimeout(startIntro, 200);
 
     const onResize = () => {
@@ -745,11 +774,14 @@ export function SketchbookView({
     }
   };
 
-  const handleCopyCurrentPrompt = () => {
+  const handleCopyCurrentPrompt = (e) => {
+    e?.stopPropagation();
     if (!activeItem) return;
     let text = '';
     if (activeItem.type === 'skill') {
       text = activeItem.install_command || (activeItem.repo_url ? `请安装这个 Skill：${activeItem.repo_url}` : activeItem.command || activeItem.prompt);
+    } else if (activeItem.type === 'tool') {
+      text = activeItem.website_url || activeItem.url || activeItem.command || activeItem.description;
     } else {
       text = activeItem.prompt || activeItem.description || activeItem.title;
     }
@@ -932,39 +964,61 @@ export function SketchbookView({
           </div>
 
           {/* Caption & Interactive Action bar (Directly below book) */}
-          <div className="flex flex-col items-center gap-1.5 pt-1">
+          <div className="relative z-40 flex flex-col items-center gap-2 mt-2 pointer-events-auto">
             <div 
               className="sb-captions cursor-pointer hover:opacity-80 transition-opacity" 
               id="sbCaptions" 
               ref={capBoxRef}
-              onClick={() => activeItem && onSelect && onSelect(activeItem)}
+              onClick={(e) => {
+                e.stopPropagation();
+                if (activeItem && onSelect) onSelect(activeItem);
+              }}
               title="点击查看此条目的完整详情与样例"
             />
             
-            {activeItem && (
-              <div className="flex items-center gap-2.5 pt-0.5">
-                <button
-                  onClick={handleCopyCurrentPrompt}
-                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-amber-900/10 hover:bg-amber-900/20 border border-amber-900/25 text-amber-950 text-xs font-serif font-bold shadow-2xs transition-all cursor-pointer hover:scale-[1.02]"
-                >
-                  {copied ? <Check className="w-3.5 h-3.5 text-emerald-800" /> : <Copy className="w-3.5 h-3.5 text-amber-900" />}
-                  <span>{copied ? '已复制！' : (activeItem.type === 'skill' ? '复制安装指令' : '复制 Prompt 提示词')}</span>
-                </button>
+            {activeItem && (() => {
+              const isSkill = activeItem.type === 'skill';
+              const isTool = activeItem.type === 'tool';
+              const copyLabel = isSkill ? '复制安装指令' : (isTool ? '复制工具网址' : '复制 Prompt 提示词');
+              
+              const imgCount = (activeItem.images && activeItem.images.length) || (activeItem.cover_image ? 1 : 0);
+              let detailLabel = '查看完整详情';
+              if (activeItem.type === 'style') {
+                detailLabel = imgCount > 1 ? `查看详情与 ${imgCount} 张原图` : '查看详情与高清样张';
+              } else if (isSkill) {
+                detailLabel = '查看 Skill 详情与配置';
+              } else if (isTool) {
+                detailLabel = '查看工具详情与官网';
+              }
 
-                {onSelect && (
+              return (
+                <div className="flex items-center gap-2.5 pt-0.5 pointer-events-auto">
                   <button
-                    onClick={() => onSelect(activeItem)}
-                    className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/80 hover:bg-white border border-amber-900/25 text-amber-950 text-xs font-serif font-semibold shadow-2xs transition-all cursor-pointer hover:scale-[1.02]"
+                    onClick={handleCopyCurrentPrompt}
+                    className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-amber-900/10 hover:bg-amber-900/20 active:scale-95 border border-amber-900/25 text-amber-950 text-xs font-serif font-bold shadow-2xs transition-all cursor-pointer hover:scale-[1.02]"
                   >
-                    <Maximize2 className="w-3.5 h-3.5 text-amber-900" />
-                    <span>查看详情与 4 张原图</span>
+                    {copied ? <Check className="w-3.5 h-3.5 text-emerald-800" /> : <Copy className="w-3.5 h-3.5 text-amber-900" />}
+                    <span>{copied ? '已复制！' : copyLabel}</span>
                   </button>
-                )}
-              </div>
-            )}
+
+                  {onSelect && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onSelect(activeItem);
+                      }}
+                      className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/90 hover:bg-white active:scale-95 border border-amber-900/25 text-amber-950 text-xs font-serif font-semibold shadow-2xs transition-all cursor-pointer hover:scale-[1.02]"
+                    >
+                      <Maximize2 className="w-3.5 h-3.5 text-amber-900" />
+                      <span>{detailLabel}</span>
+                    </button>
+                  )}
+                </div>
+              );
+            })()}
           </div>
 
-          <p className="sb-hint" id="sbHint" ref={hintRef}>
+          <p className="sb-hint select-none" id="sbHint" ref={hintRef}>
             拖动页面翻页 · 拖动铜制放大镜观察笔触
           </p>
         </div>
