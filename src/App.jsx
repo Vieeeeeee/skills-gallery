@@ -648,10 +648,10 @@ export function App() {
       {/* Footer */}
       <footer className="border-t border-black/[0.06] dark:border-white/[0.08] bg-white dark:bg-[#0d0d11] py-8 text-center text-xs text-[#86868b] dark:text-zinc-500 transition-colors">
         <div className="max-w-7xl mx-auto px-4 space-y-3">
-          <div className="flex items-center justify-center gap-2">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             <span className="text-[#1d1d1f] dark:text-white font-semibold">Prompt & Skill 风格大赏</span>
             <span>•</span>
-            <span>致敬开源创作者</span>
+            <span className="text-amber-800 dark:text-amber-300 font-medium">✨ 特别致谢「威比🙂↔️AIGC学习群」群友倾情共建</span>
           </div>
 
           {/* Contact & WeChat Badges */}
@@ -659,10 +659,11 @@ export function App() {
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f5f5f7] dark:bg-[#18181d] border border-black/[0.06] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 shadow-2xs">
               <span className="text-emerald-600 dark:text-emerald-400 font-semibold">💬 微信:</span>
               <strong className="font-mono text-[#1d1d1f] dark:text-white select-all">Wibi2077</strong>
+              <span className="text-[11px] text-[#86868b] dark:text-zinc-400 hidden sm:inline">(备注进群)</span>
               <button
                 onClick={() => {
                   navigator.clipboard.writeText('Wibi2077');
-                  showToast('微信号已复制到剪贴板！');
+                  showToast('微信号已复制！添加请备注：进AIGC学习群');
                 }}
                 className="ml-1 text-[10.5px] px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 transition-colors"
                 title="复制微信号"
