@@ -141,11 +141,11 @@ export function Navbar({
               <Search className="w-3.5 h-3.5" />
             </button>
 
-            {/* Mode Switcher: Gallery vs Sketchbook */}
-            <div className="flex items-center bg-[#f5f5f7] dark:bg-[#18181c] border border-black/[0.08] dark:border-white/[0.08] rounded-xl p-0.5 shadow-2xs">
+            {/* Mode Switcher: Gallery vs Sketchbook (Desktop/Tablet only) */}
+            <div className="hidden md:flex items-center bg-[#f5f5f7] dark:bg-[#18181c] border border-black/[0.08] dark:border-white/[0.08] rounded-xl p-0.5 shadow-2xs">
               <button
                 onClick={() => setAppMode('gallery')}
-                className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
+                className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                   appMode === 'gallery'
                     ? 'bg-white dark:bg-white text-[#1d1d1f] dark:text-[#09090b] shadow-xs font-semibold'
                     : 'text-[#6e6e73] dark:text-zinc-400 hover:text-[#1d1d1f] dark:hover:text-white'
@@ -153,11 +153,11 @@ export function Navbar({
                 title="瀑布流画廊视图"
               >
                 <LayoutGrid className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">画廊</span>
+                <span>画廊</span>
               </button>
               <button
                 onClick={() => setAppMode('sketchbook')}
-                className={`flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
+                className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                   appMode === 'sketchbook'
                     ? 'bg-amber-900 dark:bg-amber-400 text-white dark:text-amber-950 shadow-xs font-serif font-bold'
                     : 'text-[#6e6e73] dark:text-zinc-400 hover:text-[#1d1d1f] dark:hover:text-white'
@@ -165,7 +165,7 @@ export function Navbar({
                 title="拟真手账速写本视图"
               >
                 <BookOpen className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">速写本</span>
+                <span>速写本</span>
               </button>
             </div>
 

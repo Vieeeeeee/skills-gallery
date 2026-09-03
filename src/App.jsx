@@ -385,6 +385,19 @@ export function App() {
     { id: 'tool', label: '设计工具', icon: Wrench, count: typeCounts.tool || 0 },
   ];
 
+  // Mobile Safety Guard: The 3D Sketchbook is optimized for Desktop & iPad screens with high-performance GPUs.
+  // On mobile (< 768px), automatically stay in buttery-smooth native gallery view.
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768 && appMode === 'sketchbook') {
+        setAppMode('gallery');
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [appMode]);
+
   return (
     <div className="min-h-screen flex flex-col bg-[#f5f5f7] dark:bg-[#09090b] text-[#1d1d1f] dark:text-zinc-100 selection:bg-indigo-500/20 selection:text-indigo-900 transition-colors duration-200 overflow-x-hidden w-full max-w-[100vw]">
       

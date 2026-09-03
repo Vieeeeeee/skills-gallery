@@ -31,6 +31,15 @@ export function SketchbookView({
   const [loupeActive, setLoupeActive] = useState(true);
   const [copied, setCopied] = useState(false);
   const [activeItem, setActiveItem] = useState(null);
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const containerRef = useRef(null);
   const sb3dRef = useRef(null);
@@ -789,6 +798,26 @@ export function SketchbookView({
     if (onCopy) onCopy(activeItem);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  if (isMobile) {
+    return (
+      <div className="fixed inset-0 z-50 bg-[#faf7f0] dark:bg-[#121214] flex flex-col items-center justify-center p-6 text-center animate-fadeIn">
+        <div className="w-12 h-12 rounded-2xl bg-amber-100 dark:bg-amber-950/50 flex items-center justify-center text-amber-800 dark:text-amber-300 mb-3 border border-amber-200 dark:border-amber-800 shadow-2xs">
+          <BookOpen className="w-6 h-6" />
+        </div>
+        <h3 className="font-hero-serif font-bold text-lg text-[#1d1d1f] dark:text-white mb-1.5">拟真 3D 手账速写本</h3>
+        <p className="text-xs text-[#86868b] dark:text-zinc-400 max-w-xs leading-relaxed mb-5">
+          18 段实体纸张物理翻页与微距放大镜专为电脑与 iPad 大屏体验打造。在手机竖屏上，为您无缝切换至丝滑流畅的画廊视图。
+        </p>
+        <button
+          onClick={onExit}
+          className="px-5 py-2.5 rounded-xl text-xs font-semibold bg-[#1d1d1f] dark:bg-white text-white dark:text-black shadow-xs transition-transform active:scale-95 cursor-pointer"
+        >
+          返回画廊
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div ref={containerRef} className="sb-container fixed inset-0 z-50 h-screen w-screen overflow-hidden flex flex-col justify-between">
