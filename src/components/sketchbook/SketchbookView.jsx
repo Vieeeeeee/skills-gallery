@@ -1034,7 +1034,7 @@ export function SketchbookView({
           </div>
 
           <p className="sb-hint select-none" id="sbHint" ref={hintRef}>
-            拖动页面翻页 · 拖动铜制放大镜观察笔触
+            点击两侧箭头、按键盘 ← → 或拖动页面翻页 · 拖动放大镜检视微距细节
           </p>
         </div>
       </section>

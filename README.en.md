@@ -91,7 +91,7 @@ We believe that great inspiration libraries grow through community collaboration
 
 ### 💖 Special Thanks to Community & Core Contributors
 - **Co-building Community**: **「威比🙂↔️AIGC学习群」 (Wibi AIGC Community)** — A tremendous amount of high-value prompt recipes, reference images, and parameter tuning in this collection stem from the selfless sharing and creative experiments of group members.
-- **Raw Data Curation**: Special tribute to community contributor **[@我的世界皓宸]** for the tireless, systematic organization and synthesis of over 1,000+ raw visual prompt assets, benchmark records, and sample galleries!
+- **Raw Data Curation**: Special tribute to community contributor **@我的世界皓宸** for the tireless, systematic organization and synthesis of over 1,000+ raw visual prompt assets, benchmark records, and sample galleries!
 
 Whether you discover a stunning visual prompt, build a useful Agent Skill, or polish a UI component, contributions are warmly welcomed:
 
