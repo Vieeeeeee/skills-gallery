@@ -34,7 +34,7 @@
     "category": "海报与画册",
     "author": "Zeejay0",
     "repo_url": "https://github.com/Zeejay0/gathered-scenes-zine-skill",
-    "command": "npx skills add Zeejay0/gathered-scenes-zine-skill",
+    "command": "使用 $gathered-scenes-zine-skill 处理这张照片",
     "tags": [
       "Zine画册",
       "撕纸拼贴",
@@ -88,7 +88,7 @@
     "category": "海报与画册",
     "author": "ZzzLc0405",
     "repo_url": "https://github.com/ZzzLc0405/photo-abstract-editorial",
-    "command": "npx skills add ZzzLc0405/photo-abstract-editorial",
+    "command": "使用 $photo-abstract-editorial 处理这张照片",
     "tags": [
       "摄影抽象",
       "几何色块",
@@ -170,7 +170,7 @@
     "category": "海报与画册",
     "author": "LiamGvchi",
     "repo_url": "https://github.com/LiamGvchi/gc-minimal-zine-poster",
-    "command": "npx skills add LiamGvchi/gc-minimal-zine-poster",
+    "command": "使用 $gc-minimal-zine-poster 处理这张照片",
     "tags": [
       "极简海报",
       "文字排版",
@@ -224,7 +224,7 @@
     "category": "纸艺与拼贴",
     "author": "wnby",
     "repo_url": "https://github.com/wnby/photo-relic-editorial",
-    "command": "npx skills add wnby/photo-relic-editorial",
+    "command": "使用 $photo-relic-editorial 处理这张照片",
     "tags": [
       "纸上留影",
       "特种纸纹理",
@@ -306,7 +306,7 @@
     "category": "海报与画册",
     "author": "Dlcccc71913",
     "repo_url": "https://github.com/Dlcccc71913/skill-make-photo-stamp-archive",
-    "command": "npx skills add Dlcccc71913/skill-make-photo-stamp-archive",
+    "command": "使用 $skill-make-photo-stamp-archive 处理这张照片",
     "tags": [
       "复古邮票",
       "印章档案",
@@ -359,7 +359,7 @@
     "category": "极简与解构",
     "author": "leishifu666",
     "repo_url": "https://github.com/leishifu666/lsf-clock-editorial-poster",
-    "command": "npx skills add leishifu666/lsf-clock-editorial-poster",
+    "command": "使用 $lsf-clock-editorial-poster 处理这张照片",
     "tags": [
       "时钟海报",
       "编辑设计",
@@ -440,7 +440,7 @@
     "category": "水彩与插画",
     "author": "dacnay816y62-hub",
     "repo_url": "https://github.com/dacnay816y62-hub/photo-revival",
-    "command": "npx skills add dacnay816y62-hub/photo-revival",
+    "command": "使用 $photo-revival 处理这张照片",
     "tags": [
       "生活随拍",
       "诗意重绘",
@@ -493,7 +493,7 @@
     "category": "动漫与波普",
     "author": "v92388375-gif",
     "repo_url": "https://github.com/v92388375-gif/pixel-style-poster-skill",
-    "command": "npx skills add v92388375-gif/pixel-style-poster-skill",
+    "command": "使用 $pixel-style-poster-skill 处理这张照片",
     "tags": [
       "像素艺术",
       "点阵海报",
@@ -574,7 +574,7 @@
     "category": "纸艺与拼贴",
     "author": "Whiplashzeb",
     "repo_url": "https://github.com/Whiplashzeb/photo-to-zine-postcard",
-    "command": "npx skills add Whiplashzeb/photo-to-zine-postcard",
+    "command": "使用 $photo-to-zine-postcard 处理这张照片",
     "tags": [
       "色卡提取",
       "复古印刷",
@@ -628,7 +628,7 @@
     "category": "AI 视频与动效",
     "author": "heygen-com",
     "repo_url": "https://github.com/heygen-com/hyperframes",
-    "command": "npx skills add heygen-com/hyperframes",
+    "command": "使用 $hyperframes 生成动效视频",
     "tags": [
       "代码动效",
       "HeyGen",
@@ -710,7 +710,7 @@
     "category": "AI 视频与动效",
     "author": "browser-use",
     "repo_url": "https://github.com/browser-use/video-use",
-    "command": "npx skills add browser-use/video-use",
+    "command": "使用 $video-use 分析或剪辑视频",
     "tags": [
       "视频粗剪",
       "口播剪辑",
@@ -761,7 +761,7 @@
     "category": "AI 视频与动效",
     "author": "SamurAIGPT",
     "repo_url": "https://github.com/SamurAIGPT/Generative-Media-Skills",
-    "command": "npx skills add SamurAIGPT/Generative-Media-Skills",
+    "command": "使用 $Generative-Media-Skills 生成媒体内容",
     "tags": [
       "多媒体生成",
       "广告素材",
@@ -840,7 +840,7 @@
     "category": "AI 视频与动效",
     "author": "gnipbao",
     "repo_url": "https://github.com/gnipbao/story-to-handdrawn-video",
-    "command": "npx skills add gnipbao/story-to-handdrawn-video",
+    "command": "使用 $story-to-handdrawn-video 制作手绘故事视频",
     "tags": [
       "白板动画",
       "故事口播",
@@ -891,7 +891,7 @@
     "category": "AI 视频与动效",
     "author": "logamee",
     "repo_url": "https://github.com/logamee/logamee-film-forge",
-    "command": "npx skills add logamee/logamee-film-forge",
+    "command": "使用 $logamee-film-forge 生成电影分镜与视频",
     "tags": [
       "电影锻造",
       "全流程自动化",
@@ -970,7 +970,7 @@
     "category": "AI 视频与动效",
     "author": "YaoFANGUK",
     "repo_url": "https://github.com/YaoFANGUK/video-subtitle-remover",
-    "command": "npx skills add YaoFANGUK/video-subtitle-remover",
+    "command": "使用 $video-subtitle-remover 移除视频字幕",
     "tags": [
       "字幕消除",
       "水印擦除",
@@ -1023,7 +1023,7 @@
     "category": "海报与画册",
     "author": "op7418",
     "repo_url": "https://github.com/op7418/guizang-material-illustration",
-    "command": "npx skills add op7418/guizang-material-illustration",
+    "command": "使用 $guizang-material-illustration 处理这张照片",
     "tags": [
       "材质插画",
       "设计系统",
@@ -1102,7 +1102,7 @@
     "category": "动漫与波普",
     "author": "AmongFlowers",
     "repo_url": "https://github.com/AmongFlowers/gen-comic-skill",
-    "command": "npx skills add AmongFlowers/gen-comic-skill",
+    "command": "使用 $gen-comic-skill 制作连续漫画分镜",
     "tags": [
       "四格分镜",
       "漫画拼贴",
@@ -1155,7 +1155,7 @@
     "category": "法律与政务",
     "author": "MiaoQichuan",
     "repo_url": "https://github.com/MiaoQichuan/mqc-litigation-visual-redraw",
-    "command": "npx skills add MiaoQichuan/mqc-litigation-visual-redraw",
+    "command": "使用 $mqc-litigation-visual-redraw 制作法律证据可视化图解",
     "tags": [
       "诉讼可视化",
       "证据时间轴",
@@ -1209,7 +1209,7 @@
     "category": "动漫与波普",
     "author": "2998980-hue",
     "repo_url": "https://github.com/2998980-hue/surreal-pop-collage",
-    "command": "npx skills add 2998980-hue/surreal-pop-collage",
+    "command": "使用 $surreal-pop-collage 处理这张照片",
     "tags": [
       "超现实波普",
       "拼贴艺术",
@@ -1230,7 +1230,7 @@
     "category": "纸艺与拼贴",
     "author": "carolinaaafy",
     "repo_url": "https://github.com/carolinaaafy/travel-memory-card-duo",
-    "command": "npx skills add carolinaaafy/travel-memory-card-duo",
+    "command": "使用 $travel-memory-card-duo 处理这张照片",
     "tags": [
       "手账贴纸",
       "3:2卡片",
@@ -1251,7 +1251,7 @@
     "category": "国风与水墨",
     "author": "Starryear",
     "repo_url": "https://github.com/Starryear/Starryear-Abstract-Quartet",
-    "command": "npx skills add Starryear/Starryear-Abstract-Quartet",
+    "command": "使用 $Starryear-Abstract-Quartet 处理这张照片",
     "tags": [
       "水墨星点",
       "三拼画卷",
@@ -1272,7 +1272,7 @@
     "category": "水彩与插画",
     "author": "helloianneo",
     "repo_url": "https://github.com/helloianneo/ian-xiaohei-illustrations",
-    "command": "npx skills add helloianneo/ian-xiaohei-illustrations",
+    "command": "使用 $ian-xiaohei-illustrations 处理这张照片",
     "tags": [
       "治愈插画",
       "手绘小黑",
@@ -1293,7 +1293,7 @@
     "category": "极简与解构",
     "author": "NalaZhang27",
     "repo_url": "https://github.com/NalaZhang27/crystalize-skill",
-    "command": "npx skills add NalaZhang27/crystalize-skill",
+    "command": "使用 $crystalize-skill 处理这张照片",
     "tags": [
       "水晶切面",
       "低多边形",
@@ -1314,7 +1314,7 @@
     "category": "水彩与插画",
     "author": "bambooxq2000",
     "repo_url": "https://github.com/bambooxq2000/watercolor-travel-sticker",
-    "command": "npx skills add bambooxq2000/watercolor-travel-sticker",
+    "command": "使用 $watercolor-travel-sticker 处理这张照片",
     "tags": [
       "手账水彩",
       "元素抠图",
@@ -1335,7 +1335,7 @@
     "category": "极简与解构",
     "author": "Lixorn",
     "repo_url": "https://github.com/Lixorn/deconstructed-duotone-poster",
-    "command": "npx skills add Lixorn/deconstructed-duotone-poster",
+    "command": "使用 $deconstructed-duotone-poster 处理这张照片",
     "tags": [
       "双色印刷",
       "几何解构",
@@ -1356,7 +1356,7 @@
     "category": "国风与水墨",
     "author": "nevertoday",
     "repo_url": "https://github.com/nevertoday/xxd-panel",
-    "command": "npx skills add nevertoday/xxd-panel",
+    "command": "使用 $xxd-panel 处理这张照片",
     "tags": [
       "国风美学",
       "面板排版",
@@ -1377,7 +1377,7 @@
     "category": "海报与画册",
     "author": "moonlin1213",
     "repo_url": "https://github.com/moonlin1213/muted-zine-poster-v01",
-    "command": "npx skills add moonlin1213/muted-zine-poster-v01",
+    "command": "使用 $muted-zine-poster-v01 处理这张照片",
     "tags": [
       "低饱和",
       "莫兰迪",
@@ -1398,7 +1398,7 @@
     "category": "极简与解构",
     "author": "yvonnechen202608-byte",
     "repo_url": "https://github.com/yvonnechen202608-byte/picture-design",
-    "command": "npx skills add yvonnechen202608-byte/picture-design",
+    "command": "使用 $picture-design 处理这张照片",
     "tags": [
       "平面设计",
       "审美画册",
@@ -1419,7 +1419,7 @@
     "category": "海报与画册",
     "author": "freestylefly",
     "repo_url": "https://github.com/freestylefly/awesome-gpt-image-2",
-    "command": "npx skills add freestylefly/awesome-gpt-image-2",
+    "command": "使用 $awesome-gpt-image-2 处理这张照片",
     "tags": [
       "GPT-Image-2",
       "生图提示词",
@@ -1440,7 +1440,7 @@
     "category": "AI 视频与动效",
     "author": "remotion-dev",
     "repo_url": "https://github.com/remotion-dev/skills",
-    "command": "npx skills add remotion-dev/skills",
+    "command": "使用 $remotion-skills 制作代码视频",
     "tags": [
       "React视频",
       "程序化渲染",
@@ -1461,7 +1461,7 @@
     "category": "AI 视频与动效",
     "author": "Ceeon",
     "repo_url": "https://github.com/Ceeon/videocut-skills",
-    "command": "npx skills add Ceeon/videocut-skills",
+    "command": "使用 $videocut-skills 自动剪辑视频",
     "tags": [
       "中文剪辑",
       "短视频工作流",
@@ -1482,7 +1482,7 @@
     "category": "AI 视频与动效",
     "author": "dexhunter",
     "repo_url": "https://github.com/dexhunter/seedance2-skill",
-    "command": "npx skills add dexhunter/seedance2-skill",
+    "command": "使用 $seedance2-skill 生成 Seedance 视频提示词",
     "tags": [
       "Seedance 2.0",
       "分镜提示词",
@@ -1503,7 +1503,7 @@
     "category": "AI 视频与动效",
     "author": "feitangyuan",
     "repo_url": "https://github.com/feitangyuan/doodle-anim",
-    "command": "npx skills add feitangyuan/doodle-anim",
+    "command": "使用 $doodle-anim 制作涂鸦动效",
     "tags": [
       "代码动画",
       "涂鸦小人",
@@ -1524,7 +1524,7 @@
     "category": "AI 视频与动效",
     "author": "cyberlesterr",
     "repo_url": "https://github.com/cyberlesterr/paper-collage-video",
-    "command": "npx skills add cyberlesterr/paper-collage-video",
+    "command": "使用 $paper-collage-video 制作撕纸定格视频",
     "tags": [
       "纸片定格",
       "剪纸动效",
@@ -1545,7 +1545,7 @@
     "category": "AI 视频与动效",
     "author": "wddxh",
     "repo_url": "https://github.com/wddxh/ShortVideoDictor",
-    "command": "npx skills add wddxh/ShortVideoDictor",
+    "command": "使用 $ShortVideoDictor 编写短视频口播文案",
     "tags": [
       "多Agent协作",
       "短视频导演",
@@ -1566,7 +1566,7 @@
     "category": "AI 视频与动效",
     "author": "calesthio",
     "repo_url": "https://github.com/calesthio/OpenMontage",
-    "command": "npx skills add calesthio/OpenMontage",
+    "command": "使用 $OpenMontage 混剪视频",
     "tags": [
       "蒙太奇",
       "全流程剪辑",
@@ -1587,7 +1587,7 @@
     "category": "AI 视频与动效",
     "author": "doublesq97-ui",
     "repo_url": "https://github.com/doublesq97-ui/su-ai-short-drama",
-    "command": "npx skills add doublesq97-ui/su-ai-short-drama",
+    "command": "使用 $su-ai-short-drama 创作 AI 短剧分镜",
     "tags": [
       "AI短剧",
       "人物连贯性",
@@ -1608,7 +1608,7 @@
     "category": "自媒体与创作",
     "author": "op7418",
     "repo_url": "https://github.com/op7418/guizang-social-card-skill",
-    "command": "npx skills add op7418/guizang-social-card-skill",
+    "command": "使用 $guizang-social-card-skill 制作小红书图文卡片",
     "tags": [
       "小红书3:4",
       "瑞士风格",
@@ -1629,7 +1629,7 @@
     "category": "自媒体与创作",
     "author": "op7418",
     "repo_url": "https://github.com/op7418/Humanizer-zh",
-    "command": "npx skills add op7418/Humanizer-zh",
+    "command": "使用 $Humanizer-zh 去除文案 AI 味",
     "tags": [
       "去AI味",
       "口语化润色",
@@ -1650,7 +1650,7 @@
     "category": "自媒体与创作",
     "author": "dontbesilent2025",
     "repo_url": "https://github.com/dontbesilent2025/dbskill",
-    "command": "npx skills add dontbesilent2025/dbskill",
+    "command": "使用 $dbskill 诊断商业定位",
     "tags": [
       "商业问诊",
       "选题诊断",
@@ -1671,7 +1671,7 @@
     "category": "自媒体与创作",
     "author": "KKKKhazix",
     "repo_url": "https://github.com/KKKKhazix/khazix-skills",
-    "command": "npx skills add KKKKhazix/khazix-skills",
+    "command": "使用 $khazix-skills 撰写公众号深度长文",
     "tags": [
       "卡兹克",
       "爆款长文",
@@ -1692,7 +1692,7 @@
     "category": "自媒体与创作",
     "author": "op7418",
     "repo_url": "https://github.com/op7418/guizang-ppt-skill",
-    "command": "npx skills add op7418/guizang-ppt-skill",
+    "command": "使用 $guizang-ppt-skill 制作瑞士杂志风网页 PPT",
     "tags": [
       "网页PPT",
       "横向翻页",
@@ -1713,7 +1713,7 @@
     "category": "自媒体与创作",
     "author": "jimliu",
     "repo_url": "https://github.com/jimliu/baoyu-skills",
-    "command": "npx skills add jimliu/baoyu-skills",
+    "command": "使用 $baoyu-skills 翻译或重构技术长文",
     "tags": [
       "宝玉写作",
       "公众号排版",
@@ -1734,7 +1734,7 @@
     "category": "生产力与开发",
     "author": "clockless-org",
     "repo_url": "https://github.com/clockless-org/html-anything",
-    "command": "npx skills add clockless-org/html-anything",
+    "command": "使用 $html-anything 生成交互式独立 HTML",
     "tags": [
       "代码渲染",
       "交互原型",
@@ -1755,7 +1755,7 @@
     "category": "职场与思考",
     "author": "Community",
     "repo_url": "https://github.com/career-ops/career-ops",
-    "command": "npx skills add career-ops",
+    "command": "使用 $career-ops 规划职业与优化简历",
     "tags": [
       "ATS优化",
       "简历看板",
@@ -1776,7 +1776,7 @@
     "category": "职场与思考",
     "author": "Community",
     "repo_url": "https://github.com/interview-coach/interview-coach-skill",
-    "command": "npx skills add interview-coach-skill",
+    "command": "使用 $interview-coach-skill 进行模拟面试辅导",
     "tags": [
       "模拟面试",
       "STAR法则",
@@ -1797,7 +1797,7 @@
     "category": "职场与思考",
     "author": "tjboudreaux",
     "repo_url": "https://github.com/tjboudreaux/cc-thinking-skills",
-    "command": "npx skills add tjboudreaux/cc-thinking-skills",
+    "command": "使用 $cc-thinking-skills 进行第一性原理深度思考",
     "tags": [
       "思维模型",
       "批判性思考",
@@ -1818,7 +1818,7 @@
     "category": "法律与政务",
     "author": "pa1nrui1",
     "repo_url": "https://github.com/pa1nrui1/legal-skills",
-    "command": "npx skills add pa1nrui1/legal-skills",
+    "command": "使用 $legal-skills 审查合同或法律条文",
     "tags": [
       "法律文书",
       "合同审查",
@@ -1839,7 +1839,7 @@
     "category": "法律与政务",
     "author": "handsomestWei",
     "repo_url": "https://github.com/handsomestWei/patent-disclosure-skill",
-    "command": "npx skills add handsomestWei/patent-disclosure-skill",
+    "command": "使用 $patent-disclosure-skill 撰写专利技术交底书",
     "tags": [
       "专利交底",
       "技术交底书",

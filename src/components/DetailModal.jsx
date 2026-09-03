@@ -222,8 +222,36 @@ export function DetailModal({
     setTimeout(() => setCopiedPrompt(false), 2000);
   };
 
+  const getChatInvocationCommand = (targetItem) => {
+    if (!targetItem) return '';
+    const cmd = (targetItem.command || '').trim();
+    const installCmd = (targetItem.install_command || '').trim();
+    
+    // If command is valid and NOT an install command / identical to install_command
+    if (cmd && cmd !== installCmd && !cmd.startsWith('npx ') && !cmd.startsWith('git ') && !cmd.startsWith('curl ')) {
+      return cmd;
+    }
+    
+    // Fallback: extract slug from title or install_command
+    let slug = targetItem.slug || targetItem.title || '';
+    if (installCmd && installCmd.includes('/')) {
+      const parts = installCmd.split('/');
+      const lastPart = parts[parts.length - 1].split(' ')[0].trim();
+      if (lastPart) slug = lastPart;
+    }
+    if (targetItem.category === '自媒体与创作' || targetItem.category === '生产力与开发' || targetItem.category === '职场与思考' || targetItem.category === '法律与政务') {
+      return `使用 $${slug}`;
+    }
+    if (targetItem.category === 'AI 视频与动效') {
+      return `使用 $${slug} 生成视频`;
+    }
+    return `使用 $${slug} 处理这张照片`;
+  };
+
+  const chatInvocationCmd = getChatInvocationCommand(item);
+
   const handleCopyCmd = () => {
-    navigator.clipboard.writeText(item.command || item.prompt);
+    navigator.clipboard.writeText(chatInvocationCmd || item.command || item.prompt);
     setCopiedCmd(true);
     if (onCopy) onCopy('调用指令已复制');
     setTimeout(() => setCopiedCmd(false), 2000);
@@ -803,7 +831,7 @@ export function DetailModal({
                     </div>
 
                     {/* 2. Chat Trigger Command */}
-                    {item.command && (
+                    {chatInvocationCmd && (
                       <div className="space-y-1.5">
                         <div className="flex items-center justify-between">
                           <span className="text-xs font-semibold text-[#86868b] dark:text-zinc-400 flex items-center gap-1.5">
@@ -814,12 +842,12 @@ export function DetailModal({
                             onClick={handleCopyCmd}
                             className="text-xs text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-white flex items-center gap-1 transition-colors"
                           >
-                            {copiedCmd ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
+                            {copiedCmd ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3 text-[#6e6e73] dark:text-zinc-400" />}
                             <span>{copiedCmd ? '已复制' : '复制'}</span>
                           </button>
                         </div>
                         <div className="p-3 rounded-xl bg-[#f5f5f7] dark:bg-white/[0.04] border border-black/[0.06] dark:border-white/[0.08] text-xs text-[#515154] dark:text-zinc-300 font-mono select-all break-all">
-                          {item.command}
+                          {chatInvocationCmd}
                         </div>
                       </div>
                     )}
@@ -957,11 +985,11 @@ export function DetailModal({
 
                   {item.type === 'skill' ? (
                     <button
-                      onClick={handleCopyCmd}
+                      onClick={handleCopyInstallCmd}
                       className="flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-xs transition-all"
                     >
-                      {copiedCmd ? <Check className="w-4 h-4" /> : <Terminal className="w-4 h-4" />}
-                      <span>{copiedCmd ? '已复制安装指令' : '复制安装指令'}</span>
+                      {copiedInstallCmd ? <Check className="w-4 h-4" /> : <Terminal className="w-4 h-4" />}
+                      <span>{copiedInstallCmd ? '已复制安装指令' : '复制安装指令'}</span>
                     </button>
                   ) : item.type === 'tool' && item.repo_url ? (
                     <a
