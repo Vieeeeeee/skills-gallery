@@ -12,11 +12,10 @@ import { SketchbookView } from './components/sketchbook/SketchbookView';
 import { AboutModal } from './components/AboutModal';
 import { matchSearch } from './utils/search';
 import { copyText, COPY_FAIL_MSG } from './utils/copy';
+import { assertSkillsData } from './utils/data';
+import { STORAGE_KEYS, readStorage, writeStorage, removeStorage } from './utils/storage';
 import { Sparkles, Palette, Terminal, Wrench, SearchX, RefreshCw, ChevronDown, X, QrCode, ArrowUp, AlertTriangle } from 'lucide-react';
 
-const STORAGE_KEY = 'SKILLS_GALLERY_DATA_V2026_CLEAN_V14';
-const BOOKMARKS_KEY = 'SKILLS_GALLERY_BOOKMARKS_V4_FEED';
-const APP_MODE_KEY = 'SKILLS_APP_MODE_KEY';
 const PAGE_SIZE = 24;
 
 // Helper to check if an item is created by Wibi
@@ -86,11 +85,8 @@ export function App() {
   const [isBookmarkOnly, setIsBookmarkOnly] = useState(false);
   const [viewMode, setViewMode] = useState('grid');
   const [appMode, setAppMode] = useState(() => {
-    try {
-      return localStorage.getItem(APP_MODE_KEY) || 'gallery';
-    } catch {
-      return 'gallery';
-    }
+    const saved = readStorage(STORAGE_KEYS.appMode);
+    return saved === 'sketchbook' ? 'sketchbook' : 'gallery';
   });
   
   // Pagination
@@ -111,8 +107,9 @@ export function App() {
   // Bookmarks & Toast
   const [bookmarks, setBookmarks] = useState(() => {
     try {
-      const saved = localStorage.getItem(BOOKMARKS_KEY);
-      return saved ? JSON.parse(saved) : [];
+      const saved = readStorage(STORAGE_KEYS.bookmarks);
+      const parsed = saved ? JSON.parse(saved) : [];
+      return Array.isArray(parsed) ? parsed.filter((id) => typeof id === 'string') : [];
     } catch {
       return [];
     }
@@ -120,13 +117,9 @@ export function App() {
 
   // Theme (Dark Mode vs Light Mode)
   const [theme, setTheme] = useState(() => {
-    try {
-      const saved = localStorage.getItem('wibi_theme');
-      if (saved) return saved;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    } catch {
-      return 'dark';
-    }
+    const saved = readStorage(STORAGE_KEYS.theme);
+    if (saved === 'dark' || saved === 'light') return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
 
   useEffect(() => {
@@ -135,7 +128,7 @@ export function App() {
     } else {
       document.documentElement.classList.remove('dark');
     }
-    localStorage.setItem('wibi_theme', theme);
+    writeStorage(STORAGE_KEYS.theme, theme);
   }, [theme]);
 
   const handleToggleTheme = () => {
@@ -157,19 +150,22 @@ export function App() {
 
   // Initial Load: Always load fresh clean dataset on startup; preserve only explicit admin edits
   useEffect(() => {
-    const DATA_VERSION_KEY = 'SKILLS_DATA_VERSION_V2026_CLEAN_V14';
     const loadInitialData = async () => {
       try {
-        const isCustomModified = localStorage.getItem('SKILLS_DATA_CUSTOM_MODIFIED') === 'true';
-        const currentVersion = localStorage.getItem(DATA_VERSION_KEY);
-        const localData = localStorage.getItem(STORAGE_KEY);
+        const isCustomModified = readStorage(STORAGE_KEYS.dataModified) === 'true';
+        const currentVersion = readStorage(STORAGE_KEYS.dataVersion);
+        const localData = readStorage(STORAGE_KEYS.data);
 
         if (isCustomModified && currentVersion === 'v14' && localData) {
-          const parsed = JSON.parse(localData);
-          if (Array.isArray(parsed) && parsed.length > 0) {
+          try {
+            const parsed = assertSkillsData(JSON.parse(localData));
             setSkills(curateAndInterleaveSkills(parsed, false));
             setLoading(false);
             return;
+          } catch {
+            // 本地备份损坏时回退官方数据，不让可选的本地持久化拖垮整站。
+            removeStorage(STORAGE_KEYS.data);
+            removeStorage(STORAGE_KEYS.dataModified);
           }
         }
 
@@ -177,15 +173,11 @@ export function App() {
         // Cloudflare Pages 会带 ETag，数据更新后浏览器自动重新校验。
         const res = await fetch('/skills_data.json');
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
+        const data = assertSkillsData(await res.json());
         const curated = curateAndInterleaveSkills(data, false);
         setSkills(curated);
         setLoadError(null);
-        try {
-          localStorage.setItem(DATA_VERSION_KEY, 'v14');
-        } catch {
-          // Ignore quota errors in private browsing
-        }
+        writeStorage(STORAGE_KEYS.dataVersion, 'v14');
       } catch (err) {
         console.error('Failed to load initial data:', err);
         setLoadError(err.message || '未知错误');
@@ -208,22 +200,9 @@ export function App() {
     }
   }, []);
 
-  // Save Bookmarks
-  useEffect(() => {
-    try {
-      localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(bookmarks));
-    } catch (e) {
-      console.error(e);
-    }
-  }, [bookmarks]);
-
   // Save App Mode
   useEffect(() => {
-    try {
-      localStorage.setItem(APP_MODE_KEY, appMode);
-    } catch (e) {
-      console.error(e);
-    }
+    writeStorage(STORAGE_KEYS.appMode, appMode);
   }, [appMode]);
 
   // Reset pagination when search / filter changes
@@ -234,11 +213,9 @@ export function App() {
   // Save Skills
   const saveSkillsData = (newSkills) => {
     setSkills(newSkills);
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(newSkills));
-      localStorage.setItem('SKILLS_DATA_CUSTOM_MODIFIED', 'true');
-    } catch (e) {
-      console.warn('localStorage quota reached:', e);
+    const dataSaved = writeStorage(STORAGE_KEYS.data, JSON.stringify(newSkills));
+    const markerSaved = dataSaved && writeStorage(STORAGE_KEYS.dataModified, 'true');
+    if (!dataSaved || !markerSaved) {
       showToast('浏览器本地存储已满，修改仅在当前会话生效，请及时点击导出全量 JSON 备份！', 'info');
     }
   };
@@ -346,12 +323,12 @@ export function App() {
 
   // Actions
   const handleToggleBookmark = (id) => {
-    setBookmarks((prev) => {
-      const exists = prev.includes(id);
-      const next = exists ? prev.filter((b) => b !== id) : [...prev, id];
-      showToast(exists ? '已取消收藏' : '已添加至收藏夹', 'info');
-      return next;
-    });
+    const exists = bookmarks.includes(id);
+    const next = exists ? bookmarks.filter((bookmarkId) => bookmarkId !== id) : [...bookmarks, id];
+    setBookmarks(next);
+    const persisted = writeStorage(STORAGE_KEYS.bookmarks, JSON.stringify(next));
+    const message = exists ? '已取消收藏' : '已添加至收藏夹';
+    showToast(persisted ? message : `${message}（仅当前会话，浏览器禁止了本地存储）`, 'info');
   };
 
   const handleSelectItem = (item) => {
@@ -400,18 +377,23 @@ export function App() {
     const merged = [...toAdd, ...skills];
     saveSkillsData(merged);
     showToast(`成功新增 ${toAdd.length} 个条目！`);
+    return toAdd.length;
   };
 
   const handleResetToDefault = async () => {
     try {
       const res = await fetch('/skills_data.json');
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
+      const data = assertSkillsData(await res.json());
       saveSkillsData(data);
-      localStorage.removeItem('SKILLS_DATA_CUSTOM_MODIFIED');
-      showToast('已重置回官方初始精选数据！');
+      removeStorage(STORAGE_KEYS.dataModified);
+      const message = '已重置回官方初始精选数据！';
+      showToast(message);
+      return { success: true, message };
     } catch (err) {
-      showToast(`重置失败：${err.message}`, 'error');
+      const message = `重置失败：${err.message}`;
+      showToast(message, 'error');
+      return { success: false, message };
     }
   };
 
@@ -558,7 +540,7 @@ export function App() {
                   </div>
                   <div className="w-[1px] h-3 sm:h-4 bg-black/[0.1] dark:bg-white/[0.1]" />
                   <div className="flex items-baseline gap-1">
-                    <span className="text-base sm:text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400 leading-none">{(typeCounts.skill || 0) + (typeCounts.tool || 0)}</span>
+                    <span className="text-base sm:text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400 leading-none">{typeCounts.skill || 0}</span>
                     <span className="text-xs text-[#86868b] dark:text-zinc-400 font-medium font-sans">开源 Skill</span>
                   </div>
                   <div className="w-[1px] h-3 sm:h-4 bg-black/[0.1] dark:bg-white/[0.1]" />
@@ -830,7 +812,7 @@ export function App() {
         )}
 
         {/* Infinite Scroll Sentinel & Auto-loader */}
-        {!loading && appMode === "gallery" && (
+        {!loading && !loadError && filteredSkills.length > 0 && appMode === "gallery" && (
           <div className="mt-8 mb-6 text-center">
             {hasMore ? (
               <div ref={sentinelRef} className="py-6 flex flex-col items-center justify-center gap-2 text-[#86868b] dark:text-zinc-400">

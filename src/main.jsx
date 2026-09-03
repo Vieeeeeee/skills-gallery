@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { App } from './App'
+import { clearRecoverableAppData } from './utils/storage'
 import './index.css'
 
 class ErrorBoundary extends React.Component {
@@ -18,10 +19,7 @@ class ErrorBoundary extends React.Component {
   }
 
   handleReset = () => {
-    try {
-      localStorage.clear();
-      sessionStorage.clear();
-    } catch (e) {}
+    clearRecoverableAppData();
     window.location.reload();
   };
 
@@ -41,7 +39,7 @@ class ErrorBoundary extends React.Component {
               onClick={this.handleReset}
               className="w-full py-2.5 rounded-xl bg-[#1d1d1f] hover:bg-black text-white text-xs font-semibold shadow-xs transition-all cursor-pointer"
             >
-              🔄 清除所有缓存并重新载入
+              🔄 清理异常数据并重新载入
             </button>
           </div>
         </div>
@@ -58,4 +56,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </ErrorBoundary>
   </React.StrictMode>,
 )
-

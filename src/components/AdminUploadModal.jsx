@@ -10,6 +10,7 @@ import {
   Sparkles,
   Layers
 } from 'lucide-react';
+import { normalizeImportedItems } from '../utils/data';
 
 export function AdminUploadModal({
   isOpen,
@@ -48,26 +49,19 @@ export function AdminUploadModal({
         if (!Array.isArray(json) || json.length === 0) {
           throw new Error('JSON 格式必须为包含条目对象的数组');
         }
-        // 逐项容错：条目会直接进渲染管线（React key={item.id}），
-        // 缺 id / 重复 id / 缺标题会导致列表错乱，这里补齐并如实统计
-        const seen = new Set();
-        const valid = [];
-        let skipped = 0;
-        json.forEach((raw, i) => {
-          if (!raw || typeof raw !== 'object' || !raw.title) { skipped++; return; }
-          let id = typeof raw.id === 'string' && raw.id ? raw.id : `import-${Date.now()}-${i}`;
-          while (seen.has(id)) id = `${id}-${i}`;
-          seen.add(id);
-          valid.push({ ...raw, id, type: raw.type || 'style' });
-        });
+        // 导入内容会直接进渲染管线，因此在信任边界统一补齐字段并过滤畸形条目。
+        const { items: valid, invalidCount } = normalizeImportedItems(json);
         if (valid.length === 0) throw new Error('文件里没有可用条目（每条至少需要 title 字段）');
-        onAppendItems(valid);
+        const addedCount = onAppendItems(valid);
+        const duplicateCount = valid.length - addedCount;
+        const details = [
+          invalidCount > 0 ? `跳过 ${invalidCount} 条格式不合法的条目` : '',
+          duplicateCount > 0 ? `跳过 ${duplicateCount} 条已存在的条目` : ''
+        ].filter(Boolean).join('，');
         setParseResult({
           success: true,
-          count: valid.length,
-          message: skipped > 0
-            ? `导入 ${valid.length} 条，跳过 ${skipped} 条格式不合法的条目。`
-            : `成功解析并导入 ${valid.length} 个 JSON 条目！`
+          count: addedCount,
+          message: `新增 ${addedCount} 条${details ? `，${details}` : ''}。`
         });
       } else if (file.name.endsWith('.docx')) {
         const mammothModule = await import('mammoth');
@@ -107,11 +101,11 @@ export function AdminUploadModal({
         }
 
         if (extracted.length > 0) {
-          onAppendItems(extracted);
+          const addedCount = onAppendItems(extracted);
           setParseResult({
             success: true,
-            count: extracted.length,
-            message: `成功从 Docx 文档中解析并追加 ${extracted.length} 条新内容！`
+            count: addedCount,
+            message: `成功从 Docx 文档中解析并追加 ${addedCount} 条新内容！`
           });
         } else {
           setParseResult({
@@ -264,13 +258,10 @@ export function AdminUploadModal({
               </button>
 
               <button
-                onClick={() => {
+                onClick={async () => {
                   if (window.confirm('确定要清空本地修改并重置回官方初始数据吗？')) {
-                    onResetToDefault();
-                    setParseResult({
-                      success: true,
-                      message: '已重置回官方初始纯净数据集！'
-                    });
+                    const result = await onResetToDefault();
+                    setParseResult(result);
                   }
                 }}
                 className="flex items-center justify-center gap-2 p-3 rounded-2xl bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 border border-rose-200 dark:border-rose-900/60 text-rose-700 dark:text-rose-400 transition-all font-semibold shadow-2xs"
@@ -296,4 +287,3 @@ export function AdminUploadModal({
     </div>
   );
 }
-
