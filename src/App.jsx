@@ -107,8 +107,11 @@ export function App() {
         if (res.ok) {
           const data = await res.json();
           setSkills(data);
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-          localStorage.setItem(DATA_VERSION_KEY, 'v13');
+          try {
+            localStorage.setItem(DATA_VERSION_KEY, 'v13');
+          } catch {
+            // Ignore quota errors in private browsing
+          }
         }
       } catch (err) {
         console.error('Failed to load initial data:', err);
@@ -159,8 +162,10 @@ export function App() {
     setSkills(newSkills);
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(newSkills));
+      localStorage.setItem('SKILLS_DATA_CUSTOM_MODIFIED', 'true');
     } catch (e) {
-      console.error(e);
+      console.warn('localStorage quota reached:', e);
+      showToast('浏览器本地存储已满，修改仅在当前会话生效，请及时点击导出全量 JSON 备份！', 'info');
     }
   };
 
