@@ -22,9 +22,9 @@ export function AboutModal({ isOpen, onClose, onCopy }) {
         <div className="flex items-start justify-between gap-3">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 border border-indigo-200/60 dark:border-indigo-800/60">
-                <Sparkles className="w-3 h-3 text-indigo-500" />
-                <span>开源交流与共建</span>
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium bg-[#f5f5f7] dark:bg-white/[0.06] text-[#515154] dark:text-zinc-300 border border-black/[0.06] dark:border-white/[0.08]">
+                <Sparkles className="w-3 h-3 text-[#71717a] dark:text-zinc-400" />
+                <span>社群与共建</span>
               </span>
             </div>
             <h3 className="text-base sm:text-lg font-bold text-[#1d1d1f] dark:text-white tracking-tight">
@@ -46,29 +46,29 @@ export function AboutModal({ isOpen, onClose, onCopy }) {
         </div>
 
         {/* Hall of Fame / Special Acknowledgments */}
-        <div className="p-3 rounded-xl sm:rounded-2xl bg-amber-500/[0.07] border border-amber-600/15 space-y-1.5">
-          <div className="flex items-center gap-1.5 text-xs font-bold text-amber-900 dark:text-amber-300">
-            <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
+        <div className="p-3 rounded-xl sm:rounded-2xl bg-[#f8f8fa] dark:bg-[#121215] border border-black/[0.06] dark:border-white/[0.08] space-y-1.5">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-[#1d1d1f] dark:text-white">
+            <Heart className="w-3.5 h-3.5 text-[#71717a] dark:text-zinc-400" />
             <span>核心贡献与特别致谢</span>
           </div>
-          <div className="text-[11px] sm:text-xs space-y-1 text-amber-950/80 dark:text-amber-200/90 leading-relaxed font-sans">
+          <div className="text-[11px] sm:text-xs space-y-1.5 text-[#515154] dark:text-zinc-300 leading-relaxed font-sans">
             <p>
-              • <strong>共建社群</strong>：✨ 感谢<strong>「威比🙂↔️AIGC学习群」</strong>诸位群友的无私分享与实战出图沉淀！
+              • <strong>共建社群</strong>：感谢<strong>「威比🙂↔️AIGC学习群」</strong>诸位群友的无私分享与实战出图沉淀。
             </p>
             <p>
-              • <strong>原始资料整理</strong>：💖 特别致谢群友 <strong>@我的世界皓宸</strong> 对海量原始视觉资料、参数调优与样张的系统化梳理和无私奉献！
+              • <strong>原始资料整理</strong>：特别致谢群友 <strong>@我的世界皓宸</strong> 对海量原始视觉资料、参数调优与样张的系统化梳理和无私奉献。
             </p>
           </div>
         </div>
 
         {/* WeChat QR & Community Join */}
-        <div className="bg-[#f5f5f7] dark:bg-[#111114] p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-black/[0.04] dark:border-white/[0.06] text-center space-y-2.5">
-          <div className="flex items-center justify-center gap-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-400">
-            <QrCode className="w-4 h-4" />
+        <div className="bg-[#f8f8fa] dark:bg-[#121215] p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-black/[0.06] dark:border-white/[0.08] text-center space-y-2.5">
+          <div className="flex items-center justify-center gap-1.5 text-xs font-medium text-[#1d1d1f] dark:text-white">
+            <QrCode className="w-3.5 h-3.5 text-[#71717a] dark:text-zinc-400" />
             <span>扫码添加作者微信 · 加入交流群</span>
           </div>
 
-          <div className="bg-white p-2 rounded-xl shadow-xs max-w-[150px] sm:max-w-[170px] mx-auto">
+          <div className="bg-white p-2 rounded-xl shadow-2xs max-w-[150px] sm:max-w-[160px] mx-auto border border-black/[0.04]">
             <img 
               src="/wechat-qr.jpg" 
               alt="微信二维码" 
@@ -82,14 +82,14 @@ export function AboutModal({ isOpen, onClose, onCopy }) {
             </span>
             <button
               onClick={handleCopyWeChat}
-              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-medium text-xs transition-colors shadow-2xs cursor-pointer"
+              className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#18181b] dark:bg-white hover:bg-black dark:hover:bg-zinc-200 text-white dark:text-black font-semibold text-xs transition-colors shadow-2xs cursor-pointer"
             >
               <Copy className="w-3 h-3" />
               <span>复制</span>
             </button>
           </div>
-          <p className="text-[10.5px] sm:text-[11px] text-[#86868b] dark:text-zinc-500">
-            添加微信时请备注：<span className="text-emerald-700 dark:text-emerald-400 font-semibold">进AIGC学习群</span>
+          <p className="text-[10.5px] sm:text-[11px] text-[#86868b] dark:text-zinc-400">
+            添加微信时请备注：<span className="text-[#1d1d1f] dark:text-white font-semibold">进AIGC学习群</span>
           </p>
         </div>
 
@@ -101,9 +101,9 @@ export function AboutModal({ isOpen, onClose, onCopy }) {
           <div className="grid grid-cols-2 gap-1.5 sm:gap-2 text-xs">
             <a
               href="mailto:wuwei5986@gmail.com"
-              className="flex items-center gap-2 p-2 rounded-xl bg-[#f5f5f7] dark:bg-[#1a1a1f] border border-black/[0.04] dark:border-white/[0.06] text-[#1d1d1f] dark:text-zinc-200 hover:border-indigo-400/50 transition-all group"
+              className="flex items-center gap-2 p-2 rounded-xl bg-[#f8f8fa] dark:bg-[#141417] border border-black/[0.05] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 hover:border-black/[0.18] dark:hover:border-white/[0.2] transition-all group"
             >
-              <Mail className="w-3.5 h-3.5 text-indigo-500 shrink-0" />
+              <Mail className="w-3.5 h-3.5 text-[#71717a] dark:text-zinc-400 shrink-0" />
               <div className="truncate">
                 <div className="text-[9.5px] text-[#86868b] dark:text-zinc-400 leading-none">联系邮箱</div>
                 <div className="font-mono font-medium truncate mt-0.5 text-[11px]">wuwei5986...</div>
@@ -114,7 +114,7 @@ export function AboutModal({ isOpen, onClose, onCopy }) {
               href="https://x.com/wsiwsii"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 p-2 rounded-xl bg-[#f5f5f7] dark:bg-[#1a1a1f] border border-black/[0.04] dark:border-white/[0.06] text-[#1d1d1f] dark:text-zinc-200 hover:border-black/20 dark:hover:border-white/20 transition-all group"
+              className="flex items-center gap-2 p-2 rounded-xl bg-[#f8f8fa] dark:bg-[#141417] border border-black/[0.05] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 hover:border-black/[0.18] dark:hover:border-white/[0.2] transition-all group"
             >
               <span className="text-xs font-bold shrink-0">𝕏</span>
               <div className="truncate">
@@ -127,7 +127,7 @@ export function AboutModal({ isOpen, onClose, onCopy }) {
               href="https://github.com/Vieeeeeee/skills-gallery"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 p-2 rounded-xl bg-[#f5f5f7] dark:bg-[#1a1a1f] border border-black/[0.04] dark:border-white/[0.06] text-[#1d1d1f] dark:text-zinc-200 hover:border-black/20 dark:hover:border-white/20 transition-all group"
+              className="flex items-center gap-2 p-2 rounded-xl bg-[#f8f8fa] dark:bg-[#141417] border border-black/[0.05] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 hover:border-black/[0.18] dark:hover:border-white/[0.2] transition-all group"
             >
               <span className="text-xs shrink-0">🐙</span>
               <div className="truncate">
@@ -140,7 +140,7 @@ export function AboutModal({ isOpen, onClose, onCopy }) {
               href="https://github.com/Vieeeeeee/skills-gallery/issues/new?template=claim_author.yml"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 p-2 rounded-xl bg-[#f5f5f7] dark:bg-[#1a1a1f] border border-black/[0.04] dark:border-white/[0.06] text-amber-800 dark:text-amber-300 hover:border-amber-400/50 transition-all group"
+              className="flex items-center gap-2 p-2 rounded-xl bg-[#f8f8fa] dark:bg-[#141417] border border-black/[0.05] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 hover:border-black/[0.18] dark:hover:border-white/[0.2] transition-all group"
             >
               <span className="text-xs shrink-0">🏷️</span>
               <div className="truncate">
@@ -155,7 +155,7 @@ export function AboutModal({ isOpen, onClose, onCopy }) {
         <div className="pt-1">
           <button
             onClick={onClose}
-            className="w-full py-2.5 rounded-xl text-xs font-medium bg-[#f5f5f7] hover:bg-[#ebebee] dark:bg-white/[0.08] dark:hover:bg-white/[0.14] text-[#1d1d1f] dark:text-white transition-colors cursor-pointer border border-black/[0.06] dark:border-white/[0.08]"
+            className="w-full py-2.5 rounded-xl text-xs font-semibold bg-[#18181b] hover:bg-black dark:bg-white dark:hover:bg-zinc-200 text-white dark:text-black transition-all cursor-pointer shadow-xs"
           >
             关闭窗口
           </button>

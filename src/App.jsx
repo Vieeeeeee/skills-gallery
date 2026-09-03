@@ -451,6 +451,12 @@ export function App() {
             
             {/* Headline, Intro, Stats, 4 Type Filter Cards */}
             <div className="lg:col-span-7 flex flex-col justify-between space-y-2.5 sm:space-y-4">
+              
+              {/* Mobile Dynamic Animation Bar ("星那个大那个长条的动画") */}
+              <div className="lg:hidden w-full">
+                <DashCascade compact={true} />
+              </div>
+
               <div className="space-y-2 sm:space-y-3">
                 {/* Desktop badge */}
                 <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50/90 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/60 text-xs font-mono text-indigo-700 dark:text-indigo-300 shadow-2xs">
@@ -477,25 +483,25 @@ export function App() {
                   一键复制 Prompt 与安装指令，支持在线增补与本地管理。
                 </p>
 
-                {/* Desktop 4 Stat Metrics Row */}
-                <div className="hidden sm:flex items-center gap-2.5 sm:gap-4.5 pt-0.5 text-left flex-wrap">
+                {/* Colored Stat Metrics Row (Visible on both Mobile & Desktop) */}
+                <div className="flex items-center gap-2.5 sm:gap-4.5 pt-0.5 text-left flex-wrap">
                   <div className="flex items-baseline gap-1">
-                    <span className="text-lg sm:text-2xl font-bold font-mono text-[#111113] dark:text-white leading-none">{skills.length}</span>
+                    <span className="text-base sm:text-2xl font-bold font-mono text-[#111113] dark:text-white leading-none">{skills.length}</span>
                     <span className="text-xs text-[#86868b] dark:text-zinc-400 font-medium font-sans">条目</span>
                   </div>
-                  <div className="w-[1px] h-3.5 sm:h-4 bg-black/[0.1] dark:bg-white/[0.1]" />
+                  <div className="w-[1px] h-3 sm:h-4 bg-black/[0.1] dark:bg-white/[0.1]" />
                   <div className="flex items-baseline gap-1">
-                    <span className="text-lg sm:text-2xl font-bold font-mono text-rose-600 dark:text-rose-400 leading-none">{typeCounts.style || 0}</span>
+                    <span className="text-base sm:text-2xl font-bold font-mono text-rose-600 dark:text-rose-400 leading-none">{typeCounts.style || 0}</span>
                     <span className="text-xs text-[#86868b] dark:text-zinc-400 font-medium font-sans">视觉风格</span>
                   </div>
-                  <div className="w-[1px] h-3.5 sm:h-4 bg-black/[0.1] dark:bg-white/[0.1]" />
+                  <div className="w-[1px] h-3 sm:h-4 bg-black/[0.1] dark:bg-white/[0.1]" />
                   <div className="flex items-baseline gap-1">
-                    <span className="text-lg sm:text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400 leading-none">{(typeCounts.skill || 0) + (typeCounts.tool || 0)}</span>
+                    <span className="text-base sm:text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400 leading-none">{(typeCounts.skill || 0) + (typeCounts.tool || 0)}</span>
                     <span className="text-xs text-[#86868b] dark:text-zinc-400 font-medium font-sans">开源 Skill</span>
                   </div>
-                  <div className="w-[1px] h-3.5 sm:h-4 bg-black/[0.1] dark:bg-white/[0.1]" />
+                  <div className="w-[1px] h-3 sm:h-4 bg-black/[0.1] dark:bg-white/[0.1]" />
                   <div className="flex items-baseline gap-1">
-                    <span className="text-lg sm:text-2xl font-bold font-mono text-indigo-600 dark:text-indigo-400 leading-none">{uniqueAuthorsCount}+</span>
+                    <span className="text-base sm:text-2xl font-bold font-mono text-indigo-600 dark:text-indigo-400 leading-none">{uniqueAuthorsCount}+</span>
                     <span className="text-xs text-[#86868b] dark:text-zinc-400 font-medium font-sans">真实作者</span>
                   </div>
                 </div>
@@ -538,7 +544,7 @@ export function App() {
                   })}
                 </div>
 
-                {/* Mobile: Ultra-clean, single-row compact pill tabs */}
+                {/* Mobile: 4 Horizontal Buttons with Unified Height */}
                 <div className="sm:hidden flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
                   {types.map((t) => {
                     const Icon = t.icon;
@@ -547,7 +553,7 @@ export function App() {
                       <button
                         key={t.id}
                         onClick={() => setSelectedType(t.id)}
-                        className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium transition-all shrink-0 border cursor-pointer ${
+                        className={`h-7 px-2.5 rounded-lg text-[11px] font-medium transition-all shrink-0 border flex items-center gap-1 cursor-pointer ${
                           isActive
                             ? 'bg-[#18181b] dark:bg-white text-white dark:text-black font-semibold border-[#18181b] dark:border-white shadow-2xs'
                             : 'bg-white dark:bg-[#141417] border-black/[0.08] dark:border-white/[0.08] text-[#515154] dark:text-zinc-300'
@@ -555,7 +561,7 @@ export function App() {
                       >
                         <Icon className="w-3 h-3" />
                         <span>{t.label}</span>
-                        <span className="font-mono text-[10px] opacity-75">({t.count})</span>
+                        <span className="font-mono text-[9.5px] opacity-75">({t.count})</span>
                       </button>
                     );
                   })}
@@ -565,7 +571,7 @@ export function App() {
 
             {/* Right Column: Tech Frame Card with Dot Matrix Animation (Desktop only) */}
             <div className="hidden lg:flex lg:col-span-5 items-stretch">
-              <DashCascade />
+              <DashCascade compact={false} />
             </div>
 
           </div>
@@ -715,23 +721,23 @@ export function App() {
           >
             <span className="text-[#1d1d1f] dark:text-white font-semibold">Prompt & Skill 风格大赏</span>
             <span>•</span>
-            <span className="text-amber-800 dark:text-amber-300 font-medium">✨ 特别致谢「威比🙂↔️AIGC学习群」群友倾情共建</span>
+            <span className="text-[#515154] dark:text-zinc-300 font-medium">致谢「威比🙂↔️AIGC学习群」群友倾情共建</span>
             <span>•</span>
-            <span className="text-indigo-600 dark:text-indigo-400 font-medium">原始资料整理：@我的世界皓宸</span>
+            <span className="text-[#515154] dark:text-zinc-300 font-medium">原始资料整理：@我的世界皓宸</span>
           </div>
 
           {/* Contact & WeChat Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1 text-xs">
+          <div className="flex flex-wrap items-center justify-center gap-2 pt-1 text-xs">
             {/* WeChat with QR popup & copy */}
             <div className="relative group inline-flex items-center">
               <button
                 onClick={() => setIsAboutModalOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f5f5f7] dark:bg-[#18181d] border border-black/[0.06] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 shadow-2xs hover:border-emerald-500/40 transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f5f5f7] dark:bg-[#18181d] border border-black/[0.06] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 shadow-2xs hover:border-black/[0.18] dark:hover:border-white/[0.2] transition-all cursor-pointer"
                 title="点击查看社群与微信二维码"
               >
-                <span className="text-emerald-600 dark:text-emerald-400 font-semibold">💬 微信:</span>
+                <span className="text-[#515154] dark:text-zinc-400 font-medium">微信:</span>
                 <strong className="font-mono text-[#1d1d1f] dark:text-white select-all">Wibi2077</strong>
-                <span className="text-[11px] text-emerald-600 dark:text-emerald-400 flex items-center gap-0.5">
+                <span className="text-[11px] text-[#71717a] dark:text-zinc-400 flex items-center gap-0.5">
                   <QrCode className="w-3 h-3" />
                   <span>扫码进群</span>
                 </span>
@@ -743,7 +749,7 @@ export function App() {
                   navigator.clipboard.writeText('Wibi2077');
                   showToast('微信号已复制！添加请备注：进AIGC学习群');
                 }}
-                className="ml-1 text-[10.5px] px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 transition-colors cursor-pointer"
+                className="ml-1 text-[10.5px] px-2 py-0.5 rounded-full bg-black/5 dark:bg-white/10 text-[#1d1d1f] dark:text-white hover:bg-black/10 dark:hover:bg-white/15 transition-colors cursor-pointer"
                 title="复制微信号"
               >
                 复制
@@ -764,10 +770,10 @@ export function App() {
 
             <a
               href="mailto:wuwei5986@gmail.com"
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f5f5f7] dark:bg-[#18181d] border border-black/[0.06] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 hover:border-indigo-400/60 transition-all shadow-2xs"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f5f5f7] dark:bg-[#18181d] border border-black/[0.06] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 hover:border-black/[0.18] dark:hover:border-white/[0.2] transition-all shadow-2xs"
               title="发送邮件"
             >
-              <span className="text-indigo-600 dark:text-indigo-400 font-semibold">📫 邮箱:</span>
+              <span className="text-[#515154] dark:text-zinc-400 font-medium">邮箱:</span>
               <span className="font-mono">wuwei5986@gmail.com</span>
             </a>
 
@@ -775,7 +781,7 @@ export function App() {
               href="https://x.com/wsiwsii"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f5f5f7] dark:bg-[#18181d] border border-black/[0.06] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 hover:border-black/[0.2] dark:hover:border-white/[0.2] transition-all shadow-2xs"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f5f5f7] dark:bg-[#18181d] border border-black/[0.06] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 hover:border-black/[0.18] dark:hover:border-white/[0.2] transition-all shadow-2xs"
               title="访问 X (Twitter)"
             >
               <span className="font-medium">𝕏 Wibi X (@wsiwsii)</span>
@@ -785,7 +791,7 @@ export function App() {
               href="https://github.com/Vieeeeeee/skills-gallery"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f5f5f7] dark:bg-[#18181d] border border-black/[0.06] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 hover:border-black/[0.2] dark:hover:border-white/[0.2] transition-all shadow-2xs"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f5f5f7] dark:bg-[#18181d] border border-black/[0.06] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 hover:border-black/[0.18] dark:hover:border-white/[0.2] transition-all shadow-2xs"
             >
               <span>🐙 GitHub 开源主页</span>
             </a>
