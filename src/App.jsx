@@ -526,9 +526,12 @@ export function App() {
                 
                 {/* Title */}
                 <div>
-                  <h1 className="font-hero-serif font-black tracking-tight text-[#111113] dark:text-white leading-none">
-                    <span className="text-[24.5px] xs:text-[26.5px] sm:text-4xl lg:text-[46px] xl:text-[52px] whitespace-nowrap block tracking-tight">
-                      Prompt <span className="font-serif font-normal italic text-[#111113] dark:text-white">&</span> Skill 风格大赏
+                  <h1 className="font-hero-serif font-black tracking-tight text-[#111113] dark:text-white leading-[1.08] sm:leading-none">
+                    <span className="block text-[33px] sm:text-4xl lg:text-[46px] xl:text-[52px] sm:inline">
+                      Prompt <span className="font-serif font-normal italic text-[#111113] dark:text-white">&</span> Skill
+                    </span>
+                    <span className="block text-[33px] sm:text-4xl lg:text-[46px] xl:text-[52px] sm:inline sm:ml-3 tracking-wide mt-0.5 sm:mt-0">
+                      风格大赏
                     </span>
                   </h1>
                 </div>
