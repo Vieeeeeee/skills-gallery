@@ -13,10 +13,66 @@ import { AboutModal } from './components/AboutModal';
 import { matchSearch } from './utils/search';
 import { Sparkles, Palette, Terminal, Wrench, SearchX, RefreshCw, ChevronDown, X, QrCode, ArrowUp } from 'lucide-react';
 
-const STORAGE_KEY = 'SKILLS_GALLERY_DATA_V2026_CLEAN_V13';
+const STORAGE_KEY = 'SKILLS_GALLERY_DATA_V2026_CLEAN_V14';
 const BOOKMARKS_KEY = 'SKILLS_GALLERY_BOOKMARKS_V4_FEED';
 const APP_MODE_KEY = 'SKILLS_APP_MODE_KEY';
 const PAGE_SIZE = 24;
+
+// Helper to check if an item is created by Wibi
+export const isWibiItem = (item) => {
+  if (!item) return false;
+  const author = (item.author || '').toLowerCase();
+  const id = (item.id || '').toLowerCase();
+  return author.includes('vie') || author.includes('威比') || id.startsWith('wibi-');
+};
+
+// Helper to check if an item has a rich visual cover
+export const hasCoverImage = (item) => {
+  if (!item) return false;
+  return Boolean(item.cover_image || (Array.isArray(item.images) && item.images.length > 0));
+};
+
+// Curation & Interleaving Engine:
+// 1. Items with covers ALWAYS come first
+// 2. Interleave Wibi styles and other creators/community styles (3:2 balanced ratio)
+// 3. Support randomizing within buckets when clicking "换一批" (Shuffle)
+export const curateAndInterleaveSkills = (items, randomize = false) => {
+  if (!Array.isArray(items) || items.length === 0) return items;
+
+  const shuffle = (arr) => {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  };
+
+  let wibiCovers = items.filter((d) => hasCoverImage(d) && isWibiItem(d));
+  let otherCovers = items.filter((d) => hasCoverImage(d) && !isWibiItem(d));
+  let withoutCovers = items.filter((d) => !hasCoverImage(d));
+
+  if (randomize) {
+    wibiCovers = shuffle(wibiCovers);
+    otherCovers = shuffle(otherCovers);
+    withoutCovers = shuffle(withoutCovers);
+  }
+
+  const interleaved = [];
+  let w = 0;
+  let o = 0;
+
+  // Interleave with 3 Wibi : 2 Other pattern: W, O, W, O, W...
+  while (w < wibiCovers.length || o < otherCovers.length) {
+    if (w < wibiCovers.length) interleaved.push(wibiCovers[w++]);
+    if (o < otherCovers.length) interleaved.push(otherCovers[o++]);
+    if (w < wibiCovers.length) interleaved.push(wibiCovers[w++]);
+    if (o < otherCovers.length) interleaved.push(otherCovers[o++]);
+    if (w < wibiCovers.length) interleaved.push(wibiCovers[w++]);
+  }
+
+  return [...interleaved, ...withoutCovers];
+};
 
 export function App() {
   const [skills, setSkills] = useState([]);
@@ -99,17 +155,17 @@ export function App() {
 
   // Initial Load: Always load fresh clean dataset on startup; preserve only explicit admin edits
   useEffect(() => {
-    const DATA_VERSION_KEY = 'SKILLS_DATA_VERSION_V2026_CLEAN_V13';
+    const DATA_VERSION_KEY = 'SKILLS_DATA_VERSION_V2026_CLEAN_V14';
     const loadInitialData = async () => {
       try {
         const isCustomModified = localStorage.getItem('SKILLS_DATA_CUSTOM_MODIFIED') === 'true';
         const currentVersion = localStorage.getItem(DATA_VERSION_KEY);
         const localData = localStorage.getItem(STORAGE_KEY);
 
-        if (isCustomModified && currentVersion === 'v13' && localData) {
+        if (isCustomModified && currentVersion === 'v14' && localData) {
           const parsed = JSON.parse(localData);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            setSkills(parsed);
+            setSkills(curateAndInterleaveSkills(parsed, false));
             setLoading(false);
             return;
           }
@@ -118,9 +174,10 @@ export function App() {
         const res = await fetch('/skills_data.json?t=' + Date.now());
         if (res.ok) {
           const data = await res.json();
-          setSkills(data);
+          const curated = curateAndInterleaveSkills(data, false);
+          setSkills(curated);
           try {
-            localStorage.setItem(DATA_VERSION_KEY, 'v13');
+            localStorage.setItem(DATA_VERSION_KEY, 'v14');
           } catch {
             // Ignore quota errors in private browsing
           }
@@ -221,15 +278,22 @@ export function App() {
     };
   }, [skills]);
 
-  // Filtered skills
+  // Filtered skills (Always prioritizing cover images first while preserving curated order)
   const filteredSkills = useMemo(() => {
-    return skills.filter((item) => {
+    const matched = skills.filter((item) => {
       if (isBookmarkOnly && !bookmarks.includes(item.id)) return false;
       if (selectedType !== 'all' && item.type !== selectedType) return false;
       if (selectedCategory !== 'all' && item.category !== selectedCategory) return false;
       if (selectedTag && (!item.tags || !item.tags.includes(selectedTag))) return false;
       if (searchQuery && !matchSearch(item, searchQuery)) return false;
       return true;
+    });
+
+    // Ensure items with visual covers always appear first
+    return [...matched].sort((a, b) => {
+      const aHas = hasCoverImage(a) ? 1 : 0;
+      const bHas = hasCoverImage(b) ? 1 : 0;
+      return bHas - aHas;
     });
   }, [skills, searchQuery, selectedType, selectedCategory, selectedTag, isBookmarkOnly, bookmarks]);
 
@@ -359,13 +423,9 @@ export function App() {
   };
 
   const handleShuffle = () => {
-    const shuffled = [...skills];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
+    const shuffled = curateAndInterleaveSkills(skills, true);
     setSkills(shuffled);
-    showToast(' 已随机打乱排序！');
+    showToast('✨ 精选风格已换一批！');
   };
 
   const handleResetFilters = () => {

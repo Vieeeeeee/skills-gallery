@@ -28,6 +28,32 @@
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
   },
   {
+    "id": "skill-001",
+    "title": "gathered-scenes-zine-skill",
+    "type": "skill",
+    "category": "海报与画册",
+    "author": "Zeejay0",
+    "repo_url": "https://github.com/Zeejay0/gathered-scenes-zine-skill",
+    "command": "npx skills add Zeejay0/gathered-scenes-zine-skill",
+    "tags": [
+      "Zine画册",
+      "撕纸拼贴",
+      "摄影重构",
+      "开源Skill"
+    ],
+    "description": "知名度极高的综合型纸刊 Skill。保留真实摄影照片，加入不规则撕纸边缘、插画化抽象色块与大面积纸刊留白。分为实景拼贴与影像蒸馏两种子模式。",
+    "cover_image": "/images/covers/gh_zeejay0_gathered-scenes-zine-skill_1.webp",
+    "images": [
+      "/images/covers/gh_zeejay0_gathered-scenes-zine-skill_1.webp",
+      "/images/covers/gh_zeejay0_gathered-scenes-zine-skill_2.webp",
+      "/images/covers/gh_zeejay0_gathered-scenes-zine-skill_3.webp",
+      "/images/covers/gh_zeejay0_gathered-scenes-zine-skill_4.webp"
+    ],
+    "accent_color": "#9E7B9B",
+    "gradient": "from-[#322A38]/90 via-[#403447]/80 to-[#201A24]",
+    "install_command": "npx skills add Zeejay0/gathered-scenes-zine-skill"
+  },
+  {
     "id": "wibi-alt-manga-avatar",
     "slug": "alt-manga-avatar",
     "title": "Wibi Style · 粗线条漫画头像",
@@ -54,6 +80,32 @@
     "aspect_ratio": "1:1",
     "accent_color": "#4F46E5",
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "skill-002",
+    "title": "photo-abstract-editorial",
+    "type": "skill",
+    "category": "海报与画册",
+    "author": "ZzzLc0405",
+    "repo_url": "https://github.com/ZzzLc0405/photo-abstract-editorial",
+    "command": "npx skills add ZzzLc0405/photo-abstract-editorial",
+    "tags": [
+      "摄影抽象",
+      "几何色块",
+      "杂志排版",
+      "开源Skill"
+    ],
+    "description": "将一张照片转化为「原始摄影区域 + 抽象记忆面板 + 诗意英文标题」的竖向编辑杂志风图片。建筑摄影与旅行记录抽象化首选。",
+    "cover_image": "/images/covers/gh_zzzlc0405_photo-abstract-editorial_1.webp",
+    "images": [
+      "/images/covers/gh_zzzlc0405_photo-abstract-editorial_1.webp",
+      "/images/covers/gh_zzzlc0405_photo-abstract-editorial_2.webp",
+      "/images/covers/gh_zzzlc0405_photo-abstract-editorial_3.webp",
+      "/images/covers/gh_zzzlc0405_photo-abstract-editorial_4.webp"
+    ],
+    "accent_color": "#9E7B9B",
+    "gradient": "from-[#322A38]/90 via-[#403447]/80 to-[#201A24]",
+    "install_command": "npx skills add ZzzLc0405/photo-abstract-editorial"
   },
   {
     "id": "wibi-art-print-poster",
@@ -112,6 +164,32 @@
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
   },
   {
+    "id": "skill-003",
+    "title": "gc-minimal-zine-poster",
+    "type": "skill",
+    "category": "海报与画册",
+    "author": "LiamGvchi",
+    "repo_url": "https://github.com/LiamGvchi/gc-minimal-zine-poster",
+    "command": "npx skills add LiamGvchi/gc-minimal-zine-poster",
+    "tags": [
+      "极简海报",
+      "文字排版",
+      "报纸质感",
+      "开源Skill"
+    ],
+    "description": "把一张照片和一句话做成情绪海报。大面积留白与新闻纸质感，适合公众号封面、APP故事头图、读书日记单页。",
+    "cover_image": "/images/covers/gh_liamgvchi_gc-minimal-zine-poster_1.webp",
+    "images": [
+      "/images/covers/gh_liamgvchi_gc-minimal-zine-poster_1.webp",
+      "/images/covers/gh_liamgvchi_gc-minimal-zine-poster_2.webp",
+      "/images/covers/gh_liamgvchi_gc-minimal-zine-poster_3.webp",
+      "/images/covers/gh_liamgvchi_gc-minimal-zine-poster_4.webp"
+    ],
+    "accent_color": "#9E7B9B",
+    "gradient": "from-[#322A38]/90 via-[#403447]/80 to-[#201A24]",
+    "install_command": "npx skills add LiamGvchi/gc-minimal-zine-poster"
+  },
+  {
     "id": "wibi-iridescent-long-exposure",
     "slug": "iridescent-long-exposure",
     "title": "Wibi Style · 虹彩柔焦长曝光",
@@ -138,6 +216,32 @@
     "aspect_ratio": "3:4",
     "accent_color": "#4F46E5",
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "skill-004",
+    "title": "photo-relic-editorial",
+    "type": "skill",
+    "category": "纸艺与拼贴",
+    "author": "wnby",
+    "repo_url": "https://github.com/wnby/photo-relic-editorial",
+    "command": "npx skills add wnby/photo-relic-editorial",
+    "tags": [
+      "纸上留影",
+      "特种纸纹理",
+      "极简克制",
+      "开源Skill"
+    ],
+    "description": "让画面在纸面里长出一个来自源图的余像。保留真实照片原生质感，配以克制、可辨识的纸上重构印痕。",
+    "cover_image": "/images/covers/gh_wnby_photo-relic-editorial_1.webp",
+    "images": [
+      "/images/covers/gh_wnby_photo-relic-editorial_1.webp",
+      "/images/covers/gh_wnby_photo-relic-editorial_2.webp",
+      "/images/covers/gh_wnby_photo-relic-editorial_3.webp",
+      "/images/covers/gh_wnby_photo-relic-editorial_4.webp"
+    ],
+    "accent_color": "#C48A57",
+    "gradient": "from-[#3B342C]/90 via-[#4A4238]/80 to-[#2A241D]",
+    "install_command": "npx skills add wnby/photo-relic-editorial"
   },
   {
     "id": "wibi-blue-retro-print",
@@ -196,6 +300,31 @@
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
   },
   {
+    "id": "skill-005",
+    "title": "skill-make-photo-stamp-archive",
+    "type": "skill",
+    "category": "海报与画册",
+    "author": "Dlcccc71913",
+    "repo_url": "https://github.com/Dlcccc71913/skill-make-photo-stamp-archive",
+    "command": "npx skills add Dlcccc71913/skill-make-photo-stamp-archive",
+    "tags": [
+      "复古邮票",
+      "印章档案",
+      "左右对照",
+      "开源Skill"
+    ],
+    "description": "把旅行摄影转化为复古邮戳版画与印章卡。左侧写实摄影、右侧邮戳版画左右对照，浓郁旅行明信片档案馆气质。",
+    "cover_image": "/images/covers/gh_dlcccc71913_skill-make-photo-stamp-archive_1.webp",
+    "images": [
+      "/images/covers/gh_dlcccc71913_skill-make-photo-stamp-archive_1.webp",
+      "/images/covers/gh_dlcccc71913_skill-make-photo-stamp-archive_2.webp",
+      "/images/covers/gh_dlcccc71913_skill-make-photo-stamp-archive_3.webp"
+    ],
+    "accent_color": "#9E7B9B",
+    "gradient": "from-[#322A38]/90 via-[#403447]/80 to-[#201A24]",
+    "install_command": "npx skills add Dlcccc71913/skill-make-photo-stamp-archive"
+  },
+  {
     "id": "wibi-textile-toy-portrait",
     "slug": "textile-toy-portrait",
     "title": "Wibi Style · 颗粒绒感玩偶",
@@ -222,6 +351,31 @@
     "aspect_ratio": "3:4",
     "accent_color": "#4F46E5",
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "skill-006",
+    "title": "lsf-clock-editorial-poster",
+    "type": "skill",
+    "category": "极简与解构",
+    "author": "leishifu666",
+    "repo_url": "https://github.com/leishifu666/lsf-clock-editorial-poster",
+    "command": "npx skills add leishifu666/lsf-clock-editorial-poster",
+    "tags": [
+      "时钟海报",
+      "编辑设计",
+      "几何排版",
+      "开源Skill"
+    ],
+    "description": "融合时钟刻度、精巧时间戳记与建筑摄影的高端杂志封面级排版海报，几何解构与工业美感兼备。",
+    "cover_image": "/images/covers/gh_leishifu666_lsf-clock-editorial-poster_1.webp",
+    "images": [
+      "/images/covers/gh_leishifu666_lsf-clock-editorial-poster_1.webp",
+      "/images/covers/gh_leishifu666_lsf-clock-editorial-poster_2.webp",
+      "/images/covers/gh_leishifu666_lsf-clock-editorial-poster_3.webp"
+    ],
+    "accent_color": "#4A6FA5",
+    "gradient": "from-[#252D3D]/90 via-[#2F3B52]/80 to-[#181D26]",
+    "install_command": "npx skills add leishifu666/lsf-clock-editorial-poster"
   },
   {
     "id": "wibi-cold-blue-glitch-anime",
@@ -280,6 +434,31 @@
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
   },
   {
+    "id": "skill-007",
+    "title": "photo-revival",
+    "type": "skill",
+    "category": "水彩与插画",
+    "author": "dacnay816y62-hub",
+    "repo_url": "https://github.com/dacnay816y62-hub/photo-revival",
+    "command": "npx skills add dacnay816y62-hub/photo-revival",
+    "tags": [
+      "生活随拍",
+      "诗意重绘",
+      "铅笔线稿",
+      "开源Skill"
+    ],
+    "description": "日常随手拍废片救星。使用铅笔线稿、水彩晕染与大面积留白，将生活普通照片重画为白纸上的小幅诗性艺术插画。",
+    "cover_image": "/images/covers/gh_dacnay816y62-hub_photo-revival_1.webp",
+    "images": [
+      "/images/covers/gh_dacnay816y62-hub_photo-revival_1.webp",
+      "/images/covers/gh_dacnay816y62-hub_photo-revival_2.webp",
+      "/images/covers/gh_dacnay816y62-hub_photo-revival_3.webp"
+    ],
+    "accent_color": "#4A7C59",
+    "gradient": "from-[#243328]/90 via-[#2E4234]/80 to-[#1A261D]",
+    "install_command": "npx skills add dacnay816y62-hub/photo-revival"
+  },
+  {
     "id": "wibi-serpent-line-ink",
     "slug": "serpent-line-ink",
     "title": "Wibi Style · 蛇发游线墨绘",
@@ -306,6 +485,31 @@
     "aspect_ratio": "3:4",
     "accent_color": "#4F46E5",
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "skill-008",
+    "title": "pixel-style-poster-skill",
+    "type": "skill",
+    "category": "动漫与波普",
+    "author": "v92388375-gif",
+    "repo_url": "https://github.com/v92388375-gif/pixel-style-poster-skill",
+    "command": "npx skills add v92388375-gif/pixel-style-poster-skill",
+    "tags": [
+      "像素艺术",
+      "点阵海报",
+      "复古街机",
+      "开源Skill"
+    ],
+    "description": "质感极独特的点阵像素风工具。不是普通像素滤镜，而是提炼主体主要几何关系并以粗颗粒点阵与醒目色块做复古海报重构。",
+    "cover_image": "/images/covers/gh_v92388375-gif_pixel-style-poster-skill_1.webp",
+    "images": [
+      "/images/covers/gh_v92388375-gif_pixel-style-poster-skill_1.webp",
+      "/images/covers/gh_v92388375-gif_pixel-style-poster-skill_2.webp",
+      "/images/covers/gh_v92388375-gif_pixel-style-poster-skill_3.webp"
+    ],
+    "accent_color": "#E65A4B",
+    "gradient": "from-[#3D252B]/90 via-[#4F2D37]/80 to-[#29181C]",
+    "install_command": "npx skills add v92388375-gif/pixel-style-poster-skill"
   },
   {
     "id": "wibi-warm-paper-crayon-street",
@@ -364,6 +568,32 @@
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
   },
   {
+    "id": "skill-010",
+    "title": "photo-to-zine-postcard",
+    "type": "skill",
+    "category": "纸艺与拼贴",
+    "author": "Whiplashzeb",
+    "repo_url": "https://github.com/Whiplashzeb/photo-to-zine-postcard",
+    "command": "npx skills add Whiplashzeb/photo-to-zine-postcard",
+    "tags": [
+      "色卡提取",
+      "复古印刷",
+      "旅行明信片",
+      "开源Skill"
+    ],
+    "description": "自动提取照片色卡，采用复古印刷明信片版式，上下二分或左右对开，旅行摄影快速出高级片首选。",
+    "cover_image": "/images/covers/gh_whiplashzeb_photo-to-zine-postcard_1.webp",
+    "images": [
+      "/images/covers/gh_whiplashzeb_photo-to-zine-postcard_1.webp",
+      "/images/covers/gh_whiplashzeb_photo-to-zine-postcard_2.webp",
+      "/images/covers/gh_whiplashzeb_photo-to-zine-postcard_3.webp",
+      "/images/covers/gh_whiplashzeb_photo-to-zine-postcard_4.webp"
+    ],
+    "accent_color": "#C48A57",
+    "gradient": "from-[#3B342C]/90 via-[#4A4238]/80 to-[#2A241D]",
+    "install_command": "npx skills add Whiplashzeb/photo-to-zine-postcard"
+  },
+  {
     "id": "wibi-kid-head-card",
     "slug": "kid-head-card",
     "title": "Wibi Style · 童年大头卡贴",
@@ -390,6 +620,32 @@
     "aspect_ratio": "3:4",
     "accent_color": "#4F46E5",
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "skill-021",
+    "title": "hyperframes",
+    "type": "skill",
+    "category": "AI 视频与动效",
+    "author": "heygen-com",
+    "repo_url": "https://github.com/heygen-com/hyperframes",
+    "command": "npx skills add heygen-com/hyperframes",
+    "tags": [
+      "代码动效",
+      "HeyGen",
+      "MP4生成",
+      "视频Agent"
+    ],
+    "description": "HeyGen 官方出品。一句话自动生成动效代码视频，文章、推文、产品介绍都能自动化渲染为 MP4 动效视频。",
+    "cover_image": "/images/covers/gh_heygen-com_hyperframes_1.webp",
+    "images": [
+      "/images/covers/gh_heygen-com_hyperframes_1.webp",
+      "/images/covers/gh_heygen-com_hyperframes_2.webp",
+      "/images/covers/gh_heygen-com_hyperframes_3.webp",
+      "/images/covers/gh_heygen-com_hyperframes_4.webp"
+    ],
+    "accent_color": "#38A3A5",
+    "gradient": "from-[#1F3338]/90 via-[#254247]/80 to-[#142226]",
+    "install_command": "npx skills add heygen-com/hyperframes"
   },
   {
     "id": "wibi-fisheye-city-cover",
@@ -448,6 +704,29 @@
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
   },
   {
+    "id": "skill-022",
+    "title": "video-use",
+    "type": "skill",
+    "category": "AI 视频与动效",
+    "author": "browser-use",
+    "repo_url": "https://github.com/browser-use/video-use",
+    "command": "npx skills add browser-use/video-use",
+    "tags": [
+      "视频粗剪",
+      "口播剪辑",
+      "自动化调色",
+      "视频Agent"
+    ],
+    "description": "让 coding agent 帮你做视频粗剪！自动识别口播长停顿、错句重读、口头禅、字幕对齐与批量色彩调优。",
+    "cover_image": "/images/covers/gh_browser-use_video-use_1.webp",
+    "images": [
+      "/images/covers/gh_browser-use_video-use_1.webp"
+    ],
+    "accent_color": "#38A3A5",
+    "gradient": "from-[#1F3338]/90 via-[#254247]/80 to-[#142226]",
+    "install_command": "npx skills add browser-use/video-use"
+  },
+  {
     "id": "wibi-minimal-pet-doodle",
     "slug": "minimal-pet-doodle",
     "title": "Wibi Style · 宠物极简线条",
@@ -474,6 +753,29 @@
     "aspect_ratio": "3:4",
     "accent_color": "#4F46E5",
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "skill-024",
+    "title": "Generative-Media-Skills",
+    "type": "skill",
+    "category": "AI 视频与动效",
+    "author": "SamurAIGPT",
+    "repo_url": "https://github.com/SamurAIGPT/Generative-Media-Skills",
+    "command": "npx skills add SamurAIGPT/Generative-Media-Skills",
+    "tags": [
+      "多媒体生成",
+      "广告素材",
+      "UGC视频",
+      "开源Skill"
+    ],
+    "description": "图片、视频、音频生成全套智能体工具箱。专为广告营销素材、短片分镜及实验性多媒体创作设计。",
+    "cover_image": "/images/covers/gh_samuraigpt_generative-media-skills_1.webp",
+    "images": [
+      "/images/covers/gh_samuraigpt_generative-media-skills_1.webp"
+    ],
+    "accent_color": "#38A3A5",
+    "gradient": "from-[#1F3338]/90 via-[#254247]/80 to-[#142226]",
+    "install_command": "npx skills add SamurAIGPT/Generative-Media-Skills"
   },
   {
     "id": "wibi-marker-child-doodle",
@@ -532,6 +834,29 @@
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
   },
   {
+    "id": "skill-028",
+    "title": "story-to-handdrawn-video",
+    "type": "skill",
+    "category": "AI 视频与动效",
+    "author": "gnipbao",
+    "repo_url": "https://github.com/gnipbao/story-to-handdrawn-video",
+    "command": "npx skills add gnipbao/story-to-handdrawn-video",
+    "tags": [
+      "白板动画",
+      "故事口播",
+      "知识讲解",
+      "视频Agent"
+    ],
+    "description": "一键将故事文案、知识口播转化为暖米黄复古底纸手绘白板动画。铅笔擦除与手绘推演动效生动自然。",
+    "cover_image": "/images/covers/gh_gnipbao_story-to-handdrawn-video_1.webp",
+    "images": [
+      "/images/covers/gh_gnipbao_story-to-handdrawn-video_1.webp"
+    ],
+    "accent_color": "#38A3A5",
+    "gradient": "from-[#1F3338]/90 via-[#254247]/80 to-[#142226]",
+    "install_command": "npx skills add gnipbao/story-to-handdrawn-video"
+  },
+  {
     "id": "wibi-photo-perler-charm",
     "slug": "photo-perler-charm",
     "title": "Wibi Style · 照片拼豆挂件",
@@ -558,6 +883,29 @@
     "aspect_ratio": "1:1",
     "accent_color": "#4F46E5",
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "skill-029",
+    "title": "logamee-film-forge",
+    "type": "skill",
+    "category": "AI 视频与动效",
+    "author": "logamee",
+    "repo_url": "https://github.com/logamee/logamee-film-forge",
+    "command": "npx skills add logamee/logamee-film-forge",
+    "tags": [
+      "电影锻造",
+      "全流程自动化",
+      "分镜生成",
+      "开源Skill"
+    ],
+    "description": "电影级短视频与动画自动化工作流。输入大纲自动拆解角色三视图、关键帧连续提示词与配音对齐方案。",
+    "cover_image": "/images/covers/gh_logamee_logamee-film-forge_1.webp",
+    "images": [
+      "/images/covers/gh_logamee_logamee-film-forge_1.webp"
+    ],
+    "accent_color": "#38A3A5",
+    "gradient": "from-[#1F3338]/90 via-[#254247]/80 to-[#142226]",
+    "install_command": "npx skills add logamee/logamee-film-forge"
   },
   {
     "id": "wibi-pixel-stretch",
@@ -616,6 +964,31 @@
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
   },
   {
+    "id": "skill-030",
+    "title": "video-subtitle-remover",
+    "type": "skill",
+    "category": "AI 视频与动效",
+    "author": "YaoFANGUK",
+    "repo_url": "https://github.com/YaoFANGUK/video-subtitle-remover",
+    "command": "npx skills add YaoFANGUK/video-subtitle-remover",
+    "tags": [
+      "字幕消除",
+      "水印擦除",
+      "无损修复",
+      "开源Skill"
+    ],
+    "description": "基于 AI 文本擦除与光流修复技术的视频字幕抹除工具。无痕移除原生硬字幕与水印标识。",
+    "cover_image": "/images/covers/gh_yaofanguk_video-subtitle-remover_1.webp",
+    "images": [
+      "/images/covers/gh_yaofanguk_video-subtitle-remover_1.webp",
+      "/images/covers/gh_yaofanguk_video-subtitle-remover_2.webp",
+      "/images/covers/gh_yaofanguk_video-subtitle-remover_3.webp"
+    ],
+    "accent_color": "#38A3A5",
+    "gradient": "from-[#1F3338]/90 via-[#254247]/80 to-[#142226]",
+    "install_command": "npx skills add YaoFANGUK/video-subtitle-remover"
+  },
+  {
     "id": "wibi-office-animals",
     "slug": "office-animals",
     "title": "Wibi Style · 牛马宇宙",
@@ -642,6 +1015,29 @@
     "aspect_ratio": "3:4",
     "accent_color": "#4F46E5",
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "skill-040",
+    "title": "guizang-material-illustration",
+    "type": "skill",
+    "category": "海报与画册",
+    "author": "op7418",
+    "repo_url": "https://github.com/op7418/guizang-material-illustration",
+    "command": "npx skills add op7418/guizang-material-illustration",
+    "tags": [
+      "材质插画",
+      "设计系统",
+      "设计资产",
+      "开源Skill"
+    ],
+    "description": "归藏材质插画设计系统。统一的材质纹理规范、高反差色块搭配，帮助设计团队快速搭建品牌视觉一致性。",
+    "cover_image": "/images/covers/gh_op7418_guizang-material-illustration_1.webp",
+    "images": [
+      "/images/covers/gh_op7418_guizang-material-illustration_1.webp"
+    ],
+    "accent_color": "#9E7B9B",
+    "gradient": "from-[#322A38]/90 via-[#403447]/80 to-[#201A24]",
+    "install_command": "npx skills add op7418/guizang-material-illustration"
   },
   {
     "id": "wibi-clear-sky-urban-cel",
@@ -700,6 +1096,31 @@
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
   },
   {
+    "id": "skill-042",
+    "title": "gen-comic-skill",
+    "type": "skill",
+    "category": "动漫与波普",
+    "author": "AmongFlowers",
+    "repo_url": "https://github.com/AmongFlowers/gen-comic-skill",
+    "command": "npx skills add AmongFlowers/gen-comic-skill",
+    "tags": [
+      "四格分镜",
+      "漫画拼贴",
+      "黑白网点",
+      "开源Skill"
+    ],
+    "description": "将用户日常故事或连续实拍照片一键重绘为带有拟声词气泡与黑白网点质感的经典漫画分镜拼贴海报。",
+    "cover_image": "/images/covers/gh_amongflowers_gen-comic-skill_1.webp",
+    "images": [
+      "/images/covers/gh_amongflowers_gen-comic-skill_1.webp",
+      "/images/covers/gh_amongflowers_gen-comic-skill_2.webp",
+      "/images/covers/gh_amongflowers_gen-comic-skill_3.webp"
+    ],
+    "accent_color": "#E65A4B",
+    "gradient": "from-[#3D252B]/90 via-[#4F2D37]/80 to-[#29181C]",
+    "install_command": "npx skills add AmongFlowers/gen-comic-skill"
+  },
+  {
     "id": "wibi-home-journal",
     "slug": "home-journal",
     "title": "Wibi Style · 复古家居日志",
@@ -726,6 +1147,32 @@
     "aspect_ratio": "3:4",
     "accent_color": "#4F46E5",
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "skill-049",
+    "title": "mqc-litigation-visual-redraw",
+    "type": "skill",
+    "category": "法律与政务",
+    "author": "MiaoQichuan",
+    "repo_url": "https://github.com/MiaoQichuan/mqc-litigation-visual-redraw",
+    "command": "npx skills add MiaoQichuan/mqc-litigation-visual-redraw",
+    "tags": [
+      "诉讼可视化",
+      "证据时间轴",
+      "法律图表",
+      "专业助手"
+    ],
+    "description": "将错综复杂的案件证据链、借贷资金往来与事件演进脉络重构为法庭汇报级高保真事实时间轴与关系网络图。",
+    "cover_image": "/images/covers/gh_miaoqichuan_mqc-litigation-visual-redraw_1.webp",
+    "images": [
+      "/images/covers/gh_miaoqichuan_mqc-litigation-visual-redraw_1.webp",
+      "/images/covers/gh_miaoqichuan_mqc-litigation-visual-redraw_2.webp",
+      "/images/covers/gh_miaoqichuan_mqc-litigation-visual-redraw_3.webp",
+      "/images/covers/gh_miaoqichuan_mqc-litigation-visual-redraw_4.webp"
+    ],
+    "accent_color": "#3D5A80",
+    "gradient": "from-[#1F2B3A]/90 via-[#26374A]/80 to-[#141C26]",
+    "install_command": "npx skills add MiaoQichuan/mqc-litigation-visual-redraw"
   },
   {
     "id": "wibi-wibi-frame",
@@ -756,210 +1203,6 @@
     "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
   },
   {
-    "id": "skill-001",
-    "title": "gathered-scenes-zine-skill",
-    "type": "skill",
-    "category": "海报与画册",
-    "author": "Zeejay0",
-    "repo_url": "https://github.com/Zeejay0/gathered-scenes-zine-skill",
-    "command": "npx skills add Zeejay0/gathered-scenes-zine-skill",
-    "tags": [
-      "Zine画册",
-      "撕纸拼贴",
-      "摄影重构",
-      "开源Skill"
-    ],
-    "description": "知名度极高的综合型纸刊 Skill。保留真实摄影照片，加入不规则撕纸边缘、插画化抽象色块与大面积纸刊留白。分为实景拼贴与影像蒸馏两种子模式。",
-    "cover_image": "/images/covers/gh_zeejay0_gathered-scenes-zine-skill_1.webp",
-    "images": [
-      "/images/covers/gh_zeejay0_gathered-scenes-zine-skill_1.webp",
-      "/images/covers/gh_zeejay0_gathered-scenes-zine-skill_2.webp",
-      "/images/covers/gh_zeejay0_gathered-scenes-zine-skill_3.webp",
-      "/images/covers/gh_zeejay0_gathered-scenes-zine-skill_4.webp"
-    ],
-    "accent_color": "#9E7B9B",
-    "gradient": "from-[#322A38]/90 via-[#403447]/80 to-[#201A24]",
-    "install_command": "npx skills add Zeejay0/gathered-scenes-zine-skill"
-  },
-  {
-    "id": "skill-002",
-    "title": "photo-abstract-editorial",
-    "type": "skill",
-    "category": "海报与画册",
-    "author": "ZzzLc0405",
-    "repo_url": "https://github.com/ZzzLc0405/photo-abstract-editorial",
-    "command": "npx skills add ZzzLc0405/photo-abstract-editorial",
-    "tags": [
-      "摄影抽象",
-      "几何色块",
-      "杂志排版",
-      "开源Skill"
-    ],
-    "description": "将一张照片转化为「原始摄影区域 + 抽象记忆面板 + 诗意英文标题」的竖向编辑杂志风图片。建筑摄影与旅行记录抽象化首选。",
-    "cover_image": "/images/covers/gh_zzzlc0405_photo-abstract-editorial_1.webp",
-    "images": [
-      "/images/covers/gh_zzzlc0405_photo-abstract-editorial_1.webp",
-      "/images/covers/gh_zzzlc0405_photo-abstract-editorial_2.webp",
-      "/images/covers/gh_zzzlc0405_photo-abstract-editorial_3.webp",
-      "/images/covers/gh_zzzlc0405_photo-abstract-editorial_4.webp"
-    ],
-    "accent_color": "#9E7B9B",
-    "gradient": "from-[#322A38]/90 via-[#403447]/80 to-[#201A24]",
-    "install_command": "npx skills add ZzzLc0405/photo-abstract-editorial"
-  },
-  {
-    "id": "skill-003",
-    "title": "gc-minimal-zine-poster",
-    "type": "skill",
-    "category": "海报与画册",
-    "author": "LiamGvchi",
-    "repo_url": "https://github.com/LiamGvchi/gc-minimal-zine-poster",
-    "command": "npx skills add LiamGvchi/gc-minimal-zine-poster",
-    "tags": [
-      "极简海报",
-      "文字排版",
-      "报纸质感",
-      "开源Skill"
-    ],
-    "description": "把一张照片和一句话做成情绪海报。大面积留白与新闻纸质感，适合公众号封面、APP故事头图、读书日记单页。",
-    "cover_image": "/images/covers/gh_liamgvchi_gc-minimal-zine-poster_1.webp",
-    "images": [
-      "/images/covers/gh_liamgvchi_gc-minimal-zine-poster_1.webp",
-      "/images/covers/gh_liamgvchi_gc-minimal-zine-poster_2.webp",
-      "/images/covers/gh_liamgvchi_gc-minimal-zine-poster_3.webp",
-      "/images/covers/gh_liamgvchi_gc-minimal-zine-poster_4.webp"
-    ],
-    "accent_color": "#9E7B9B",
-    "gradient": "from-[#322A38]/90 via-[#403447]/80 to-[#201A24]",
-    "install_command": "npx skills add LiamGvchi/gc-minimal-zine-poster"
-  },
-  {
-    "id": "skill-004",
-    "title": "photo-relic-editorial",
-    "type": "skill",
-    "category": "纸艺与拼贴",
-    "author": "wnby",
-    "repo_url": "https://github.com/wnby/photo-relic-editorial",
-    "command": "npx skills add wnby/photo-relic-editorial",
-    "tags": [
-      "纸上留影",
-      "特种纸纹理",
-      "极简克制",
-      "开源Skill"
-    ],
-    "description": "让画面在纸面里长出一个来自源图的余像。保留真实照片原生质感，配以克制、可辨识的纸上重构印痕。",
-    "cover_image": "/images/covers/gh_wnby_photo-relic-editorial_1.webp",
-    "images": [
-      "/images/covers/gh_wnby_photo-relic-editorial_1.webp",
-      "/images/covers/gh_wnby_photo-relic-editorial_2.webp",
-      "/images/covers/gh_wnby_photo-relic-editorial_3.webp",
-      "/images/covers/gh_wnby_photo-relic-editorial_4.webp"
-    ],
-    "accent_color": "#C48A57",
-    "gradient": "from-[#3B342C]/90 via-[#4A4238]/80 to-[#2A241D]",
-    "install_command": "npx skills add wnby/photo-relic-editorial"
-  },
-  {
-    "id": "skill-005",
-    "title": "skill-make-photo-stamp-archive",
-    "type": "skill",
-    "category": "海报与画册",
-    "author": "Dlcccc71913",
-    "repo_url": "https://github.com/Dlcccc71913/skill-make-photo-stamp-archive",
-    "command": "npx skills add Dlcccc71913/skill-make-photo-stamp-archive",
-    "tags": [
-      "复古邮票",
-      "印章档案",
-      "左右对照",
-      "开源Skill"
-    ],
-    "description": "把旅行摄影转化为复古邮戳版画与印章卡。左侧写实摄影、右侧邮戳版画左右对照，浓郁旅行明信片档案馆气质。",
-    "cover_image": "/images/covers/gh_dlcccc71913_skill-make-photo-stamp-archive_1.webp",
-    "images": [
-      "/images/covers/gh_dlcccc71913_skill-make-photo-stamp-archive_1.webp",
-      "/images/covers/gh_dlcccc71913_skill-make-photo-stamp-archive_2.webp",
-      "/images/covers/gh_dlcccc71913_skill-make-photo-stamp-archive_3.webp"
-    ],
-    "accent_color": "#9E7B9B",
-    "gradient": "from-[#322A38]/90 via-[#403447]/80 to-[#201A24]",
-    "install_command": "npx skills add Dlcccc71913/skill-make-photo-stamp-archive"
-  },
-  {
-    "id": "skill-006",
-    "title": "lsf-clock-editorial-poster",
-    "type": "skill",
-    "category": "极简与解构",
-    "author": "leishifu666",
-    "repo_url": "https://github.com/leishifu666/lsf-clock-editorial-poster",
-    "command": "npx skills add leishifu666/lsf-clock-editorial-poster",
-    "tags": [
-      "时钟海报",
-      "编辑设计",
-      "几何排版",
-      "开源Skill"
-    ],
-    "description": "融合时钟刻度、精巧时间戳记与建筑摄影的高端杂志封面级排版海报，几何解构与工业美感兼备。",
-    "cover_image": "/images/covers/gh_leishifu666_lsf-clock-editorial-poster_1.webp",
-    "images": [
-      "/images/covers/gh_leishifu666_lsf-clock-editorial-poster_1.webp",
-      "/images/covers/gh_leishifu666_lsf-clock-editorial-poster_2.webp",
-      "/images/covers/gh_leishifu666_lsf-clock-editorial-poster_3.webp"
-    ],
-    "accent_color": "#4A6FA5",
-    "gradient": "from-[#252D3D]/90 via-[#2F3B52]/80 to-[#181D26]",
-    "install_command": "npx skills add leishifu666/lsf-clock-editorial-poster"
-  },
-  {
-    "id": "skill-007",
-    "title": "photo-revival",
-    "type": "skill",
-    "category": "水彩与插画",
-    "author": "dacnay816y62-hub",
-    "repo_url": "https://github.com/dacnay816y62-hub/photo-revival",
-    "command": "npx skills add dacnay816y62-hub/photo-revival",
-    "tags": [
-      "生活随拍",
-      "诗意重绘",
-      "铅笔线稿",
-      "开源Skill"
-    ],
-    "description": "日常随手拍废片救星。使用铅笔线稿、水彩晕染与大面积留白，将生活普通照片重画为白纸上的小幅诗性艺术插画。",
-    "cover_image": "/images/covers/gh_dacnay816y62-hub_photo-revival_1.webp",
-    "images": [
-      "/images/covers/gh_dacnay816y62-hub_photo-revival_1.webp",
-      "/images/covers/gh_dacnay816y62-hub_photo-revival_2.webp",
-      "/images/covers/gh_dacnay816y62-hub_photo-revival_3.webp"
-    ],
-    "accent_color": "#4A7C59",
-    "gradient": "from-[#243328]/90 via-[#2E4234]/80 to-[#1A261D]",
-    "install_command": "npx skills add dacnay816y62-hub/photo-revival"
-  },
-  {
-    "id": "skill-008",
-    "title": "pixel-style-poster-skill",
-    "type": "skill",
-    "category": "动漫与波普",
-    "author": "v92388375-gif",
-    "repo_url": "https://github.com/v92388375-gif/pixel-style-poster-skill",
-    "command": "npx skills add v92388375-gif/pixel-style-poster-skill",
-    "tags": [
-      "像素艺术",
-      "点阵海报",
-      "复古街机",
-      "开源Skill"
-    ],
-    "description": "质感极独特的点阵像素风工具。不是普通像素滤镜，而是提炼主体主要几何关系并以粗颗粒点阵与醒目色块做复古海报重构。",
-    "cover_image": "/images/covers/gh_v92388375-gif_pixel-style-poster-skill_1.webp",
-    "images": [
-      "/images/covers/gh_v92388375-gif_pixel-style-poster-skill_1.webp",
-      "/images/covers/gh_v92388375-gif_pixel-style-poster-skill_2.webp",
-      "/images/covers/gh_v92388375-gif_pixel-style-poster-skill_3.webp"
-    ],
-    "accent_color": "#E65A4B",
-    "gradient": "from-[#3D252B]/90 via-[#4F2D37]/80 to-[#29181C]",
-    "install_command": "npx skills add v92388375-gif/pixel-style-poster-skill"
-  },
-  {
     "id": "skill-009",
     "title": "surreal-pop-collage",
     "type": "skill",
@@ -979,32 +1222,6 @@
     "accent_color": "#E65A4B",
     "gradient": "from-[#3D252B]/90 via-[#4F2D37]/80 to-[#29181C]",
     "install_command": "npx skills add 2998980-hue/surreal-pop-collage"
-  },
-  {
-    "id": "skill-010",
-    "title": "photo-to-zine-postcard",
-    "type": "skill",
-    "category": "纸艺与拼贴",
-    "author": "Whiplashzeb",
-    "repo_url": "https://github.com/Whiplashzeb/photo-to-zine-postcard",
-    "command": "npx skills add Whiplashzeb/photo-to-zine-postcard",
-    "tags": [
-      "色卡提取",
-      "复古印刷",
-      "旅行明信片",
-      "开源Skill"
-    ],
-    "description": "自动提取照片色卡，采用复古印刷明信片版式，上下二分或左右对开，旅行摄影快速出高级片首选。",
-    "cover_image": "/images/covers/gh_whiplashzeb_photo-to-zine-postcard_1.webp",
-    "images": [
-      "/images/covers/gh_whiplashzeb_photo-to-zine-postcard_1.webp",
-      "/images/covers/gh_whiplashzeb_photo-to-zine-postcard_2.webp",
-      "/images/covers/gh_whiplashzeb_photo-to-zine-postcard_3.webp",
-      "/images/covers/gh_whiplashzeb_photo-to-zine-postcard_4.webp"
-    ],
-    "accent_color": "#C48A57",
-    "gradient": "from-[#3B342C]/90 via-[#4A4238]/80 to-[#2A241D]",
-    "install_command": "npx skills add Whiplashzeb/photo-to-zine-postcard"
   },
   {
     "id": "skill-011",
@@ -1217,55 +1434,6 @@
     "install_command": "npx skills add freestylefly/awesome-gpt-image-2"
   },
   {
-    "id": "skill-021",
-    "title": "hyperframes",
-    "type": "skill",
-    "category": "AI 视频与动效",
-    "author": "heygen-com",
-    "repo_url": "https://github.com/heygen-com/hyperframes",
-    "command": "npx skills add heygen-com/hyperframes",
-    "tags": [
-      "代码动效",
-      "HeyGen",
-      "MP4生成",
-      "视频Agent"
-    ],
-    "description": "HeyGen 官方出品。一句话自动生成动效代码视频，文章、推文、产品介绍都能自动化渲染为 MP4 动效视频。",
-    "cover_image": "/images/covers/gh_heygen-com_hyperframes_1.webp",
-    "images": [
-      "/images/covers/gh_heygen-com_hyperframes_1.webp",
-      "/images/covers/gh_heygen-com_hyperframes_2.webp",
-      "/images/covers/gh_heygen-com_hyperframes_3.webp",
-      "/images/covers/gh_heygen-com_hyperframes_4.webp"
-    ],
-    "accent_color": "#38A3A5",
-    "gradient": "from-[#1F3338]/90 via-[#254247]/80 to-[#142226]",
-    "install_command": "npx skills add heygen-com/hyperframes"
-  },
-  {
-    "id": "skill-022",
-    "title": "video-use",
-    "type": "skill",
-    "category": "AI 视频与动效",
-    "author": "browser-use",
-    "repo_url": "https://github.com/browser-use/video-use",
-    "command": "npx skills add browser-use/video-use",
-    "tags": [
-      "视频粗剪",
-      "口播剪辑",
-      "自动化调色",
-      "视频Agent"
-    ],
-    "description": "让 coding agent 帮你做视频粗剪！自动识别口播长停顿、错句重读、口头禅、字幕对齐与批量色彩调优。",
-    "cover_image": "/images/covers/gh_browser-use_video-use_1.webp",
-    "images": [
-      "/images/covers/gh_browser-use_video-use_1.webp"
-    ],
-    "accent_color": "#38A3A5",
-    "gradient": "from-[#1F3338]/90 via-[#254247]/80 to-[#142226]",
-    "install_command": "npx skills add browser-use/video-use"
-  },
-  {
     "id": "skill-023",
     "title": "remotion-skills",
     "type": "skill",
@@ -1285,29 +1453,6 @@
     "accent_color": "#38A3A5",
     "gradient": "from-[#1F3338]/90 via-[#254247]/80 to-[#142226]",
     "install_command": "npx skills add remotion-dev/skills"
-  },
-  {
-    "id": "skill-024",
-    "title": "Generative-Media-Skills",
-    "type": "skill",
-    "category": "AI 视频与动效",
-    "author": "SamurAIGPT",
-    "repo_url": "https://github.com/SamurAIGPT/Generative-Media-Skills",
-    "command": "npx skills add SamurAIGPT/Generative-Media-Skills",
-    "tags": [
-      "多媒体生成",
-      "广告素材",
-      "UGC视频",
-      "开源Skill"
-    ],
-    "description": "图片、视频、音频生成全套智能体工具箱。专为广告营销素材、短片分镜及实验性多媒体创作设计。",
-    "cover_image": "/images/covers/gh_samuraigpt_generative-media-skills_1.webp",
-    "images": [
-      "/images/covers/gh_samuraigpt_generative-media-skills_1.webp"
-    ],
-    "accent_color": "#38A3A5",
-    "gradient": "from-[#1F3338]/90 via-[#254247]/80 to-[#142226]",
-    "install_command": "npx skills add SamurAIGPT/Generative-Media-Skills"
   },
   {
     "id": "skill-025",
@@ -1371,77 +1516,6 @@
     "accent_color": "#38A3A5",
     "gradient": "from-[#1F3338]/90 via-[#254247]/80 to-[#142226]",
     "install_command": "npx skills add feitangyuan/doodle-anim"
-  },
-  {
-    "id": "skill-028",
-    "title": "story-to-handdrawn-video",
-    "type": "skill",
-    "category": "AI 视频与动效",
-    "author": "gnipbao",
-    "repo_url": "https://github.com/gnipbao/story-to-handdrawn-video",
-    "command": "npx skills add gnipbao/story-to-handdrawn-video",
-    "tags": [
-      "白板动画",
-      "故事口播",
-      "知识讲解",
-      "视频Agent"
-    ],
-    "description": "一键将故事文案、知识口播转化为暖米黄复古底纸手绘白板动画。铅笔擦除与手绘推演动效生动自然。",
-    "cover_image": "/images/covers/gh_gnipbao_story-to-handdrawn-video_1.webp",
-    "images": [
-      "/images/covers/gh_gnipbao_story-to-handdrawn-video_1.webp"
-    ],
-    "accent_color": "#38A3A5",
-    "gradient": "from-[#1F3338]/90 via-[#254247]/80 to-[#142226]",
-    "install_command": "npx skills add gnipbao/story-to-handdrawn-video"
-  },
-  {
-    "id": "skill-029",
-    "title": "logamee-film-forge",
-    "type": "skill",
-    "category": "AI 视频与动效",
-    "author": "logamee",
-    "repo_url": "https://github.com/logamee/logamee-film-forge",
-    "command": "npx skills add logamee/logamee-film-forge",
-    "tags": [
-      "电影锻造",
-      "全流程自动化",
-      "分镜生成",
-      "开源Skill"
-    ],
-    "description": "电影级短视频与动画自动化工作流。输入大纲自动拆解角色三视图、关键帧连续提示词与配音对齐方案。",
-    "cover_image": "/images/covers/gh_logamee_logamee-film-forge_1.webp",
-    "images": [
-      "/images/covers/gh_logamee_logamee-film-forge_1.webp"
-    ],
-    "accent_color": "#38A3A5",
-    "gradient": "from-[#1F3338]/90 via-[#254247]/80 to-[#142226]",
-    "install_command": "npx skills add logamee/logamee-film-forge"
-  },
-  {
-    "id": "skill-030",
-    "title": "video-subtitle-remover",
-    "type": "skill",
-    "category": "AI 视频与动效",
-    "author": "YaoFANGUK",
-    "repo_url": "https://github.com/YaoFANGUK/video-subtitle-remover",
-    "command": "npx skills add YaoFANGUK/video-subtitle-remover",
-    "tags": [
-      "字幕消除",
-      "水印擦除",
-      "无损修复",
-      "开源Skill"
-    ],
-    "description": "基于 AI 文本擦除与光流修复技术的视频字幕抹除工具。无痕移除原生硬字幕与水印标识。",
-    "cover_image": "/images/covers/gh_yaofanguk_video-subtitle-remover_1.webp",
-    "images": [
-      "/images/covers/gh_yaofanguk_video-subtitle-remover_1.webp",
-      "/images/covers/gh_yaofanguk_video-subtitle-remover_2.webp",
-      "/images/covers/gh_yaofanguk_video-subtitle-remover_3.webp"
-    ],
-    "accent_color": "#38A3A5",
-    "gradient": "from-[#1F3338]/90 via-[#254247]/80 to-[#142226]",
-    "install_command": "npx skills add YaoFANGUK/video-subtitle-remover"
   },
   {
     "id": "skill-031",
@@ -1633,29 +1707,6 @@
     "install_command": "npx skills add op7418/guizang-ppt-skill"
   },
   {
-    "id": "skill-040",
-    "title": "guizang-material-illustration",
-    "type": "skill",
-    "category": "海报与画册",
-    "author": "op7418",
-    "repo_url": "https://github.com/op7418/guizang-material-illustration",
-    "command": "npx skills add op7418/guizang-material-illustration",
-    "tags": [
-      "材质插画",
-      "设计系统",
-      "设计资产",
-      "开源Skill"
-    ],
-    "description": "归藏材质插画设计系统。统一的材质纹理规范、高反差色块搭配，帮助设计团队快速搭建品牌视觉一致性。",
-    "cover_image": "/images/covers/gh_op7418_guizang-material-illustration_1.webp",
-    "images": [
-      "/images/covers/gh_op7418_guizang-material-illustration_1.webp"
-    ],
-    "accent_color": "#9E7B9B",
-    "gradient": "from-[#322A38]/90 via-[#403447]/80 to-[#201A24]",
-    "install_command": "npx skills add op7418/guizang-material-illustration"
-  },
-  {
     "id": "skill-041",
     "title": "baoyu-skills",
     "type": "skill",
@@ -1675,31 +1726,6 @@
     "accent_color": "#E76F51",
     "gradient": "from-[#3B2923]/90 via-[#4A322A]/80 to-[#261A16]",
     "install_command": "npx skills add jimliu/baoyu-skills"
-  },
-  {
-    "id": "skill-042",
-    "title": "gen-comic-skill",
-    "type": "skill",
-    "category": "动漫与波普",
-    "author": "AmongFlowers",
-    "repo_url": "https://github.com/AmongFlowers/gen-comic-skill",
-    "command": "npx skills add AmongFlowers/gen-comic-skill",
-    "tags": [
-      "四格分镜",
-      "漫画拼贴",
-      "黑白网点",
-      "开源Skill"
-    ],
-    "description": "将用户日常故事或连续实拍照片一键重绘为带有拟声词气泡与黑白网点质感的经典漫画分镜拼贴海报。",
-    "cover_image": "/images/covers/gh_amongflowers_gen-comic-skill_1.webp",
-    "images": [
-      "/images/covers/gh_amongflowers_gen-comic-skill_1.webp",
-      "/images/covers/gh_amongflowers_gen-comic-skill_2.webp",
-      "/images/covers/gh_amongflowers_gen-comic-skill_3.webp"
-    ],
-    "accent_color": "#E65A4B",
-    "gradient": "from-[#3D252B]/90 via-[#4F2D37]/80 to-[#29181C]",
-    "install_command": "npx skills add AmongFlowers/gen-comic-skill"
   },
   {
     "id": "skill-043",
@@ -1826,32 +1852,6 @@
     "accent_color": "#3D5A80",
     "gradient": "from-[#1F2B3A]/90 via-[#26374A]/80 to-[#141C26]",
     "install_command": "npx skills add handsomestWei/patent-disclosure-skill"
-  },
-  {
-    "id": "skill-049",
-    "title": "mqc-litigation-visual-redraw",
-    "type": "skill",
-    "category": "法律与政务",
-    "author": "MiaoQichuan",
-    "repo_url": "https://github.com/MiaoQichuan/mqc-litigation-visual-redraw",
-    "command": "npx skills add MiaoQichuan/mqc-litigation-visual-redraw",
-    "tags": [
-      "诉讼可视化",
-      "证据时间轴",
-      "法律图表",
-      "专业助手"
-    ],
-    "description": "将错综复杂的案件证据链、借贷资金往来与事件演进脉络重构为法庭汇报级高保真事实时间轴与关系网络图。",
-    "cover_image": "/images/covers/gh_miaoqichuan_mqc-litigation-visual-redraw_1.webp",
-    "images": [
-      "/images/covers/gh_miaoqichuan_mqc-litigation-visual-redraw_1.webp",
-      "/images/covers/gh_miaoqichuan_mqc-litigation-visual-redraw_2.webp",
-      "/images/covers/gh_miaoqichuan_mqc-litigation-visual-redraw_3.webp",
-      "/images/covers/gh_miaoqichuan_mqc-litigation-visual-redraw_4.webp"
-    ],
-    "accent_color": "#3D5A80",
-    "gradient": "from-[#1F2B3A]/90 via-[#26374A]/80 to-[#141C26]",
-    "install_command": "npx skills add MiaoQichuan/mqc-litigation-visual-redraw"
   },
   {
     "id": "tool-001",
