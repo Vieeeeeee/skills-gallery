@@ -238,6 +238,14 @@ export function DetailModal({
     setTimeout(() => setCopiedInstallCmd(false), 2000);
   };
 
+  const handleCopyMotion = () => {
+    if (!item?.motion_prompt) return;
+    navigator.clipboard.writeText(item.motion_prompt);
+    setCopiedMotion(true);
+    if (onCopy) onCopy('运镜提示词已复制');
+    setTimeout(() => setCopiedMotion(false), 2000);
+  };
+
   const images = item.images && item.images.length > 0 
     ? item.images 
     : (item.cover_image ? [item.cover_image] : []);

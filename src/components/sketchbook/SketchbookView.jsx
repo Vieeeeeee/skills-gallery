@@ -141,7 +141,6 @@ export function SketchbookView({
     const loupe = loupeRef.current;
     const capBox = capBoxRef.current;
     const hint = hintRef.current;
-    const plateList = plateListRef.current;
 
     if (!book || !sb3d || !loupe || !pages.length) return;
 
@@ -294,11 +293,7 @@ export function SketchbookView({
     }
 
     function marks() {
-      if (!plateList) return;
-      const cur = turn ? turn.to : idx;
-      plateList.querySelectorAll('.sb-plate').forEach((b, i) => {
-        b.setAttribute('aria-current', i === cur ? 'true' : 'false');
-      });
+      // Plate thumbnails removed in 100vh single-screen layout
     }
 
     function syncZoomLayer() {
