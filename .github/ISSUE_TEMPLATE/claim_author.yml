@@ -1,0 +1,52 @@
+name: 🏷️ 原创作者认领与更正 (Claim Original Attribution)
+description: 若您是画廊中某款视觉风格或 Agent Skill 的原创作者，欢迎提交凭证认领署名或申请更正
+title: "【创作者认领】: <条目名称与ID>"
+labels: ["attribution-claim", "author"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### 创作者权益与原创尊重声明
+        本项目致力于汇聚并传播优秀的 AI 视觉美学与 Agent 技能。对于部分早期收录、网络沉淀而未查明具体出处的条目，我们暂时标注了“开源社区/网络整理”。
+        
+        **我们坚决尊重并捍卫每一位创作者的劳动成果与署名权！**
+        如果您是某条内容的原创作者，请提供能够证明首发时间的截图或凭据，我们将在核实后第一时间为您完成官方署名回填，并在大赏卡片及致谢墙上展示您的个人主页！
+  - type: input
+    id: item_info
+    attributes:
+      label: 认领的条目名称与编号 (Item Title & ID)
+      placeholder: "例如：ID: 42 [宋代青绿山水] 或 技能名称"
+    validations:
+      required: true
+  - type: input
+    id: author_name
+    attributes:
+      label: 您的创作者名称 / 昵称 (Your Name / Handle)
+      placeholder: "例如：@张三 或 某某工作室"
+    validations:
+      required: true
+  - type: input
+    id: social_url
+    attributes:
+      label: 您的个人社交主页 / 官网链接 (Social Profile / Website)
+      placeholder: "https://x.com/... 或 https://github.com/... 或 小红书主页"
+    validations:
+      required: true
+  - type: dropdown
+    id: claim_action
+    attributes:
+      label: 您的诉求 (Claim Action)
+      options:
+        - "核实原创，请在卡片更新我的官方作者署名与主页链接（推荐）"
+        - "补充/更正提示词参数与效果图信息"
+        - "我不希望该条目被公开收录，请协助下架移除"
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 原创首发凭证与截图证据 (Proof of Originality)
+      description: 请提供能清晰佐证您是原创首发者的依据（如早于收录时间的社交平台发布链接、带有发布日期的后台/草稿截图、工程源文件截图等，可直接拖拽粘贴图片到下方输入框）
+      placeholder: "1. 首次发布链接：https://...\n2. 带有时间戳的截图：（直接粘贴截图到这里）"
+    validations:
+      required: true

@@ -691,6 +691,24 @@ export function DetailModal({
                   </div>
                 </div>
 
+                {/* Community Attribution & Author Claim Notice */}
+                {(!item.author || item.author === '开源社区' || item.author === '网络整理' || item.author === '网络收集' || item.author === '未知') && (
+                  <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-amber-50/70 dark:bg-amber-950/25 border border-amber-200/60 dark:border-amber-800/40 text-[11px] text-amber-900/80 dark:text-amber-300">
+                    <span className="flex items-center gap-1.5 min-w-0">
+                      <span>🏷️</span>
+                      <span className="truncate">本条目来源于开源与网络整理。若您是首发原创作者，欢迎认领署名！</span>
+                    </span>
+                    <a
+                      href={`https://github.com/Vieeeeeee/skills-gallery/issues/new?template=claim_author.yml&title=${encodeURIComponent(`【创作者认领】: ${item.title || item.id}`)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline font-semibold hover:text-amber-950 dark:hover:text-amber-100 shrink-0 ml-2"
+                    >
+                      凭证认领 ↗
+                    </a>
+                  </div>
+                )}
+
                 {/* 3. TYPE-SPECIFIC SECTIONS */}
 
                 {/* A. Style Details (Prompt Box) */}

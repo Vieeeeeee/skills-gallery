@@ -766,11 +766,21 @@ export function SketchbookView({
 
       {/* Top Header Bar */}
       <header className="sb-top">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
           <div className="sb-brand">
             <BookOpen className="w-5 h-5 text-amber-900/80" />
             <span>Prompt & Skill · 风格速写本</span>
           </div>
+
+          <a 
+            href="https://twitter.com/MengTo" 
+            target="_blank" 
+            rel="noreferrer"
+            className="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10.5px] font-serif text-amber-900/75 hover:text-amber-950 bg-amber-900/10 hover:bg-amber-900/15 border border-amber-900/15 transition-all"
+            title="致敬 MengTo 先生的设计手账交互概念"
+          >
+            <span>✨ 交互美学致敬 MengTo</span>
+          </a>
 
           {/* Borderless Floating Category Browser (按类浏览) */}
           <div 
