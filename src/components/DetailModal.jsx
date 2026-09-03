@@ -311,7 +311,7 @@ export function DetailModal({
               </div>
             ) : (
               <div className="flex items-center gap-2.5 min-w-0 pr-2">
-                <span className="text-xs font-mono font-medium px-2.5 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/60 shrink-0">
+                <span className="text-xs font-mono font-medium px-2 py-0.5 rounded-md bg-black/[0.04] dark:bg-white/[0.08] text-[#515154] dark:text-zinc-300 shrink-0">
                   {seriesName}
                 </span>
                 <h2 className="text-base sm:text-lg font-bold text-[#1d1d1f] dark:text-white truncate">
@@ -352,7 +352,7 @@ export function DetailModal({
 
               <button
                 onClick={onClose}
-                className="p-2 rounded-xl bg-white dark:bg-white/[0.08] hover:bg-[#f5f5f7] dark:hover:bg-white/[0.14] border border-black/[0.08] dark:border-white/[0.1] text-[#86868b] dark:text-zinc-400 hover:text-[#1d1d1f] dark:hover:text-white transition-all"
+                className="p-1.5 rounded-xl hover:bg-black/[0.05] dark:hover:bg-white/[0.08] text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-white transition-all cursor-pointer active:scale-95"
                 title="关闭"
               >
                 <X className="w-4 h-4" />
@@ -693,44 +693,44 @@ export function DetailModal({
                   </div>
                 )}
 
-                {/* 2. Metadata Info Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3 sm:p-3.5 bg-[#f8f8fa] dark:bg-[#16161c] rounded-2xl border border-black/[0.04] dark:border-white/[0.06] text-xs">
+                {/* 2. Metadata Info Grid (Clean borderless strip) */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-2.5 gap-x-4 py-3 border-y border-black/[0.05] dark:border-white/[0.06] text-xs">
                   <div>
-                    <span className="text-[#86868b] dark:text-zinc-400 block text-[11px]">内容类型</span>
-                    <span className="font-semibold text-[#1d1d1f] dark:text-white mt-0.5 inline-flex items-center gap-1">
+                    <span className="text-[#86868b] dark:text-zinc-500 block text-[10.5px] uppercase tracking-wider">内容类型</span>
+                    <span className="font-semibold text-[#1d1d1f] dark:text-zinc-200 mt-0.5 inline-flex items-center gap-1">
                       {item.type === 'style' ? '🎨 视觉风格' : (item.type === 'skill' ? '⚡ 智能体技能' : '🛠️ 设计工具')}
                     </span>
                   </div>
                   <div>
-                    <span className="text-[#86868b] dark:text-zinc-400 block text-[11px]">所属分类</span>
-                    <span className="font-semibold text-[#1d1d1f] dark:text-white mt-0.5 block">{item.category}</span>
+                    <span className="text-[#86868b] dark:text-zinc-500 block text-[10.5px] uppercase tracking-wider">所属分类</span>
+                    <span className="font-semibold text-[#1d1d1f] dark:text-zinc-200 mt-0.5 block">{item.category}</span>
                   </div>
                   <div>
-                    <span className="text-[#86868b] dark:text-zinc-400 block text-[11px]">创作者 / 来源</span>
-                    <span className="font-semibold text-[#1d1d1f] dark:text-white mt-0.5 block truncate">
+                    <span className="text-[#86868b] dark:text-zinc-500 block text-[10.5px] uppercase tracking-wider">创作者 / 来源</span>
+                    <span className="font-semibold text-[#1d1d1f] dark:text-zinc-200 mt-0.5 block truncate">
                       @{item.author === 'Vie' || item.author === 'vie' || item.author === 'Vie (威比)' || (item.author && item.author.includes('威比')) ? '威比 Hunter Wei.（抖音、小红书同名）' : (item.author || '开源社区')}
                     </span>
                   </div>
                   <div>
-                    <span className="text-[#86868b] dark:text-zinc-400 block text-[11px]">{item.type === 'style' ? '建议画幅' : '系统编号'}</span>
-                    <span className="font-mono font-semibold text-[#1d1d1f] dark:text-white mt-0.5 block">
+                    <span className="text-[#86868b] dark:text-zinc-500 block text-[10.5px] uppercase tracking-wider">{item.type === 'style' ? '建议画幅' : '系统编号'}</span>
+                    <span className="font-mono font-semibold text-[#1d1d1f] dark:text-zinc-200 mt-0.5 block">
                       {item.type === 'style' ? (item.aspect_ratio || '3:4 / 自适应') : item.id}
                     </span>
                   </div>
                 </div>
 
-                {/* Community Attribution & Author Claim Notice */}
+                {/* Community Attribution & Author Claim Notice (Minimalist Text) */}
                 {(!item.author || item.author === '开源社区' || item.author === '网络整理' || item.author === '网络收集' || item.author === '未知') && (
-                  <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-amber-50/70 dark:bg-amber-950/25 border border-amber-200/60 dark:border-amber-800/40 text-[11px] text-amber-900/80 dark:text-amber-300">
-                    <span className="flex items-center gap-1.5 min-w-0">
+                  <div className="flex items-center justify-between text-[11px] text-[#86868b] dark:text-zinc-400">
+                    <span className="flex items-center gap-1.5 min-w-0 truncate">
                       <span>🏷️</span>
-                      <span className="truncate">本条目来源于开源与网络整理。若您是首发原创作者，欢迎认领署名！</span>
+                      <span className="truncate">来源于开源与网络整理。若您是首发原创作者，欢迎认领署名！</span>
                     </span>
                     <a
                       href={`https://github.com/Vieeeeeee/skills-gallery/issues/new?template=claim_author.yml&title=${encodeURIComponent(`【创作者认领】: ${item.title || item.id}`)}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="underline font-semibold hover:text-amber-950 dark:hover:text-amber-100 shrink-0 ml-2"
+                      className="underline font-medium hover:text-indigo-600 dark:hover:text-indigo-400 shrink-0 ml-2"
                     >
                       凭证认领 ↗
                     </a>
@@ -793,83 +793,79 @@ export function DetailModal({
                   </div>
                 )}
 
-                {/* B. Skill Details (Call & Install Command & Repo) */}
+                {/* B. Skill Details (Unified Command Station) */}
                 {item.type === 'skill' && (
                   <div className="space-y-3.5">
-                    {/* Description */}
+                    {/* Natural Breathable Description */}
                     {item.description && (
-                      <div className="space-y-1.5">
-                        <span className="text-xs font-semibold text-[#1d1d1f] dark:text-white">技能说明</span>
-                        <div className="p-3.5 rounded-2xl bg-[#f8f8fa] dark:bg-white/[0.04] border border-black/[0.04] dark:border-white/[0.06] text-xs sm:text-sm text-[#515154] dark:text-zinc-300 leading-relaxed">
-                          {item.description}
-                        </div>
-                      </div>
+                      <p className="text-xs sm:text-sm text-[#515154] dark:text-zinc-300 leading-relaxed">
+                        {item.description}
+                      </p>
                     )}
 
-                    {/* 1. Install Command (PRIMARY & PROMINENT) */}
-                    <div className="space-y-1.5">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-semibold text-emerald-800 dark:text-emerald-400 flex items-center gap-1.5">
-                          <Terminal className="w-3.5 h-3.5" />
-                          安装指令 (在终端运行以安装 Skill)
-                        </span>
+                    {/* Unified Command Station (One Single Purposeful Container) */}
+                    <div className="rounded-2xl bg-[#f8f8fa] dark:bg-white/[0.02] border border-black/[0.06] dark:border-white/[0.08] overflow-hidden">
+                      {/* 1. Terminal Install Command */}
+                      <div className="p-3 sm:p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                        <div className="space-y-1 min-w-0 flex-1">
+                          <span className="text-[11px] font-semibold text-emerald-800 dark:text-emerald-400 flex items-center gap-1.5">
+                            <Terminal className="w-3.5 h-3.5 shrink-0" />
+                            <span>终端安装 (Terminal)</span>
+                          </span>
+                          <div className="font-mono text-xs text-[#1d1d1f] dark:text-zinc-100 select-all break-all">
+                            {item.install_command || (item.repo_url ? `npx skills add ${item.repo_url.replace('https://github.com/', '')}` : '通用标准 Agent 技能包')}
+                          </div>
+                        </div>
                         <button
                           onClick={handleCopyInstallCmd}
-                          className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                            copiedInstallCmd
-                              ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700'
-                              : 'bg-emerald-600 hover:bg-emerald-700 text-white'
-                          }`}
+                          className="self-start sm:self-center px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-700 text-white transition-all flex items-center gap-1.5 shrink-0 shadow-2xs cursor-pointer active:scale-95"
                         >
                           {copiedInstallCmd ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                          <span>{copiedInstallCmd ? '已复制' : '复制安装指令'}</span>
+                          <span>{copiedInstallCmd ? '已复制' : '复制安装'}</span>
                         </button>
                       </div>
-                      <div className="p-3 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/40 text-xs text-emerald-950 dark:text-emerald-200 font-mono select-all break-all flex items-center justify-between gap-2">
-                        <span>{item.install_command || (item.repo_url ? `请在终端执行安装：${item.repo_url}` : '通用标准 Agent 技能包')}</span>
-                      </div>
-                    </div>
 
-                    {/* 2. Chat Trigger Command */}
-                    {chatInvocationCmd && (
-                      <div className="space-y-1.5">
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs font-semibold text-[#86868b] dark:text-zinc-400 flex items-center gap-1.5">
-                            <span className="w-1.5 h-1.5 rounded-full bg-zinc-400" />
-                            对话调用指令 (安装后在对话中触发)
-                          </span>
+                      {/* 2. Chat Invocation Command */}
+                      {chatInvocationCmd && (
+                        <div className="p-3 sm:p-3.5 border-t border-black/[0.05] dark:border-white/[0.06] flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 bg-black/[0.01] dark:bg-white/[0.01]">
+                          <div className="space-y-1 min-w-0 flex-1">
+                            <span className="text-[11px] font-semibold text-[#86868b] dark:text-zinc-400 flex items-center gap-1.5">
+                              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0" />
+                              <span>对话触发 (Chat Prompt)</span>
+                            </span>
+                            <div className="font-mono text-xs text-[#515154] dark:text-zinc-300 select-all break-all">
+                              {chatInvocationCmd}
+                            </div>
+                          </div>
                           <button
                             onClick={handleCopyCmd}
-                            className="text-xs text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-white flex items-center gap-1 transition-colors"
+                            className="self-start sm:self-center px-3 py-1.5 rounded-xl text-xs font-medium bg-black/[0.04] dark:bg-white/[0.08] hover:bg-black/[0.08] dark:hover:bg-white/[0.12] text-[#1d1d1f] dark:text-zinc-200 transition-all flex items-center gap-1.5 shrink-0 cursor-pointer active:scale-95"
                           >
-                            {copiedCmd ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3 text-[#6e6e73] dark:text-zinc-400" />}
-                            <span>{copiedCmd ? '已复制' : '复制'}</span>
+                            {copiedCmd ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-[#6e6e73] dark:text-zinc-400" />}
+                            <span>{copiedCmd ? '已复制' : '复制指令'}</span>
                           </button>
                         </div>
-                        <div className="p-3 rounded-xl bg-[#f5f5f7] dark:bg-white/[0.04] border border-black/[0.06] dark:border-white/[0.08] text-xs text-[#515154] dark:text-zinc-300 font-mono select-all break-all">
-                          {chatInvocationCmd}
-                        </div>
-                      </div>
-                    )}
+                      )}
 
-                    {/* 3. GitHub Source Link */}
-                    {item.repo_url && (
-                      <div className="flex items-center justify-between p-3 rounded-xl bg-[#f8f8fa] dark:bg-white/[0.03] border border-black/[0.06] dark:border-white/[0.08]">
-                        <span className="text-xs text-[#86868b] dark:text-zinc-400 flex items-center gap-1.5">
-                          <GithubIcon className="w-3.5 h-3.5" />
-                          开源代码仓库
-                        </span>
-                        <a
-                          href={item.repo_url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-xs font-mono text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1"
-                        >
-                          <span>查看 GitHub 仓库</span>
-                          <ExternalLink className="w-3 h-3" />
-                        </a>
-                      </div>
-                    )}
+                      {/* 3. GitHub Source Link (Integrated Row) */}
+                      {item.repo_url && (
+                        <div className="px-3.5 py-2.5 bg-black/[0.02] dark:bg-white/[0.03] border-t border-black/[0.05] dark:border-white/[0.06] flex items-center justify-between text-xs">
+                          <span className="text-[#86868b] dark:text-zinc-400 flex items-center gap-1.5">
+                            <GithubIcon className="w-3.5 h-3.5" />
+                            <span>开源代码仓库</span>
+                          </span>
+                          <a
+                            href={item.repo_url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-xs font-mono text-indigo-600 dark:text-indigo-400 hover:underline flex items-center gap-1 font-medium"
+                          >
+                            <span>查看 GitHub 仓库</span>
+                            <ExternalLink className="w-3 h-3" />
+                          </a>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
 
@@ -899,17 +895,17 @@ export function DetailModal({
                   </div>
                 )}
 
-                {/* Tags Row */}
+                {/* Tags Row (Borderless Minimalist Hash Tokens) */}
                 {item.tags && item.tags.length > 0 && (
-                  <div className="flex items-center gap-1.5 flex-wrap pt-1">
-                    <span className="text-xs text-[#86868b] dark:text-zinc-400 font-medium flex items-center gap-1 mr-1">
-                      <Tag className="w-3.5 h-3.5" />
+                  <div className="flex items-center gap-2 flex-wrap pt-0.5">
+                    <span className="text-xs text-[#86868b] dark:text-zinc-500 font-medium flex items-center gap-1">
+                      <Tag className="w-3.5 h-3.5 opacity-60" />
                       标签:
                     </span>
                     {item.tags.map((tg, i) => (
                       <span 
                         key={i}
-                        className="text-xs px-2.5 py-1 rounded-lg bg-[#f5f5f7] dark:bg-white/[0.06] text-[#515154] dark:text-zinc-300 font-medium"
+                        className="text-xs text-[#6e6e73] dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-mono transition-colors select-none"
                       >
                         #{tg}
                       </span>
@@ -917,9 +913,9 @@ export function DetailModal({
                   </div>
                 )}
 
-                {/* Related Recommendations */}
+                {/* Related Recommendations (Borderless Ghost Items) */}
                 {relatedItems && relatedItems.length > 0 && (
-                  <div className="pt-3 border-t border-black/[0.06] dark:border-white/[0.08] space-y-2.5">
+                  <div className="pt-3 border-t border-black/[0.05] dark:border-white/[0.06] space-y-2">
                     <span className="text-xs font-semibold text-[#86868b] dark:text-zinc-400 flex items-center gap-1.5">
                       <Compass className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                       同分类灵感推荐
@@ -929,12 +925,12 @@ export function DetailModal({
                         <button
                           key={rel.id}
                           onClick={() => onSelectRelated(rel)}
-                          className="p-2.5 rounded-xl bg-[#f8f8fa] dark:bg-[#16161c] hover:bg-[#f0f0f4] dark:hover:bg-[#1e1e24] border border-black/[0.04] dark:border-white/[0.06] text-left transition-all group"
+                          className="p-2.5 rounded-xl hover:bg-black/[0.03] dark:hover:bg-white/[0.04] text-left transition-all group cursor-pointer"
                         >
-                          <div className="text-xs font-semibold text-[#1d1d1f] dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 truncate">
+                          <div className="text-xs font-medium text-[#1d1d1f] dark:text-zinc-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 truncate">
                             {rel.title.replace(/^\[[^\]]+\]\s*/, '')}
                           </div>
-                          <div className="text-[11px] text-[#86868b] dark:text-zinc-400 mt-0.5">
+                          <div className="text-[11px] text-[#86868b] dark:text-zinc-500 mt-0.5">
                             @{rel.author || '开源社区'}
                           </div>
                         </button>
