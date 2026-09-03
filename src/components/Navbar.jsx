@@ -36,7 +36,8 @@ export function Navbar({
   appMode = 'gallery',
   setAppMode,
   theme = 'light',
-  onToggleTheme
+  onToggleTheme,
+  onOpenAbout
 }) {
   const searchInputRef = useRef(null);
 
@@ -135,6 +136,16 @@ export function Navbar({
                 <span className="hidden sm:inline">速写本</span>
               </button>
             </div>
+
+            {/* Community & About Entrance */}
+            <button
+              onClick={onOpenAbout}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium bg-emerald-50/90 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800/80 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100/90 dark:hover:bg-emerald-900/60 shadow-2xs transition-all cursor-pointer"
+              title="查看社群、特别致谢与联系作者"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>💬 交流群</span>
+            </button>
 
             {/* Shuffle / Randomize */}
             <button

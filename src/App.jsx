@@ -9,8 +9,9 @@ import { AdminAuthModal } from './components/AdminAuthModal';
 import { Toast } from './components/Toast';
 import { DashCascade } from './components/DashCascade';
 import { SketchbookView } from './components/sketchbook/SketchbookView';
+import { AboutModal } from './components/AboutModal';
 import { matchSearch } from './utils/search';
-import { Sparkles, Palette, Terminal, Wrench, SearchX, RefreshCw, ChevronDown, X, QrCode } from 'lucide-react';
+import { Sparkles, Palette, Terminal, Wrench, SearchX, RefreshCw, ChevronDown, X, QrCode, ArrowUp } from 'lucide-react';
 
 const STORAGE_KEY = 'SKILLS_GALLERY_DATA_V2026_CLEAN_V13';
 const BOOKMARKS_KEY = 'SKILLS_GALLERY_BOOKMARKS_V4_FEED';
@@ -46,6 +47,8 @@ export function App() {
   const [editingItem, setEditingItem] = useState(null);
   const [isUploadOpen, setIsUploadOpen] = useState(false);
   const [isWeChatModalOpen, setIsWeChatModalOpen] = useState(false);
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
   
   // Bookmarks & Toast
   const [bookmarks, setBookmarks] = useState(() => {
@@ -80,6 +83,14 @@ export function App() {
   const handleToggleTheme = () => {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark');
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 400);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const [toast, setToast] = useState(null);
   const showToast = (message, type = 'success') => {
@@ -414,6 +425,7 @@ export function App() {
         setAppMode={setAppMode}
         theme={theme}
         onToggleTheme={handleToggleTheme}
+        onOpenAbout={() => setIsAboutModalOpen(true)}
       />
 
       {/* Hero Section */}
@@ -649,7 +661,11 @@ export function App() {
       {/* Footer */}
       <footer className="border-t border-black/[0.06] dark:border-white/[0.08] bg-white dark:bg-[#0d0d11] py-8 text-center text-xs text-[#86868b] dark:text-zinc-500 transition-colors">
         <div className="max-w-7xl mx-auto px-4 space-y-3">
-          <div className="flex flex-wrap items-center justify-center gap-2">
+          <div 
+            className="flex flex-wrap items-center justify-center gap-2 cursor-pointer hover:opacity-85 transition-opacity"
+            onClick={() => setIsAboutModalOpen(true)}
+            title="点击查看社群与致谢详情"
+          >
             <span className="text-[#1d1d1f] dark:text-white font-semibold">Prompt & Skill 风格大赏</span>
             <span>•</span>
             <span className="text-amber-800 dark:text-amber-300 font-medium">✨ 特别致谢「威比🙂↔️AIGC学习群」群友倾情共建</span>
@@ -662,9 +678,9 @@ export function App() {
             {/* WeChat with QR popup & copy */}
             <div className="relative group inline-flex items-center">
               <button
-                onClick={() => setIsWeChatModalOpen(true)}
+                onClick={() => setIsAboutModalOpen(true)}
                 className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f5f5f7] dark:bg-[#18181d] border border-black/[0.06] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 shadow-2xs hover:border-emerald-500/40 transition-all cursor-pointer"
-                title="点击查看微信二维码扫码进群"
+                title="点击查看社群与微信二维码"
               >
                 <span className="text-emerald-600 dark:text-emerald-400 font-semibold">💬 微信:</span>
                 <strong className="font-mono text-[#1d1d1f] dark:text-white select-all">Wibi2077</strong>
@@ -680,14 +696,17 @@ export function App() {
                   navigator.clipboard.writeText('Wibi2077');
                   showToast('微信号已复制！添加请备注：进AIGC学习群');
                 }}
-                className="ml-1 text-[10.5px] px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 transition-colors"
+                className="ml-1 text-[10.5px] px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 transition-colors cursor-pointer"
                 title="复制微信号"
               >
                 复制
               </button>
 
               {/* Desktop Hover Floating QR Card */}
-              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-50 p-3 bg-white dark:bg-[#18181d] rounded-2xl shadow-2xl border border-black/[0.08] dark:border-white/[0.12] text-center w-48 pointer-events-none animate-fadeIn">
+              <div 
+                onClick={() => setIsAboutModalOpen(true)}
+                className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 hidden group-hover:block z-50 p-3 bg-white dark:bg-[#18181d] rounded-2xl shadow-2xl border border-black/[0.08] dark:border-white/[0.12] text-center w-48 cursor-pointer animate-fadeIn"
+              >
                 <div className="bg-white p-1 rounded-xl shadow-xs">
                   <img src="/wechat-qr.jpg" alt="微信二维码" className="w-40 h-auto mx-auto rounded-lg" />
                 </div>
@@ -732,7 +751,7 @@ export function App() {
             <span>© 2026 Edition · Curated by 威比 Hunter Wei.（抖音、小红书同名）</span>
             <button
               onClick={() => setIsAuthModalOpen(true)}
-              className="hover:text-black/60 dark:hover:text-white/60 transition-colors p-1"
+              className="hover:text-black/60 dark:hover:text-white/60 transition-colors p-1 cursor-pointer"
               title="Admin Entrance"
             >
               🔒
@@ -740,6 +759,30 @@ export function App() {
           </div>
         </div>
       </footer>
+
+      {/* Floating Action Dock (Always accessible without scrolling to bottom) */}
+      <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2.5 pointer-events-none">
+        {/* Floating Community & Credits Pill */}
+        <button
+          onClick={() => setIsAboutModalOpen(true)}
+          className="pointer-events-auto inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/95 dark:bg-[#18181d]/95 hover:bg-white dark:hover:bg-[#22222a] text-[#1d1d1f] dark:text-zinc-100 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-black/[0.08] dark:border-white/[0.12] backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer text-xs font-medium group"
+          title="查看社群、特别致谢与联系方式"
+        >
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span>💬 交流群 & 致谢</span>
+        </button>
+
+        {/* Back to top button (Visible after scrolling) */}
+        {showBackToTop && (
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="pointer-events-auto w-9 h-9 rounded-full bg-white/95 dark:bg-[#18181d]/95 hover:bg-white dark:hover:bg-[#22222a] text-[#1d1d1f] dark:text-zinc-100 shadow-[0_8px_24px_rgb(0,0,0,0.12)] border border-black/[0.08] dark:border-white/[0.12] backdrop-blur-md flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer animate-fadeIn"
+            title="回到顶部"
+          >
+            <ArrowUp className="w-4 h-4" />
+          </button>
+        )}
+      </div>
         </>
       )}
 
@@ -791,54 +834,12 @@ export function App() {
         totalCount={skills.length}
       />
 
-      {/* WeChat QR Code Modal */}
-      {isWeChatModalOpen && (
-        <div 
-          className="fixed inset-0 z-[120] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 animate-fadeIn"
-          onClick={() => setIsWeChatModalOpen(false)}
-        >
-          <div 
-            className="relative bg-white dark:bg-[#18181d] rounded-3xl p-6 shadow-2xl border border-black/[0.08] dark:border-white/[0.12] max-w-xs w-full text-center space-y-3.5"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setIsWeChatModalOpen(false)}
-              className="absolute top-4 right-4 p-1.5 text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-white rounded-full bg-black/5 dark:bg-white/5 transition-colors"
-            >
-              <X className="w-4 h-4" />
-            </button>
-
-            <div className="pt-1">
-              <span className="inline-block p-2 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 mb-1">
-                💬
-              </span>
-              <h3 className="text-base font-bold text-[#1d1d1f] dark:text-white">添加作者微信 · 加入交流群</h3>
-              <p className="text-xs text-[#86868b] dark:text-zinc-400 mt-0.5">扫码直达 · 备注：进AIGC学习群</p>
-            </div>
-
-            <div className="bg-[#f5f5f7] dark:bg-[#121215] p-3 rounded-2xl border border-black/[0.04] dark:border-white/[0.06]">
-              <img 
-                src="/wechat-qr.jpg" 
-                alt="微信二维码" 
-                className="w-56 h-auto mx-auto rounded-xl shadow-xs"
-              />
-            </div>
-
-            <div className="flex items-center justify-between px-3 py-2 rounded-xl bg-[#f5f5f7] dark:bg-[#141418] border border-black/[0.06] dark:border-white/[0.08] text-xs">
-              <span className="text-[#86868b] dark:text-zinc-400">微信号: <strong className="font-mono text-[#1d1d1f] dark:text-white">Wibi2077</strong></span>
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText('Wibi2077');
-                  showToast('微信号已复制！添加请备注：进AIGC学习群');
-                }}
-                className="px-2.5 py-1 rounded-lg bg-emerald-600 text-white font-medium text-xs hover:bg-emerald-700 transition-colors shadow-2xs"
-              >
-                复制
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* About & Community Modal (Credits, WeChat QR, Contact, Claim) */}
+      <AboutModal
+        isOpen={isAboutModalOpen}
+        onClose={() => setIsAboutModalOpen(false)}
+        onCopy={showToast}
+      />
 
     </div>
   );
