@@ -145,7 +145,7 @@ export function CategoryFilter({
               <div className="grid grid-cols-3 gap-1.5 w-full">
                 <button
                   onClick={() => { setSelectedCategory('all'); }}
-                  className={`h-7.5 px-2 rounded-lg text-[11px] font-medium transition-all border flex items-center justify-center gap-1 truncate cursor-pointer ${
+                  className={`h-7 px-2 rounded-lg text-[11px] font-medium transition-all border flex items-center justify-center gap-1 truncate cursor-pointer ${
                     selectedCategory === 'all'
                       ? 'bg-[#18181b] dark:bg-white text-white dark:text-black font-semibold border-[#18181b] dark:border-white shadow-2xs'
                       : 'bg-white dark:bg-[#141417] border-black/[0.08] dark:border-white/[0.08] text-[#515154] dark:text-zinc-300'
@@ -162,7 +162,7 @@ export function CategoryFilter({
                     <button
                       key={cat}
                       onClick={() => { setSelectedCategory(isCatActive ? 'all' : cat); }}
-                      className={`h-7.5 px-2 rounded-lg text-[11px] font-medium transition-all border flex items-center justify-center gap-1 truncate cursor-pointer ${
+                      className={`h-7 px-2 rounded-lg text-[11px] font-medium transition-all border flex items-center justify-center gap-1 truncate cursor-pointer ${
                         isCatActive
                           ? 'bg-[#18181b] dark:bg-white text-white dark:text-black font-semibold border-[#18181b] dark:border-white shadow-2xs'
                           : 'bg-white dark:bg-[#141417] border-black/[0.08] dark:border-white/[0.08] text-[#515154] dark:text-zinc-300'
