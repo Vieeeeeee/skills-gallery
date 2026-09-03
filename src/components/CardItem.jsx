@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   Copy, 
   Check, 
@@ -15,6 +15,7 @@ import { GithubIcon } from './Icons';
 
 export function CardItem({
   item,
+  index,
   onSelect,
   onCopy,
   isBookmarked,
@@ -28,6 +29,16 @@ export function CardItem({
   const [copied, setCopied] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const imgRef = useRef(null);
+
+  const imageSrc = !imageError ? (item.cover_image || (item.images && item.images.length > 0 ? item.images[0] : null)) : null;
+  const hasImage = Boolean(imageSrc);
+
+  useEffect(() => {
+    if (imgRef.current && imgRef.current.complete && imgRef.current.naturalWidth > 0) {
+      setImageLoaded(true);
+    }
+  }, [imageSrc]);
 
   const handleCopyClick = (e) => {
     e.stopPropagation();
@@ -44,11 +55,6 @@ export function CardItem({
     if (onCopy) onCopy(item);
     setTimeout(() => setCopied(false), 2000);
   };
-
-  const imageSrc = !imageError ? (item.cover_image || (item.images && item.images.length > 0 ? item.images[0] : null)) : null;
-  const hasImage = Boolean(imageSrc);
-
-  // Extract series [XXX]
   const seriesMatch = (item.title || '').match(/^\[([^\]]+)\]\s*(.*)$/);
   const seriesName = seriesMatch ? seriesMatch[1] : (item.category || '精选');
   const mainTitle = seriesMatch ? seriesMatch[2] : (item.title || '');
@@ -188,13 +194,16 @@ export function CardItem({
         {hasImage ? (
           <div className="w-full relative flex items-center justify-center bg-[#f0f0f2] dark:bg-[#18181d] min-h-[140px] sm:min-h-[180px] overflow-hidden">
             {!imageLoaded && (
-              <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 dark:from-zinc-800 dark:via-zinc-700 dark:to-zinc-800 animate-pulse" />
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 dark:from-zinc-800 dark:via-zinc-700 dark:to-zinc-800 animate-pulse pointer-events-none" />
             )}
             <img
+              ref={imgRef}
               src={imageSrc}
               alt={item.title}
-              className={`w-full h-auto object-cover max-h-[520px] transition-opacity duration-300 group-hover:scale-[1.02] ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-              loading="lazy"
+              className="w-full h-auto object-cover max-h-[520px] transition-transform duration-300 group-hover:scale-[1.02]"
+              loading={index !== undefined && index < 8 ? "eager" : "lazy"}
+              decoding="async"
+              fetchPriority={index !== undefined && index < 4 ? "high" : "auto"}
               onLoad={() => setImageLoaded(true)}
               onError={() => setImageError(true)}
             />

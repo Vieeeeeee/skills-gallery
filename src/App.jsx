@@ -638,10 +638,11 @@ export function App() {
         {/* Responsive Feed View (Mobile: 2 cols | iPad/Tablet: 3 cols | Desktop: 4 cols) */}
         {!loading && appMode === 'gallery' && viewMode === 'grid' && (
           <div className="columns-2 md:columns-3 lg:columns-4 gap-2 sm:gap-4.5">
-            {displayedSkills.map((item) => (
+            {displayedSkills.map((item, index) => (
               <CardItem
                 key={item.id}
                 item={item}
+                index={index}
                 viewMode="grid"
                 onSelect={handleSelectItem}
                 onCopy={(it) => showToast(`${it.type === 'skill' ? '安装指令' : '提示词'}已复制！`)}
@@ -662,10 +663,11 @@ export function App() {
         {/* List View (2-Column Responsive Grid) */}
         {!loading && appMode === 'gallery' && viewMode === 'list' && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-            {displayedSkills.map((item) => (
+            {displayedSkills.map((item, index) => (
               <CardItem
                 key={item.id}
                 item={item}
+                index={index}
                 viewMode="list"
                 onSelect={handleSelectItem}
                 onCopy={(it) => showToast(`${it.type === 'skill' ? '安装指令' : '提示词'}已复制！`)}
