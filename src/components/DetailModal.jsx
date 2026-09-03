@@ -91,8 +91,6 @@ export function DetailModal({
     setTagSuggestionsOpen(false);
   }, [item, isOpen]);
 
-  if (!isOpen || !item) return null;
-
   // --- Obsidian-Style Tag Handlers ---
   const tagSuggestions = useMemo(() => {
     if (!tagInput.trim()) return [];
@@ -245,6 +243,8 @@ export function DetailModal({
     if (onCopy) onCopy('运镜提示词已复制');
     setTimeout(() => setCopiedMotion(false), 2000);
   };
+
+  if (!isOpen || !item) return null;
 
   const images = item.images && item.images.length > 0 
     ? item.images 
