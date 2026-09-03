@@ -429,23 +429,25 @@ export function App() {
       />
 
       {/* Hero Section */}
-      <div className="relative border-b border-black/[0.06] dark:border-white/[0.08] bg-white dark:bg-[#0d0d11] pt-4 pb-3.5 sm:pt-9 sm:pb-7 overflow-hidden transition-colors">
+      <div className="relative border-b border-black/[0.06] dark:border-white/[0.08] bg-white dark:bg-[#0d0d11] pt-3 pb-2.5 sm:pt-9 sm:pb-7 overflow-hidden transition-colors">
         {/* Subtle Ambient Background Gradient Light */}
         <div className="absolute top-0 right-0 w-[500px] h-[350px] bg-gradient-to-bl from-indigo-200/20 via-purple-100/10 to-transparent dark:from-indigo-900/15 dark:via-purple-900/10 pointer-events-none rounded-full blur-3xl -z-0" />
 
         <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-stretch">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-8 items-stretch">
             
             {/* Headline, Intro, Stats, 4 Type Filter Cards */}
-            <div className="lg:col-span-7 flex flex-col justify-between space-y-3 sm:space-y-4">
-              <div className="space-y-2.5 sm:space-y-3">
-                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-indigo-50/90 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/60 text-[11px] sm:text-xs font-mono text-indigo-700 dark:text-indigo-300 shadow-2xs">
+            <div className="lg:col-span-7 flex flex-col justify-between space-y-2.5 sm:space-y-4">
+              <div className="space-y-2 sm:space-y-3">
+                {/* Desktop badge */}
+                <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50/90 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/60 text-xs font-mono text-indigo-700 dark:text-indigo-300 shadow-2xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-400" />
                   <span>1,000+ 精选收录 · 真实来源溯源</span>
                 </div>
                 
+                {/* Title */}
                 <div>
-                  <h1 className="font-hero-serif text-[28px] sm:text-4xl lg:text-[54px] font-bold tracking-tight text-[#111113] dark:text-white leading-[1.18] sm:leading-[1.12]">
+                  <h1 className="font-hero-serif text-2xl sm:text-4xl lg:text-[54px] font-bold tracking-tight text-[#111113] dark:text-white leading-tight sm:leading-[1.12]">
                     <span className="block sm:inline">
                       Prompt <span className="font-serif font-normal italic text-[#111113] dark:text-white">&</span> Skill
                     </span>
@@ -455,14 +457,15 @@ export function App() {
                   </h1>
                 </div>
 
-                <p className="text-xs sm:text-sm md:text-base text-[#6e6e73] dark:text-zinc-400 leading-relaxed max-w-xl font-sans">
+                {/* Desktop Subtitle */}
+                <p className="hidden sm:block text-xs sm:text-sm md:text-base text-[#6e6e73] dark:text-zinc-400 leading-relaxed max-w-xl font-sans">
                   收录网络前沿 AI 视觉风格提示词与开源 Skill 工作流。
                   <br className="hidden sm:inline" />
                   一键复制 Prompt 与安装指令，支持在线增补与本地管理。
                 </p>
 
-                {/* 4 Stat Metrics Row with Vertical Dividers */}
-                <div className="flex items-center gap-2.5 sm:gap-4.5 pt-0.5 text-left flex-wrap">
+                {/* Desktop 4 Stat Metrics Row */}
+                <div className="hidden sm:flex items-center gap-2.5 sm:gap-4.5 pt-0.5 text-left flex-wrap">
                   <div className="flex items-baseline gap-1">
                     <span className="text-lg sm:text-2xl font-bold font-mono text-[#111113] dark:text-white leading-none">{skills.length}</span>
                     <span className="text-xs text-[#86868b] dark:text-zinc-400 font-medium font-sans">条目</span>
@@ -485,9 +488,10 @@ export function App() {
                 </div>
               </div>
 
-              {/* 4 Type Filter Cards */}
-              <div className="pt-1 sm:pt-2">
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
+              {/* 4 Type Filter Cards (Desktop grid vs Mobile clean 1-row tabs) */}
+              <div className="pt-0.5 sm:pt-2">
+                {/* Desktop Grid (sm+) */}
+                <div className="hidden sm:grid sm:grid-cols-4 gap-2.5">
                   {types.map((t) => {
                     const Icon = t.icon;
                     const isActive = selectedType === t.id;
@@ -495,27 +499,50 @@ export function App() {
                       <button
                         key={t.id}
                         onClick={() => setSelectedType(t.id)}
-                        className={`flex items-center gap-2 p-2 sm:gap-2.5 sm:p-3 rounded-xl sm:rounded-2xl transition-all duration-200 text-left border cursor-pointer ${
+                        className={`flex items-center gap-2.5 p-3 rounded-2xl transition-all duration-200 text-left border cursor-pointer ${
                           isActive
                             ? 'bg-[#18181b] dark:bg-white text-white dark:text-[#09090b] border-[#18181b] dark:border-white shadow-sm'
                             : 'bg-white dark:bg-[#141417] hover:bg-[#fafafc] dark:hover:bg-[#1a1a1e] border-black/[0.08] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 shadow-2xs hover:border-black/[0.14] dark:hover:border-white/[0.16]'
                         }`}
                       >
-                        <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 ${
+                        <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
                           isActive
                             ? 'bg-white/15 dark:bg-black/10 text-white dark:text-black'
                             : 'bg-[#f5f5f7] dark:bg-white/[0.06] text-[#6e6e73] dark:text-zinc-400'
                         }`}>
-                          <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                          <Icon className="w-4 h-4" />
                         </div>
                         <div className="min-w-0">
                           <div className={`text-xs font-bold truncate ${isActive ? 'text-white dark:text-black' : 'text-[#1d1d1f] dark:text-zinc-200'}`}>
                             {t.label}
                           </div>
-                          <div className={`text-[11px] sm:text-xs font-mono font-medium ${isActive ? 'text-white/70 dark:text-black/70' : 'text-[#86868b] dark:text-zinc-400'}`}>
+                          <div className={`text-xs font-mono font-medium ${isActive ? 'text-white/70 dark:text-black/70' : 'text-[#86868b] dark:text-zinc-400'}`}>
                             {t.count}
                           </div>
                         </div>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Mobile: Ultra-clean, single-row compact pill tabs */}
+                <div className="sm:hidden flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+                  {types.map((t) => {
+                    const Icon = t.icon;
+                    const isActive = selectedType === t.id;
+                    return (
+                      <button
+                        key={t.id}
+                        onClick={() => setSelectedType(t.id)}
+                        className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium transition-all shrink-0 border cursor-pointer ${
+                          isActive
+                            ? 'bg-[#18181b] dark:bg-white text-white dark:text-black font-semibold border-[#18181b] dark:border-white shadow-2xs'
+                            : 'bg-white dark:bg-[#141417] border-black/[0.08] dark:border-white/[0.08] text-[#515154] dark:text-zinc-300'
+                        }`}
+                      >
+                        <Icon className="w-3 h-3" />
+                        <span>{t.label}</span>
+                        <span className="font-mono text-[10px] opacity-75">({t.count})</span>
                       </button>
                     );
                   })}
@@ -531,7 +558,7 @@ export function App() {
           </div>
 
           {/* Full-width Category & Hot Tags Section */}
-          <div className="mt-3.5 pt-3 sm:mt-6 sm:pt-5 border-t border-black/[0.06] dark:border-white/[0.08]">
+          <div className="mt-2.5 pt-2.5 sm:mt-6 sm:pt-5 border-t border-black/[0.06] dark:border-white/[0.08]">
             <CategoryFilter
               categories={categories}
               selectedCategory={selectedCategory}
