@@ -526,12 +526,9 @@ export function App() {
                 
                 {/* Title */}
                 <div>
-                  <h1 className="font-hero-serif text-2xl sm:text-4xl lg:text-[54px] font-bold tracking-tight text-[#111113] dark:text-white leading-tight sm:leading-[1.12]">
-                    <span className="block sm:inline">
-                      Prompt <span className="font-serif font-normal italic text-[#111113] dark:text-white">&</span> Skill
-                    </span>
-                    <span className="block sm:inline sm:ml-3">
-                      风格大赏
+                  <h1 className="font-hero-serif font-black tracking-tight text-[#111113] dark:text-white leading-none">
+                    <span className="text-[24.5px] xs:text-[26.5px] sm:text-4xl lg:text-[46px] xl:text-[52px] whitespace-nowrap block tracking-tight">
+                      Prompt <span className="font-serif font-normal italic text-[#111113] dark:text-white">&</span> Skill 风格大赏
                     </span>
                   </h1>
                 </div>
@@ -701,29 +698,82 @@ export function App() {
           </div>
         )}
 
-        {/* Responsive Feed View (Mobile: 2 cols | iPad/Tablet: 3 cols | Desktop: 4 cols) */}
+        {/* Responsive Feed View (Mobile: 2 Flex Columns | Tablet: 3 Multi-Columns | Desktop: 4 Multi-Columns) */}
         {!loading && appMode === 'gallery' && viewMode === 'grid' && (
-          <div className="columns-2 md:columns-3 lg:columns-4 gap-2 sm:gap-4.5">
-            {displayedSkills.map((item, index) => (
-              <CardItem
-                key={item.id}
-                item={item}
-                index={index}
-                viewMode="grid"
-                onSelect={handleSelectItem}
-                onCopy={(it) => showToast(`${it.type === 'skill' ? '安装指令' : '提示词'}已复制！`)}
-                isBookmarked={bookmarks.includes(item.id)}
-                onToggleBookmark={handleToggleBookmark}
-                isAdmin={isAdmin}
-                onEdit={(it) => {
-                  setEditingItem(it);
-                  setIsEditOpen(true);
-                }}
-                onDelete={handleDeleteItem}
-                onTagClick={(tag) => setSelectedTag(tag)}
-              />
-            ))}
-          </div>
+          <>
+            {/* Mobile View: Dedicated 2-Column Flexbox Waterfall (100% immune to WebKit multi-column paint bugs) */}
+            <div className="sm:hidden flex gap-2 items-start w-full">
+              <div className="flex-1 min-w-0 flex flex-col gap-2">
+                {displayedSkills
+                  .filter((_, i) => i % 2 === 0)
+                  .map((item, colIdx) => (
+                    <CardItem
+                      key={item.id}
+                      item={item}
+                      index={colIdx * 2}
+                      viewMode="grid"
+                      onSelect={handleSelectItem}
+                      onCopy={(it) => showToast(`${it.type === 'skill' ? '安装指令' : '提示词'}已复制！`)}
+                      isBookmarked={bookmarks.includes(item.id)}
+                      onToggleBookmark={handleToggleBookmark}
+                      isAdmin={isAdmin}
+                      onEdit={(it) => {
+                        setEditingItem(it);
+                        setIsEditOpen(true);
+                      }}
+                      onDelete={handleDeleteItem}
+                      onTagClick={(tag) => setSelectedTag(tag)}
+                    />
+                  ))}
+              </div>
+              <div className="flex-1 min-w-0 flex flex-col gap-2">
+                {displayedSkills
+                  .filter((_, i) => i % 2 === 1)
+                  .map((item, colIdx) => (
+                    <CardItem
+                      key={item.id}
+                      item={item}
+                      index={colIdx * 2 + 1}
+                      viewMode="grid"
+                      onSelect={handleSelectItem}
+                      onCopy={(it) => showToast(`${it.type === 'skill' ? '安装指令' : '提示词'}已复制！`)}
+                      isBookmarked={bookmarks.includes(item.id)}
+                      onToggleBookmark={handleToggleBookmark}
+                      isAdmin={isAdmin}
+                      onEdit={(it) => {
+                        setEditingItem(it);
+                        setIsEditOpen(true);
+                      }}
+                      onDelete={handleDeleteItem}
+                      onTagClick={(tag) => setSelectedTag(tag)}
+                    />
+                  ))}
+              </div>
+            </div>
+
+            {/* Desktop View (sm+): Multi-column Masonry (3 cols on tablet, 4 cols on desktop) */}
+            <div className="hidden sm:block sm:columns-3 lg:columns-4 gap-4.5">
+              {displayedSkills.map((item, index) => (
+                <CardItem
+                  key={item.id}
+                  item={item}
+                  index={index}
+                  viewMode="grid"
+                  onSelect={handleSelectItem}
+                  onCopy={(it) => showToast(`${it.type === 'skill' ? '安装指令' : '提示词'}已复制！`)}
+                  isBookmarked={bookmarks.includes(item.id)}
+                  onToggleBookmark={handleToggleBookmark}
+                  isAdmin={isAdmin}
+                  onEdit={(it) => {
+                    setEditingItem(it);
+                    setIsEditOpen(true);
+                  }}
+                  onDelete={handleDeleteItem}
+                  onTagClick={(tag) => setSelectedTag(tag)}
+                />
+              ))}
+            </div>
+          </>
         )}
 
         {/* List View (2-Column Responsive Grid) */}

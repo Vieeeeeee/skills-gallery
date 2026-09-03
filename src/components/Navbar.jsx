@@ -85,9 +85,9 @@ export function Navbar({
               </svg>
             </div>
             <div>
-              <h1 className="font-hero-serif font-bold text-sm sm:text-base md:text-lg text-[#1d1d1f] dark:text-white tracking-tight truncate">
+              <span className="font-hero-serif font-bold text-sm sm:text-base md:text-lg text-[#1d1d1f] dark:text-white tracking-tight truncate block">
                 <span className="hidden sm:inline">Prompt & Skill </span>风格大赏
-              </h1>
+              </span>
             </div>
           </div>
 

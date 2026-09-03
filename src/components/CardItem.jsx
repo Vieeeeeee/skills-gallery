@@ -192,7 +192,7 @@ export function CardItem({
       <div className="relative w-full overflow-hidden bg-[#f5f5f7] dark:bg-[#101014] border-b border-black/[0.04] dark:border-white/[0.06]">
         
         {hasImage ? (
-          <div className="w-full relative flex items-center justify-center bg-[#f0f0f2] dark:bg-[#18181d] min-h-[140px] sm:min-h-[180px] overflow-hidden">
+          <div className="w-full relative flex items-center justify-center bg-[#f0f0f2] dark:bg-[#1e1e24] min-h-[140px] sm:min-h-[180px] overflow-hidden">
             {!imageLoaded && (
               <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 dark:from-zinc-800 dark:via-zinc-700 dark:to-zinc-800 animate-pulse pointer-events-none" />
             )}
@@ -200,7 +200,7 @@ export function CardItem({
               ref={imgRef}
               src={imageSrc}
               alt={item.title}
-              className="w-full h-auto object-cover max-h-[520px] transition-transform duration-300 group-hover:scale-[1.02]"
+              className="w-full h-auto object-cover max-h-[520px] block sm:transition-transform sm:duration-300 sm:group-hover:scale-[1.02]"
               loading={index !== undefined && index < 8 ? "eager" : "lazy"}
               decoding="async"
               fetchPriority={index !== undefined && index < 4 ? "high" : "auto"}
@@ -211,7 +211,7 @@ export function CardItem({
 
             {/* Bottom Type Badge on Image */}
             <div className="absolute bottom-1.5 left-1.5 sm:bottom-2 sm:left-2 z-10">
-              <span className="text-[8.5px] sm:text-[10px] font-mono font-medium px-1.5 sm:px-2 py-0.5 rounded-full bg-black/65 backdrop-blur-md text-white border border-white/20 shadow-xs">
+              <span className="text-[8.5px] sm:text-[10px] font-mono font-medium px-1.5 sm:px-2 py-0.5 rounded-full bg-black/75 text-white border border-white/20 shadow-xs select-none">
                 {seriesName}
               </span>
             </div>

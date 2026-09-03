@@ -16,15 +16,14 @@ export function CategoryFilter({
 
   return (
     <div className="space-y-2">
-      {/* Category Row */}
-      <div className="flex items-start sm:items-center gap-2 text-xs">
-        <span className="text-[#86868b] dark:text-zinc-400 font-medium shrink-0 flex items-center gap-1 text-xs pt-1 sm:pt-0 select-none">
+      {/* Desktop Category Row (sm+) */}
+      <div className="hidden sm:flex items-center gap-2 text-xs">
+        <span className="text-[#86868b] dark:text-zinc-400 font-medium shrink-0 flex items-center gap-1 text-xs select-none">
           <span className="text-[#1d1d1f] dark:text-white text-xs">❖</span>
           分类:
         </span>
 
-        {/* Desktop View: Clean wrapped row */}
-        <div className="hidden sm:flex flex-1 flex-wrap items-center gap-1.5">
+        <div className="flex-1 flex flex-wrap items-center gap-1.5">
           <button
             onClick={() => setSelectedCategory('all')}
             className={`px-2.5 py-1 rounded-full font-medium transition-all text-[11.5px] border flex items-center gap-1 cursor-pointer ${
@@ -60,86 +59,92 @@ export function CategoryFilter({
             );
           })}
         </div>
+      </div>
 
-        {/* Mobile View: Collapsed single row vs Expanded full tight grid */}
-        <div className="sm:hidden flex-1 min-w-0">
-          {!isExpanded ? (
-            /* Collapsed: Strictly 1 Single Horizontal Row with Pinned Expand Button */
-            <div className="flex items-center justify-between gap-1.5 w-full">
-              {/* Horizontally scrollable row of unified category pills */}
-              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 flex-1 min-w-0">
+      {/* Mobile View: Collapsed single row vs Expanded 100% full-width grid */}
+      <div className="sm:hidden w-full">
+        {!isExpanded ? (
+          /* Collapsed: Strictly 1 Single Horizontal Row with Pinned Expand Button */
+          <div className="flex items-center justify-between gap-1.5 w-full">
+            <span className="text-[#86868b] dark:text-zinc-400 font-medium shrink-0 flex items-center gap-1 text-xs select-none">
+              <span className="text-[#1d1d1f] dark:text-white text-xs">❖</span>
+              分类:
+            </span>
+
+            {/* Horizontally scrollable row of unified category pills */}
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 flex-1 min-w-0">
+              <button
+                onClick={() => setSelectedCategory('all')}
+                className={`h-7 px-2.5 rounded-lg text-[11px] font-medium transition-all shrink-0 border flex items-center gap-1 cursor-pointer ${
+                  selectedCategory === 'all'
+                    ? 'bg-[#18181b] dark:bg-white text-white dark:text-black font-semibold border-[#18181b] dark:border-white shadow-2xs'
+                    : 'bg-white dark:bg-[#141417] border-black/[0.08] dark:border-white/[0.08] text-[#515154] dark:text-zinc-300'
+                }`}
+              >
+                <span>全部</span>
+                <span className="font-mono text-[10px] opacity-70">({categoryCounts.all || 0})</span>
+              </button>
+
+              {/* If a category is selected (and not all), show it with clear X */}
+              {selectedCategory !== 'all' && (
                 <button
                   onClick={() => setSelectedCategory('all')}
-                  className={`h-7 px-2.5 rounded-lg text-[11px] font-medium transition-all shrink-0 border flex items-center gap-1 cursor-pointer ${
-                    selectedCategory === 'all'
-                      ? 'bg-[#18181b] dark:bg-white text-white dark:text-black font-semibold border-[#18181b] dark:border-white shadow-2xs'
-                      : 'bg-white dark:bg-[#141417] border-black/[0.08] dark:border-white/[0.08] text-[#515154] dark:text-zinc-300'
-                  }`}
+                  className="h-7 px-2.5 rounded-lg text-[11px] font-semibold transition-all shrink-0 border flex items-center gap-1 bg-[#18181b] dark:bg-white text-white dark:text-black border-[#18181b] dark:border-white shadow-2xs cursor-pointer"
                 >
-                  <span>全部</span>
-                  <span className="font-mono text-[10px] opacity-70">({categoryCounts.all || 0})</span>
+                  <span>{selectedCategory}</span>
+                  <span className="font-mono text-[10px] opacity-70">({categoryCounts[selectedCategory] || 0})</span>
+                  <X className="w-3 h-3 ml-0.5" />
                 </button>
+              )}
 
-                {/* If a category is selected (and not all), show it with clear X */}
-                {selectedCategory !== 'all' && (
-                  <button
-                    onClick={() => setSelectedCategory('all')}
-                    className="h-7 px-2.5 rounded-lg text-[11px] font-semibold transition-all shrink-0 border flex items-center gap-1 bg-[#18181b] dark:bg-white text-white dark:text-black border-[#18181b] dark:border-white shadow-2xs cursor-pointer"
-                  >
-                    <span>{selectedCategory}</span>
-                    <span className="font-mono text-[10px] opacity-70">({categoryCounts[selectedCategory] || 0})</span>
-                    <X className="w-3 h-3 ml-0.5" />
-                  </button>
-                )}
+              {/* If a tag is selected, show it with clear X */}
+              {selectedTag && (
+                <button
+                  onClick={() => setSelectedTag('')}
+                  className="h-7 px-2.5 rounded-lg text-[11px] font-semibold transition-all shrink-0 border flex items-center gap-1 bg-[#18181b] dark:bg-white text-white dark:text-black border-[#18181b] dark:border-white shadow-2xs cursor-pointer"
+                >
+                  <span>#{selectedTag}</span>
+                  <X className="w-3 h-3 ml-0.5" />
+                </button>
+              )}
 
-                {/* If a tag is selected, show it with clear X */}
-                {selectedTag && (
-                  <button
-                    onClick={() => setSelectedTag('')}
-                    className="h-7 px-2.5 rounded-lg text-[11px] font-semibold transition-all shrink-0 border flex items-center gap-1 bg-[#18181b] dark:bg-white text-white dark:text-black border-[#18181b] dark:border-white shadow-2xs cursor-pointer"
-                  >
-                    <span>#{selectedTag}</span>
-                    <X className="w-3 h-3 ml-0.5" />
-                  </button>
-                )}
+              {/* Other categories horizontally scrollable */}
+              {categories.filter(c => c !== selectedCategory).map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className="h-7 px-2.5 rounded-lg text-[11px] font-medium transition-all shrink-0 border bg-white dark:bg-[#141417] border-black/[0.08] dark:border-white/[0.08] text-[#515154] dark:text-zinc-300 cursor-pointer"
+                >
+                  <span>{cat}</span>
+                </button>
+              ))}
+            </div>
 
-                {/* Other categories horizontally scrollable */}
-                {categories.filter(c => c !== selectedCategory).map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setSelectedCategory(cat)}
-                    className="h-7 px-2.5 rounded-lg text-[11px] font-medium transition-all shrink-0 border bg-white dark:bg-[#141417] border-black/[0.08] dark:border-white/[0.08] text-[#515154] dark:text-zinc-300 cursor-pointer"
-                  >
-                    <span>{cat}</span>
-                  </button>
-                ))}
-              </div>
-
-              {/* Pinned Expand Button on the right */}
+            {/* Pinned Expand Button on the right */}
+            <button
+              onClick={() => setIsExpanded(true)}
+              className="h-7 px-2.5 rounded-lg text-[11px] font-medium transition-all shrink-0 border border-black/[0.08] dark:border-white/[0.08] bg-white dark:bg-[#141417] text-[#1d1d1f] dark:text-white flex items-center gap-1 shadow-2xs cursor-pointer"
+            >
+              <span>展开</span>
+              <ChevronDown className="w-3 h-3 text-[#86868b]" />
+            </button>
+          </div>
+        ) : (
+          /* Expanded Full Mobile View: 100% Full Width (Zero Left Space!) */
+          <div className="space-y-3 pt-0.5 w-full">
+            {/* Header with clear title and prominent Collapse button */}
+            <div className="flex items-center justify-between w-full">
+              <span className="text-xs font-bold text-[#1d1d1f] dark:text-white flex items-center gap-1">
+                <span>❖ 全部分类 ({categories.length})</span>
+              </span>
               <button
-                onClick={() => setIsExpanded(true)}
-                className="h-7 px-2.5 rounded-lg text-[11px] font-medium transition-all shrink-0 border border-black/[0.08] dark:border-white/[0.08] bg-white dark:bg-[#141417] text-[#1d1d1f] dark:text-white flex items-center gap-1 shadow-2xs cursor-pointer"
+                onClick={() => setIsExpanded(false)}
+                className="h-7 px-2.5 rounded-lg text-[11px] font-medium transition-all border border-black/[0.08] dark:border-white/[0.08] bg-[#f5f5f7] dark:bg-white/[0.08] text-[#1d1d1f] dark:text-white flex items-center gap-1 cursor-pointer"
               >
-                <span>展开</span>
-                <ChevronDown className="w-3 h-3 text-[#86868b]" />
+                <span>收起分类</span>
+                <ChevronUp className="w-3 h-3 text-[#86868b]" />
               </button>
             </div>
-          ) : (
-            /* Expanded Full Mobile View: Harmonious Unified Grid */
-            <div className="space-y-3 pt-0.5">
-              {/* Header with clear title and prominent Collapse button */}
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-[#1d1d1f] dark:text-white flex items-center gap-1">
-                  <span>❖ 全部分类 ({categories.length})</span>
-                </span>
-                <button
-                  onClick={() => setIsExpanded(false)}
-                  className="h-7 px-2.5 rounded-lg text-[11px] font-medium transition-all border border-black/[0.08] dark:border-white/[0.08] bg-[#f5f5f7] dark:bg-white/[0.08] text-[#1d1d1f] dark:text-white flex items-center gap-1 cursor-pointer"
-                >
-                  <span>收起分类</span>
-                  <ChevronUp className="w-3 h-3 text-[#86868b]" />
-                </button>
-              </div>
 
               {/* Uniform 3-Column Grid of Categories (Identical height & padding) */}
               <div className="grid grid-cols-3 gap-1.5 w-full">
@@ -227,7 +232,6 @@ export function CategoryFilter({
             </div>
           )}
         </div>
-      </div>
 
       {/* Desktop Hot Tags Section (hidden on mobile, mobile displays inside expanded view) */}
       {hotTags && hotTags.length > 0 && (
