@@ -293,6 +293,9 @@ export function App() {
       showToast('新条目已添加成功！');
     }
     saveSkillsData(updated);
+    if (selectedItem && selectedItem.id === savedItem.id) {
+      setSelectedItem(savedItem);
+    }
     setIsEditOpen(false);
     setEditingItem(null);
   };
@@ -671,6 +674,10 @@ export function App() {
           setIsDetailOpen(false);
           setSelectedItem(null);
         }}
+        isAdmin={isAdmin}
+        onSave={handleSaveItem}
+        allTags={hotTags}
+        categories={categories}
         onCopy={(msg) => showToast(msg)}
         onSelectRelated={(rel) => setSelectedItem(rel)}
         relatedItems={relatedItems}
@@ -683,7 +690,7 @@ export function App() {
           setIsAdmin(true);
           showToast('管理模式已解锁！');
         }}
-        correctPasscode="Wibi888"
+        correctPasscode="wibi888"
       />
 
       <EditModal
