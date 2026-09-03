@@ -323,8 +323,8 @@ export function SketchbookView({
 
     function restLoupe() {
       const b = bookBox();
-      lx = b.x + b.w * 0.80;
-      ly = b.y + b.h * 0.48;
+      lx = b.x + b.w * 0.84;
+      ly = b.y + b.h * 0.70;
       placeLoupe();
     }
 
@@ -524,7 +524,6 @@ export function SketchbookView({
     function startTurn(dir, t) {
       spring = null;
       if (turn) { idx = turn.to; turn = null; }
-      shoveLoupe(dir);
       const from = idx;
       turn = { dir: dir, from: from, to: dir === 'next' ? (from + 1) % M : (from - 1 + M) % M, t: t || 0 };
       paint();
@@ -798,20 +797,20 @@ export function SketchbookView({
 
       {/* Top Header Bar */}
       <header className="sb-top">
-        <div className="flex items-center gap-3 sm:gap-4">
+        <div className="flex items-center gap-2.5 sm:gap-3">
           <div className="sb-brand">
-            <BookOpen className="w-5 h-5 text-amber-900/80" />
-            <span>Prompt & Skill · 风格速写本</span>
+            <BookOpen className="w-4 h-4 text-amber-900/70" />
+            <span>风格速写本</span>
           </div>
 
           <a 
             href="https://twitter.com/MengTo" 
             target="_blank" 
             rel="noreferrer"
-            className="hidden sm:inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10.5px] font-serif text-amber-900/75 hover:text-amber-950 bg-amber-900/10 hover:bg-amber-900/15 border border-amber-900/15 transition-all"
+            className="hidden sm:inline-flex items-center gap-1 h-7 px-2.5 rounded-full text-[11px] font-serif text-amber-900/70 hover:text-amber-950 bg-amber-900/[0.04] hover:bg-amber-900/[0.08] border border-amber-900/15 transition-all"
             title="致敬 MengTo 先生的设计手账交互概念"
           >
-            <span>✨ 交互美学致敬 MengTo</span>
+            <span>✨ 致敬 MengTo</span>
           </a>
 
           {/* Borderless Floating Category Browser (按类浏览) */}
@@ -822,13 +821,13 @@ export function SketchbookView({
           >
             <button 
               onClick={() => setIsCatMenuOpen(prev => !prev)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-serif text-amber-950/80 hover:text-amber-950 hover:bg-amber-900/10 border border-amber-900/20 bg-amber-900/5 transition-all shadow-2xs cursor-pointer"
+              className="h-7 inline-flex items-center gap-1.5 px-3 rounded-full text-[11px] font-serif text-amber-950/80 hover:text-amber-950 hover:bg-amber-900/[0.08] border border-amber-900/15 bg-amber-900/[0.04] transition-all cursor-pointer"
               title="按类切换速写本"
             >
               <span>按类浏览</span>
-              <span className="text-[10px] opacity-60">▾</span>
+              <span className="text-[9px] opacity-60">▾</span>
               {selectedCategory !== 'all' && (
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-900/15 text-amber-950 font-sans font-medium">
+                <span className="text-[9.5px] px-1.5 py-0.2 rounded-full bg-amber-900/15 text-amber-950 font-sans font-medium">
                   {categoryOptions.find(c => c.id === selectedCategory)?.label || selectedCategory}
                 </span>
               )}
@@ -864,18 +863,18 @@ export function SketchbookView({
         </div>
 
         {/* Right Tools & Exit */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           {/* Zoom controls */}
-          <div className="sb-tools flex items-center" role="group" aria-label="view controls">
-            <button className="sb-tool-btn" id="zOut" aria-label="zoom out">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+          <div className="sb-tools" role="group" aria-label="view controls">
+            <button className="sb-tool-btn" id="zOut" aria-label="zoom out" title="缩小">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
                 <circle cx="8.6" cy="8.6" r="5.6"/>
                 <path d="M12.8 12.8 17.4 17.4M6.2 8.6h4.8"/>
               </svg>
             </button>
             <span className="sb-zoom-read" id="zRead">{zoomText}</span>
-            <button className="sb-tool-btn" id="zIn" aria-label="zoom in">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+            <button className="sb-tool-btn" id="zIn" aria-label="zoom in" title="放大">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
                 <circle cx="8.6" cy="8.6" r="5.6"/>
                 <path d="M12.8 12.8 17.4 17.4M6.2 8.6h4.8M8.6 6.2v4.8"/>
               </svg>
@@ -888,7 +887,7 @@ export function SketchbookView({
               aria-pressed={loupeActive ? 'true' : 'false'}
               title="切换放大镜"
             >
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
                 <circle cx="8.8" cy="8.8" r="5.8"/>
                 <path d="M13 13l4.4 4.4"/>
                 <path d="M6.4 7.2a3.2 3.2 0 0 1 2.4-1.4" opacity=".55"/>
@@ -899,8 +898,9 @@ export function SketchbookView({
           <button 
             onClick={onExit}
             className="sb-exit-btn"
+            title="退出速写本返回画廊"
           >
-            <ArrowLeft className="w-3.5 h-3.5" />
+            <ArrowLeft className="w-3 h-3" />
             <span>返回画廊</span>
           </button>
         </div>
@@ -992,25 +992,40 @@ export function SketchbookView({
               }
 
               return (
-                <div className="flex items-center gap-2.5 pt-0.5 pointer-events-auto">
+                <div className="flex items-center gap-4 pt-1 pointer-events-auto select-none">
+                  {/* Copy Prompt / Command / URL - Restrained Pure Text with Underline Animation */}
                   <button
                     onClick={handleCopyCurrentPrompt}
-                    className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-amber-900/10 hover:bg-amber-900/20 active:scale-95 border border-amber-900/25 text-amber-950 text-xs font-serif font-bold shadow-2xs transition-all cursor-pointer hover:scale-[1.02]"
+                    className="group/btn relative inline-flex items-center gap-1.5 py-0.5 text-[11px] font-serif text-amber-950/70 hover:text-amber-950 transition-colors duration-200 cursor-pointer"
                   >
-                    {copied ? <Check className="w-3.5 h-3.5 text-emerald-800" /> : <Copy className="w-3.5 h-3.5 text-amber-900" />}
-                    <span>{copied ? '已复制！' : copyLabel}</span>
+                    {copied ? (
+                      <Check className="w-3 h-3 text-emerald-800 animate-in zoom-in-75" />
+                    ) : (
+                      <Copy className="w-3 h-3 text-amber-900/45 group-hover/btn:text-amber-900 transition-colors duration-200" />
+                    )}
+                    <span className="relative font-medium tracking-wide">
+                      {copied ? '已复制！' : copyLabel}
+                      <span className="absolute left-0 -bottom-0.5 w-0 h-px bg-amber-900/40 group-hover/btn:w-full transition-all duration-300 ease-out" />
+                    </span>
                   </button>
 
+                  {/* Delicate slash divider */}
+                  {onSelect && <span className="text-amber-900/25 text-[10px] font-sans select-none">/</span>}
+
+                  {/* View Details - Restrained Pure Text with Underline Animation */}
                   {onSelect && (
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         onSelect(activeItem);
                       }}
-                      className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/90 hover:bg-white active:scale-95 border border-amber-900/25 text-amber-950 text-xs font-serif font-semibold shadow-2xs transition-all cursor-pointer hover:scale-[1.02]"
+                      className="group/btn relative inline-flex items-center gap-1.5 py-0.5 text-[11px] font-serif text-amber-950/70 hover:text-amber-950 transition-colors duration-200 cursor-pointer"
                     >
-                      <Maximize2 className="w-3.5 h-3.5 text-amber-900" />
-                      <span>{detailLabel}</span>
+                      <Maximize2 className="w-3 h-3 text-amber-900/45 group-hover/btn:text-amber-900 transition-colors duration-200" />
+                      <span className="relative font-medium tracking-wide">
+                        {detailLabel}
+                        <span className="absolute left-0 -bottom-0.5 w-0 h-px bg-amber-900/40 group-hover/btn:w-full transition-all duration-300 ease-out" />
+                      </span>
                     </button>
                   )}
                 </div>
