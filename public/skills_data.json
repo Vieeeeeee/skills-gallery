@@ -1800,10 +1800,8 @@
       "专业助手"
     ],
     "description": "严谨的法律智能体。支持标准买卖/劳动/竞业合同风险审查、诉讼文书标准化草拟及法条因果链检索推演。",
-    "cover_image": "/images/covers/gh_pa1nrui1_legal-skills_1.webp",
-    "images": [
-      "/images/covers/gh_pa1nrui1_legal-skills_1.webp"
-    ],
+    "cover_image": "",
+    "images": [],
     "accent_color": "#3D5A80",
     "gradient": "from-[#1F2B3A]/90 via-[#26374A]/80 to-[#141C26]",
     "install_command": "npx skills add pa1nrui1/legal-skills"

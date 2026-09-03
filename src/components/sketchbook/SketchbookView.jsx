@@ -723,7 +723,7 @@ export function SketchbookView({
   }, [pages]);
 
   const toggleFullscreen = () => {
-    if (!document.fullscreenElement) {
+      if (!document.fullscreenElement) {
       document.documentElement.requestFullscreen().catch(() => {});
       setIsFullscreen(true);
     } else {
@@ -734,7 +734,12 @@ export function SketchbookView({
 
   const handleCopyCurrentPrompt = () => {
     if (!activeItem) return;
-    const text = activeItem.prompt || activeItem.description || activeItem.title;
+    let text = '';
+    if (activeItem.type === 'skill') {
+      text = activeItem.install_command || (activeItem.repo_url ? `请安装这个 Skill：${activeItem.repo_url}` : activeItem.command || activeItem.prompt);
+    } else {
+      text = activeItem.prompt || activeItem.description || activeItem.title;
+    }
     navigator.clipboard.writeText(text);
     setCopied(true);
     if (onCopy) onCopy(activeItem);
@@ -749,24 +754,18 @@ export function SketchbookView({
       {/* Top Header Bar */}
       <header className="sb-top">
         <div className="sb-brand">
-          <Sparkles className="w-5 h-5 text-[#9a6a3e]" />
-          <span>Skills & 风格大赏 · 速写本</span>
+          <BookOpen className="w-5 h-5 text-amber-900/80" />
+          <span>Prompt & Skill · 风格速写本</span>
         </div>
-        <nav>
-          <a href="#plates">目录 (Plates)</a>
-          <button onClick={() => {
-            const btn = document.getElementById('sbRight');
-            btn?.click();
-          }}>
-            翻下一页
-          </button>
-          <button onClick={toggleFullscreen} className="hidden sm:inline-flex items-center gap-1">
-            {isFullscreen ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
-            <span>全屏</span>
-          </button>
-          <button onClick={onExit} className="sb-exit-btn">
-            <ArrowLeft className="w-4 h-4" />
-            <span>返回画廊模式</span>
+        <nav aria-label="primary">
+          <a href="#plates">画册目录</a>
+          <button onClick={() => window.location.hash = '#plates'}>按类浏览</button>
+          <button 
+            onClick={onExit}
+            className="sb-exit-btn"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>返回画板总览</span>
           </button>
         </nav>
       </header>
@@ -830,25 +829,31 @@ export function SketchbookView({
 
           {/* Caption & Interactive Action bar */}
           <div className="flex flex-col items-center gap-2">
-            <div className="sb-captions" id="sbCaptions" ref={capBoxRef} />
+            <div 
+              className="sb-captions cursor-pointer hover:opacity-80 transition-opacity" 
+              id="sbCaptions" 
+              ref={capBoxRef}
+              onClick={() => activeItem && onSelect && onSelect(activeItem)}
+              title="点击查看此条目的完整详情与样例"
+            />
             
             {activeItem && (
-              <div className="flex items-center gap-2 pt-1">
+              <div className="flex items-center gap-2.5 pt-1">
                 <button
                   onClick={handleCopyCurrentPrompt}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-900/10 hover:bg-amber-900/20 border border-amber-900/20 text-amber-950 text-xs font-serif font-bold shadow-2xs transition-all cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-amber-900/10 hover:bg-amber-900/20 border border-amber-900/25 text-amber-950 text-xs font-serif font-bold shadow-2xs transition-all cursor-pointer hover:scale-[1.02]"
                 >
                   {copied ? <Check className="w-3.5 h-3.5 text-emerald-800" /> : <Copy className="w-3.5 h-3.5 text-amber-900" />}
-                  <span>{copied ? '已复制 Prompt！' : '复制当前页 Prompt'}</span>
+                  <span>{copied ? '已复制！' : (activeItem.type === 'skill' ? '复制安装指令' : '复制 Prompt 提示词')}</span>
                 </button>
 
                 {onSelect && (
                   <button
                     onClick={() => onSelect(activeItem)}
-                    className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-white/70 hover:bg-white border border-amber-900/20 text-amber-950 text-xs font-serif shadow-2xs transition-all cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white/80 hover:bg-white border border-amber-900/25 text-amber-950 text-xs font-serif font-semibold shadow-2xs transition-all cursor-pointer hover:scale-[1.02]"
                   >
-                    <Maximize2 className="w-3 h-3 text-amber-900" />
-                    <span>查看详情</span>
+                    <Maximize2 className="w-3.5 h-3.5 text-amber-900" />
+                    <span>查看详情与 4 张原图</span>
                   </button>
                 )}
               </div>

@@ -79,16 +79,16 @@ export function DetailModal({
         onClick={onClose}
       >
         <div 
-          className="relative w-full max-w-3xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-black/[0.08] overflow-hidden my-auto max-h-[92vh] flex flex-col"
+          className="relative w-full max-w-4xl lg:max-w-5xl bg-white dark:bg-[#101014] rounded-2xl sm:rounded-3xl shadow-2xl border border-black/[0.08] dark:border-white/[0.12] overflow-hidden my-auto max-h-[92vh] flex flex-col text-[#1d1d1f] dark:text-zinc-100"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-4 sm:p-5 border-b border-black/[0.06] shrink-0 bg-[#fafafc]">
+          <div className="flex items-center justify-between p-4 sm:p-5 border-b border-black/[0.06] dark:border-white/[0.08] shrink-0 bg-[#fafafc] dark:bg-[#141419]">
             <div className="flex items-center gap-2.5 min-w-0 pr-2">
-              <span className="text-xs font-mono font-medium px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 border border-indigo-200/80 shrink-0">
+              <span className="text-xs font-mono font-medium px-2.5 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/60 shrink-0">
                 {seriesName}
               </span>
-              <h2 className="text-base sm:text-lg font-bold text-[#1d1d1f] truncate">
+              <h2 className="text-base sm:text-lg font-bold text-[#1d1d1f] dark:text-white truncate">
                 {mainTitle}
               </h2>
             </div>
@@ -96,7 +96,7 @@ export function DetailModal({
             <div className="flex items-center gap-1.5 shrink-0">
               <button
                 onClick={onClose}
-                className="p-2 rounded-xl bg-white hover:bg-[#f5f5f7] border border-black/[0.08] text-[#86868b] hover:text-[#1d1d1f] transition-all"
+                className="p-2 rounded-xl bg-white dark:bg-white/[0.08] hover:bg-[#f5f5f7] dark:hover:bg-white/[0.14] border border-black/[0.08] dark:border-white/[0.1] text-[#86868b] dark:text-zinc-400 hover:text-[#1d1d1f] dark:hover:text-white transition-all"
                 title="关闭"
               >
                 <X className="w-4 h-4" />
@@ -111,30 +111,38 @@ export function DetailModal({
             {images.length > 0 && (
               <div className="space-y-2.5">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold text-[#86868b] flex items-center gap-1.5">
-                    <Layers className="w-3.5 h-3.5 text-indigo-600" />
+                  <span className="text-xs font-semibold text-[#86868b] dark:text-zinc-400 flex items-center gap-1.5">
+                    <Layers className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                     效果展示与样例 ({images.length})
                   </span>
-                  <span className="text-[11px] text-[#86868b]">
-                    点击图片查看全屏无损原图
+                  <span className="text-[11px] text-[#86868b] dark:text-zinc-500">
+                    点击图片查看全屏无损大图
                   </span>
                 </div>
 
-                <div className={`grid gap-3 ${images.length === 1 ? 'grid-cols-1' : 'grid-cols-2 sm:grid-cols-3'}`}>
+                <div className={`grid gap-2.5 sm:gap-3 ${
+                  images.length === 1 
+                    ? 'grid-cols-1 max-w-sm mx-auto' 
+                    : images.length === 2 
+                      ? 'grid-cols-2' 
+                      : images.length === 3 
+                        ? 'grid-cols-3' 
+                        : 'grid-cols-2 lg:grid-cols-4'
+                }`}>
                   {images.map((img, idx) => (
                     <div 
                       key={idx}
                       onClick={() => openLightbox(idx)}
-                      className="group relative aspect-auto max-h-[360px] rounded-xl overflow-hidden bg-[#f5f5f7] border border-black/[0.06] cursor-zoom-in flex items-center justify-center"
+                      className="group relative aspect-square rounded-xl overflow-hidden bg-[#f5f5f7] dark:bg-[#18181d] border border-black/[0.06] dark:border-white/[0.08] cursor-zoom-in flex items-center justify-center shadow-xs"
                     >
                       <img
                         src={img}
                         alt={`${mainTitle} 样例 ${idx + 1}`}
-                        className="w-full h-auto max-h-[360px] object-contain transition-transform duration-300 group-hover:scale-105"
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                         loading="lazy"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
-                        <div className="p-2 rounded-full bg-white/90 text-[#1d1d1f] shadow-md backdrop-blur-md">
+                        <div className="p-2 rounded-full bg-white/90 dark:bg-zinc-800/90 text-[#1d1d1f] dark:text-white shadow-md backdrop-blur-md">
                           <Maximize2 className="w-4 h-4" />
                         </div>
                       </div>
@@ -145,26 +153,26 @@ export function DetailModal({
             )}
 
             {/* 2. Metadata Info Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3 sm:p-3.5 bg-[#f8f8fa] rounded-2xl border border-black/[0.04] text-xs">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3 sm:p-3.5 bg-[#f8f8fa] dark:bg-[#16161c] rounded-2xl border border-black/[0.04] dark:border-white/[0.06] text-xs">
               <div>
-                <span className="text-[#86868b] block text-[11px]">内容类型</span>
-                <span className="font-semibold text-[#1d1d1f] mt-0.5 inline-flex items-center gap-1">
+                <span className="text-[#86868b] dark:text-zinc-400 block text-[11px]">内容类型</span>
+                <span className="font-semibold text-[#1d1d1f] dark:text-white mt-0.5 inline-flex items-center gap-1">
                   {item.type === 'style' ? '🎨 视觉风格' : (item.type === 'skill' ? '⚡ 智能体技能' : '🛠️ 设计工具')}
                 </span>
               </div>
               <div>
-                <span className="text-[#86868b] block text-[11px]">所属分类</span>
-                <span className="font-semibold text-[#1d1d1f] mt-0.5 block">{item.category}</span>
+                <span className="text-[#86868b] dark:text-zinc-400 block text-[11px]">所属分类</span>
+                <span className="font-semibold text-[#1d1d1f] dark:text-white mt-0.5 block">{item.category}</span>
               </div>
               <div>
-                <span className="text-[#86868b] block text-[11px]">创作者 / 来源</span>
-                <span className="font-semibold text-[#1d1d1f] mt-0.5 block truncate">
+                <span className="text-[#86868b] dark:text-zinc-400 block text-[11px]">创作者 / 来源</span>
+                <span className="font-semibold text-[#1d1d1f] dark:text-white mt-0.5 block truncate">
                   @{item.author === 'Vie' || item.author === 'vie' || item.author === 'Vie (威比)' ? '威比 Hunter Wei.' : (item.author || '开源社区')}
                 </span>
               </div>
               <div>
-                <span className="text-[#86868b] block text-[11px]">{item.type === 'style' ? '建议画幅' : '系统编号'}</span>
-                <span className="font-mono font-semibold text-[#1d1d1f] mt-0.5 block">
+                <span className="text-[#86868b] dark:text-zinc-400 block text-[11px]">{item.type === 'style' ? '建议画幅' : '系统编号'}</span>
+                <span className="font-mono font-semibold text-[#1d1d1f] dark:text-white mt-0.5 block">
                   {item.type === 'style' ? (item.aspect_ratio || '3:4 / 自适应') : item.id}
                 </span>
               </div>
@@ -177,23 +185,23 @@ export function DetailModal({
               <div className="space-y-3.5">
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <label className="text-xs font-semibold text-[#1d1d1f] flex items-center gap-1.5">
-                      <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
+                    <label className="text-xs font-semibold text-[#1d1d1f] dark:text-white flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                       完整生图提示词 (Prompt)
                     </label>
                     <button
                       onClick={handleCopyPrompt}
                       className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
                         copiedPrompt 
-                          ? 'bg-emerald-50 text-emerald-800 border border-emerald-300' 
-                          : 'bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200'
+                          ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700' 
+                          : 'bg-indigo-50 dark:bg-indigo-950/40 hover:bg-indigo-100 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800'
                       }`}
                     >
-                      {copiedPrompt ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+                      {copiedPrompt ? <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                       <span>{copiedPrompt ? '已复制' : '一键复制 Prompt'}</span>
                     </button>
                   </div>
-                  <div className="relative p-3.5 sm:p-4 rounded-2xl bg-[#f5f5f7] border border-black/[0.06] text-xs sm:text-sm text-[#1d1d1f] font-mono leading-relaxed whitespace-pre-wrap select-all max-h-[300px] overflow-y-auto">
+                  <div className="relative p-3.5 sm:p-4 rounded-2xl bg-[#f5f5f7] dark:bg-black/60 border border-black/[0.06] dark:border-white/[0.08] text-xs sm:text-sm text-[#1d1d1f] dark:text-zinc-100 font-mono leading-relaxed whitespace-pre-wrap select-all max-h-[300px] overflow-y-auto">
                     {item.prompt}
                   </div>
                 </div>
@@ -202,7 +210,7 @@ export function DetailModal({
                 {item.is_motion && item.motion_prompt && (
                   <div className="space-y-1.5">
                     <div className="flex items-center justify-between">
-                      <label className="text-xs font-semibold text-purple-700 flex items-center gap-1.5">
+                      <label className="text-xs font-semibold text-purple-700 dark:text-purple-300 flex items-center gap-1.5">
                         <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
                         动态视频运镜提示词 (Motion Prompt)
                       </label>
@@ -210,15 +218,15 @@ export function DetailModal({
                         onClick={handleCopyMotion}
                         className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-medium transition-all ${
                           copiedMotion 
-                            ? 'bg-emerald-50 text-emerald-800 border border-emerald-300' 
-                            : 'bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200'
+                            ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700' 
+                            : 'bg-purple-50 dark:bg-purple-950/40 hover:bg-purple-100 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800'
                         }`}
                       >
-                        {copiedMotion ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+                        {copiedMotion ? <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                         <span>{copiedMotion ? '已复制' : '复制运镜词'}</span>
                       </button>
                     </div>
-                    <div className="p-3 rounded-xl bg-purple-50/40 border border-purple-100 text-xs text-purple-900 font-mono leading-relaxed select-all">
+                    <div className="p-3 rounded-xl bg-purple-50/40 dark:bg-purple-950/20 border border-purple-100 dark:border-purple-900/40 text-xs text-purple-900 dark:text-purple-200 font-mono leading-relaxed select-all">
                       {item.motion_prompt}
                     </div>
                   </div>
@@ -232,8 +240,8 @@ export function DetailModal({
                 {/* Description */}
                 {item.description && (
                   <div className="space-y-1.5">
-                    <span className="text-xs font-semibold text-[#1d1d1f]">技能说明</span>
-                    <div className="p-3.5 rounded-2xl bg-[#f8f8fa] border border-black/[0.04] text-xs sm:text-sm text-[#515154] leading-relaxed">
+                    <span className="text-xs font-semibold text-[#1d1d1f] dark:text-white">技能说明</span>
+                    <div className="p-3.5 rounded-2xl bg-[#f8f8fa] dark:bg-white/[0.04] border border-black/[0.04] dark:border-white/[0.06] text-xs sm:text-sm text-[#515154] dark:text-zinc-300 leading-relaxed">
                       {item.description}
                     </div>
                   </div>
@@ -243,23 +251,23 @@ export function DetailModal({
                 {item.install_command && (
                   <div className="space-y-1.5">
                     <div className="flex items-center justify-between">
-                      <label className="text-xs font-semibold text-[#1d1d1f] flex items-center gap-1.5">
-                        <Terminal className="w-3.5 h-3.5 text-emerald-600" />
+                      <label className="text-xs font-semibold text-[#1d1d1f] dark:text-white flex items-center gap-1.5">
+                        <Terminal className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                         Skill 安装命令 (最重要 · 一键安装)
                       </label>
                       <button
                         onClick={handleCopyInstallCmd}
                         className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
                           copiedInstallCmd 
-                            ? 'bg-emerald-50 text-emerald-800 border border-emerald-300' 
-                            : 'bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 shadow-2xs'
+                            ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700' 
+                            : 'bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 shadow-2xs'
                         }`}
                       >
-                        {copiedInstallCmd ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-emerald-700" />}
+                        {copiedInstallCmd ? <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-emerald-700 dark:text-emerald-300" />}
                         <span>{copiedInstallCmd ? '已复制安装指令' : '一键复制安装指令'}</span>
                       </button>
                     </div>
-                    <div className="p-3 sm:p-3.5 rounded-xl bg-emerald-50/40 border border-emerald-200/70 text-emerald-950 font-mono text-xs sm:text-sm overflow-x-auto shadow-2xs">
+                    <div className="p-3 sm:p-3.5 rounded-xl bg-emerald-50/40 dark:bg-emerald-950/20 border border-emerald-200/70 dark:border-emerald-700/50 text-emerald-950 dark:text-emerald-300 font-mono text-xs sm:text-sm overflow-x-auto shadow-2xs">
                       <code>{item.install_command}</code>
                     </div>
                   </div>
@@ -269,23 +277,23 @@ export function DetailModal({
                 {item.command && (
                   <div className="space-y-1.5 pt-1">
                     <div className="flex items-center justify-between">
-                      <label className="text-xs font-medium text-[#86868b] flex items-center gap-1.5">
-                        <Terminal className="w-3.5 h-3.5 text-[#86868b]" />
+                      <label className="text-xs font-medium text-[#86868b] dark:text-zinc-400 flex items-center gap-1.5">
+                        <Terminal className="w-3.5 h-3.5 text-[#86868b] dark:text-zinc-400" />
                         安装后在对话中调用 (可选)
                       </label>
                       <button
                         onClick={handleCopyCmd}
                         className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-medium transition-all ${
                           copiedCmd 
-                            ? 'bg-emerald-50 text-emerald-800 border border-emerald-300' 
-                            : 'bg-[#f5f5f7] hover:bg-[#ebebed] text-[#6e6e73] border border-black/[0.06]'
+                            ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700' 
+                            : 'bg-[#f5f5f7] dark:bg-white/[0.08] hover:bg-[#ebebed] text-[#6e6e73] dark:text-zinc-300 border border-black/[0.06] dark:border-white/[0.1]'
                         }`}
                       >
-                        {copiedCmd ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3" />}
+                        {copiedCmd ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3" />}
                         <span>{copiedCmd ? '已复制' : '复制调用词'}</span>
                       </button>
                     </div>
-                    <div className="p-2.5 rounded-xl bg-[#f8f8fa] border border-black/[0.05] text-[#515154] font-mono text-xs overflow-x-auto">
+                    <div className="p-2.5 rounded-xl bg-[#f8f8fa] dark:bg-white/[0.04] border border-black/[0.05] dark:border-white/[0.06] text-[#515154] dark:text-zinc-300 font-mono text-xs overflow-x-auto">
                       <code>{item.command}</code>
                     </div>
                   </div>
@@ -297,13 +305,13 @@ export function DetailModal({
                     href={item.repo_url}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center justify-between p-3.5 rounded-2xl bg-[#f5f5f7] hover:bg-[#ebebed] border border-black/[0.06] transition-all text-xs text-[#1d1d1f] font-medium group"
+                    className="flex items-center justify-between p-3.5 rounded-2xl bg-[#f5f5f7] dark:bg-[#18181d] hover:bg-[#ebebed] dark:hover:bg-[#222228] border border-black/[0.06] dark:border-white/[0.08] transition-all text-xs text-[#1d1d1f] dark:text-white font-medium group"
                   >
                     <span className="flex items-center gap-2">
-                      <GithubIcon className="w-4 h-4 text-[#1d1d1f]" />
+                      <GithubIcon className="w-4 h-4 text-[#1d1d1f] dark:text-white" />
                       <span>查看 GitHub 开源仓库</span>
                     </span>
-                    <span className="flex items-center gap-1 text-[#86868b] group-hover:text-indigo-600">
+                    <span className="flex items-center gap-1 text-[#86868b] dark:text-zinc-400 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
                       <span className="font-mono truncate max-w-[240px] sm:max-w-md">{item.repo_url}</span>
                       <ExternalLink className="w-3.5 h-3.5 shrink-0" />
                     </span>

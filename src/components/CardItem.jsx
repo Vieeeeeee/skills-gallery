@@ -106,18 +106,18 @@ export function CardItem({
     return (
       <div 
         onClick={() => onSelect(item)}
-        className="group flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-3.5 bg-white hover:bg-[#fafafc] border border-black/[0.06] hover:border-black/[0.12] rounded-xl sm:rounded-2xl transition-all gap-2.5 sm:gap-3 cursor-pointer shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.04)] mb-3"
+        className="group flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-3.5 bg-white dark:bg-[#141417] hover:bg-[#fafafc] dark:hover:bg-[#1c1c22] border border-black/[0.06] dark:border-white/[0.08] hover:border-black/[0.12] dark:hover:border-white/[0.16] rounded-xl sm:rounded-2xl transition-all gap-2.5 sm:gap-3 cursor-pointer shadow-[0_2px_8px_rgba(0,0,0,0.02)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.3)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.04)] h-full mb-0"
       >
         <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0 flex-1">
-          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#f5f5f7] border border-black/[0.04] flex items-center justify-center shrink-0 text-[#6e6e73] group-hover:text-[#1d1d1f] transition-colors">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#f5f5f7] dark:bg-white/[0.06] border border-black/[0.04] dark:border-white/[0.06] flex items-center justify-center shrink-0 text-[#6e6e73] dark:text-zinc-400 group-hover:text-[#1d1d1f] dark:group-hover:text-white transition-colors">
             <TypeIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </div>
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
-              <span className="text-[9px] sm:text-[10px] font-mono font-medium px-1.5 py-0.5 rounded bg-[#f5f5f7] text-[#515154] border border-black/[0.04]">
+              <span className="text-[9px] sm:text-[10px] font-mono font-medium px-1.5 py-0.5 rounded bg-[#f5f5f7] dark:bg-white/[0.06] text-[#515154] dark:text-zinc-400 border border-black/[0.04] dark:border-white/[0.06]">
                 {seriesName}
               </span>
-              <h3 className="text-xs sm:text-sm font-semibold text-[#1d1d1f] group-hover:text-indigo-600 transition-colors truncate">
+              <h3 className="text-xs sm:text-sm font-semibold text-[#1d1d1f] dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors truncate">
                 {mainTitle}
               </h3>
               {item.repo_url && (
@@ -126,13 +126,13 @@ export function CardItem({
                   target="_blank" 
                   rel="noreferrer" 
                   onClick={(e) => e.stopPropagation()}
-                  className="text-[#86868b] hover:text-[#1d1d1f]"
+                  className="text-[#86868b] dark:text-zinc-500 hover:text-[#1d1d1f] dark:hover:text-white"
                 >
                   <GithubIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 </a>
               )}
             </div>
-            <div className="flex items-center gap-1.5 text-[10px] sm:text-xs text-[#86868b] mt-0.5">
+            <div className="flex items-center gap-1.5 text-[10px] sm:text-xs text-[#86868b] dark:text-zinc-400 mt-0.5">
               <span>@{authorDisplay}</span>
               <span>•</span>
               <span>{item.category}</span>
@@ -145,26 +145,26 @@ export function CardItem({
             onClick={handleCopyClick}
             className={`flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-medium border transition-all ${
               copied
-                ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
-                : 'bg-[#f5f5f7] hover:bg-[#e8e8ed] border-black/[0.06] text-[#1d1d1f]'
+                ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-700 text-emerald-800 dark:text-emerald-300'
+                : 'bg-[#f5f5f7] dark:bg-white/[0.08] hover:bg-[#e8e8ed] dark:hover:bg-white/[0.14] border-black/[0.06] dark:border-white/[0.1] text-[#1d1d1f] dark:text-zinc-200'
             }`}
           >
-            {copied ? <Check className="w-3 h-3 text-emerald-600" /> : <Copy className="w-3 h-3 text-[#6e6e73]" />}
+            {copied ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3 text-[#6e6e73] dark:text-zinc-400" />}
             <span>{copied ? '已复制' : (item.type === 'skill' ? '复制安装指令' : (item.type === 'tool' ? '复制链接' : '复制Prompt'))}</span>
           </button>
 
           {isAdmin && (
-            <div className="flex items-center gap-1 pl-1 border-l border-black/[0.06]">
+            <div className="flex items-center gap-1 pl-1 border-l border-black/[0.06] dark:border-white/[0.1]">
               <button
                 onClick={(e) => { e.stopPropagation(); onEdit(item); }}
-                className="p-1 sm:p-1.5 rounded-lg bg-[#f5f5f7] hover:bg-[#e8e8ed] text-[#6e6e73] hover:text-[#1d1d1f]"
+                className="p-1 sm:p-1.5 rounded-lg bg-[#f5f5f7] dark:bg-white/[0.08] hover:bg-[#e8e8ed] text-[#6e6e73] dark:text-zinc-300 hover:text-[#1d1d1f] dark:hover:text-white"
                 title="编辑"
               >
                 <Edit3 className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
               </button>
               <button
                 onClick={(e) => { e.stopPropagation(); onDelete(item.id); }}
-                className="p-1 sm:p-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-700 hover:text-rose-900"
+                className="p-1 sm:p-1.5 rounded-lg bg-rose-50 dark:bg-rose-950/30 hover:bg-rose-100 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-400"
                 title="删除"
               >
                 <Trash2 className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
@@ -180,15 +180,15 @@ export function CardItem({
   return (
     <div 
       onClick={() => onSelect(item)}
-      className="break-inside-avoid mb-3.5 sm:mb-4.5 group relative flex flex-col bg-white hover:bg-[#fafafc] border border-black/[0.06] hover:border-black/[0.14] rounded-2xl overflow-hidden transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.09)] hover:-translate-y-0.5 cursor-pointer"
+      className="break-inside-avoid mb-3.5 sm:mb-4.5 group relative flex flex-col bg-white dark:bg-[#141417] hover:bg-[#fafafc] dark:hover:bg-[#1c1c22] border border-black/[0.06] dark:border-white/[0.08] hover:border-black/[0.14] dark:hover:border-white/[0.18] rounded-2xl overflow-hidden transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.09)] hover:-translate-y-0.5 cursor-pointer"
     >
       {/* Visual Cover Area: Natural Auto Height without Hard Crop */}
-      <div className="relative w-full overflow-hidden bg-[#f5f5f7] border-b border-black/[0.04]">
+      <div className="relative w-full overflow-hidden bg-[#f5f5f7] dark:bg-[#101014] border-b border-black/[0.04] dark:border-white/[0.06]">
         
         {hasImage ? (
-          <div className="w-full relative flex items-center justify-center bg-[#f0f0f2] min-h-[180px] overflow-hidden">
+          <div className="w-full relative flex items-center justify-center bg-[#f0f0f2] dark:bg-[#18181d] min-h-[180px] overflow-hidden">
             {!imageLoaded && (
-              <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse" />
+              <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 dark:from-zinc-800 dark:via-zinc-700 dark:to-zinc-800 animate-pulse" />
             )}
             <img
               src={imageSrc}
@@ -211,18 +211,18 @@ export function CardItem({
           <div className={`w-full aspect-[16/10] bg-gradient-to-br ${getCardGradient(item.category)} p-3 sm:p-4 flex flex-col justify-between relative overflow-hidden`}>
             {/* Top pill badges */}
             <div className="flex items-center gap-1.5 z-10">
-              <span className="text-[10px] sm:text-[11px] font-medium px-2 py-0.5 rounded-full bg-white/90 backdrop-blur-md text-[#1d1d1f] border border-black/[0.06] shadow-2xs truncate">
+              <span className="text-[10px] sm:text-[11px] font-medium px-2 py-0.5 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-md text-[#1d1d1f] dark:text-white border border-black/[0.06] dark:border-white/[0.1] shadow-2xs truncate">
                 {seriesName}
               </span>
               {item.type === 'style' && (
-                <span className="text-[10px] sm:text-[11px] font-mono text-[#6e6e73] px-2 py-0.5 rounded-full bg-white/80 backdrop-blur-md border border-black/[0.04]">
+                <span className="text-[10px] sm:text-[11px] font-mono text-[#6e6e73] dark:text-zinc-300 px-2 py-0.5 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md border border-black/[0.04] dark:border-white/[0.08]">
                   {item.aspect_ratio || '自适应'}
                 </span>
               )}
             </div>
 
             {/* Bottom-right large watermark badge (No prompt text in preview) */}
-            <div className="absolute right-2.5 sm:right-3.5 -bottom-1 font-mono text-4xl sm:text-5xl font-black tracking-wider select-none pointer-events-none opacity-[0.09] text-black transition-all group-hover:scale-105 group-hover:opacity-[0.14]">
+            <div className="absolute right-2.5 sm:right-3.5 -bottom-1 font-mono text-4xl sm:text-5xl font-black tracking-wider select-none pointer-events-none opacity-[0.09] dark:opacity-[0.14] text-black dark:text-white transition-all group-hover:scale-105 group-hover:opacity-[0.14]">
               {currentType.watermark}
             </div>
           </div>
@@ -234,13 +234,13 @@ export function CardItem({
         
         <div>
           {/* Main Title */}
-          <h3 className="font-bold text-[13px] sm:text-[14.5px] text-[#1d1d1f] group-hover:text-indigo-600 transition-colors line-clamp-2 leading-snug sm:leading-tight">
+          <h3 className="font-bold text-[13px] sm:text-[14.5px] text-[#1d1d1f] dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-2 leading-snug sm:leading-tight">
             {mainTitle}
           </h3>
 
           {/* Author & ID Row */}
-          <div className="flex items-center justify-between gap-1.5 mt-1.5 text-[11px] text-[#86868b]">
-            <span className="text-[#515154] font-medium truncate max-w-[70%] flex items-center gap-1">
+          <div className="flex items-center justify-between gap-1.5 mt-1.5 text-[11px] text-[#86868b] dark:text-zinc-400">
+            <span className="text-[#515154] dark:text-zinc-300 font-medium truncate max-w-[70%] flex items-center gap-1">
               @{authorDisplay}
               {item.repo_url && (
                 <a
@@ -248,21 +248,21 @@ export function CardItem({
                   target="_blank"
                   rel="noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="text-[#86868b] hover:text-black"
+                  className="text-[#86868b] dark:text-zinc-500 hover:text-black dark:hover:text-white"
                   title="查看 GitHub 仓库"
                 >
                   <GithubIcon className="w-3 h-3 inline-block ml-0.5" />
                 </a>
               )}
             </span>
-            <span className="font-mono text-[#86868b] shrink-0 text-[10px]">
+            <span className="font-mono text-[#86868b] dark:text-zinc-500 shrink-0 text-[10px]">
               {item.id}
             </span>
           </div>
 
           {/* Tool specific complete description */}
           {item.type === 'tool' && item.description && (
-            <p className="text-[11.5px] text-[#515154] mt-2 leading-relaxed bg-[#f8f8fa] p-2 rounded-xl border border-black/[0.04]">
+            <p className="text-[11.5px] text-[#515154] dark:text-zinc-300 mt-2 leading-relaxed bg-[#f8f8fa] dark:bg-white/[0.04] p-2 rounded-xl border border-black/[0.04] dark:border-white/[0.06]">
               {item.description}
             </p>
           )}
@@ -279,7 +279,7 @@ export function CardItem({
                       onTagClick(tg);
                     }
                   }}
-                  className="text-[10px] px-1.5 py-0.5 rounded-md bg-[#f5f5f7] hover:bg-[#ebebed] text-[#6e6e73] font-medium truncate transition-colors"
+                  className="text-[10px] px-1.5 py-0.5 rounded-md bg-[#f5f5f7] dark:bg-white/[0.06] hover:bg-[#ebebed] dark:hover:bg-white/[0.12] text-[#6e6e73] dark:text-zinc-400 font-medium truncate transition-colors"
                 >
                   #{tg}
                 </span>
@@ -289,19 +289,19 @@ export function CardItem({
         </div>
 
         {/* Action Row Customized by Type */}
-        <div className="pt-2 border-t border-black/[0.04] flex items-center justify-between gap-2">
+        <div className="pt-2 border-t border-black/[0.04] dark:border-white/[0.08] flex items-center justify-between gap-2">
           
           {item.type === 'skill' ? (
             <button
               onClick={handleCopyClick}
               className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-xl text-xs font-medium border transition-all ${
                 copied
-                  ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
-                  : 'bg-[#f5f5f7] hover:bg-[#ebebed] border-black/[0.06] text-[#1d1d1f] shadow-2xs'
+                  ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-700 text-emerald-800 dark:text-emerald-300'
+                  : 'bg-[#f5f5f7] dark:bg-white/[0.08] hover:bg-[#ebebed] dark:hover:bg-white/[0.14] border-black/[0.06] dark:border-white/[0.1] text-[#1d1d1f] dark:text-zinc-200 shadow-2xs'
               }`}
               title={item.install_command || item.command}
             >
-              {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Terminal className="w-3.5 h-3.5 text-[#6e6e73]" />}
+              {copied ? <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> : <Terminal className="w-3.5 h-3.5 text-[#6e6e73] dark:text-zinc-400" />}
               <span className="truncate">{copied ? '已复制安装指令' : '复制安装指令'}</span>
             </button>
           ) : item.type === 'tool' ? (
@@ -312,7 +312,7 @@ export function CardItem({
                   target="_blank"
                   rel="noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="flex-1 flex items-center justify-center gap-1 py-1.5 px-2 rounded-xl text-xs font-medium bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 transition-all"
+                  className="flex-1 flex items-center justify-center gap-1 py-1.5 px-2 rounded-xl text-xs font-medium bg-indigo-50 dark:bg-indigo-950/40 hover:bg-indigo-100 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 transition-all"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
                   <span>访问工具</span>
@@ -322,12 +322,12 @@ export function CardItem({
                 onClick={handleCopyClick}
                 className={`flex-1 flex items-center justify-center gap-1 py-1.5 px-2 rounded-xl text-xs font-medium border transition-all ${
                   copied
-                    ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
-                    : 'bg-[#f5f5f7] hover:bg-[#ebebed] border-black/[0.06] text-[#1d1d1f]'
+                    ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-700 text-emerald-800 dark:text-emerald-300'
+                    : 'bg-[#f5f5f7] dark:bg-white/[0.08] hover:bg-[#ebebed] dark:hover:bg-white/[0.14] border-black/[0.06] dark:border-white/[0.1] text-[#1d1d1f] dark:text-zinc-200'
                 }`}
                 title={item.website_url || item.repo_url || item.command}
               >
-                {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-[#6e6e73]" />}
+                {copied ? <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-[#6e6e73] dark:text-zinc-400" />}
                 <span>{copied ? '已复制链接' : '复制网址'}</span>
               </button>
             </div>
@@ -336,11 +336,11 @@ export function CardItem({
               onClick={handleCopyClick}
               className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-xl text-xs font-medium border transition-all ${
                 copied
-                  ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
-                  : 'bg-[#f5f5f7] hover:bg-[#ebebed] border-black/[0.06] text-[#1d1d1f] shadow-2xs'
+                  ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-300 dark:border-emerald-700 text-emerald-800 dark:text-emerald-300'
+                  : 'bg-[#f5f5f7] dark:bg-white/[0.08] hover:bg-[#ebebed] dark:hover:bg-white/[0.14] border-black/[0.06] dark:border-white/[0.1] text-[#1d1d1f] dark:text-zinc-200 shadow-2xs'
               }`}
             >
-              {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-[#6e6e73]" />}
+              {copied ? <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3.5 h-3.5 text-[#6e6e73] dark:text-zinc-400" />}
               <span className="truncate">{copied ? '已复制 Prompt' : '一键复制 Prompt'}</span>
             </button>
           )}
@@ -350,24 +350,24 @@ export function CardItem({
               e.stopPropagation();
               onSelect(item);
             }}
-            className="p-1.5 rounded-xl bg-[#f5f5f7] hover:bg-[#ebebed] border border-black/[0.06] text-[#6e6e73] hover:text-[#1d1d1f] transition-all shadow-2xs shrink-0"
+            className="p-1.5 rounded-xl bg-[#f5f5f7] dark:bg-white/[0.08] hover:bg-[#ebebed] dark:hover:bg-white/[0.14] border border-black/[0.06] dark:border-white/[0.1] text-[#6e6e73] dark:text-zinc-400 hover:text-[#1d1d1f] dark:hover:text-white transition-all shadow-2xs shrink-0"
             title="查看完整详情"
           >
             <Maximize2 className="w-3.5 h-3.5" />
           </button>
 
           {isAdmin && (
-            <div className="flex items-center gap-1 pl-1 border-l border-black/[0.06]">
+            <div className="flex items-center gap-1 pl-1 border-l border-black/[0.06] dark:border-white/[0.1]">
               <button
                 onClick={(e) => { e.stopPropagation(); onEdit(item); }}
-                className="p-1.5 rounded-lg bg-[#f5f5f7] hover:bg-[#e8e8ed] text-[#6e6e73]"
+                className="p-1.5 rounded-lg bg-[#f5f5f7] dark:bg-white/[0.08] hover:bg-[#e8e8ed] text-[#6e6e73] dark:text-zinc-300"
                 title="编辑"
               >
                 <Edit3 className="w-3 h-3" />
               </button>
               <button
                 onClick={(e) => { e.stopPropagation(); onDelete(item.id); }}
-                className="p-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700"
+                className="p-1.5 rounded-lg bg-rose-50 dark:bg-rose-950/30 hover:bg-rose-100 text-rose-700 dark:text-rose-400"
                 title="删除"
               >
                 <Trash2 className="w-3 h-3" />
