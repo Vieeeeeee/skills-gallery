@@ -142,12 +142,11 @@ export function Navbar({
             {/* Community & About Entrance */}
             <button
               onClick={onOpenAbout}
-              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl text-xs font-medium bg-emerald-50/90 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800/80 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100/90 dark:hover:bg-emerald-900/60 shadow-2xs transition-all cursor-pointer"
-              title="查看社群、特别致谢与联系作者"
+              className="flex items-center gap-1 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-[#141417] hover:bg-[#fafafc] dark:hover:bg-[#1c1c22] border border-black/[0.08] dark:border-white/[0.08] text-[#515154] dark:text-zinc-300 hover:text-[#1d1d1f] dark:hover:text-white shadow-2xs transition-all cursor-pointer select-none"
+              title="查看社群、致谢与联系方式"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="hidden sm:inline">💬 交流群</span>
-              <span className="sm:hidden text-[11px] font-medium">交流群</span>
+              <span className="text-[11px] sm:text-xs">社群与关于</span>
+              <span className="text-[9px] text-[#86868b] dark:text-zinc-500">▾</span>
             </button>
 
             {/* Shuffle / Randomize */}

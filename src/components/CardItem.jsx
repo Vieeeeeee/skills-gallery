@@ -180,13 +180,13 @@ export function CardItem({
   return (
     <div 
       onClick={() => onSelect(item)}
-      className="break-inside-avoid mb-3.5 sm:mb-4.5 group relative flex flex-col bg-white dark:bg-[#141417] hover:bg-[#fafafc] dark:hover:bg-[#1c1c22] border border-black/[0.06] dark:border-white/[0.08] hover:border-black/[0.14] dark:hover:border-white/[0.18] rounded-2xl overflow-hidden transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.09)] hover:-translate-y-0.5 cursor-pointer"
+      className="break-inside-avoid mb-2 sm:mb-4.5 group relative flex flex-col bg-white dark:bg-[#141417] hover:bg-[#fafafc] dark:hover:bg-[#1c1c22] border border-black/[0.06] dark:border-white/[0.08] hover:border-black/[0.14] dark:hover:border-white/[0.18] rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.09)] hover:-translate-y-0.5 cursor-pointer"
     >
       {/* Visual Cover Area: Natural Auto Height without Hard Crop */}
       <div className="relative w-full overflow-hidden bg-[#f5f5f7] dark:bg-[#101014] border-b border-black/[0.04] dark:border-white/[0.06]">
         
         {hasImage ? (
-          <div className="w-full relative flex items-center justify-center bg-[#f0f0f2] dark:bg-[#18181d] min-h-[180px] overflow-hidden">
+          <div className="w-full relative flex items-center justify-center bg-[#f0f0f2] dark:bg-[#18181d] min-h-[140px] sm:min-h-[180px] overflow-hidden">
             {!imageLoaded && (
               <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 dark:from-zinc-800 dark:via-zinc-700 dark:to-zinc-800 animate-pulse" />
             )}
@@ -201,21 +201,21 @@ export function CardItem({
             <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent pointer-events-none" />
 
             {/* Bottom Type Badge on Image */}
-            <div className="absolute bottom-2 left-2 z-10">
-              <span className="text-[9px] sm:text-[10px] font-mono font-medium px-2 py-0.5 rounded-full bg-black/65 backdrop-blur-md text-white border border-white/20 shadow-xs">
+            <div className="absolute bottom-1.5 left-1.5 sm:bottom-2 sm:left-2 z-10">
+              <span className="text-[8.5px] sm:text-[10px] font-mono font-medium px-1.5 sm:px-2 py-0.5 rounded-full bg-black/65 backdrop-blur-md text-white border border-white/20 shadow-xs">
                 {seriesName}
               </span>
             </div>
           </div>
         ) : (
-          <div className={`w-full aspect-[16/10] bg-gradient-to-br ${getCardGradient(item.category)} p-3 sm:p-4 flex flex-col justify-between relative overflow-hidden`}>
+          <div className={`w-full aspect-[16/10] bg-gradient-to-br ${getCardGradient(item.category)} p-2.5 sm:p-4 flex flex-col justify-between relative overflow-hidden`}>
             {/* Top pill badges */}
-            <div className="flex items-center gap-1.5 z-10">
-              <span className="text-[10px] sm:text-[11px] font-medium px-2 py-0.5 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-md text-[#1d1d1f] dark:text-white border border-black/[0.06] dark:border-white/[0.1] shadow-2xs truncate">
+            <div className="flex items-center gap-1 sm:gap-1.5 z-10">
+              <span className="text-[9.5px] sm:text-[11px] font-medium px-1.5 sm:px-2 py-0.5 rounded-full bg-white/90 dark:bg-black/60 backdrop-blur-md text-[#1d1d1f] dark:text-white border border-black/[0.06] dark:border-white/[0.1] shadow-2xs truncate">
                 {seriesName}
               </span>
               {item.type === 'style' && (
-                <span className="text-[10px] sm:text-[11px] font-mono text-[#6e6e73] dark:text-zinc-300 px-2 py-0.5 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md border border-black/[0.04] dark:border-white/[0.08]">
+                <span className="text-[9.5px] sm:text-[11px] font-mono text-[#6e6e73] dark:text-zinc-300 px-1.5 sm:px-2 py-0.5 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md border border-black/[0.04] dark:border-white/[0.08]">
                   {item.aspect_ratio || '自适应'}
                 </span>
               )}
@@ -230,16 +230,16 @@ export function CardItem({
       </div>
 
       {/* Specific Content Template Based on Type */}
-      <div className="p-3 sm:p-4 flex-1 flex flex-col justify-between space-y-2.5">
+      <div className="p-2 sm:p-4 flex-1 flex flex-col justify-between space-y-1.5 sm:space-y-2.5">
         
         <div>
           {/* Main Title */}
-          <h3 className="font-bold text-[13px] sm:text-[14.5px] text-[#1d1d1f] dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-2 leading-snug sm:leading-tight">
+          <h3 className="font-bold text-[12px] sm:text-[14.5px] text-[#1d1d1f] dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-2 leading-snug sm:leading-tight">
             {mainTitle}
           </h3>
 
           {/* Author & ID Row */}
-          <div className="flex items-center justify-between gap-1.5 mt-1.5 text-[11px] text-[#86868b] dark:text-zinc-400">
+          <div className="flex items-center justify-between gap-1 mt-1 sm:mt-1.5 text-[10px] sm:text-[11px] text-[#86868b] dark:text-zinc-400">
             <span className="text-[#515154] dark:text-zinc-300 font-medium truncate max-w-[70%] flex items-center gap-1">
               @{authorDisplay}
               {item.repo_url && (

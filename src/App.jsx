@@ -429,23 +429,23 @@ export function App() {
       />
 
       {/* Hero Section */}
-      <div className="relative border-b border-black/[0.06] dark:border-white/[0.08] bg-white dark:bg-[#0d0d11] pt-6 pb-6 sm:pt-9 sm:pb-7 overflow-hidden transition-colors">
+      <div className="relative border-b border-black/[0.06] dark:border-white/[0.08] bg-white dark:bg-[#0d0d11] pt-4 pb-3.5 sm:pt-9 sm:pb-7 overflow-hidden transition-colors">
         {/* Subtle Ambient Background Gradient Light */}
         <div className="absolute top-0 right-0 w-[500px] h-[350px] bg-gradient-to-bl from-indigo-200/20 via-purple-100/10 to-transparent dark:from-indigo-900/15 dark:via-purple-900/10 pointer-events-none rounded-full blur-3xl -z-0" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+        <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-8 items-stretch">
             
             {/* Headline, Intro, Stats, 4 Type Filter Cards */}
-            <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
-              <div className="space-y-3">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50/90 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/60 text-xs font-mono text-indigo-700 dark:text-indigo-300 shadow-2xs">
+            <div className="lg:col-span-7 flex flex-col justify-between space-y-3 sm:space-y-4">
+              <div className="space-y-2.5 sm:space-y-3">
+                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-indigo-50/90 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/60 text-[11px] sm:text-xs font-mono text-indigo-700 dark:text-indigo-300 shadow-2xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-400" />
                   <span>1,000+ 精选收录 · 真实来源溯源</span>
                 </div>
                 
                 <div>
-                  <h1 className="font-hero-serif text-4xl sm:text-5xl lg:text-[54px] font-bold tracking-tight text-[#111113] dark:text-white leading-[1.12]">
+                  <h1 className="font-hero-serif text-2xl sm:text-4xl lg:text-[54px] font-bold tracking-tight text-[#111113] dark:text-white leading-tight sm:leading-[1.12]">
                     Prompt <span className="font-serif font-normal italic text-[#111113] dark:text-white">&</span> Skill 风格大赏
                   </h1>
                 </div>
@@ -457,32 +457,32 @@ export function App() {
                 </p>
 
                 {/* 4 Stat Metrics Row with Vertical Dividers */}
-                <div className="flex items-center gap-3 sm:gap-4.5 pt-1 text-left flex-wrap">
+                <div className="flex items-center gap-2.5 sm:gap-4.5 pt-0.5 text-left flex-wrap">
                   <div className="flex items-baseline gap-1">
-                    <span className="text-xl sm:text-2xl font-bold font-mono text-[#111113] dark:text-white leading-none">{skills.length}</span>
+                    <span className="text-lg sm:text-2xl font-bold font-mono text-[#111113] dark:text-white leading-none">{skills.length}</span>
                     <span className="text-xs text-[#86868b] dark:text-zinc-400 font-medium font-sans">条目</span>
                   </div>
-                  <div className="w-[1px] h-4 bg-black/[0.1] dark:bg-white/[0.1]" />
+                  <div className="w-[1px] h-3.5 sm:h-4 bg-black/[0.1] dark:bg-white/[0.1]" />
                   <div className="flex items-baseline gap-1">
-                    <span className="text-xl sm:text-2xl font-bold font-mono text-rose-600 dark:text-rose-400 leading-none">{typeCounts.style || 0}</span>
+                    <span className="text-lg sm:text-2xl font-bold font-mono text-rose-600 dark:text-rose-400 leading-none">{typeCounts.style || 0}</span>
                     <span className="text-xs text-[#86868b] dark:text-zinc-400 font-medium font-sans">视觉风格</span>
                   </div>
-                  <div className="w-[1px] h-4 bg-black/[0.1] dark:bg-white/[0.1]" />
+                  <div className="w-[1px] h-3.5 sm:h-4 bg-black/[0.1] dark:bg-white/[0.1]" />
                   <div className="flex items-baseline gap-1">
-                    <span className="text-xl sm:text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400 leading-none">{(typeCounts.skill || 0) + (typeCounts.tool || 0)}</span>
+                    <span className="text-lg sm:text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400 leading-none">{(typeCounts.skill || 0) + (typeCounts.tool || 0)}</span>
                     <span className="text-xs text-[#86868b] dark:text-zinc-400 font-medium font-sans">开源 Skill</span>
                   </div>
-                  <div className="w-[1px] h-4 bg-black/[0.1] dark:bg-white/[0.1]" />
+                  <div className="w-[1px] h-3.5 sm:h-4 bg-black/[0.1] dark:bg-white/[0.1]" />
                   <div className="flex items-baseline gap-1">
-                    <span className="text-xl sm:text-2xl font-bold font-mono text-indigo-600 dark:text-indigo-400 leading-none">{uniqueAuthorsCount}+</span>
+                    <span className="text-lg sm:text-2xl font-bold font-mono text-indigo-600 dark:text-indigo-400 leading-none">{uniqueAuthorsCount}+</span>
                     <span className="text-xs text-[#86868b] dark:text-zinc-400 font-medium font-sans">真实作者</span>
                   </div>
                 </div>
               </div>
 
               {/* 4 Type Filter Cards */}
-              <div className="pt-2">
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              <div className="pt-1 sm:pt-2">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
                   {types.map((t) => {
                     const Icon = t.icon;
                     const isActive = selectedType === t.id;
@@ -490,24 +490,24 @@ export function App() {
                       <button
                         key={t.id}
                         onClick={() => setSelectedType(t.id)}
-                        className={`flex items-center gap-2.5 p-3 rounded-2xl transition-all duration-200 text-left border ${
+                        className={`flex items-center gap-2 p-2 sm:gap-2.5 sm:p-3 rounded-xl sm:rounded-2xl transition-all duration-200 text-left border cursor-pointer ${
                           isActive
                             ? 'bg-[#18181b] dark:bg-white text-white dark:text-[#09090b] border-[#18181b] dark:border-white shadow-sm'
                             : 'bg-white dark:bg-[#141417] hover:bg-[#fafafc] dark:hover:bg-[#1a1a1e] border-black/[0.08] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 shadow-2xs hover:border-black/[0.14] dark:hover:border-white/[0.16]'
                         }`}
                       >
-                        <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
+                        <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 ${
                           isActive
                             ? 'bg-white/15 dark:bg-black/10 text-white dark:text-black'
                             : 'bg-[#f5f5f7] dark:bg-white/[0.06] text-[#6e6e73] dark:text-zinc-400'
                         }`}>
-                          <Icon className="w-4 h-4" />
+                          <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                         </div>
                         <div className="min-w-0">
                           <div className={`text-xs font-bold truncate ${isActive ? 'text-white dark:text-black' : 'text-[#1d1d1f] dark:text-zinc-200'}`}>
                             {t.label}
                           </div>
-                          <div className={`text-xs font-mono font-medium ${isActive ? 'text-white/70 dark:text-black/70' : 'text-[#86868b] dark:text-zinc-400'}`}>
+                          <div className={`text-[11px] sm:text-xs font-mono font-medium ${isActive ? 'text-white/70 dark:text-black/70' : 'text-[#86868b] dark:text-zinc-400'}`}>
                             {t.count}
                           </div>
                         </div>
@@ -518,15 +518,15 @@ export function App() {
               </div>
             </div>
 
-            {/* Right Column: Tech Frame Card with Dot Matrix Animation */}
-            <div className="lg:col-span-5 flex items-stretch">
+            {/* Right Column: Tech Frame Card with Dot Matrix Animation (Desktop only) */}
+            <div className="hidden lg:flex lg:col-span-5 items-stretch">
               <DashCascade />
             </div>
 
           </div>
 
           {/* Full-width Category & Hot Tags Section */}
-          <div className="mt-6 pt-5 border-t border-black/[0.06] dark:border-white/[0.08]">
+          <div className="mt-3.5 pt-3 sm:mt-6 sm:pt-5 border-t border-black/[0.06] dark:border-white/[0.08]">
             <CategoryFilter
               categories={categories}
               selectedCategory={selectedCategory}
@@ -544,7 +544,7 @@ export function App() {
       </div>
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-2.5 sm:px-4 md:px-6 lg:px-8 py-5 sm:py-8">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-3 sm:py-8">
         
         {/* Results summary bar */}
         <div className="flex items-center justify-between mb-4 sm:mb-6 text-[11px] sm:text-xs text-[#86868b] dark:text-zinc-400 px-1">
@@ -592,7 +592,7 @@ export function App() {
 
         {/* Responsive Feed View (Mobile: 2 cols | iPad/Tablet: 3 cols | Desktop: 4 cols) */}
         {!loading && appMode === 'gallery' && viewMode === 'grid' && (
-          <div className="columns-2 md:columns-3 lg:columns-4 gap-3 sm:gap-4.5">
+          <div className="columns-2 md:columns-3 lg:columns-4 gap-2 sm:gap-4.5">
             {displayedSkills.map((item) => (
               <CardItem
                 key={item.id}
@@ -760,29 +760,16 @@ export function App() {
         </div>
       </footer>
 
-      {/* Floating Action Dock (Always accessible without scrolling to bottom) */}
-      <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2.5 pointer-events-none">
-        {/* Floating Community & Credits Pill */}
+      {/* Floating Back to Top Button (Only visible after scrolling down) */}
+      {showBackToTop && (
         <button
-          onClick={() => setIsAboutModalOpen(true)}
-          className="pointer-events-auto inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-white/95 dark:bg-[#18181d]/95 hover:bg-white dark:hover:bg-[#22222a] text-[#1d1d1f] dark:text-zinc-100 shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-black/[0.08] dark:border-white/[0.12] backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer text-xs font-medium group"
-          title="查看社群、特别致谢与联系方式"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="fixed bottom-5 right-5 z-40 w-9 h-9 rounded-full bg-white/95 dark:bg-[#18181d]/95 hover:bg-white dark:hover:bg-[#22222a] text-[#1d1d1f] dark:text-zinc-100 shadow-[0_4px_16px_rgba(0,0,0,0.12)] border border-black/[0.08] dark:border-white/[0.12] backdrop-blur-md flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer animate-fadeIn"
+          title="回到顶部"
         >
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>💬 交流群 & 致谢</span>
+          <ArrowUp className="w-4 h-4" />
         </button>
-
-        {/* Back to top button (Visible after scrolling) */}
-        {showBackToTop && (
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="pointer-events-auto w-9 h-9 rounded-full bg-white/95 dark:bg-[#18181d]/95 hover:bg-white dark:hover:bg-[#22222a] text-[#1d1d1f] dark:text-zinc-100 shadow-[0_8px_24px_rgb(0,0,0,0.12)] border border-black/[0.08] dark:border-white/[0.12] backdrop-blur-md flex items-center justify-center transition-all hover:scale-105 active:scale-95 cursor-pointer animate-fadeIn"
-            title="回到顶部"
-          >
-            <ArrowUp className="w-4 h-4" />
-          </button>
-        )}
-      </div>
+      )}
         </>
       )}
 
