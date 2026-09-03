@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build artifacts
+dist/
+dist-ssr/
+*.local
+
+# Cloudflare / Wrangler
+.wrangler/
+
+# Editor & OS
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.idea/
+.vscode/
+
+# Large local backups not meant for git
+local_backup_fonts/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

@@ -1,0 +1,758 @@
+[
+  {
+    "id": "wibi-electric-blue-halftone-poster",
+    "slug": "electric-blue-halftone-poster",
+    "title": "Wibi Style · 电蓝网点海报",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/electric-blue-halftone-poster",
+    "command": "使用 $electric-blue-halftone-poster 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/electric-blue-halftone-poster",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "波普海报"
+    ],
+    "description": "把单人人像或宠物大头照做成 1:1 电光蓝粗网点半调唱片海报：纯黑、纯白和可数的粗圆点组成主体，电光蓝底配红黄星星与白色条码。",
+    "cover_image": "/images/wibi/electric-blue-halftone-poster_1.webp",
+    "images": [
+      "/images/wibi/electric-blue-halftone-poster_1.webp",
+      "/images/wibi/electric-blue-halftone-poster_2.webp",
+      "/images/wibi/electric-blue-halftone-poster_3.webp",
+      "/images/wibi/electric-blue-halftone-poster_4.webp"
+    ],
+    "aspect_ratio": "1:1",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-alt-manga-avatar",
+    "slug": "alt-manga-avatar",
+    "title": "Wibi Style · 粗线条漫画头像",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/alt-manga-avatar",
+    "command": "使用 $alt-manga-avatar 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/alt-manga-avatar",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "人物肖像"
+    ],
+    "description": "以下仅展示本 Skill 的实际生成结果，不包含用户原始照片。",
+    "cover_image": "/images/wibi/alt-manga-avatar_1.webp",
+    "images": [
+      "/images/wibi/alt-manga-avatar_1.webp",
+      "/images/wibi/alt-manga-avatar_2.webp",
+      "/images/wibi/alt-manga-avatar_3.webp",
+      "/images/wibi/alt-manga-avatar_4.webp"
+    ],
+    "aspect_ratio": "1:1",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-art-print-poster",
+    "slug": "art-print-poster",
+    "title": "Wibi Style · 蜡笔手绘头像",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/art-print-poster",
+    "command": "使用 $art-print-poster 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/art-print-poster",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "波普海报"
+    ],
+    "description": "以下仅展示本 Skill 的实际生成结果，不包含用户原始照片。",
+    "cover_image": "/images/wibi/art-print-poster_1.webp",
+    "images": [
+      "/images/wibi/art-print-poster_1.webp",
+      "/images/wibi/art-print-poster_2.webp",
+      "/images/wibi/art-print-poster_3.webp",
+      "/images/wibi/art-print-poster_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-dark-red-black-cel-shaded",
+    "slug": "dark-red-black-cel-shaded",
+    "title": "Wibi Style · 暗夜红黑赛璐璐",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/dark-red-black-cel-shaded",
+    "command": "使用 $dark-red-black-cel-shaded 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/dark-red-black-cel-shaded",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "生活纪实"
+    ],
+    "description": "轮廓清楚、适合戏剧性红黑光影的人物照片。",
+    "cover_image": "/images/wibi/dark-red-black-cel-shaded_1.webp",
+    "images": [
+      "/images/wibi/dark-red-black-cel-shaded_1.webp",
+      "/images/wibi/dark-red-black-cel-shaded_2.webp",
+      "/images/wibi/dark-red-black-cel-shaded_3.webp",
+      "/images/wibi/dark-red-black-cel-shaded_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-iridescent-long-exposure",
+    "slug": "iridescent-long-exposure",
+    "title": "Wibi Style · 虹彩柔焦长曝光",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/iridescent-long-exposure",
+    "command": "使用 $iridescent-long-exposure 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/iridescent-long-exposure",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "人物肖像"
+    ],
+    "description": "想要朦胧氛围的人物近景或局部特写。",
+    "cover_image": "/images/wibi/iridescent-long-exposure_1.webp",
+    "images": [
+      "/images/wibi/iridescent-long-exposure_1.webp",
+      "/images/wibi/iridescent-long-exposure_2.webp",
+      "/images/wibi/iridescent-long-exposure_3.webp",
+      "/images/wibi/iridescent-long-exposure_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-blue-retro-print",
+    "slug": "blue-retro-print",
+    "title": "Wibi Style · 蓝底复古印刷",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/blue-retro-print",
+    "command": "使用 $blue-retro-print 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/blue-retro-print",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "人物肖像"
+    ],
+    "description": "以下仅展示本 Skill 的实际生成结果，不包含用户原始照片。",
+    "cover_image": "/images/wibi/blue-retro-print_1.webp",
+    "images": [
+      "/images/wibi/blue-retro-print_1.webp",
+      "/images/wibi/blue-retro-print_2.webp",
+      "/images/wibi/blue-retro-print_3.webp",
+      "/images/wibi/blue-retro-print_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-underground-audition",
+    "slug": "underground-audition",
+    "title": "Wibi Style · 地下试镜skill",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/underground-audition",
+    "command": "使用 $underground-audition 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/underground-audition",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "人物肖像"
+    ],
+    "description": "把一张清晰人像照片做成纯白背景的三联\"模特资料卡\"：同一个人原地转身的三个定格——完整侧脸转向画面左侧、正面直视喊叫、完整侧脸镜像转向画面右侧——用九十年代模特试镜宝丽来快照式的机顶直闪硬光拍摄，清冷未修图质感。",
+    "cover_image": "/images/wibi/underground-audition_1.webp",
+    "images": [
+      "/images/wibi/underground-audition_1.webp",
+      "/images/wibi/underground-audition_2.webp",
+      "/images/wibi/underground-audition_3.webp",
+      "/images/wibi/underground-audition_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-textile-toy-portrait",
+    "slug": "textile-toy-portrait",
+    "title": "Wibi Style · 颗粒绒感玩偶",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/textile-toy-portrait",
+    "command": "使用 $textile-toy-portrait 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/textile-toy-portrait",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "治愈插画"
+    ],
+    "description": "把单人清晰头像、头肩照或半身照变成横向大头、极小五官、颗粒绒与粗针织并置的 3D 纺织设计玩偶；发型、表情、配饰和手部关系明确的照片更稳定。",
+    "cover_image": "/images/wibi/textile-toy-portrait_1.webp",
+    "images": [
+      "/images/wibi/textile-toy-portrait_1.webp",
+      "/images/wibi/textile-toy-portrait_2.webp",
+      "/images/wibi/textile-toy-portrait_3.webp",
+      "/images/wibi/textile-toy-portrait_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-cold-blue-glitch-anime",
+    "slug": "cold-blue-glitch-anime",
+    "title": "Wibi Style · 冷蓝失真动漫",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/cold-blue-glitch-anime",
+    "command": "使用 $cold-blue-glitch-anime 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/cold-blue-glitch-anime",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "波普海报"
+    ],
+    "description": "适合人物写真、自拍、街头抓拍、夜景生活照、姿态与情绪明确的照片。",
+    "cover_image": "/images/wibi/cold-blue-glitch-anime_1.webp",
+    "images": [
+      "/images/wibi/cold-blue-glitch-anime_1.webp",
+      "/images/wibi/cold-blue-glitch-anime_2.webp",
+      "/images/wibi/cold-blue-glitch-anime_3.webp",
+      "/images/wibi/cold-blue-glitch-anime_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-crayon-flat-naive",
+    "slug": "crayon-flat-naive",
+    "title": "Wibi Style · 蜡笔极简扁平画",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/crayon-flat-naive",
+    "command": "使用 $crayon-flat-naive 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/crayon-flat-naive",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "人物肖像"
+    ],
+    "description": "把一张真实照片重绘成纯白纸面、蜡笔颗粒、极简五官和高饱和扁平色块的手绘时装插画。",
+    "cover_image": "/images/wibi/crayon-flat-naive_1.webp",
+    "images": [
+      "/images/wibi/crayon-flat-naive_1.webp",
+      "/images/wibi/crayon-flat-naive_2.webp",
+      "/images/wibi/crayon-flat-naive_3.webp",
+      "/images/wibi/crayon-flat-naive_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-serpent-line-ink",
+    "slug": "serpent-line-ink",
+    "title": "Wibi Style · 蛇发游线墨绘",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/serpent-line-ink",
+    "command": "使用 $serpent-line-ink 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/serpent-line-ink",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "人物肖像"
+    ],
+    "description": "把用户上传的单人头肩、近景或半身照片转换成蛇发即兴钢笔墨绘肖像：暖象牙纸大片留白、粗细突变的自由长线、三至五处局部浓黑，以及顺原发型伸出的一至两个蛇首游线。",
+    "cover_image": "/images/wibi/serpent-line-ink_1.webp",
+    "images": [
+      "/images/wibi/serpent-line-ink_1.webp",
+      "/images/wibi/serpent-line-ink_2.webp",
+      "/images/wibi/serpent-line-ink_3.webp",
+      "/images/wibi/serpent-line-ink_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-warm-paper-crayon-street",
+    "slug": "warm-paper-crayon-street",
+    "title": "Wibi Style · 暖纸蜡笔街拍",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/warm-paper-crayon-street",
+    "command": "使用 $warm-paper-crayon-street 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/warm-paper-crayon-street",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "生活纪实"
+    ],
+    "description": "把一张真实人物照片重绘成象牙白纸面的粗蜡笔时尚编辑插画：笨拙的大色块形体、只剩三到五个图形的符号化小脸、一处电光蓝或柠檬黄跳色，以及三个粗钝手写的大写英文单词，像独立服装小刊里的随手街拍记录。",
+    "cover_image": "/images/wibi/warm-paper-crayon-street_1.webp",
+    "images": [
+      "/images/wibi/warm-paper-crayon-street_1.webp",
+      "/images/wibi/warm-paper-crayon-street_2.webp",
+      "/images/wibi/warm-paper-crayon-street_3.webp",
+      "/images/wibi/warm-paper-crayon-street_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-diamond-kid-head-card",
+    "slug": "diamond-kid-head-card",
+    "title": "Wibi Style · 钻牙萌娃大头",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/diamond-kid-head-card",
+    "command": "使用 $diamond-kid-head-card 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/diamond-kid-head-card",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "治愈插画"
+    ],
+    "description": "> **本款已并入 （`kid-head-card`）。** > 新包含同一套钻牙萌娃规则，另外支持把当代自拍反推成 5–8 岁的童年酷照，进门会自动判断走哪一版。 > 本包保留可用，但不再单独更新。",
+    "cover_image": "/images/wibi/diamond-kid-head-card_1.webp",
+    "images": [
+      "/images/wibi/diamond-kid-head-card_1.webp",
+      "/images/wibi/diamond-kid-head-card_2.webp",
+      "/images/wibi/diamond-kid-head-card_3.webp",
+      "/images/wibi/diamond-kid-head-card_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-kid-head-card",
+    "slug": "kid-head-card",
+    "title": "Wibi Style · 童年大头卡贴",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/kid-head-card",
+    "command": "使用 $kid-head-card 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/kid-head-card",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "治愈插画"
+    ],
+    "description": "**Visual Skill by @威比 Hunter Wei.** 抖音、小红书同名",
+    "cover_image": "/images/wibi/kid-head-card_1.webp",
+    "images": [
+      "/images/wibi/kid-head-card_1.webp",
+      "/images/wibi/kid-head-card_2.webp",
+      "/images/wibi/kid-head-card_3.webp",
+      "/images/wibi/kid-head-card_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-fisheye-city-cover",
+    "slug": "fisheye-city-cover",
+    "title": "Wibi Style · 鱼眼城市海报",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/fisheye-city-cover",
+    "command": "使用 $fisheye-city-cover 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/fisheye-city-cover",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "波普海报"
+    ],
+    "description": "把一张人物、合照、街拍或旅行照片做成 3:4 Y2K 强鱼眼城市杂志海报：真实 8–12mm 鱼眼畸变、液态铬银城市标题、三种可选背景、旧 CCD / MiniDV 质感和断续 RGB 信号横条。",
+    "cover_image": "/images/wibi/fisheye-city-cover_1.webp",
+    "images": [
+      "/images/wibi/fisheye-city-cover_1.webp",
+      "/images/wibi/fisheye-city-cover_2.webp",
+      "/images/wibi/fisheye-city-cover_3.webp",
+      "/images/wibi/fisheye-city-cover_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-niulai-movie-poster",
+    "slug": "niulai-movie-poster",
+    "title": "Wibi Style · 牛来电影海报",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/niulai-movie-poster",
+    "command": "使用 $niulai-movie-poster 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/niulai-movie-poster",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "波普海报"
+    ],
+    "description": "把一张横版照片做成《牛来》式低成本电影海报：真人手机照片负责场景、人数、姿势、衣服和道具，低清旧动画牛头负责头脸反差，朱砂红「牛来」毛笔片名和一枚朱红印章负责海报身份。",
+    "cover_image": "/images/wibi/niulai-movie-poster_1.webp",
+    "images": [
+      "/images/wibi/niulai-movie-poster_1.webp",
+      "/images/wibi/niulai-movie-poster_2.webp",
+      "/images/wibi/niulai-movie-poster_3.webp",
+      "/images/wibi/niulai-movie-poster_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-minimal-pet-doodle",
+    "slug": "minimal-pet-doodle",
+    "title": "Wibi Style · 宠物极简线条",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/minimal-pet-doodle",
+    "command": "使用 $minimal-pet-doodle 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/minimal-pet-doodle",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "治愈插画"
+    ],
+    "description": "把猫狗照片里最有记忆点的动作，画成大面积留白、少量笨拙黑线和一小块毛色彩铅组成的稚拙涂鸦。姿态、视线和身体曲线清楚的照片更稳定。",
+    "cover_image": "/images/wibi/minimal-pet-doodle_1.webp",
+    "images": [
+      "/images/wibi/minimal-pet-doodle_1.webp",
+      "/images/wibi/minimal-pet-doodle_2.webp",
+      "/images/wibi/minimal-pet-doodle_3.webp",
+      "/images/wibi/minimal-pet-doodle_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-marker-child-doodle",
+    "slug": "marker-child-doodle",
+    "title": "Wibi Style · 马克笔童画",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/marker-child-doodle",
+    "command": "使用 $marker-child-doodle 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/marker-child-doodle",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "治愈插画"
+    ],
+    "description": "适合人物、宠物和互动道具清楚的真实照片；环境复杂时会删去背景，半身照片不会补出腿脚",
+    "cover_image": "/images/wibi/marker-child-doodle_1.webp",
+    "images": [
+      "/images/wibi/marker-child-doodle_1.webp",
+      "/images/wibi/marker-child-doodle_2.webp",
+      "/images/wibi/marker-child-doodle_3.webp",
+      "/images/wibi/marker-child-doodle_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-quirky-pop-doodle-sticker",
+    "slug": "quirky-pop-doodle-sticker",
+    "title": "Wibi Style · 怪趣波普涂鸦贴纸",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/quirky-pop-doodle-sticker",
+    "command": "使用 $quirky-pop-doodle-sticker 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/quirky-pop-doodle-sticker",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "治愈插画"
+    ],
+    "description": "适合人物、宠物、产品或道具主体清楚、动作和轮廓有记忆点的照片。",
+    "cover_image": "/images/wibi/quirky-pop-doodle-sticker_1.webp",
+    "images": [
+      "/images/wibi/quirky-pop-doodle-sticker_1.webp",
+      "/images/wibi/quirky-pop-doodle-sticker_2.webp",
+      "/images/wibi/quirky-pop-doodle-sticker_3.webp",
+      "/images/wibi/quirky-pop-doodle-sticker_4.webp"
+    ],
+    "aspect_ratio": "1:1",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-photo-perler-charm",
+    "slug": "photo-perler-charm",
+    "title": "Wibi Style · 照片拼豆挂件",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/photo-perler-charm",
+    "command": "使用 $photo-perler-charm 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/photo-perler-charm",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "人物肖像"
+    ],
+    "description": "适合人物、宠物、花束、食物和轮廓清晰的物件照片。",
+    "cover_image": "/images/wibi/photo-perler-charm_1.webp",
+    "images": [
+      "/images/wibi/photo-perler-charm_1.webp",
+      "/images/wibi/photo-perler-charm_2.webp",
+      "/images/wibi/photo-perler-charm_3.webp",
+      "/images/wibi/photo-perler-charm_4.webp"
+    ],
+    "aspect_ratio": "1:1",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-pixel-stretch",
+    "slug": "pixel-stretch",
+    "title": "Wibi Style · 像素切片拉伸",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/pixel-stretch",
+    "command": "使用 $pixel-stretch 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/pixel-stretch",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "波普海报"
+    ],
+    "description": "主体清楚的任意照片，人物或静物都行。",
+    "cover_image": "/images/wibi/pixel-stretch_1.webp",
+    "images": [
+      "/images/wibi/pixel-stretch_1.webp",
+      "/images/wibi/pixel-stretch_2.webp",
+      "/images/wibi/pixel-stretch_3.webp",
+      "/images/wibi/pixel-stretch_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-glitch-pixel-collage",
+    "slug": "glitch-pixel-collage",
+    "title": "Wibi Style · 乱码像素拼贴",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/glitch-pixel-collage",
+    "command": "使用 $glitch-pixel-collage 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/glitch-pixel-collage",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "波普海报"
+    ],
+    "description": "人物、静物或色彩层次明确的照片。",
+    "cover_image": "/images/wibi/glitch-pixel-collage_1.webp",
+    "images": [
+      "/images/wibi/glitch-pixel-collage_1.webp",
+      "/images/wibi/glitch-pixel-collage_2.webp",
+      "/images/wibi/glitch-pixel-collage_3.webp",
+      "/images/wibi/glitch-pixel-collage_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-office-animals",
+    "slug": "office-animals",
+    "title": "Wibi Style · 牛马宇宙",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/office-animals",
+    "command": "使用 $office-animals 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/office-animals",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "人物肖像"
+    ],
+    "description": "把动物同事送进办公室：指定动物、场景、精神状态或大标题，也可以一句“随机”抽出一套动作成立的 Y2K 中文荒诞打工海报。",
+    "cover_image": "/images/wibi/office-animals_1.webp",
+    "images": [
+      "/images/wibi/office-animals_1.webp",
+      "/images/wibi/office-animals_2.webp",
+      "/images/wibi/office-animals_3.webp",
+      "/images/wibi/office-animals_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-clear-sky-urban-cel",
+    "slug": "clear-sky-urban-cel",
+    "title": "Wibi Style · 晴空都市赛璐璐",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/clear-sky-urban-cel",
+    "command": "使用 $clear-sky-urban-cel 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/clear-sky-urban-cel",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "生活纪实"
+    ],
+    "description": "适合城市街道、建筑、旅行纪实、交通设施和环境人物照片。",
+    "cover_image": "/images/wibi/clear-sky-urban-cel_1.webp",
+    "images": [
+      "/images/wibi/clear-sky-urban-cel_1.webp",
+      "/images/wibi/clear-sky-urban-cel_2.webp",
+      "/images/wibi/clear-sky-urban-cel_3.webp",
+      "/images/wibi/clear-sky-urban-cel_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-retro-table-print",
+    "slug": "retro-table-print",
+    "title": "Wibi Style · 复古餐桌杂志",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/retro-table-print",
+    "command": "使用 $retro-table-print 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/retro-table-print",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "生活纪实"
+    ],
+    "description": "把随手拍的餐桌照片重新构图成红底复古杂志美食静物。适合餐厅打卡照、家常菜、外卖照——整桌或单盘都可以，能看清菜和器皿就够。",
+    "cover_image": "/images/wibi/retro-table-print_1.webp",
+    "images": [
+      "/images/wibi/retro-table-print_1.webp",
+      "/images/wibi/retro-table-print_2.webp",
+      "/images/wibi/retro-table-print_3.webp",
+      "/images/wibi/retro-table-print_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-home-journal",
+    "slug": "home-journal",
+    "title": "Wibi Style · 复古家居日志",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/home-journal",
+    "command": "使用 $home-journal 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/home-journal",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "生活纪实"
+    ],
+    "description": "家里任意角落的随手照片，客厅、卧室、咖啡台、书架都行。",
+    "cover_image": "/images/wibi/home-journal_1.webp",
+    "images": [
+      "/images/wibi/home-journal_1.webp",
+      "/images/wibi/home-journal_2.webp",
+      "/images/wibi/home-journal_3.webp",
+      "/images/wibi/home-journal_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  },
+  {
+    "id": "wibi-wibi-frame",
+    "slug": "wibi-frame",
+    "title": "Wibi Style · 框景漫画",
+    "type": "skill",
+    "category": "开源 Skill",
+    "author": "Vie (威比)",
+    "repo_url": "https://github.com/Vieeeeeee/wibi-style/tree/main/skills/wibi-frame",
+    "command": "使用 $wibi-frame 处理这张照片",
+    "install_command": "请安装这个 Skill：https://github.com/Vieeeeeee/wibi-style/tree/main/skills/wibi-frame",
+    "tags": [
+      "Wibi 官方出品",
+      "威比",
+      "视觉Skill",
+      "人物肖像"
+    ],
+    "description": "把普通照片里最值得看的局部，做成大面积纯色留白中的复古平面漫画特写。Skill 会先给出三个具体局部供你选择，再完成小框聚焦、自然越框和框内外同色连接。",
+    "cover_image": "/images/wibi/wibi-frame_1.webp",
+    "images": [
+      "/images/wibi/wibi-frame_1.webp",
+      "/images/wibi/wibi-frame_2.webp",
+      "/images/wibi/wibi-frame_3.webp",
+      "/images/wibi/wibi-frame_4.webp"
+    ],
+    "aspect_ratio": "3:4",
+    "accent_color": "#4F46E5",
+    "gradient": "from-[#2A2B4A]/90 via-[#36385C]/80 to-[#1C1D33]"
+  }
+]

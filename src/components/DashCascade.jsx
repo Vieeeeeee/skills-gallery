@@ -1,0 +1,117 @@
+import React, { useEffect, useRef } from "react";
+import { DashCascade as DashCascadeEngine } from "./dash-cascade/engine";
+
+export function DashCascade({ className = "" }) {
+  const canvasRef = useRef(null);
+  const engineRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let engine = null;
+    let onScreen = false;
+    let hidden = false;
+
+    const sync = () => {
+      if (!engine || reduced) return;
+      if (onScreen && !hidden) engine.start();
+      else engine.stop();
+    };
+
+    const raf = requestAnimationFrame(() => {
+      if (!canvasRef.current) return;
+      engine = new DashCascadeEngine(canvas);
+      engineRef.current = engine;
+      if (!engine.ok) return;
+      if (reduced) engine.renderStill();
+      else sync();
+    });
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        onScreen = entries[0]?.isIntersecting ?? false;
+        sync();
+      },
+      { threshold: 0.1 }
+    );
+    io.observe(canvas);
+
+    const onVis = () => {
+      hidden = document.hidden;
+      sync();
+    };
+    document.addEventListener("visibilitychange", onVis);
+
+    let rt = 0;
+    const onResize = () => {
+      window.clearTimeout(rt);
+      rt = window.setTimeout(() => engine?.resize(), 80);
+    };
+    window.addEventListener("resize", onResize);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVis);
+      window.removeEventListener("resize", onResize);
+      window.clearTimeout(rt);
+      engine?.destroy();
+      engineRef.current = null;
+    };
+  }, []);
+
+  return (
+    <div
+      role="img"
+      aria-label="PROMPT, SKILLS, WIBI word cascade animation"
+      className={`relative w-full h-full min-h-[300px] sm:min-h-[340px] bg-[#fafafc] border border-black/[0.08] rounded-3xl p-5 sm:p-7 shadow-[0_4px_24px_rgba(0,0,0,0.03)] flex flex-col justify-between select-none cursor-pointer overflow-hidden group ${className}`}
+      onPointerEnter={() => engineRef.current?.setHover(true)}
+      onPointerLeave={() => engineRef.current?.setHover(false)}
+    >
+      {/* Top Precision Header Bar */}
+      <div className="flex items-center justify-between z-10">
+        <div className="flex items-center gap-2">
+          <span className="text-indigo-500 text-xs select-none">✦</span>
+          <span className="text-[10px] sm:text-[11px] font-mono tracking-widest text-[#86868b] uppercase">
+            SKILLS · STYLES · WORKFLOWS
+          </span>
+        </div>
+        <div className="flex items-center gap-1.5 font-mono text-[10px] sm:text-[11px] text-[#86868b]">
+          <span>EDITION</span>
+          <span className="text-black/30 font-light">·</span>
+          <span>2026</span>
+        </div>
+      </div>
+
+      {/* Left precision 4 vertical dot points */}
+      <div className="absolute left-5 top-14 flex flex-col gap-1.5 z-10 pointer-events-none opacity-40">
+        <span className="w-1 h-1 rounded-full bg-black/40" />
+        <span className="w-1 h-1 rounded-full bg-black/40" />
+        <span className="w-1 h-1 rounded-full bg-black/40" />
+        <span className="w-1 h-1 rounded-full bg-black/40" />
+      </div>
+
+      {/* Center Dynamic Word Cascade Canvas */}
+      <div className="relative w-full h-44 sm:h-52 my-auto z-10 flex items-center justify-center">
+        <canvas ref={canvasRef} className="w-full h-full block" />
+      </div>
+
+      {/* Bottom Precision Footer Row */}
+      <div className="flex items-center justify-between z-10 pt-2 font-mono text-[10px] text-[#86868b]">
+        <span className="tracking-wider text-[#86868b] uppercase">
+          AI × DESIGN × CODE
+        </span>
+        <div className="flex items-center gap-2">
+          <span className="tracking-widest">37.7749°N, 122.4194°W</span>
+        </div>
+      </div>
+
+      {/* Precision Corner Crop Mark (Bottom-Right) */}
+      <div className="absolute right-4 bottom-12 text-[#86868b]/30 font-mono text-xs select-none pointer-events-none">
+        ⌝
+      </div>
+    </div>
+  );
+}
