@@ -66,7 +66,10 @@ export function EditModal({
       return;
     }
 
+    // 必须以原条目为底再覆盖：从零重建会丢掉表单里没有的字段
+    // （install_command / slug / website_url / 多图 …）
     const savedItem = {
+      ...(item || {}),
       id: formData.id || `custom-${Date.now()}`,
       title: formData.title.trim(),
       type: formData.type,
@@ -79,7 +82,9 @@ export function EditModal({
       command: formData.command.trim(),
       description: formData.prompt.slice(0, 140).trim(),
       cover_image: formData.image_url.trim() || item?.cover_image || '',
-      images: formData.image_url.trim() ? [formData.image_url.trim()] : (item?.images || []),
+      images: formData.image_url.trim()
+        ? [formData.image_url.trim(), ...((item?.images || []).filter((u) => u !== formData.image_url.trim()))]
+        : (item?.images || []),
       target_model: item?.target_model || '通用大模型',
       negative_prompt: item?.negative_prompt || '',
       is_motion: item?.is_motion || false,
@@ -95,17 +100,17 @@ export function EditModal({
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/40 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-fade-in">
       <div className="fixed inset-0" onClick={onClose} />
 
-      <div className="relative w-full max-w-2xl bg-white border border-black/[0.08] rounded-3xl shadow-[0_24px_64px_rgba(0,0,0,0.18)] overflow-hidden z-10 animate-scale-in max-h-[90vh] flex flex-col text-[#1d1d1f]">
+      <div className="relative w-full max-w-2xl bg-white dark:bg-[#101014] border border-black/[0.08] dark:border-white/[0.1] rounded-3xl shadow-[0_24px_64px_rgba(0,0,0,0.18)] overflow-hidden z-10 animate-scale-in max-h-[90vh] flex flex-col text-[#1d1d1f] dark:text-white">
         
         {/* Modal Header */}
-        <div className="px-6 py-4 border-b border-black/[0.06] flex items-center justify-between bg-white sticky top-0 z-20">
+        <div className="px-6 py-4 border-b border-black/[0.06] dark:border-white/[0.08] flex items-center justify-between bg-white dark:bg-[#101014] sticky top-0 z-20">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-indigo-600" />
-            <h2 className="text-lg font-bold text-[#1d1d1f]">
+            <Sparkles className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+            <h2 className="text-lg font-bold text-[#1d1d1f] dark:text-white">
               {item ? '编辑条目' : '新增 Skill / 风格提示词'}
             </h2>
           </div>
-          <button onClick={onClose} className="p-2 rounded-xl bg-[#f5f5f7] hover:bg-[#e8e8ed] text-[#6e6e73] hover:text-[#1d1d1f]">
+          <button onClick={onClose} className="p-2 rounded-xl bg-[#f5f5f7] dark:bg-white/[0.06] hover:bg-[#e8e8ed] dark:hover:bg-white/[0.12] text-[#6e6e73] dark:text-zinc-400 hover:text-[#1d1d1f] dark:hover:text-white">
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -115,22 +120,22 @@ export function EditModal({
           
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <div className="sm:col-span-2 space-y-1">
-              <label className="font-semibold text-[#1d1d1f]">条目标题 *</label>
+              <label className="font-semibold text-[#1d1d1f] dark:text-white">条目标题 *</label>
               <input
                 type="text"
                 required
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                 placeholder="例如：[旅行海报] 二分构图·哑光米白艺术纸明信片"
-                className="w-full px-3.5 py-2.5 bg-[#f5f5f7] focus:bg-white border border-black/[0.06] focus:border-indigo-500 rounded-xl text-[#1d1d1f] outline-none text-xs"
+                className="w-full px-3.5 py-2.5 bg-[#f5f5f7] dark:bg-white/[0.06] focus:bg-white dark:focus:bg-black/40 border border-black/[0.06] dark:border-white/[0.08] focus:border-indigo-500 rounded-xl text-[#1d1d1f] dark:text-white outline-none text-xs"
               />
             </div>
             <div className="space-y-1">
-              <label className="font-semibold text-[#1d1d1f]">类型 *</label>
+              <label className="font-semibold text-[#1d1d1f] dark:text-white">类型 *</label>
               <select
                 value={formData.type}
                 onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                className="w-full px-3.5 py-2.5 bg-[#f5f5f7] focus:bg-white border border-black/[0.06] focus:border-indigo-500 rounded-xl text-[#1d1d1f] outline-none text-xs"
+                className="w-full px-3.5 py-2.5 bg-[#f5f5f7] dark:bg-white/[0.06] focus:bg-white dark:focus:bg-black/40 border border-black/[0.06] dark:border-white/[0.08] focus:border-indigo-500 rounded-xl text-[#1d1d1f] dark:text-white outline-none text-xs"
               >
                 <option value="style">🎨 视觉风格提示词</option>
                 <option value="skill">⚡️ 开源 Skill</option>
@@ -141,7 +146,7 @@ export function EditModal({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="space-y-1">
-              <label className="font-semibold text-[#1d1d1f]">分类 *</label>
+              <label className="font-semibold text-[#1d1d1f] dark:text-white">分类 *</label>
               <input
                 type="text"
                 required
@@ -149,7 +154,7 @@ export function EditModal({
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                 placeholder="例如：海报拼贴 / 视频生成"
-                className="w-full px-3.5 py-2.5 bg-[#f5f5f7] focus:bg-white border border-black/[0.06] focus:border-indigo-500 rounded-xl text-[#1d1d1f] outline-none text-xs"
+                className="w-full px-3.5 py-2.5 bg-[#f5f5f7] dark:bg-white/[0.06] focus:bg-white dark:focus:bg-black/40 border border-black/[0.06] dark:border-white/[0.08] focus:border-indigo-500 rounded-xl text-[#1d1d1f] dark:text-white outline-none text-xs"
               />
               <datalist id="category-suggestions">
                 {categories.map((c, i) => (
@@ -158,11 +163,11 @@ export function EditModal({
               </datalist>
             </div>
             <div className="space-y-1">
-              <label className="font-semibold text-[#1d1d1f]">画幅比例 / 格式</label>
+              <label className="font-semibold text-[#1d1d1f] dark:text-white">画幅比例 / 格式</label>
               <select
                 value={formData.aspect_ratio}
                 onChange={(e) => setFormData({ ...formData, aspect_ratio: e.target.value })}
-                className="w-full px-3.5 py-2.5 bg-[#f5f5f7] focus:bg-white border border-black/[0.06] focus:border-indigo-500 rounded-xl text-[#1d1d1f] outline-none text-xs"
+                className="w-full px-3.5 py-2.5 bg-[#f5f5f7] dark:bg-white/[0.06] focus:bg-white dark:focus:bg-black/40 border border-black/[0.06] dark:border-white/[0.08] focus:border-indigo-500 rounded-xl text-[#1d1d1f] dark:text-white outline-none text-xs"
               >
                 <option value="3:4">3:4 竖版海报</option>
                 <option value="1:1">1:1 正方形</option>
@@ -175,88 +180,88 @@ export function EditModal({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="space-y-1">
-              <label className="font-semibold text-[#1d1d1f]">真实作者 / 来源</label>
+              <label className="font-semibold text-[#1d1d1f] dark:text-white">真实作者 / 来源</label>
               <input
                 type="text"
                 value={formData.author}
                 onChange={(e) => setFormData({ ...formData, author: e.target.value })}
                 placeholder="例如：Zeejay0 / 卡兹克 / 开源社区"
-                className="w-full px-3.5 py-2.5 bg-[#f5f5f7] focus:bg-white border border-black/[0.06] focus:border-indigo-500 rounded-xl text-[#1d1d1f] outline-none text-xs"
+                className="w-full px-3.5 py-2.5 bg-[#f5f5f7] dark:bg-white/[0.06] focus:bg-white dark:focus:bg-black/40 border border-black/[0.06] dark:border-white/[0.08] focus:border-indigo-500 rounded-xl text-[#1d1d1f] dark:text-white outline-none text-xs"
               />
             </div>
             <div className="space-y-1">
-              <label className="font-semibold text-[#1d1d1f]">GitHub 仓库 / 链接</label>
+              <label className="font-semibold text-[#1d1d1f] dark:text-white">GitHub 仓库 / 链接</label>
               <input
                 type="url"
                 value={formData.repo_url}
                 onChange={(e) => setFormData({ ...formData, repo_url: e.target.value })}
                 placeholder="https://github.com/..."
-                className="w-full px-3.5 py-2.5 bg-[#f5f5f7] focus:bg-white border border-black/[0.06] focus:border-indigo-500 rounded-xl text-[#1d1d1f] outline-none text-xs"
+                className="w-full px-3.5 py-2.5 bg-[#f5f5f7] dark:bg-white/[0.06] focus:bg-white dark:focus:bg-black/40 border border-black/[0.06] dark:border-white/[0.08] focus:border-indigo-500 rounded-xl text-[#1d1d1f] dark:text-white outline-none text-xs"
               />
             </div>
           </div>
 
           <div className="space-y-1">
-            <label className="font-semibold text-[#1d1d1f]">标签 (逗号分隔)</label>
+            <label className="font-semibold text-[#1d1d1f] dark:text-white">标签 (逗号分隔)</label>
             <input
               type="text"
               value={formData.tags}
               onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
               placeholder="例如：二分构图, 水彩插画, 3:4竖版"
-              className="w-full px-3.5 py-2.5 bg-[#f5f5f7] focus:bg-white border border-black/[0.06] focus:border-indigo-500 rounded-xl text-[#1d1d1f] outline-none text-xs"
+              className="w-full px-3.5 py-2.5 bg-[#f5f5f7] dark:bg-white/[0.06] focus:bg-white dark:focus:bg-black/40 border border-black/[0.06] dark:border-white/[0.08] focus:border-indigo-500 rounded-xl text-[#1d1d1f] dark:text-white outline-none text-xs"
             />
           </div>
 
           <div className="space-y-1">
-            <label className="font-semibold text-[#1d1d1f]">一键调用 / 安装指令</label>
+            <label className="font-semibold text-[#1d1d1f] dark:text-white">一键调用 / 安装指令</label>
             <input
               type="text"
               value={formData.command}
               onChange={(e) => setFormData({ ...formData, command: e.target.value })}
               placeholder="例如：帮我安装 github 上 LiamGvchi 的 gc-minimal-zine-poster skill"
-              className="w-full px-3.5 py-2.5 bg-[#f5f5f7] focus:bg-white border border-black/[0.06] font-mono focus:border-indigo-500 rounded-xl text-[#1d1d1f] outline-none text-xs"
+              className="w-full px-3.5 py-2.5 bg-[#f5f5f7] dark:bg-white/[0.06] focus:bg-white dark:focus:bg-black/40 border border-black/[0.06] dark:border-white/[0.08] font-mono focus:border-indigo-500 rounded-xl text-[#1d1d1f] dark:text-white outline-none text-xs"
             />
           </div>
 
           <div className="space-y-1">
-            <label className="font-semibold text-[#1d1d1f]">完整提示词 / 风格描述 *</label>
+            <label className="font-semibold text-[#1d1d1f] dark:text-white">完整提示词 / 风格描述 *</label>
             <textarea
               required
               rows={6}
               value={formData.prompt}
               onChange={(e) => setFormData({ ...formData, prompt: e.target.value })}
               placeholder="输入完整的生图 Prompt、负向提示词或 Skill 工作流要求..."
-              className="w-full p-3.5 bg-[#f5f5f7] focus:bg-white border border-black/[0.06] rounded-2xl text-[#1d1d1f] font-mono focus:border-indigo-500 outline-none text-xs leading-relaxed"
+              className="w-full p-3.5 bg-[#f5f5f7] dark:bg-white/[0.06] focus:bg-white dark:focus:bg-black/40 border border-black/[0.06] dark:border-white/[0.08] rounded-2xl text-[#1d1d1f] dark:text-white font-mono focus:border-indigo-500 outline-none text-xs leading-relaxed"
             />
           </div>
 
           <div className="space-y-1">
-            <label className="font-semibold text-[#1d1d1f]">使用指南与参数建议</label>
+            <label className="font-semibold text-[#1d1d1f] dark:text-white">使用指南与参数建议</label>
             <textarea
               rows={2}
               value={formData.usage_guide}
               onChange={(e) => setFormData({ ...formData, usage_guide: e.target.value })}
               placeholder="例如：上传原图，比例建议 3:4..."
-              className="w-full p-3 bg-[#f5f5f7] focus:bg-white border border-black/[0.06] rounded-xl text-[#1d1d1f] focus:border-indigo-500 outline-none text-xs leading-relaxed"
+              className="w-full p-3 bg-[#f5f5f7] dark:bg-white/[0.06] focus:bg-white dark:focus:bg-black/40 border border-black/[0.06] dark:border-white/[0.08] rounded-xl text-[#1d1d1f] dark:text-white focus:border-indigo-500 outline-none text-xs leading-relaxed"
             />
           </div>
 
           <div className="space-y-1">
-            <label className="font-semibold text-[#1d1d1f]">图片预览路径或外链 (可选)</label>
+            <label className="font-semibold text-[#1d1d1f] dark:text-white">图片预览路径或外链 (可选)</label>
             <input
               type="text"
               value={formData.image_url}
               onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
               placeholder="例如：/images/image1.jpg 或 https://..."
-              className="w-full px-3.5 py-2.5 bg-[#f5f5f7] focus:bg-white border border-black/[0.06] focus:border-indigo-500 rounded-xl text-[#1d1d1f] outline-none text-xs"
+              className="w-full px-3.5 py-2.5 bg-[#f5f5f7] dark:bg-white/[0.06] focus:bg-white dark:focus:bg-black/40 border border-black/[0.06] dark:border-white/[0.08] focus:border-indigo-500 rounded-xl text-[#1d1d1f] dark:text-white outline-none text-xs"
             />
           </div>
 
-          <div className="pt-4 border-t border-black/[0.06] flex items-center justify-end gap-3">
+          <div className="pt-4 border-t border-black/[0.06] dark:border-white/[0.08] flex items-center justify-end gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl bg-[#f5f5f7] hover:bg-[#e8e8ed] font-semibold text-[#515154] hover:text-[#1d1d1f] transition-colors"
+              className="px-4 py-2 rounded-xl bg-[#f5f5f7] dark:bg-white/[0.06] hover:bg-[#e8e8ed] dark:hover:bg-white/[0.12] font-semibold text-[#515154] dark:text-zinc-300 hover:text-[#1d1d1f] dark:hover:text-white transition-colors"
             >
               取消
             </button>

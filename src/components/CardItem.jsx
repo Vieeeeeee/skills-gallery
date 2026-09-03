@@ -11,6 +11,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { GithubIcon } from './Icons';
+import { copyText } from '../utils/copy';
 
 export function CardItem({
   item,
@@ -23,6 +24,7 @@ export function CardItem({
   onEdit,
   onDelete,
   onTagClick,
+  onCopyFail,
   viewMode = 'grid'
 }) {
   const [copied, setCopied] = useState(false);
@@ -39,7 +41,7 @@ export function CardItem({
     }
   }, [imageSrc]);
 
-  const handleCopyClick = (e) => {
+  const handleCopyClick = async (e) => {
     e.stopPropagation();
     let textToCopy = '';
     if (item.type === 'skill') {
@@ -49,7 +51,11 @@ export function CardItem({
     } else {
       textToCopy = item.prompt || item.description;
     }
-    navigator.clipboard.writeText(textToCopy);
+    const ok = await copyText(textToCopy);
+    if (!ok) {
+      if (onCopyFail) onCopyFail();
+      return;
+    }
     setCopied(true);
     if (onCopy) onCopy(item);
     setTimeout(() => setCopied(false), 2000);

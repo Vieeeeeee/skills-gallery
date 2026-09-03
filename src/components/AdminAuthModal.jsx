@@ -45,10 +45,11 @@ export function AdminAuthModal({
 
         <div className="space-y-1 mb-5">
           <h3 className="text-base font-bold text-[#1d1d1f] dark:text-white tracking-tight">
-            管理员身份验证
+            解锁本地编辑模式
           </h3>
           <p className="text-xs text-[#6e6e73] dark:text-zinc-400">
-            请输入管理员私密口令以解锁卡片编辑、删除、图片修改与增补权限。
+            输入口令以解锁卡片编辑、删除、图片修改与增补。所有改动只保存在当前浏览器，
+            不会影响其他访客看到的内容。
           </p>
         </div>
 
@@ -56,7 +57,7 @@ export function AdminAuthModal({
           <div className="space-y-1.5">
             <label className="text-xs font-semibold text-[#1d1d1f] dark:text-white flex items-center gap-1.5">
               <KeyRound className="w-3.5 h-3.5 text-[#86868b] dark:text-zinc-400" />
-              管理员口令 (小写)
+              编辑口令（不分大小写）
             </label>
             <input
               type="password"
@@ -66,7 +67,7 @@ export function AdminAuthModal({
                 setInputPasscode(e.target.value);
                 if (error) setError('');
               }}
-              placeholder="请输入管理员私密口令"
+              placeholder="请输入编辑口令"
               className="w-full px-3.5 py-2.5 bg-[#f5f5f7] dark:bg-white/[0.06] focus:bg-white dark:focus:bg-black/40 border border-transparent focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 rounded-xl text-xs text-[#1d1d1f] dark:text-white placeholder-[#86868b] dark:placeholder-zinc-500 outline-none transition-all"
             />
           </div>

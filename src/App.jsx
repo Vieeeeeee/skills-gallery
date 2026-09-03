@@ -11,7 +11,8 @@ import { DashCascade } from './components/DashCascade';
 import { SketchbookView } from './components/sketchbook/SketchbookView';
 import { AboutModal } from './components/AboutModal';
 import { matchSearch } from './utils/search';
-import { Sparkles, Palette, Terminal, Wrench, SearchX, RefreshCw, ChevronDown, X, QrCode, ArrowUp } from 'lucide-react';
+import { copyText, COPY_FAIL_MSG } from './utils/copy';
+import { Sparkles, Palette, Terminal, Wrench, SearchX, RefreshCw, ChevronDown, X, QrCode, ArrowUp, AlertTriangle } from 'lucide-react';
 
 const STORAGE_KEY = 'SKILLS_GALLERY_DATA_V2026_CLEAN_V14';
 const BOOKMARKS_KEY = 'SKILLS_GALLERY_BOOKMARKS_V4_FEED';
@@ -77,6 +78,7 @@ export const curateAndInterleaveSkills = (items, randomize = false) => {
 export function App() {
   const [skills, setSkills] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedType, setSelectedType] = useState('all');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -171,20 +173,23 @@ export function App() {
           }
         }
 
-        const res = await fetch('/skills_data.json?t=' + Date.now());
-        if (res.ok) {
-          const data = await res.json();
-          const curated = curateAndInterleaveSkills(data, false);
-          setSkills(curated);
-          try {
-            localStorage.setItem(DATA_VERSION_KEY, 'v14');
-          } catch {
-            // Ignore quota errors in private browsing
-          }
+        // 不加时间戳：时间戳会击穿浏览器与 CDN 缓存，每次访问都重下 638KB。
+        // Cloudflare Pages 会带 ETag，数据更新后浏览器自动重新校验。
+        const res = await fetch('/skills_data.json');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const curated = curateAndInterleaveSkills(data, false);
+        setSkills(curated);
+        setLoadError(null);
+        try {
+          localStorage.setItem(DATA_VERSION_KEY, 'v14');
+        } catch {
+          // Ignore quota errors in private browsing
         }
       } catch (err) {
         console.error('Failed to load initial data:', err);
-        showToast('加载数据失败', 'error');
+        setLoadError(err.message || '未知错误');
+        showToast('数据加载失败，请检查网络后重试', 'error');
       } finally {
         setLoading(false);
       }
@@ -400,14 +405,13 @@ export function App() {
   const handleResetToDefault = async () => {
     try {
       const res = await fetch('/skills_data.json');
-      if (res.ok) {
-        const data = await res.json();
-        saveSkillsData(data);
-        localStorage.removeItem('SKILLS_DATA_CUSTOM_MODIFIED');
-        showToast('已重置回官方初始精选数据！');
-      }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      saveSkillsData(data);
+      localStorage.removeItem('SKILLS_DATA_CUSTOM_MODIFIED');
+      showToast('已重置回官方初始精选数据！');
     } catch (err) {
-      showToast('重置失败', 'error');
+      showToast(`重置失败：${err.message}`, 'error');
     }
   };
 
@@ -441,7 +445,7 @@ export function App() {
   const types = [
     { id: 'all', label: '全量精选', icon: Sparkles, count: typeCounts.all || 0 },
     { id: 'style', label: '视觉风格', icon: Palette, count: typeCounts.style || 0 },
-    { id: 'skill', label: '开源 Skill', icon: Terminal, count: (typeCounts.skill || 0) + (typeCounts.tool || 0) },
+    { id: 'skill', label: '开源 Skill', icon: Terminal, count: typeCounts.skill || 0 },
     { id: 'tool', label: '设计工具', icon: Wrench, count: typeCounts.tool || 0 },
   ];
 
@@ -471,6 +475,7 @@ export function App() {
           onExit={() => setAppMode('gallery')}
           onSelect={handleSelectItem}
           onCopy={(it) => showToast(`${it.type === 'skill' ? '安装指令' : '提示词'}已复制！`)}
+          onCopyFail={() => showToast(COPY_FAIL_MSG, 'error')}
         />
       ) : (
         <>
@@ -679,8 +684,27 @@ export function App() {
           </div>
         )}
 
+        {/* Load failure (must not masquerade as "no search results") */}
+        {!loading && loadError && skills.length === 0 && (
+          <div className="py-20 text-center space-y-3 max-w-sm mx-auto">
+            <div className="w-12 h-12 rounded-2xl bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-900 flex items-center justify-center mx-auto text-rose-600 dark:text-rose-400 shadow-2xs">
+              <AlertTriangle className="w-6 h-6" />
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-[#1d1d1f] dark:text-white">数据加载失败</h3>
+              <p className="text-xs text-[#86868b] dark:text-zinc-400 mt-1">网络异常或数据源暂时不可用（{loadError}）。</p>
+            </div>
+            <button
+              onClick={() => window.location.reload()}
+              className="px-4 py-2 rounded-xl bg-[#1d1d1f] dark:bg-white hover:bg-black dark:hover:bg-zinc-200 text-white dark:text-black text-xs font-semibold shadow-xs transition-all"
+            >
+              重新加载
+            </button>
+          </div>
+        )}
+
         {/* Empty */}
-        {!loading && filteredSkills.length === 0 && (
+        {!loading && !loadError && filteredSkills.length === 0 && (
           <div className="py-20 text-center space-y-3 max-w-sm mx-auto">
             <div className="w-12 h-12 rounded-2xl bg-white dark:bg-[#141417] border border-black/[0.08] dark:border-white/[0.08] flex items-center justify-center mx-auto text-[#86868b] dark:text-zinc-400 shadow-2xs">
               <SearchX className="w-6 h-6" />
@@ -714,6 +738,7 @@ export function App() {
                       viewMode="grid"
                       onSelect={handleSelectItem}
                       onCopy={(it) => showToast(`${it.type === 'skill' ? '安装指令' : '提示词'}已复制！`)}
+                      onCopyFail={() => showToast(COPY_FAIL_MSG, 'error')}
                       isBookmarked={bookmarks.includes(item.id)}
                       onToggleBookmark={handleToggleBookmark}
                       isAdmin={isAdmin}
@@ -737,6 +762,7 @@ export function App() {
                       viewMode="grid"
                       onSelect={handleSelectItem}
                       onCopy={(it) => showToast(`${it.type === 'skill' ? '安装指令' : '提示词'}已复制！`)}
+                      onCopyFail={() => showToast(COPY_FAIL_MSG, 'error')}
                       isBookmarked={bookmarks.includes(item.id)}
                       onToggleBookmark={handleToggleBookmark}
                       isAdmin={isAdmin}
@@ -761,6 +787,7 @@ export function App() {
                   viewMode="grid"
                   onSelect={handleSelectItem}
                   onCopy={(it) => showToast(`${it.type === 'skill' ? '安装指令' : '提示词'}已复制！`)}
+                  onCopyFail={() => showToast(COPY_FAIL_MSG, 'error')}
                   isBookmarked={bookmarks.includes(item.id)}
                   onToggleBookmark={handleToggleBookmark}
                   isAdmin={isAdmin}
@@ -787,6 +814,7 @@ export function App() {
                 viewMode="list"
                 onSelect={handleSelectItem}
                 onCopy={(it) => showToast(`${it.type === 'skill' ? '安装指令' : '提示词'}已复制！`)}
+                onCopyFail={() => showToast(COPY_FAIL_MSG, 'error')}
                 isBookmarked={bookmarks.includes(item.id)}
                 onToggleBookmark={handleToggleBookmark}
                 isAdmin={isAdmin}
@@ -854,10 +882,10 @@ export function App() {
               </button>
 
               <button
-                onClick={(e) => {
+                onClick={async (e) => {
                   e.stopPropagation();
-                  navigator.clipboard.writeText('Wibi2077');
-                  showToast('微信号已复制！添加请备注：进AIGC学习群');
+                  const ok = await copyText('Wibi2077');
+                  showToast(ok ? '微信号已复制！添加请备注：进AIGC学习群' : COPY_FAIL_MSG, ok ? 'success' : 'error');
                 }}
                 className="ml-1 text-[10.5px] px-2 py-0.5 rounded-full bg-black/5 dark:bg-white/10 text-[#1d1d1f] dark:text-white hover:bg-black/10 dark:hover:bg-white/15 transition-colors cursor-pointer"
                 title="复制微信号"
@@ -948,7 +976,7 @@ export function App() {
         onSave={handleSaveItem}
         allTags={hotTags}
         categories={categories}
-        onCopy={(msg) => showToast(msg)}
+        onCopy={(msg, type) => showToast(msg, type)}
         onSelectRelated={(rel) => setSelectedItem(rel)}
         relatedItems={relatedItems}
       />

@@ -12,6 +12,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { generateSpreadImage, cleanTitle } from './spreadGenerator';
+import { copyText } from '../../utils/copy';
 
 const N = 18;           // strips — enough for a smooth curve
 const SPAN = 0.449;     // gutter -> outer page edge
@@ -19,12 +20,14 @@ const BETA = 0.60;      // peak curl of arc
 const TILT_X = 4.5, TILT_Y = 7;
 const ZOOM_MIN = 0.9, ZOOM_MAX = 1.5;
 const MAG = 2.3;
+const MAX_SPREADS = 60;   // 速写本一次最多铺 60 页（每页要现画一张 1760x1240 画布）
 
 export function SketchbookView({
   items = [],
   onExit,
   onSelect,
-  onCopy
+  onCopy,
+  onCopyFail
 }) {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [zoomText, setZoomText] = useState('100%');
@@ -62,13 +65,15 @@ export function SketchbookView({
       const c = it.category || '未分类';
       counts[c] = (counts[c] || 0) + 1;
     });
+    // 计数按实际会铺进书里的页数封顶，否则下拉标 (999) 但只翻得到 60 页
+    const cap = (n) => Math.min(n, MAX_SPREADS);
     const list = Object.entries(counts)
-      .map(([name, count]) => ({ id: name, label: name, count }))
+      .map(([name, count]) => ({ id: name, label: name, count: cap(count) }))
       .sort((a, b) => b.count - a.count);
     return [
-      { id: 'all', label: '全部灵感', count: items.length },
-      { id: 'type:style', label: '🎨 视觉风格提示词', count: items.filter(it => it.type === 'style').length },
-      { id: 'type:skill', label: '⚡ 开源技能', count: items.filter(it => it.type === 'skill').length },
+      { id: 'all', label: '全部灵感', count: cap(items.length) },
+      { id: 'type:style', label: '🎨 视觉风格提示词', count: cap(items.filter(it => it.type === 'style').length) },
+      { id: 'type:skill', label: '⚡ 开源技能', count: cap(items.filter(it => it.type === 'skill').length) },
       ...list
     ];
   }, [items]);
@@ -95,7 +100,7 @@ export function SketchbookView({
         return;
       }
 
-      const spreadItems = filteredItems.slice(0, 60);
+      const spreadItems = filteredItems.slice(0, MAX_SPREADS);
 
       const spreadList = spreadItems.map((item, i) => ({
         ...item,
@@ -782,7 +787,7 @@ export function SketchbookView({
     }
   };
 
-  const handleCopyCurrentPrompt = (e) => {
+  const handleCopyCurrentPrompt = async (e) => {
     e?.stopPropagation();
     if (!activeItem) return;
     let text = '';
@@ -793,7 +798,11 @@ export function SketchbookView({
     } else {
       text = activeItem.prompt || activeItem.description || activeItem.title;
     }
-    navigator.clipboard.writeText(text);
+    const ok = await copyText(text);
+    if (!ok) {
+      if (onCopyFail) onCopyFail();
+      return;
+    }
     setCopied(true);
     if (onCopy) onCopy(activeItem);
     setTimeout(() => setCopied(false), 2000);

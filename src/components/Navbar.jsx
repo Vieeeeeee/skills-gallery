@@ -44,7 +44,11 @@ export function Navbar({
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === '/' && document.activeElement !== searchInputRef.current && document.activeElement !== mobileInputRef.current) {
+      // 只有焦点不在任何可输入元素上时，'/' 才作为快捷键。
+      // 否则在提示词/URL 里根本打不出斜杠。
+      const ae = document.activeElement;
+      const isTyping = ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA' || ae.tagName === 'SELECT' || ae.isContentEditable);
+      if (e.key === '/' && !isTyping) {
         e.preventDefault();
         if (window.innerWidth < 768) {
           setIsMobileSearchOpen(true);

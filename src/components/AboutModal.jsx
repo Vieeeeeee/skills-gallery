@@ -1,12 +1,13 @@
 import React from 'react';
 import { X, Copy, Mail, QrCode, Heart, Sparkles } from 'lucide-react';
+import { copyText, COPY_FAIL_MSG } from '../utils/copy';
 
 export function AboutModal({ isOpen, onClose, onCopy }) {
   if (!isOpen) return null;
 
-  const handleCopyWeChat = () => {
-    navigator.clipboard.writeText('Wibi2077');
-    if (onCopy) onCopy('微信号已复制！添加请备注：进AIGC学习群');
+  const handleCopyWeChat = async () => {
+    const ok = await copyText('Wibi2077');
+    if (onCopy) onCopy(ok ? '微信号已复制！添加请备注：进AIGC学习群' : COPY_FAIL_MSG, ok ? 'success' : 'error');
   };
 
   return (

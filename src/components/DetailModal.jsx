@@ -26,6 +26,7 @@ import {
 } from 'lucide-react';
 import { GithubIcon } from './Icons';
 import { ImageLightbox } from './ImageLightbox';
+import { copyText, COPY_FAIL_MSG } from '../utils/copy';
 
 export function DetailModal({
   item,
@@ -66,6 +67,7 @@ export function DetailModal({
   const [newImageUrl, setNewImageUrl] = useState('');
   const fileInputRef = useRef(null);
   const tagInputRef = useRef(null);
+  const backdropDownRef = useRef(false);
 
   // Sync editData when item changes or modal opens
   useEffect(() => {
@@ -90,6 +92,19 @@ export function DetailModal({
     setNewImageUrl('');
     setTagSuggestionsOpen(false);
   }, [item, isOpen]);
+
+  // Esc 关闭弹窗。三种情况让位：lightbox 自己接管、标签下拉自己接管、
+  // 编辑中不关（避免一键丢掉未保存的修改，取消要显式点「取消」）。
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKeyDown = (e) => {
+      if (e.key !== 'Escape') return;
+      if (lightboxOpen || tagSuggestionsOpen || isEditing) return;
+      onClose();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isOpen, lightboxOpen, tagSuggestionsOpen, isEditing, onClose]);
 
   // --- Obsidian-Style Tag Handlers ---
   const tagSuggestions = useMemo(() => {
@@ -215,8 +230,9 @@ export function DetailModal({
     setIsEditing(false);
   };
 
-  const handleCopyPrompt = () => {
-    navigator.clipboard.writeText(item.prompt || item.description);
+  const handleCopyPrompt = async () => {
+    const ok = await copyText(item.prompt || item.description);
+    if (!ok) return onCopy && onCopy(COPY_FAIL_MSG, 'error');
     setCopiedPrompt(true);
     if (onCopy) onCopy('提示词已完整复制到剪贴板');
     setTimeout(() => setCopiedPrompt(false), 2000);
@@ -250,23 +266,26 @@ export function DetailModal({
 
   const chatInvocationCmd = getChatInvocationCommand(item);
 
-  const handleCopyCmd = () => {
-    navigator.clipboard.writeText(chatInvocationCmd || item.command || item.prompt);
+  const handleCopyCmd = async () => {
+    const ok = await copyText(chatInvocationCmd || item.command || item.prompt);
+    if (!ok) return onCopy && onCopy(COPY_FAIL_MSG, 'error');
     setCopiedCmd(true);
     if (onCopy) onCopy('调用指令已复制');
     setTimeout(() => setCopiedCmd(false), 2000);
   };
 
-  const handleCopyInstallCmd = () => {
-    navigator.clipboard.writeText(item.install_command || item.command);
+  const handleCopyInstallCmd = async () => {
+    const ok = await copyText(item.install_command || item.command);
+    if (!ok) return onCopy && onCopy(COPY_FAIL_MSG, 'error');
     setCopiedInstallCmd(true);
     if (onCopy) onCopy('安装指令已复制');
     setTimeout(() => setCopiedInstallCmd(false), 2000);
   };
 
-  const handleCopyMotion = () => {
+  const handleCopyMotion = async () => {
     if (!item?.motion_prompt) return;
-    navigator.clipboard.writeText(item.motion_prompt);
+    const ok = await copyText(item.motion_prompt);
+    if (!ok) return onCopy && onCopy(COPY_FAIL_MSG, 'error');
     setCopiedMotion(true);
     if (onCopy) onCopy('运镜提示词已复制');
     setTimeout(() => setCopiedMotion(false), 2000);
@@ -291,7 +310,10 @@ export function DetailModal({
     <>
       <div 
         className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 overflow-y-auto animate-fadeIn"
-        onClick={onClose}
+        onPointerDown={(e) => { backdropDownRef.current = e.target === e.currentTarget; }}
+        onClick={(e) => {
+          if (e.target === e.currentTarget && backdropDownRef.current) onClose();
+        }}
       >
         <div 
           className="relative w-full max-w-4xl lg:max-w-5xl bg-white dark:bg-[#101014] rounded-2xl sm:rounded-3xl shadow-2xl border border-black/[0.08] dark:border-white/[0.12] overflow-hidden my-auto max-h-[92vh] flex flex-col text-[#1d1d1f] dark:text-zinc-100"
