@@ -101,7 +101,7 @@ export function Navbar({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="搜索风格、Skill、GitHub 仓库、作者...（按 / 聚焦）"
-                className="w-full pl-10 pr-14 py-2 bg-[#f5f5f7]/90 dark:bg-[#141417] hover:bg-[#efeff2] dark:hover:bg-[#1a1a1e] focus:bg-white dark:focus:bg-[#18181c] border border-black/[0.08] dark:border-white/[0.1] focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/20 rounded-full text-xs text-[#1d1d1f] dark:text-white placeholder-[#86868b] dark:placeholder-zinc-500 transition-all outline-none shadow-2xs"
+                className="w-full pl-10 pr-14 py-1.5 sm:py-2 bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.06] dark:hover:bg-white/[0.08] focus:bg-white dark:focus:bg-[#18181c] focus:ring-1 focus:ring-black/10 dark:focus:ring-white/15 rounded-full text-xs text-[#1d1d1f] dark:text-white placeholder-[#86868b] dark:placeholder-zinc-500 transition-all outline-none"
               />
               <div className="absolute right-3 flex items-center gap-1.5">
                 {searchQuery && (
@@ -113,7 +113,7 @@ export function Navbar({
                     <X className="w-3.5 h-3.5" />
                   </button>
                 )}
-                <kbd className="hidden sm:inline-block text-[11px] font-mono text-[#86868b] dark:text-zinc-500 bg-white dark:bg-zinc-800 px-2 py-0.5 rounded-full border border-black/[0.08] dark:border-white/[0.1] shadow-2xs">
+                <kbd className="hidden sm:inline-block text-[11px] font-mono text-[#86868b] dark:text-zinc-500 bg-black/[0.04] dark:bg-white/[0.08] px-1.5 py-0.5 rounded-md">
                   /
                 </kbd>
               </div>
@@ -123,17 +123,17 @@ export function Navbar({
           {/* Action Buttons */}
           <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
             
-            {/* Mobile Search Toggle Button (icon only) */}
+            {/* Mobile Search Toggle Button (Borderless Ghost) */}
             <button
               onClick={() => {
                 const next = !isMobileSearchOpen;
                 setIsMobileSearchOpen(next);
                 if (next) setTimeout(() => mobileInputRef.current?.focus(), 120);
               }}
-              className={`p-1.5 rounded-xl border transition-all md:hidden cursor-pointer ${
+              className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all md:hidden cursor-pointer active:scale-95 ${
                 isMobileSearchOpen || searchQuery
-                  ? 'bg-[#18181b] dark:bg-white text-white dark:text-black border-[#18181b] dark:border-white shadow-2xs'
-                  : 'bg-white dark:bg-[#141417] border-black/[0.08] dark:border-white/[0.08] text-[#515154] dark:text-zinc-300'
+                  ? 'bg-black/[0.08] dark:bg-white/[0.14] text-[#1d1d1f] dark:text-white font-medium'
+                  : 'hover:bg-black/[0.05] dark:hover:bg-white/[0.07] text-[#515154] dark:text-zinc-300 hover:text-[#1d1d1f] dark:hover:text-white'
               }`}
               title="搜索"
               aria-label="搜索"
@@ -141,13 +141,13 @@ export function Navbar({
               <Search className="w-3.5 h-3.5" />
             </button>
 
-            {/* Mode Switcher: Gallery vs Sketchbook (Desktop/Tablet only) */}
-            <div className="hidden md:flex items-center bg-[#f5f5f7] dark:bg-[#18181c] border border-black/[0.08] dark:border-white/[0.08] rounded-xl p-0.5 shadow-2xs">
+            {/* Mode Switcher: Gallery vs Sketchbook (Desktop/Tablet Borderless Pill) */}
+            <div className="hidden md:flex items-center bg-black/[0.04] dark:bg-white/[0.06] rounded-xl p-0.5">
               <button
                 onClick={() => setAppMode('gallery')}
                 className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                   appMode === 'gallery'
-                    ? 'bg-white dark:bg-white text-[#1d1d1f] dark:text-[#09090b] shadow-xs font-semibold'
+                    ? 'bg-white dark:bg-[#1f1f24] text-[#1d1d1f] dark:text-white shadow-2xs font-semibold'
                     : 'text-[#6e6e73] dark:text-zinc-400 hover:text-[#1d1d1f] dark:hover:text-white'
                 }`}
                 title="瀑布流画廊视图"
@@ -159,7 +159,7 @@ export function Navbar({
                 onClick={() => setAppMode('sketchbook')}
                 className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-all cursor-pointer ${
                   appMode === 'sketchbook'
-                    ? 'bg-amber-900 dark:bg-amber-400 text-white dark:text-amber-950 shadow-xs font-serif font-bold'
+                    ? 'bg-amber-900 dark:bg-amber-400 text-white dark:text-amber-950 shadow-2xs font-serif font-bold'
                     : 'text-[#6e6e73] dark:text-zinc-400 hover:text-[#1d1d1f] dark:hover:text-white'
                 }`}
                 title="拟真手账速写本视图"
@@ -169,30 +169,30 @@ export function Navbar({
               </button>
             </div>
 
-            {/* Community & About Entrance */}
+            {/* Community & About Entrance (Borderless Ghost) */}
             <button
               onClick={onOpenAbout}
-              className="flex items-center gap-0.5 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-[#141417] hover:bg-[#fafafc] dark:hover:bg-[#1c1c22] border border-black/[0.08] dark:border-white/[0.08] text-[#515154] dark:text-zinc-300 hover:text-[#1d1d1f] dark:hover:text-white shadow-2xs transition-all cursor-pointer select-none"
+              className="flex items-center gap-0.5 px-2.5 py-1.5 rounded-xl text-xs font-medium hover:bg-black/[0.05] dark:hover:bg-white/[0.07] text-[#515154] dark:text-zinc-300 hover:text-[#1d1d1f] dark:hover:text-white transition-all cursor-pointer select-none active:scale-95"
               title="查看社群、致谢与关于"
             >
               <span className="text-[11px] sm:text-xs">关于</span>
               <span className="text-[9px] text-[#86868b] dark:text-zinc-500">▾</span>
             </button>
 
-            {/* Shuffle / Randomize (Desktop/Tablet only) */}
+            {/* Shuffle / Randomize (Desktop/Tablet Borderless Ghost) */}
             <button
               onClick={onShuffle}
-              className="hidden md:flex items-center justify-center sm:px-3 sm:py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-[#141417] border border-black/[0.08] dark:border-white/[0.08] text-[#515154] dark:text-zinc-300 hover:border-black/[0.15] dark:hover:border-white/[0.18] hover:text-[#1d1d1f] dark:hover:text-white shadow-2xs transition-all cursor-pointer"
+              className="hidden md:flex items-center justify-center px-2.5 py-1.5 rounded-xl text-xs font-medium hover:bg-black/[0.05] dark:hover:bg-white/[0.07] text-[#515154] dark:text-zinc-300 hover:text-[#1d1d1f] dark:hover:text-white transition-all cursor-pointer active:scale-95"
               title="随机打乱排序 / 换一批灵感"
             >
               <Shuffle className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400 mr-1.5" />
               <span>换一批</span>
             </button>
 
-            {/* Dark Mode Switcher */}
+            {/* Dark Mode Switcher (Borderless Ghost) */}
             <button
               onClick={onToggleTheme}
-              className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-white dark:bg-[#141417] border border-black/[0.08] dark:border-white/[0.08] text-[#515154] dark:text-zinc-300 hover:border-black/[0.15] dark:hover:border-white/[0.18] hover:text-[#1d1d1f] dark:hover:text-white shadow-2xs transition-all cursor-pointer"
+              className="flex items-center justify-center w-8 h-8 rounded-xl hover:bg-black/[0.05] dark:hover:bg-white/[0.07] text-[#515154] dark:text-zinc-300 hover:text-[#1d1d1f] dark:hover:text-white transition-all cursor-pointer active:scale-95"
               title={theme === 'dark' ? '切换为亮色模式' : '切换为暗黑模式'}
             >
               {theme === 'dark' ? (
@@ -202,13 +202,13 @@ export function Navbar({
               )}
             </button>
 
-            {/* View Mode Toggle (Desktop only) */}
-            <div className="hidden lg:flex items-center bg-[#f5f5f7] dark:bg-[#18181c] border border-black/[0.06] dark:border-white/[0.08] rounded-xl p-0.5">
+            {/* View Mode Toggle (Desktop only Borderless Pill) */}
+            <div className="hidden lg:flex items-center bg-black/[0.04] dark:bg-white/[0.06] rounded-xl p-0.5">
               <button
                 onClick={() => setViewMode('grid')}
                 className={`p-1.5 rounded-lg transition-all ${
                   viewMode === 'grid' 
-                    ? 'bg-white dark:bg-white text-[#1d1d1f] dark:text-[#09090b] shadow-xs' 
+                    ? 'bg-white dark:bg-[#1f1f24] text-[#1d1d1f] dark:text-white shadow-2xs' 
                     : 'text-[#86868b] dark:text-zinc-400 hover:text-[#1d1d1f] dark:hover:text-white'
                 }`}
                 title="海报网格视图"
@@ -219,7 +219,7 @@ export function Navbar({
                 onClick={() => setViewMode('list')}
                 className={`p-1.5 rounded-lg transition-all ${
                   viewMode === 'list' 
-                    ? 'bg-white dark:bg-white text-[#1d1d1f] dark:text-[#09090b] shadow-xs' 
+                    ? 'bg-white dark:bg-[#1f1f24] text-[#1d1d1f] dark:text-white shadow-2xs' 
                     : 'text-[#86868b] dark:text-zinc-400 hover:text-[#1d1d1f] dark:hover:text-white'
                 }`}
                 title="列表视图"
@@ -289,7 +289,7 @@ export function Navbar({
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="搜索风格、Skill、作者..."
-                className="w-full pl-8 pr-14 py-1.5 bg-[#f5f5f7]/90 dark:bg-[#141417] hover:bg-[#efeff2] dark:hover:bg-[#1a1a1e] focus:bg-white dark:focus:bg-[#18181c] border border-black/[0.08] dark:border-white/[0.1] focus:border-indigo-500 dark:focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/20 rounded-full text-xs text-[#1d1d1f] dark:text-white placeholder-[#86868b] dark:placeholder-zinc-500 transition-all outline-none shadow-2xs min-w-0"
+                className="w-full pl-8 pr-14 py-1.5 bg-black/[0.04] dark:bg-white/[0.06] hover:bg-black/[0.06] dark:hover:bg-white/[0.08] focus:bg-white dark:focus:bg-[#18181c] focus:ring-1 focus:ring-black/10 dark:focus:ring-white/15 rounded-full text-xs text-[#1d1d1f] dark:text-white placeholder-[#86868b] dark:placeholder-zinc-500 transition-all outline-none min-w-0"
               />
               <div className="absolute right-2 flex items-center gap-1">
                 {searchQuery && (
