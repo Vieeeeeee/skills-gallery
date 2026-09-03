@@ -40,9 +40,40 @@ export function SketchbookView({
   const loupeRef = useRef(null);
   const capBoxRef = useRef(null);
   const hintRef = useRef(null);
-  const plateListRef = useRef(null);
 
-  // Prepare pages dataset: Singapore sketches + generated custom style spreads
+  // Category filtering state ("按类浏览")
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [isCatMenuOpen, setIsCatMenuOpen] = useState(false);
+
+  // Group unique categories
+  const categoryOptions = useMemo(() => {
+    if (!items || items.length === 0) return [];
+    const counts = {};
+    items.forEach(it => {
+      const c = it.category || '未分类';
+      counts[c] = (counts[c] || 0) + 1;
+    });
+    const list = Object.entries(counts)
+      .map(([name, count]) => ({ id: name, label: name, count }))
+      .sort((a, b) => b.count - a.count);
+    return [
+      { id: 'all', label: '全部灵感', count: items.length },
+      { id: 'type:style', label: '🎨 视觉风格提示词', count: items.filter(it => it.type === 'style').length },
+      { id: 'type:skill', label: '⚡ 开源技能', count: items.filter(it => it.type === 'skill').length },
+      ...list
+    ];
+  }, [items]);
+
+  // Filter items by category
+  const filteredItems = useMemo(() => {
+    if (!items) return [];
+    if (selectedCategory === 'all') return items;
+    if (selectedCategory === 'type:style') return items.filter(it => it.type === 'style');
+    if (selectedCategory === 'type:skill') return items.filter(it => it.type === 'skill');
+    return items.filter(it => it.category === selectedCategory);
+  }, [items, selectedCategory]);
+
+  // Prepare pages dataset: generated custom style spreads
   const [pages, setPages] = useState([]);
 
   useEffect(() => {
@@ -50,9 +81,12 @@ export function SketchbookView({
 
     async function loadPages() {
       // 100% Pure project items — Zero external demo items
-      if (!items || items.length === 0) return;
+      if (!filteredItems || filteredItems.length === 0) {
+        setPages([]);
+        return;
+      }
 
-      const spreadItems = items.slice(0, 60);
+      const spreadItems = filteredItems.slice(0, 60);
 
       const spreadList = spreadItems.map((item, i) => ({
         ...item,
@@ -97,7 +131,7 @@ export function SketchbookView({
 
     loadPages();
     return () => { isMounted = false; };
-  }, [items]);
+  }, [filteredItems]);
 
   useEffect(() => {
     const book = bookRef.current;
@@ -609,22 +643,6 @@ export function SketchbookView({
     };
     window.addEventListener('keydown', onKeyDown);
 
-    // Populate Plates List
-    if (plateList) {
-      plateList.textContent = '';
-      pages.forEach((p, i) => {
-        const li = el('li');
-        const b = el('button', 'sb-plate');
-        b.innerHTML = '<span class="n">' + String(i + 1).padStart(2, '0') + '</span>' +
-                      '<span class="t">' + cleanTitle(p.title) + '</span><span class="p">' + (p.place || '') + '</span>';
-        b.onclick = () => {
-          goTo(i);
-          document.getElementById('sbStage')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        };
-        li.appendChild(b);
-        plateList.appendChild(li);
-      });
-    }
 
     // Opening Riffle
     function endIntro() {
@@ -747,27 +765,108 @@ export function SketchbookView({
   };
 
   return (
-    <div ref={containerRef} className="sb-container fixed inset-0 z-50 overflow-y-auto">
+    <div ref={containerRef} className="sb-container fixed inset-0 z-50 h-screen w-screen overflow-hidden flex flex-col justify-between">
       {/* Background painted watercolor ground */}
       <div className="sb-wash" aria-hidden="true" />
 
       {/* Top Header Bar */}
       <header className="sb-top">
-        <div className="sb-brand">
-          <BookOpen className="w-5 h-5 text-amber-900/80" />
-          <span>Prompt & Skill · 风格速写本</span>
+        <div className="flex items-center gap-4">
+          <div className="sb-brand">
+            <BookOpen className="w-5 h-5 text-amber-900/80" />
+            <span>Prompt & Skill · 风格速写本</span>
+          </div>
+
+          {/* Borderless Floating Category Browser (按类浏览) */}
+          <div 
+            className="relative"
+            onMouseEnter={() => setIsCatMenuOpen(true)}
+            onMouseLeave={() => setIsCatMenuOpen(false)}
+          >
+            <button 
+              onClick={() => setIsCatMenuOpen(prev => !prev)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-serif text-amber-950/80 hover:text-amber-950 hover:bg-amber-900/10 border border-amber-900/20 bg-amber-900/5 transition-all shadow-2xs cursor-pointer"
+              title="按类切换速写本"
+            >
+              <span>按类浏览</span>
+              <span className="text-[10px] opacity-60">▾</span>
+              {selectedCategory !== 'all' && (
+                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-900/15 text-amber-950 font-sans font-medium">
+                  {categoryOptions.find(c => c.id === selectedCategory)?.label || selectedCategory}
+                </span>
+              )}
+            </button>
+
+            {isCatMenuOpen && (
+              <div className="absolute left-0 top-full mt-1.5 w-52 py-2 bg-[#f6f2e9]/95 backdrop-blur-md rounded-2xl shadow-[0_16px_36px_rgba(60,40,20,0.18)] border border-amber-900/15 z-50 animate-scale-in">
+                <div className="px-3.5 py-1 text-[10px] font-mono tracking-widest text-amber-900/60 uppercase">
+                  选择画册分类
+                </div>
+                <div className="max-h-64 overflow-y-auto scrollbar-none py-1">
+                  {categoryOptions.map(cat => (
+                    <button
+                      key={cat.id}
+                      onClick={() => {
+                        setSelectedCategory(cat.id);
+                        setIsCatMenuOpen(false);
+                      }}
+                      className={`w-full text-left px-3.5 py-1.5 text-xs transition-colors flex items-center justify-between font-serif ${
+                        selectedCategory === cat.id 
+                          ? 'text-amber-950 font-bold bg-amber-900/15' 
+                          : 'text-amber-900/80 hover:text-amber-950 hover:bg-amber-900/5'
+                      }`}
+                    >
+                      <span className="truncate pr-2">{cat.label}</span>
+                      <span className="text-[10px] font-mono opacity-60 shrink-0">({cat.count})</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-        <nav aria-label="primary">
-          <a href="#plates">画册目录</a>
-          <button onClick={() => window.location.hash = '#plates'}>按类浏览</button>
+
+        {/* Right Tools & Exit */}
+        <div className="flex items-center gap-3">
+          {/* Zoom controls */}
+          <div className="sb-tools flex items-center" role="group" aria-label="view controls">
+            <button className="sb-tool-btn" id="zOut" aria-label="zoom out">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+                <circle cx="8.6" cy="8.6" r="5.6"/>
+                <path d="M12.8 12.8 17.4 17.4M6.2 8.6h4.8"/>
+              </svg>
+            </button>
+            <span className="sb-zoom-read" id="zRead">{zoomText}</span>
+            <button className="sb-tool-btn" id="zIn" aria-label="zoom in">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+                <circle cx="8.6" cy="8.6" r="5.6"/>
+                <path d="M12.8 12.8 17.4 17.4M6.2 8.6h4.8M8.6 6.2v4.8"/>
+              </svg>
+            </button>
+            <span className="sb-tool-sep" aria-hidden="true" />
+            <button 
+              className="sb-tool-btn" 
+              id="loupeBtn" 
+              aria-label="magnifier" 
+              aria-pressed={loupeActive ? 'true' : 'false'}
+              title="切换放大镜"
+            >
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+                <circle cx="8.8" cy="8.8" r="5.8"/>
+                <path d="M13 13l4.4 4.4"/>
+                <path d="M6.4 7.2a3.2 3.2 0 0 1 2.4-1.4" opacity=".55"/>
+              </svg>
+            </button>
+          </div>
+
           <button 
             onClick={onExit}
             className="sb-exit-btn"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>返回画板总览</span>
+            <span>返回画廊</span>
           </button>
-        </nav>
+        </div>
       </header>
 
       {/* Hero 3D Sketchbook Section */}
@@ -780,7 +879,7 @@ export function SketchbookView({
         </p>
 
         <div className="sb-wrap" id="sbWrap">
-          {/* Motion blur filters for opening riffle */}
+          {/* Motion blur filters */}
           <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true">
             <filter id="sb-mblur-1"><feGaussianBlur stdDeviation="5 0"/></filter>
             <filter id="sb-mblur-2"><feGaussianBlur stdDeviation="14 0"/></filter>
@@ -827,8 +926,8 @@ export function SketchbookView({
             </button>
           </div>
 
-          {/* Caption & Interactive Action bar */}
-          <div className="flex flex-col items-center gap-2">
+          {/* Caption & Interactive Action bar (Directly below book) */}
+          <div className="flex flex-col items-center gap-1.5 pt-1">
             <div 
               className="sb-captions cursor-pointer hover:opacity-80 transition-opacity" 
               id="sbCaptions" 
@@ -838,7 +937,7 @@ export function SketchbookView({
             />
             
             {activeItem && (
-              <div className="flex items-center gap-2.5 pt-1">
+              <div className="flex items-center gap-2.5 pt-0.5">
                 <button
                   onClick={handleCopyCurrentPrompt}
                   className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-amber-900/10 hover:bg-amber-900/20 border border-amber-900/25 text-amber-950 text-xs font-serif font-bold shadow-2xs transition-all cursor-pointer hover:scale-[1.02]"
@@ -860,56 +959,11 @@ export function SketchbookView({
             )}
           </div>
 
-          {/* Tools bar */}
-          <div className="sb-tools" role="group" aria-label="view controls">
-            <button className="sb-tool-btn" id="zOut" aria-label="zoom out">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
-                <circle cx="8.6" cy="8.6" r="5.6"/>
-                <path d="M12.8 12.8 17.4 17.4M6.2 8.6h4.8"/>
-              </svg>
-            </button>
-            <span className="sb-zoom-read" id="zRead">{zoomText}</span>
-            <button className="sb-tool-btn" id="zIn" aria-label="zoom in">
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
-                <circle cx="8.6" cy="8.6" r="5.6"/>
-                <path d="M12.8 12.8 17.4 17.4M6.2 8.6h4.8M8.6 6.2v4.8"/>
-              </svg>
-            </button>
-            <span className="sb-tool-sep" aria-hidden="true" />
-            <button 
-              className="sb-tool-btn" 
-              id="loupeBtn" 
-              aria-label="magnifier" 
-              aria-pressed={loupeActive ? 'true' : 'false'}
-            >
-              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
-                <circle cx="8.8" cy="8.8" r="5.8"/>
-                <path d="M13 13l4.4 4.4"/>
-                <path d="M6.4 7.2a3.2 3.2 0 0 1 2.4-1.4" opacity=".55"/>
-              </svg>
-            </button>
-          </div>
-
           <p className="sb-hint" id="sbHint" ref={hintRef}>
             拖动页面翻页 · 拖动铜制放大镜观察笔触
           </p>
         </div>
       </section>
-
-      <div className="sb-rule" aria-hidden="true" />
-
-      {/* Plates / Table of Contents Section */}
-      <section id="plates" className="sb-plates">
-        <p className="sb-section-label">速写本目录 · Plates & Styles</p>
-        <ol className="sb-plate-list" id="plateList" ref={plateListRef} />
-      </section>
-
-      <div className="sb-rule short" aria-hidden="true" />
-
-      {/* Footer */}
-      <footer className="text-center pb-12 pt-4 text-xs font-mono text-amber-900/50 uppercase tracking-widest">
-        Skills & 风格大赏 · MengTo Sketchbook Edition · Open Source
-      </footer>
     </div>
   );
 }

@@ -109,12 +109,12 @@ export function Navbar({
           <div className="flex items-center gap-2 shrink-0">
             
             {/* Mode Switcher: Gallery vs Sketchbook */}
-            <div className="flex items-center bg-[#f5f5f7] dark:bg-[#141417] border border-black/[0.08] dark:border-white/[0.08] rounded-xl p-0.5 shadow-2xs">
+            <div className="flex items-center bg-[#f5f5f7] dark:bg-[#18181c] border border-black/[0.08] dark:border-white/[0.08] rounded-xl p-0.5 shadow-2xs">
               <button
                 onClick={() => setAppMode('gallery')}
                 className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
                   appMode === 'gallery'
-                    ? 'bg-white dark:bg-[#222226] text-[#1d1d1f] dark:text-white shadow-xs font-semibold'
+                    ? 'bg-white dark:bg-white text-[#1d1d1f] dark:text-[#09090b] shadow-xs font-semibold'
                     : 'text-[#6e6e73] dark:text-zinc-400 hover:text-[#1d1d1f] dark:hover:text-white'
                 }`}
                 title="瀑布流画廊视图"
@@ -126,7 +126,7 @@ export function Navbar({
                 onClick={() => setAppMode('sketchbook')}
                 className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${
                   appMode === 'sketchbook'
-                    ? 'bg-amber-900 text-white shadow-xs font-serif font-bold'
+                    ? 'bg-amber-900 dark:bg-amber-400 text-white dark:text-amber-950 shadow-xs font-serif font-bold'
                     : 'text-[#6e6e73] dark:text-zinc-400 hover:text-[#1d1d1f] dark:hover:text-white'
                 }`}
                 title="拟真手账速写本视图"
@@ -160,47 +160,53 @@ export function Navbar({
             </button>
 
             {/* View Mode Toggle */}
-            <div className="hidden lg:flex items-center bg-[#f5f5f7] dark:bg-[#141417] border border-black/[0.06] dark:border-white/[0.08] rounded-xl p-0.5">
+            <div className="hidden lg:flex items-center bg-[#f5f5f7] dark:bg-[#18181c] border border-black/[0.06] dark:border-white/[0.08] rounded-xl p-0.5">
               <button
                 onClick={() => setViewMode('grid')}
-                className={`p-1.5 rounded-lg transition-all ${viewMode === 'grid' ? 'bg-white dark:bg-[#222226] text-[#1d1d1f] dark:text-white shadow-xs' : 'text-[#86868b] dark:text-zinc-400 hover:text-[#1d1d1f] dark:hover:text-white'}`}
+                className={`p-1.5 rounded-lg transition-all ${
+                  viewMode === 'grid' 
+                    ? 'bg-white dark:bg-white text-[#1d1d1f] dark:text-[#09090b] shadow-xs' 
+                    : 'text-[#86868b] dark:text-zinc-400 hover:text-[#1d1d1f] dark:hover:text-white'
+                }`}
                 title="海报网格视图"
               >
                 <LayoutGrid className="w-3.5 h-3.5" />
               </button>
               <button
                 onClick={() => setViewMode('list')}
-                className={`p-1.5 rounded-lg transition-all ${viewMode === 'list' ? 'bg-white dark:bg-[#222226] text-[#1d1d1f] dark:text-white shadow-xs' : 'text-[#86868b] dark:text-zinc-400 hover:text-[#1d1d1f] dark:hover:text-white'}`}
+                className={`p-1.5 rounded-lg transition-all ${
+                  viewMode === 'list' 
+                    ? 'bg-white dark:bg-white text-[#1d1d1f] dark:text-[#09090b] shadow-xs' 
+                    : 'text-[#86868b] dark:text-zinc-400 hover:text-[#1d1d1f] dark:hover:text-white'
+                }`}
                 title="列表视图"
               >
                 <List className="w-3.5 h-3.5" />
               </button>
             </div>
 
-            {/* Export JSON */}
-            <button
-              onClick={onExportJson}
-              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-[#141417] border border-black/[0.08] dark:border-white/[0.08] text-[#515154] dark:text-zinc-300 hover:border-black/[0.15] dark:hover:border-white/[0.18] hover:text-[#1d1d1f] dark:hover:text-white shadow-2xs transition-all"
-              title="导出全量 JSON 备份"
-            >
-              <Download className="w-3.5 h-3.5 text-[#86868b] dark:text-zinc-400" />
-              <span className="hidden xl:inline">备份</span>
-            </button>
-
             {/* Admin Controls (Discreet) */}
             {isAdmin ? (
-              <div className="flex items-center gap-1.5 bg-emerald-50/80 border border-emerald-200/80 rounded-xl p-0.5">
+              <div className="flex items-center gap-1.5 bg-emerald-50/80 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800 rounded-xl p-0.5">
+                <button
+                  onClick={onExportJson}
+                  className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium text-emerald-900 dark:text-emerald-300 hover:bg-emerald-100/60 dark:hover:bg-emerald-900/60 transition-colors"
+                  title="导出全量 JSON 备份"
+                >
+                  <Download className="w-3.5 h-3.5 text-emerald-700 dark:text-emerald-400" />
+                  <span>备份</span>
+                </button>
                 <button
                   onClick={onOpenUpload}
-                  className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium text-emerald-900 hover:bg-emerald-100/60 transition-colors"
+                  className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium text-emerald-900 dark:text-emerald-300 hover:bg-emerald-100/60 dark:hover:bg-emerald-900/60 transition-colors"
                   title="上传 Docx/JSON 增补"
                 >
-                  <UploadCloud className="w-3.5 h-3.5 text-emerald-700" />
+                  <UploadCloud className="w-3.5 h-3.5 text-emerald-700 dark:text-emerald-400" />
                   <span>增补</span>
                 </button>
                 <button
                   onClick={onOpenNewModal}
-                  className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#1d1d1f] hover:bg-black text-white shadow-xs transition-all"
+                  className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold bg-[#1d1d1f] dark:bg-white hover:bg-black dark:hover:bg-zinc-200 text-white dark:text-black shadow-xs transition-all"
                   title="手动新增"
                 >
                   <PlusCircle className="w-3 h-3" />
@@ -208,10 +214,10 @@ export function Navbar({
                 </button>
                 <button
                   onClick={onAdminToggle}
-                  className="p-1 rounded-lg text-emerald-800 hover:bg-emerald-200/60 transition-colors"
+                  className="p-1 rounded-lg text-emerald-800 dark:text-emerald-300 hover:bg-emerald-200/60 dark:hover:bg-emerald-900/60 transition-colors"
                   title="退出管理模式"
                 >
-                  <Unlock className="w-3.5 h-3.5 text-emerald-700" />
+                  <Unlock className="w-3.5 h-3.5 text-emerald-700 dark:text-emerald-400" />
                 </button>
               </div>
             ) : (

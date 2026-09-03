@@ -347,14 +347,14 @@ export function DetailModal({
             {/* Tags Row */}
             {item.tags && item.tags.length > 0 && (
               <div className="flex items-center gap-1.5 flex-wrap pt-1">
-                <span className="text-xs text-[#86868b] font-medium flex items-center gap-1 mr-1">
+                <span className="text-xs text-[#86868b] dark:text-zinc-400 font-medium flex items-center gap-1 mr-1">
                   <Tag className="w-3.5 h-3.5" />
                   标签:
                 </span>
                 {item.tags.map((tg, i) => (
                   <span 
                     key={i}
-                    className="text-xs px-2.5 py-1 rounded-lg bg-[#f5f5f7] text-[#515154] font-medium"
+                    className="text-xs px-2.5 py-1 rounded-lg bg-[#f5f5f7] dark:bg-white/[0.06] text-[#515154] dark:text-zinc-300 font-medium"
                   >
                     #{tg}
                   </span>
@@ -364,9 +364,9 @@ export function DetailModal({
 
             {/* Related Recommendations */}
             {relatedItems && relatedItems.length > 0 && (
-              <div className="pt-3 border-t border-black/[0.06] space-y-2.5">
-                <span className="text-xs font-semibold text-[#86868b] flex items-center gap-1.5">
-                  <Compass className="w-3.5 h-3.5 text-indigo-600" />
+              <div className="pt-3 border-t border-black/[0.06] dark:border-white/[0.08] space-y-2.5">
+                <span className="text-xs font-semibold text-[#86868b] dark:text-zinc-400 flex items-center gap-1.5">
+                  <Compass className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                   同分类灵感推荐
                 </span>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -374,12 +374,12 @@ export function DetailModal({
                     <button
                       key={rel.id}
                       onClick={() => onSelectRelated(rel)}
-                      className="p-2.5 rounded-xl bg-[#f8f8fa] hover:bg-[#f0f0f4] border border-black/[0.04] text-left transition-all group"
+                      className="p-2.5 rounded-xl bg-[#f8f8fa] dark:bg-[#16161c] hover:bg-[#f0f0f4] dark:hover:bg-[#1e1e24] border border-black/[0.04] dark:border-white/[0.06] text-left transition-all group"
                     >
-                      <div className="text-xs font-semibold text-[#1d1d1f] group-hover:text-indigo-600 truncate">
+                      <div className="text-xs font-semibold text-[#1d1d1f] dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 truncate">
                         {rel.title.replace(/^\[[^\]]+\]\s*/, '')}
                       </div>
-                      <div className="text-[11px] text-[#86868b] mt-0.5">
+                      <div className="text-[11px] text-[#86868b] dark:text-zinc-400 mt-0.5">
                         @{rel.author || '开源社区'}
                       </div>
                     </button>
@@ -391,8 +391,8 @@ export function DetailModal({
           </div>
 
           {/* Footer Action Bar */}
-          <div className="p-4 sm:p-5 border-t border-black/[0.06] bg-[#fafafc] flex items-center justify-between gap-3 shrink-0">
-            <span className="text-xs text-[#86868b] font-mono hidden sm:inline">
+          <div className="p-4 sm:p-5 border-t border-black/[0.06] dark:border-white/[0.08] bg-[#fafafc] dark:bg-[#141419] flex items-center justify-between gap-3 shrink-0">
+            <span className="text-xs text-[#86868b] dark:text-zinc-500 font-mono hidden sm:inline">
               ID: {item.id}
             </span>
 
@@ -427,7 +427,7 @@ export function DetailModal({
 
               <button
                 onClick={onClose}
-                className="px-4 py-2.5 rounded-xl bg-white hover:bg-[#f5f5f7] border border-black/[0.08] text-[#515154] hover:text-[#1d1d1f] text-xs font-semibold transition-all"
+                className="px-4 py-2.5 rounded-xl bg-white dark:bg-white/[0.08] hover:bg-[#f5f5f7] dark:hover:bg-white/[0.14] border border-black/[0.08] dark:border-white/[0.1] text-[#515154] dark:text-zinc-300 hover:text-[#1d1d1f] dark:hover:text-white text-xs font-semibold transition-all"
               >
                 关闭
               </button>

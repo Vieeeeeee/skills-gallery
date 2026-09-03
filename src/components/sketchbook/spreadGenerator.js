@@ -77,11 +77,11 @@ export async function generateSpreadImage(item, index) {
     ? { cx: 1275, cy: 620, maxW: 580, maxH: 490 }
     : { cx: 485, cy: 620, maxW: 580, maxH: 490 };
 
-  // 2. Draw Tipped-In Archival Artwork Page with Traditional Seal Stamp
-  await drawTippedInArtworkPage(ctx, item, index, artBounds);
+  // 2. Draw Artwork with watercolor feathered edge blending & Chinese cinnabar chop stamp beside it
+  await drawFeatheredArtworkPage(ctx, item, index, artBounds);
 
-  // 3. Draw Minimalist KingHwa OldSong Text Page (Serene, uncluttered)
-  drawKingHwaTextPage(ctx, item, index, textBounds);
+  // 3. Draw Clean, Balanced Text Page
+  drawCleanSerifTextPage(ctx, item, index, textBounds);
 
   const dataUrl = canvas.toDataURL('image/webp', 0.88);
   spreadCache.set(cacheKey, dataUrl);
@@ -89,46 +89,46 @@ export async function generateSpreadImage(item, index) {
 }
 
 /**
- * Draws the Minimal Text Page in KingHwa OldSong (京華老宋体)
- * Strictly minimal: Title + Author only, generous breathing room
+ * Draws the Minimal Text Page in Noto Serif SC (思源宋体) & Songti SC
+ * Strictly minimal: Title + Author only, generous breathing room, balanced weights
  */
-function drawKingHwaTextPage(ctx, item, index, bounds) {
+function drawCleanSerifTextPage(ctx, item, index, bounds) {
   const { x, cy, maxW } = bounds;
 
   ctx.save();
 
   // 1. Top Plate Label & Category
   const plateNum = String(index + 1).padStart(3, '0');
-  const catLabel = (item.category || (item.type === 'skill' ? '开源技能' : '视觉风格')).toUpperCase();
+  const catLabel = item.category || (item.type === 'skill' ? '开源技能' : '视觉风格');
   
-  ctx.font = '500 15px "KingHwaOldSong", "Songti SC", "STSong", serif';
+  ctx.font = '500 15px "Playfair Display", "Noto Serif SC", "Songti SC", serif';
   ctx.fillStyle = 'rgba(135, 105, 75, 0.75)';
   ctx.textAlign = 'left';
-  ctx.fillText('PLATE № ' + plateNum + '  ·  ' + catLabel, x, cy - 130);
+  ctx.fillText('PLATE № ' + plateNum + '  ·  ' + catLabel, x, cy - 128);
 
   // 2. Delicate hairline divider
-  ctx.strokeStyle = 'rgba(135, 105, 75, 0.25)';
+  ctx.strokeStyle = 'rgba(135, 105, 75, 0.22)';
   ctx.lineWidth = 1;
   ctx.beginPath();
-  ctx.moveTo(x, cy - 112);
-  ctx.lineTo(x + 160, cy - 112);
+  ctx.moveTo(x, cy - 110);
+  ctx.lineTo(x + 160, cy - 110);
   ctx.stroke();
 
-  // 3. Main Name (Cleaned, KingHwa OldSong, Large Scale & Generous Whitespace)
+  // 3. Main Name (Cleaned, Noto Serif SC, Large Scale & Generous Whitespace)
   const title = cleanTitle(item.title);
 
-  ctx.fillStyle = '#221911';
-  let fontSize = 42;
-  if (title.length > 20) fontSize = 32;
-  else if (title.length > 12) fontSize = 36;
+  ctx.fillStyle = '#261b12';
+  let fontSize = 40;
+  if (title.length > 20) fontSize = 30;
+  else if (title.length > 12) fontSize = 34;
 
-  ctx.font = 'bold ' + fontSize + 'px "KingHwaOldSong", "Songti SC", "STSong", "Newsreader", serif';
+  ctx.font = '600 ' + fontSize + 'px "Noto Serif SC", "Songti SC", "STSong", serif';
   
-  const titleStartY = cy - (fontSize * 0.7);
+  const titleStartY = cy - (fontSize * 0.65);
   wrapText(ctx, title, x, titleStartY, maxW - 20, fontSize * 1.45, 3);
 
-  // 4. Clean Author Attribution (KingHwa OldSong Italic)
-  ctx.font = 'italic 16px "KingHwaOldSong", "Newsreader", "Songti SC", serif';
+  // 4. Clean Author Attribution
+  ctx.font = 'italic 16px "Playfair Display", "Noto Serif SC", "Songti SC", serif';
   ctx.fillStyle = 'rgba(145, 115, 85, 0.82)';
   
   const authorText = item.author ? ('@' + item.author) : '@威比 Hunter Wei.';
@@ -138,9 +138,9 @@ function drawKingHwaTextPage(ctx, item, index, bounds) {
 }
 
 /**
- * Draws Artwork as a tipped-in archival print with authentic tactile borders
+ * Draws Artwork with watercolor feathering blending smoothly into paper texture
  */
-async function drawTippedInArtworkPage(ctx, item, index, bounds) {
+async function drawFeatheredArtworkPage(ctx, item, index, bounds) {
   const { cx, cy, maxW, maxH } = bounds;
   const imageSrc = item.cover_image || (item.images && item.images[0]);
 
@@ -159,37 +159,86 @@ async function drawTippedInArtworkPage(ctx, item, index, bounds) {
       const drawX = cx - drawW / 2;
       const drawY = cy - drawH / 2;
 
-      // Draw subtle tactile physical paper relief shadow (NOT digital blur)
+      // Create offscreen canvas for feathered artwork
+      const artCanvas = document.createElement('canvas');
+      artCanvas.width = drawW;
+      artCanvas.height = drawH;
+      const artCtx = artCanvas.getContext('2d');
+
+      // Draw image
+      artCtx.drawImage(img, 0, 0, drawW, drawH);
+
+      // Apply soft watercolor feathered edge mask
+      artCtx.globalCompositeOperation = 'destination-in';
+      
+      const featherSize = Math.max(16, Math.min(32, Math.min(drawW, drawH) * 0.08));
+      
+      const maskCanvas = document.createElement('canvas');
+      maskCanvas.width = drawW;
+      maskCanvas.height = drawH;
+      const maskCtx = maskCanvas.getContext('2d');
+
+      maskCtx.fillStyle = '#ffffff';
+      maskCtx.fillRect(featherSize, featherSize, drawW - featherSize * 2, drawH - featherSize * 2);
+
+      // Top feather
+      const gTop = maskCtx.createLinearGradient(0, 0, 0, featherSize);
+      gTop.addColorStop(0, 'rgba(255,255,255,0)');
+      gTop.addColorStop(0.35, 'rgba(255,255,255,0.12)');
+      gTop.addColorStop(0.75, 'rgba(255,255,255,0.72)');
+      gTop.addColorStop(1, 'rgba(255,255,255,1)');
+      maskCtx.fillStyle = gTop;
+      maskCtx.fillRect(featherSize, 0, drawW - featherSize * 2, featherSize);
+
+      // Bottom feather
+      const gBot = maskCtx.createLinearGradient(0, drawH - featherSize, 0, drawH);
+      gBot.addColorStop(0, 'rgba(255,255,255,1)');
+      gBot.addColorStop(0.25, 'rgba(255,255,255,0.72)');
+      gBot.addColorStop(0.65, 'rgba(255,255,255,0.12)');
+      gBot.addColorStop(1, 'rgba(255,255,255,0)');
+      maskCtx.fillStyle = gBot;
+      maskCtx.fillRect(featherSize, drawH - featherSize, drawW - featherSize * 2, featherSize);
+
+      // Left feather
+      const gLeft = maskCtx.createLinearGradient(0, 0, featherSize, 0);
+      gLeft.addColorStop(0, 'rgba(255,255,255,0)');
+      gLeft.addColorStop(0.35, 'rgba(255,255,255,0.12)');
+      gLeft.addColorStop(0.75, 'rgba(255,255,255,0.72)');
+      gLeft.addColorStop(1, 'rgba(255,255,255,1)');
+      maskCtx.fillStyle = gLeft;
+      maskCtx.fillRect(0, featherSize, featherSize, drawH - featherSize * 2);
+
+      // Right feather
+      const gRight = maskCtx.createLinearGradient(drawW - featherSize, 0, drawW, 0);
+      gRight.addColorStop(0, 'rgba(255,255,255,1)');
+      gRight.addColorStop(0.25, 'rgba(255,255,255,0.72)');
+      gRight.addColorStop(0.65, 'rgba(255,255,255,0.12)');
+      gRight.addColorStop(1, 'rgba(255,255,255,0)');
+      maskCtx.fillStyle = gRight;
+      maskCtx.fillRect(drawW - featherSize, featherSize, featherSize, drawH - featherSize * 2);
+
+      // 4 corners radial vignettes
+      drawCornerVignette(maskCtx, 0, 0, featherSize, 0, 0);
+      drawCornerVignette(maskCtx, drawW - featherSize, 0, featherSize, drawW, 0);
+      drawCornerVignette(maskCtx, 0, drawH - featherSize, featherSize, 0, drawH);
+      drawCornerVignette(maskCtx, drawW - featherSize, drawH - featherSize, featherSize, drawW, drawH);
+
+      // Apply mask to art
+      artCtx.drawImage(maskCanvas, 0, 0);
+
+      // Draw onto main page with subtle tactile shadow
       ctx.save();
-      ctx.shadowColor = 'rgba(60, 42, 20, 0.14)';
+      ctx.shadowColor = 'rgba(60, 42, 20, 0.09)';
       ctx.shadowBlur = 16;
       ctx.shadowOffsetY = 6;
-      
-      // Archival mount mat behind image (gives fine print tactile presence)
-      ctx.fillStyle = '#faf6ed';
-      roundRect(ctx, drawX - 4, drawY - 4, drawW + 8, drawH + 8, 4);
-      ctx.fill();
+      ctx.drawImage(artCanvas, drawX, drawY);
       ctx.restore();
 
-      // Draw hairline archival border
-      ctx.save();
-      ctx.strokeStyle = 'rgba(140, 115, 85, 0.22)';
-      ctx.lineWidth = 1;
-      roundRect(ctx, drawX - 4, drawY - 4, drawW + 8, drawH + 8, 4);
-      ctx.stroke();
-      ctx.restore();
-
-      // Draw the image clipped to clean corners
-      ctx.save();
-      roundRect(ctx, drawX, drawY, drawW, drawH, 3);
-      ctx.clip();
-      ctx.drawImage(img, drawX, drawY, drawW, drawH);
-      ctx.restore();
-
-      // Stamped authentic vertical vermilion seal (SKILL vs PROMPT)
-      const sealX = drawX + drawW - 32;
-      const sealY = drawY + drawH - 52;
-      drawVerticalSealStamp(ctx, sealX, sealY, item.type === 'skill' ? 'skill' : 'prompt');
+      // Chinese Vermilion Seal Stamp: PLACED OUTSIDE/BESIDE THE IMAGE
+      // Lower right margin, staggered organically, NEVER overlapping the picture!
+      const stampX = drawX + drawW - 28;
+      const stampY = drawY + drawH + 16;
+      drawChineseChopStamp(ctx, stampX, stampY, item.type === 'skill' ? '技' : '賞');
 
     } catch (e) {
       drawMinimalFallbackArt(ctx, item, cx, cy, maxW, maxH);
@@ -199,65 +248,63 @@ async function drawTippedInArtworkPage(ctx, item, index, bounds) {
   }
 }
 
+function drawCornerVignette(ctx, x, y, size, cornerX, cornerY) {
+  const g = ctx.createRadialGradient(
+    cornerX === 0 ? size : x, cornerY === 0 ? size : y, 0,
+    cornerX === 0 ? size : x, cornerY === 0 ? size : y, size
+  );
+  g.addColorStop(0, 'rgba(255,255,255,1)');
+  g.addColorStop(0.35, 'rgba(255,255,255,0.65)');
+  g.addColorStop(0.7, 'rgba(255,255,255,0.08)');
+  g.addColorStop(1, 'rgba(255,255,255,0)');
+  ctx.fillStyle = g;
+  ctx.fillRect(x, y, size, size);
+}
+
 /**
- * Traditional Chinese Vermilion Ink Vertical Seal Stamp (SKILL / PROMPT)
- * Features double-line borders and cinnabar seal ink aesthetic
+ * Traditional Chinese Vermilion Ink Chop Seal Stamp
+ * Features authentic cinnabar ink, double-line border, and traditional Chinese character
+ * Placed outside/beside artwork for connoisseur stamp presence
  */
-function drawVerticalSealStamp(ctx, x, y, type) {
+function drawChineseChopStamp(ctx, x, y, char) {
   ctx.save();
   ctx.translate(x, y);
-  ctx.rotate(-0.02);
+  ctx.rotate(-0.035);
 
-  const w = 26;
-  const h = 68;
+  const size = 30;
 
   // Outer vermilion border
-  ctx.strokeStyle = 'rgba(184, 52, 40, 0.88)';
-  ctx.lineWidth = 1.4;
-  roundRect(ctx, -w / 2, -h / 2, w, h, 3);
+  ctx.strokeStyle = 'rgba(184, 48, 36, 0.85)';
+  ctx.lineWidth = 1.6;
+  roundRect(ctx, -size / 2, -size / 2, size, size, 4);
   ctx.stroke();
 
-  // Subtle translucent cinnabar background
-  ctx.fillStyle = 'rgba(184, 52, 40, 0.08)';
+  // Subtle translucent cinnabar seal ink wash
+  ctx.fillStyle = 'rgba(184, 48, 36, 0.08)';
   ctx.fill();
 
-  // Inner fine double-line
-  ctx.strokeStyle = 'rgba(184, 52, 40, 0.42)';
+  // Fine inner border line
+  ctx.strokeStyle = 'rgba(184, 48, 36, 0.38)';
   ctx.lineWidth = 0.6;
-  roundRect(ctx, -w / 2 + 2.5, -h / 2 + 2.5, w - 5, h - 5, 2);
+  roundRect(ctx, -size / 2 + 2.5, -size / 2 + 2.5, size - 5, size - 5, 2.5);
   ctx.stroke();
 
-  // Seal Characters
-  ctx.fillStyle = 'rgba(184, 52, 40, 0.92)';
+  // Seal Chinese Character (技 / 賞 / 藏)
+  ctx.fillStyle = 'rgba(184, 48, 36, 0.92)';
+  ctx.font = 'bold 16px "Noto Serif SC", "Songti SC", "STSong", serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-
-  if (type === 'skill') {
-    // Vertical "SKILL"
-    ctx.font = 'bold 11px "KingHwaOldSong", "Newsreader", serif';
-    const letters = ['S', 'K', 'I', 'L', 'L'];
-    letters.forEach((lt, idx) => {
-      ctx.fillText(lt, 0, -22 + idx * 11);
-    });
-  } else {
-    // Vertical "PROMPT"
-    ctx.font = 'bold 9.5px "KingHwaOldSong", "Newsreader", serif';
-    const letters = ['P', 'R', 'O', 'M', 'P', 'T'];
-    letters.forEach((lt, idx) => {
-      ctx.fillText(lt, 0, -24 + idx * 9.8);
-    });
-  }
+  ctx.fillText(char || '賞', 0, 1);
 
   ctx.restore();
 }
 
 /**
  * Minimal Fallback Artwork Page for items without pictures
- * Clean, artistic, with "待补充" indication
  */
 function drawMinimalFallbackArt(ctx, item, cx, cy, maxW, maxH) {
-  const w = Math.min(maxW, 480);
-  const h = Math.min(maxH, 420);
+  const w = Math.min(maxW, 460);
+  const h = Math.min(maxH, 400);
   const x = cx - w / 2;
   const y = cy - h / 2;
 
@@ -280,18 +327,18 @@ function drawMinimalFallbackArt(ctx, item, cx, cy, maxW, maxH) {
 
   // Title in Center
   ctx.fillStyle = '#2d2116';
-  ctx.font = 'bold 30px "KingHwaOldSong", "Songti SC", serif';
+  ctx.font = '600 28px "Noto Serif SC", "Songti SC", serif';
   ctx.textAlign = 'center';
   const title = cleanTitle(item.title) || '视觉风格画赏';
   ctx.fillText(title, cx, cy - 20);
 
   // Poetic "待补充" label
   ctx.fillStyle = '#947656';
-  ctx.font = 'italic 16px "KingHwaOldSong", "Songti SC", "Newsreader", serif';
-  ctx.fillText('「 视觉样例待补充 · 原创提示词已入卷 」', cx, cy + 24);
+  ctx.font = 'italic 15px "Noto Serif SC", "Songti SC", serif';
+  ctx.fillText('「 视觉样例待补充 · 原创提示词已入卷 」', cx, cy + 22);
 
-  // Vertical seal "待補"
-  drawVerticalSealStamp(ctx, cx, cy + 90, item.type === 'skill' ? 'skill' : 'prompt');
+  // Traditional chop stamp beside
+  drawChineseChopStamp(ctx, cx, cy + 85, '入');
 
   ctx.restore();
 }

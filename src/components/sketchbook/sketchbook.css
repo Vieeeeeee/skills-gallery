@@ -1,11 +1,3 @@
-@font-face {
-  font-family: 'KingHwaOldSong';
-  src: url('/fonts/KingHwa_OldSong.ttf') format('truetype');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* =====================================================================
    MengTo Sketchbook Styles — Full 1:1 Port with Enhanced Style Support
    ===================================================================== */
@@ -17,11 +9,12 @@
   --sb-ink-faint: rgba(43,39,33,.36);
   --sb-hairline: rgba(43,39,33,.14);
   --sb-earth: #9a6a3e;
-  --sb-display: 'KingHwaOldSong', 'Instrument Serif', 'Playfair Display', 'Songti SC', "New York", Georgia, 'Times New Roman', serif;
-  --sb-font: 'KingHwaOldSong', 'Newsreader', 'Klee One', "New York", Georgia, 'Times New Roman', serif;
+  --sb-display: 'Noto Serif SC', 'Playfair Display', 'Songti SC', 'STSong', "New York", Georgia, 'Times New Roman', serif;
+  --sb-font: 'Noto Serif SC', 'Songti SC', 'STSong', 'Newsreader', "New York", Georgia, 'Times New Roman', serif;
   --sb-track-caps: .24em;
   --sb-track-nav: .06em;
 }
+
 
 .sb-container {
   font-family: var(--sb-font);
@@ -29,10 +22,15 @@
   background: var(--sb-paper);
   color: var(--sb-ink);
   -webkit-font-smoothing: antialiased;
-  min-height: 100vh;
-  width: 100%;
-  position: relative;
-  overflow-x: hidden;
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -58,21 +56,17 @@
   background: linear-gradient(180deg, rgba(236,231,220,.25) 0%, rgba(236,231,220,.72) 58%, var(--sb-paper) 88%);
 }
 
-/* ---------------- Top Bar ---------------- */
+/* ---------------- Top Bar (Single-Screen Header) ---------------- */
 .sb-top {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  position: relative;
+  width: 100%;
   z-index: 50;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 11px;
-  padding-inline: clamp(16px, 4vw, 48px);
-  padding-block: 16px 54px;
+  justify-content: space-between;
+  padding: 12px clamp(16px, 3vw, 36px);
   pointer-events: none;
-  text-align: center;
 }
 .sb-top > * {
   pointer-events: auto;
@@ -90,7 +84,7 @@
 }
 .sb-top .sb-brand {
   font-family: var(--sb-display);
-  font-size: clamp(22px, 2.4vw, 30px);
+  font-size: clamp(18px, 1.8vw, 24px);
   letter-spacing: .01em;
   white-space: nowrap;
   line-height: 1;
@@ -101,8 +95,8 @@
 }
 .sb-top nav {
   display: flex;
-  gap: clamp(12px, 2vw, 24px);
-  font-size: 14px;
+  gap: clamp(10px, 1.5vw, 18px);
+  font-size: 13px;
   align-items: center;
   letter-spacing: var(--sb-track-nav);
   font-weight: 400;
@@ -134,45 +128,51 @@
   transform: scale(1.02);
 }
 
-/* ---------------- Hero / Stage ---------------- */
+/* ---------------- Hero / Stage (Single Screen Pure Fit) ---------------- */
 .sb-hero {
   position: relative;
-  display: grid;
-  justify-items: center;
-  align-content: center;
-  min-height: 100vh;
-  padding: clamp(100px, 12vh, 140px) 0 clamp(60px, 8vh, 100px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 0;
+  padding: 2px 12px 10px;
   z-index: 1;
+  overflow: hidden;
 }
 
 .sb-botany {
   position: absolute;
   bottom: 0;
-  width: clamp(120px, 15vw, 250px);
-  opacity: .55;
+  width: clamp(100px, 12vw, 180px);
+  opacity: .45;
   pointer-events: none;
   user-select: none;
   z-index: 0;
 }
-.sb-botany.l { left: clamp(-40px, -1vw, 0px); bottom: 2%; }
-.sb-botany.r { right: clamp(-30px, 0vw, 10px); bottom: -2%; width: clamp(100px, 12vw, 200px); }
+.sb-botany.l { left: clamp(-40px, -1vw, 0px); bottom: 1%; }
+.sb-botany.r { right: clamp(-30px, 0vw, 10px); bottom: -1%; width: clamp(90px, 10vw, 160px); }
 @media (max-width: 900px) { .sb-botany { display: none; } }
 
 .sb-hero-kicker {
-  font-size: 11.5px;
+  font-size: 10px;
   font-weight: 500;
   letter-spacing: var(--sb-track-caps);
   text-align: center;
   color: var(--sb-ink-soft);
-  margin: 0 0 clamp(18px, 3vh, 32px);
+  margin: 0 0 6px;
   text-transform: uppercase;
 }
 
 .sb-wrap {
-  display: grid;
-  justify-items: center;
-  gap: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   width: 100%;
+  max-height: 100%;
   position: relative;
   z-index: 2;
 }
@@ -191,7 +191,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 2px;
+  padding: 6px 4px;
   border: 0;
   background: transparent;
   color: var(--sb-ink-faint);
@@ -202,15 +202,16 @@
 }
 .sb-arrow:hover {
   color: var(--sb-ink);
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
-/* The box is the book's untransformed frame */
 .sb-3d {
   position: relative;
   flex: 1 1;
   min-width: 0;
-  max-width: 880px;
+  max-width: min(840px, 86vw);
+  max-height: min(520px, 57vh);
+  aspect-ratio: 1760 / 1240;
   perspective: 1750px;
   perspective-origin: 50% 46%;
 }
