@@ -117,6 +117,19 @@ npm run dev
 
 ---
 
+## 📫 创作者与交流联系 (Contact & Connect)
+
+欢迎技术交流、Prompt 商业定制合作、加入微信交流群或创作者认领沟通：
+
+- 💬 **微信 (WeChat)**：`Wibi2077` *(添加请备注：Skills 或 AI)*
+- 📮 **联系邮箱 (Email)**：[wuwei5986@gmail.com](mailto:wuwei5986@gmail.com)
+- 📱 **社交主页**：
+  - **小红书 / 抖音**：同名 `@威比 Hunter Wei.`
+  - **GitHub**：[@Vieeeeeee](https://github.com/Vieeeeeee)
+  - **X (Twitter)**：[@Vieeeeeee](https://twitter.com/Vieeeeeee)
+
+---
+
 ## 📄 开源许可证与免责声明 (License & Disclaimer)
 
 - **代码授权**：本项目核心源代码遵循 **[MIT License](LICENSE)** 开源协议，您可以自由地学习、自部署或衍生；

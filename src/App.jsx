@@ -647,17 +647,54 @@ export function App() {
 
       {/* Footer */}
       <footer className="border-t border-black/[0.06] dark:border-white/[0.08] bg-white dark:bg-[#0d0d11] py-8 text-center text-xs text-[#86868b] dark:text-zinc-500 transition-colors">
-        <div className="max-w-7xl mx-auto px-4 space-y-1.5">
+        <div className="max-w-7xl mx-auto px-4 space-y-3">
           <div className="flex items-center justify-center gap-2">
             <span className="text-[#1d1d1f] dark:text-white font-semibold">Prompt & Skill 风格大赏</span>
             <span>•</span>
             <span>致敬开源创作者</span>
           </div>
+
+          {/* Contact & WeChat Badges */}
+          <div className="flex flex-wrap items-center justify-center gap-2.5 pt-1 text-xs">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f5f5f7] dark:bg-[#18181d] border border-black/[0.06] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 shadow-2xs">
+              <span className="text-emerald-600 dark:text-emerald-400 font-semibold">💬 微信:</span>
+              <strong className="font-mono text-[#1d1d1f] dark:text-white select-all">Wibi2077</strong>
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText('Wibi2077');
+                  showToast('微信号已复制到剪贴板！');
+                }}
+                className="ml-1 text-[10.5px] px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-100 transition-colors"
+                title="复制微信号"
+              >
+                复制
+              </button>
+            </span>
+
+            <a
+              href="mailto:wuwei5986@gmail.com"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f5f5f7] dark:bg-[#18181d] border border-black/[0.06] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 hover:border-indigo-400/60 transition-all shadow-2xs"
+              title="发送邮件"
+            >
+              <span className="text-indigo-600 dark:text-indigo-400 font-semibold">📫 邮箱:</span>
+              <span className="font-mono">wuwei5986@gmail.com</span>
+            </a>
+
+            <a
+              href="https://github.com/Vieeeeeee/skills-gallery"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f5f5f7] dark:bg-[#18181d] border border-black/[0.06] dark:border-white/[0.08] text-[#1d1d1f] dark:text-zinc-200 hover:border-black/[0.2] dark:hover:border-white/[0.2] transition-all shadow-2xs"
+            >
+              <span>🐙 GitHub 开源主页</span>
+            </a>
+          </div>
+
           <p className="text-[11px] text-[#86868b] dark:text-zinc-400">
-            提示词与开源仓库归原作者所有 · 持续收录精选
+            提示词与开源仓库归原作者所有 · 欢迎创作者认领署名与交流合作
           </p>
-          <div className="pt-2 flex items-center justify-center gap-2 text-[10px] text-black/20 dark:text-white/20">
-            <span>© 2026 Edition</span>
+          <div className="pt-1 flex items-center justify-center gap-2 text-[10px] text-black/20 dark:text-white/20">
+            <span>© 2026 Edition · Curated by @威比 Hunter Wei.</span>
             <button
               onClick={() => setIsAuthModalOpen(true)}
               className="hover:text-black/60 dark:hover:text-white/60 transition-colors p-1"
