@@ -8,7 +8,6 @@ import {
   Sparkles, 
   Edit3, 
   Trash2,
-  Maximize2,
   ExternalLink
 } from 'lucide-react';
 import { GithubIcon } from './Icons';
@@ -354,16 +353,6 @@ export function CardItem({
             </button>
           )}
 
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onSelect(item);
-            }}
-            className="p-1.5 rounded-xl bg-[#f5f5f7] dark:bg-white/[0.08] hover:bg-[#ebebed] dark:hover:bg-white/[0.14] border border-black/[0.06] dark:border-white/[0.1] text-[#6e6e73] dark:text-zinc-400 hover:text-[#1d1d1f] dark:hover:text-white transition-all shadow-2xs shrink-0"
-            title="查看完整详情"
-          >
-            <Maximize2 className="w-3.5 h-3.5" />
-          </button>
 
           {isAdmin && (
             <div className="flex items-center gap-1 pl-1 border-l border-black/[0.06] dark:border-white/[0.1]">
