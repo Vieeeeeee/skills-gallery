@@ -10,7 +10,11 @@
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38bdf8.svg)](https://tailwindcss.com/)
 [![Cloudflare Pages](https://img.shields.io/badge/Deploy-Cloudflare%20Pages-orange.svg)](https://skills-gallery-bs1.pages.dev)
 
-**[👉 立即访问在线版 (Live Demo)](https://skills-gallery-bs1.pages.dev)** · **[📖 提交新风格/技能 (投稿指引)](CONTRIBUTING.md)** · **[💬 讨论与建议](../../issues)**
+**[简体中文](README.md)** · **[English](README.en.md)**
+
+<br/>
+
+**[👉 立即访问在线版 (Live Demo)](https://skills-gallery-bs1.pages.dev)** · **[📖 提交新风格/技能 (投稿指引)](CONTRIBUTING.md)** · **[🏷️ 原创认领](../../issues/new?template=claim_author.yml)** · **[💬 讨论与建议](../../issues)**
 
 <br/>
 
