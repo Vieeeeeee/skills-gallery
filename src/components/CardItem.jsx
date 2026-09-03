@@ -51,9 +51,8 @@ export function CardItem({
   // Extract series [XXX]
   const seriesMatch = (item.title || '').match(/^\[([^\]]+)\]\s*(.*)$/);
   const seriesName = seriesMatch ? seriesMatch[1] : (item.category || '精选');
-  const mainTitle = seriesMatch ? seriesMatch[2] : (item.title || '');
-  const authorDisplay = (item.author === 'Vie' || item.author === 'vie' || item.author === 'Vie (威比)')
-    ? '威比 Hunter Wei.'
+  const authorDisplay = (item.author === 'Vie' || item.author === 'vie' || item.author === 'Vie (威比)' || (item.author && item.author.includes('威比')))
+    ? '威比 Hunter Wei.（抖音、小红书同名）'
     : (item.author || '开源社区');
 
   const typeConfig = {

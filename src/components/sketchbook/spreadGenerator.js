@@ -131,7 +131,7 @@ function drawCleanSerifTextPage(ctx, item, index, bounds) {
   ctx.font = 'italic 16px "Playfair Display", "Noto Serif SC", "Songti SC", serif';
   ctx.fillStyle = 'rgba(145, 115, 85, 0.82)';
   
-  const authorText = item.author ? ('@' + item.author) : '@威比 Hunter Wei.';
+  const authorText = item.author ? ('@' + item.author) : '@威比 Hunter Wei.（抖音、小红书同名）';
   ctx.fillText(authorText, x, cy + 130);
 
   ctx.restore();

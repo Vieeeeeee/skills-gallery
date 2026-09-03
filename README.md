@@ -140,7 +140,7 @@ npm run dev
 
 <div align="center">
 
-**Curated with ❤️ by [Hunter Wei (威比)](https://github.com/Vieeeeeee) & Open Source Community**
+**Curated with ❤️ by [威比 Hunter Wei.（抖音、小红书同名）](https://github.com/Vieeeeeee) & Open Source Community**
 
 如果这个项目对您有所启发或帮助，欢迎点击右上角点亮一颗 ⭐️ **Star** 支持我们！
 

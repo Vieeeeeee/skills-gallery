@@ -680,7 +680,7 @@ export function DetailModal({
                   <div>
                     <span className="text-[#86868b] dark:text-zinc-400 block text-[11px]">创作者 / 来源</span>
                     <span className="font-semibold text-[#1d1d1f] dark:text-white mt-0.5 block truncate">
-                      @{item.author === 'Vie' || item.author === 'vie' || item.author === 'Vie (威比)' ? '威比 Hunter Wei.' : (item.author || '开源社区')}
+                      @{item.author === 'Vie' || item.author === 'vie' || item.author === 'Vie (威比)' || (item.author && item.author.includes('威比')) ? '威比 Hunter Wei.（抖音、小红书同名）' : (item.author || '开源社区')}
                     </span>
                   </div>
                   <div>

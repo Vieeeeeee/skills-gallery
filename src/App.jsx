@@ -695,7 +695,7 @@ export function App() {
             提示词与开源仓库归原作者所有 · 欢迎创作者认领署名与交流合作
           </p>
           <div className="pt-1 flex items-center justify-center gap-2 text-[10px] text-black/20 dark:text-white/20">
-            <span>© 2026 Edition · Curated by @威比 Hunter Wei.</span>
+            <span>© 2026 Edition · Curated by 威比 Hunter Wei.（抖音、小红书同名）</span>
             <button
               onClick={() => setIsAuthModalOpen(true)}
               className="hover:text-black/60 dark:hover:text-white/60 transition-colors p-1"
