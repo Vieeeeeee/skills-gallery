@@ -445,8 +445,13 @@ export function App() {
                 </div>
                 
                 <div>
-                  <h1 className="font-hero-serif text-2xl sm:text-4xl lg:text-[54px] font-bold tracking-tight text-[#111113] dark:text-white leading-tight sm:leading-[1.12]">
-                    Prompt <span className="font-serif font-normal italic text-[#111113] dark:text-white">&</span> Skill 风格大赏
+                  <h1 className="font-hero-serif text-[28px] sm:text-4xl lg:text-[54px] font-bold tracking-tight text-[#111113] dark:text-white leading-[1.18] sm:leading-[1.12]">
+                    <span className="block sm:inline">
+                      Prompt <span className="font-serif font-normal italic text-[#111113] dark:text-white">&</span> Skill
+                    </span>
+                    <span className="block sm:inline sm:ml-3">
+                      风格大赏
+                    </span>
                   </h1>
                 </div>
 
