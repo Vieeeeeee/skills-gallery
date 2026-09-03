@@ -314,7 +314,7 @@ export function SketchbookView({
     }
 
     function loupeSize() {
-      return Math.round(Math.max(165, Math.min(262, (book?.clientWidth || 800) * 0.235)));
+      return Math.round(Math.max(130, Math.min(210, (book?.clientWidth || 800) * 0.20)));
     }
 
     function bookBox() {
@@ -323,8 +323,8 @@ export function SketchbookView({
 
     function restLoupe() {
       const b = bookBox();
-      lx = b.x + b.w * 0.86;
-      ly = b.y + b.h * 0.65;
+      lx = b.x + b.w * 0.80;
+      ly = b.y + b.h * 0.48;
       placeLoupe();
     }
 
@@ -363,7 +363,7 @@ export function SketchbookView({
       const nx = (b.w / 2 + (lx - b.x - b.w / 2) / view.z) / b.w;
       const ny = (b.h / 2 + (ly - b.y - b.h / 2) / view.z) / b.h;
       if (nx < 0.02 || nx > 0.98 || ny < 0.17 || ny > 0.83) return;
-      lTarget = { x: b.x + b.w * (dir === 'next' ? 0.14 : 0.86), y: b.y + b.h * 0.65 };
+      lTarget = { x: b.x + b.w * (dir === 'next' ? 0.20 : 0.80), y: b.y + b.h * 0.48 };
       kick();
     }
 
@@ -964,7 +964,7 @@ export function SketchbookView({
           </div>
 
           {/* Caption & Interactive Action bar (Directly below book) */}
-          <div className="relative z-40 flex flex-col items-center gap-2 mt-2 pointer-events-auto">
+          <div className="relative z-40 flex flex-col items-center gap-2.5 mt-4 pointer-events-auto">
             <div 
               className="sb-captions cursor-pointer hover:opacity-80 transition-opacity" 
               id="sbCaptions" 
