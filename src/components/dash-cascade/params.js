@@ -126,6 +126,16 @@ function generateCharGlyph(char, x0, w) {
           rows.push([[l + s * 0.8, l + s * 1.8], [r - s * 1.8, r - s * 0.8]]);
         }
         break;
+      case 'A':
+        if (row === 0) rows.push([[l + s * 0.5, r - s * 0.5]]);
+        else if (row === 4) rows.push([[l, r]]);
+        else rows.push([[l, l + s], [r - s, r]]);
+        break;
+      case 'E':
+        if (row === 0 || row === 9) rows.push([[l, r]]);
+        else if (row === 4 || row === 5) rows.push([[l, r - s * 0.4]]);
+        else rows.push([[l, l + s]]);
+        break;
       case 'B':
         if (row === 0 || row === 4 || row === 9) rows.push([[l, r - s * 0.3]]);
         else rows.push([[l, l + s], [r - s, r]]);
@@ -168,5 +178,6 @@ export function compileWordGrid(wordStr, totalWidth = 640, padding = 45) {
 export const WORDS = [
   compileWordGrid("PROMPT"),
   compileWordGrid("SKILLS"),
-  compileWordGrid("WIBI")
+  compileWordGrid("WIBI"),
+  compileWordGrid("TASTE")
 ];

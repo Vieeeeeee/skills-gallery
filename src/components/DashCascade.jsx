@@ -79,7 +79,7 @@ export function DashCascade({ className = "", compact = false }) {
         <div className="flex items-center gap-1.5">
           <span className="text-indigo-500 dark:text-indigo-400 text-xs select-none">✦</span>
           <span className={`${compact ? 'text-[9.5px]' : 'text-[10px] sm:text-[11px]'} font-mono tracking-widest text-[#86868b] dark:text-zinc-400 uppercase`}>
-            SKILLS · STYLES · WORKFLOWS
+            SKILLS · STYLES · TASTE
           </span>
         </div>
         <div className={`flex items-center gap-1 font-mono ${compact ? 'text-[9.5px]' : 'text-[10px] sm:text-[11px]'} text-[#86868b] dark:text-zinc-400`}>
@@ -108,7 +108,7 @@ export function DashCascade({ className = "", compact = false }) {
       {!compact && (
         <div className="flex items-center justify-between z-10 pt-2 font-mono text-[10px] text-[#86868b] dark:text-zinc-400">
           <span className="tracking-wider text-[#86868b] dark:text-zinc-400 uppercase">
-            AI × DESIGN × CODE
+            TASTE IS THE NEW SYNTAX
           </span>
           <div className="flex items-center gap-2">
             <span className="tracking-widest">37.7749°N, 122.4194°W</span>
