@@ -524,10 +524,10 @@ export function App() {
                   <span>1,000+ 精选收录 · 真实来源溯源</span>
                 </div>
                 
-                {/* Title (Strictly 1 Single Line across Mobile & Desktop) */}
+                {/* Title (Strictly 1 Single Line across Mobile & Desktop, Max Edge-to-Edge) */}
                 <div>
                   <h1 className="font-hero-serif font-black tracking-tight text-[#111113] dark:text-white leading-none whitespace-nowrap">
-                    <span className="text-[26px] min-[370px]:text-[28px] min-[390px]:text-[30px] min-[420px]:text-[32px] sm:text-4xl lg:text-[46px] xl:text-[52px] tracking-tight inline-block">
+                    <span className="text-[clamp(30px,9.1vw,40px)] sm:text-4xl lg:text-[46px] xl:text-[52px] tracking-tight inline-block">
                       Prompt <span className="font-serif font-normal italic text-[#111113] dark:text-white">&</span> Skill 风格大赏
                     </span>
                   </h1>
