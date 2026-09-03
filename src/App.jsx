@@ -386,7 +386,7 @@ export function App() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f5f5f7] dark:bg-[#09090b] text-[#1d1d1f] dark:text-zinc-100 selection:bg-indigo-500/20 selection:text-indigo-900 transition-colors duration-200">
+    <div className="min-h-screen flex flex-col bg-[#f5f5f7] dark:bg-[#09090b] text-[#1d1d1f] dark:text-zinc-100 selection:bg-indigo-500/20 selection:text-indigo-900 transition-colors duration-200 overflow-x-hidden w-full max-w-[100vw]">
       
       {/* Toast */}
       <Toast toast={toast} onClose={() => setToast(null)} />
