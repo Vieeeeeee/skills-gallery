@@ -199,10 +199,13 @@ export function App() {
 
     loadInitialData();
 
-    // Secret Admin URL Trigger (?admin=true or #admin)
+    // Secret Admin URL Trigger (?admin=true / #admin / /admin)
+    // /admin 这条是有效的：Cloudflare Pages 对未匹配路径回落到 index.html 并返回 200
+    // （线上实测过），不会 404。
     try {
       const params = new URLSearchParams(window.location.search);
-      if (params.get('admin') === 'true' || window.location.hash === '#admin') {
+      const path = window.location.pathname.replace(/\/+$/, '');
+      if (params.get('admin') === 'true' || window.location.hash === '#admin' || path.endsWith('/admin')) {
         setIsAuthModalOpen(true);
       }
     } catch (e) {
