@@ -53,3 +53,5 @@ npx wrangler pages deploy dist --project-name=skills-gallery
 5. **编辑模式不是权限系统**: `VITE_ADMIN_PASSCODE` 是 `VITE_` 前缀变量，必然会打进公开 bundle，任何人都能从 JS 里读到。它只防手滑。所有编辑只写当前浏览器的 localStorage，不影响其他访客。不要在文档或 UI 里把它描述成安全边界。
 6. **不要加 `?t=Date.now()` 这类缓存击穿参数**: `skills_data.json` gzip 后 638KB，加时间戳会让浏览器和 CDN 缓存全部失效、每次访问重下。数据更新靠 Cloudflare Pages 的 ETag 自动校验。
 7. **暗色模式是一等公民**: 新增组件必须成对写 `dark:` 变体。EditModal / AdminUploadModal / Toast 曾经整个漏掉，在暗色下是纯白板。
+8. **开源许可与第三方版权边界**: 本项目 MIT 协议仅适用于前端程序代码、UI 组件及 3D 手账交互引擎；收录的所有第三方 Agent Skills、开源仓库及 Prompt 属于原作者独立知识产权，遵循各自源仓库独立协议，本仓库仅作为索引字典，严禁越权声明或二次许可（No Sublicense）。
+

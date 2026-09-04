@@ -142,9 +142,10 @@ Feel free to connect for technical discussions, custom prompt collaborations, jo
 ---
 
 ## 📄 License & Disclaimer
-
-- **Code License**: The core codebase is licensed under the **[MIT License](LICENSE)**. You are free to learn from, fork, and self-host this project;
-- **Disclaimer**: The prompts, styles, and tools included in this repository are for study, research, and creative exploration, and do not constitute commercial or legal warranties.
+ 
+- **Software Code License**: The **core application codebase, UI components, and 3D sketchbook physics engine** are licensed under the **[MIT License](LICENSE)**. You are free to learn from, fork, and self-host this project;
+- **Third-Party Agent Skills & IP Rights**: This project acts solely as a **curation and inspiration directory (Curation Directory & Index)**. All third-party Agent Skills, external GitHub repositories, and npm packages indexed herein remain the **sole intellectual property of their respective original authors and are governed by their own independent licenses** (e.g., MIT, Apache, GPL). Skills Gallery does not claim ownership or grant sublicenses over third-party works;
+- **Disclaimer & Author Protection**: The prompts, styles, and tools included are for study, research, and creative exploration. We strictly enforce a 24-hour author claim and unconditional correction/takedown policy.
 
 ---
 

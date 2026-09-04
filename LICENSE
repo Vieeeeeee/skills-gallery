@@ -19,3 +19,22 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+==============================================================================
+第三方权利、数据索引与许可边界声明 (Third-Party Rights & Scope Limitation)
+==============================================================================
+
+1. 软件代码许可 (Software Codebase):
+   上述 MIT 许可证仅且仅适用于「Skills Gallery」项目本身编写的前端网站程序源代码、
+   UI 组件、3D 速写本交互物理引擎及辅助构建脚本。
+
+2. 第三方 Skill 与开源仓库 (Third-Party Agent Skills & Repositories):
+   本项目数据（包括但不限于 skills_data.json）中索引的各类第三方 Agent Skills、
+   GitHub 开源仓库、npm 依赖包与开发者代码，其知识产权与著作权均严格归属于各自的原始作者。
+   本项目仅作为开源生态的灵感字典与检索索引目录（Curation Directory），本许可证
+   绝不赋予对上述任何第三方项目的二次许可（Sublicense）、所有权转让或许可协议篡改。
+   各第三方 Skill 的安装与使用均遵循其原始仓库所声明之独立许可证。
+
+3. 生图提示词与社区作品 (Prompts & Community Artworks):
+   收录的视觉提示词（Prompts）及效果参考图均汇聚自社区公开探讨与创作者授权分享，
+   其原创权益归原作者所有。本项目坚决遵守 24 小时更正及无条件更正/下架承诺。
