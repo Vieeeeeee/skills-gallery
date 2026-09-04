@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X, Copy, Mail, QrCode, Heart, Sparkles } from 'lucide-react';
 import { copyText, COPY_FAIL_MSG } from '../utils/copy';
 
 export function AboutModal({ isOpen, onClose, onCopy }) {
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const handleCopyWeChat = async () => {
