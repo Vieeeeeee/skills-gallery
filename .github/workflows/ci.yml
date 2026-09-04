@@ -26,5 +26,9 @@ jobs:
     - name: Validate Skills & Prompts Data Schema
       run: npm run validate:data
 
+    - name: Check External Link Liveness (non-blocking)
+      run: node scripts/validate_data.js --check-links
+      continue-on-error: true
+
     - name: Test Production Build
       run: npm run build

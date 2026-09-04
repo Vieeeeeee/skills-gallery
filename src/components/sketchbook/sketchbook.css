@@ -46,7 +46,7 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: url('/sketchbook/bg-wash.jpg') center top / cover no-repeat;
+  background: url('/sketchbook/bg-wash.webp') center top / cover no-repeat;
   opacity: .88;
 }
 .sb-wash:after {
@@ -625,7 +625,7 @@
   width: min(1080px, 86vw);
   margin: clamp(24px, 5vh, 50px) auto;
   height: clamp(24px, 3.5vw, 42px);
-  background: url('/sketchbook/divider.png') center / 100% auto no-repeat;
+  background: url('/sketchbook/divider.webp') center / 100% auto no-repeat;
   opacity: .5;
 }
 .sb-rule.short {

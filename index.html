@@ -11,6 +11,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Ma+Shan+Zheng&family=Klee+One:wght@400;600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600;1,700&family=Noto+Serif+SC:wght@500;600;700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all';this.onload=null">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Ma+Shan+Zheng&family=Klee+One:wght@400;600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,400;1,600;1,700&family=Noto+Serif+SC:wght@500;600;700;900&display=swap" rel="stylesheet"></noscript>
     <title>Prompt & Skill 风格大赏 · AI 视觉风格与开源 Skill 灵感库</title>
+    <script>
+      // 首屏防白闪：React 挂载前先把主题类打上，逻辑与 App.jsx 的 theme 初始化保持一致。
+      try {
+        var t = localStorage.getItem('wibi_theme');
+        if (t !== 'dark' && t !== 'light') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        if (t === 'dark') document.documentElement.classList.add('dark');
+      } catch (e) {}
+    </script>
   </head>
   <body class="bg-[#f5f5f7] dark:bg-[#09090b] text-[#1d1d1f] dark:text-zinc-100 antialiased selection:bg-indigo-500/20 selection:text-indigo-900 min-h-screen overflow-x-hidden w-full max-w-[100vw]">
     <div id="root"></div>

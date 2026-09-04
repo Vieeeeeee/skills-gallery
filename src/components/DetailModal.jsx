@@ -58,6 +58,8 @@ export function DetailModal({
     repo_url: '',
     description: '',
     prompt: '',
+    install_command: '',
+    command: '',
     tags: [],
     images: [],
     cover_image: ''
@@ -68,20 +70,25 @@ export function DetailModal({
   const fileInputRef = useRef(null);
   const tagInputRef = useRef(null);
   const backdropDownRef = useRef(false);
+  const contentScrollRef = useRef(null);
+  const modalBodyRef = useRef(null);
+  const previousFocusRef = useRef(null);
 
   // Sync editData when item changes or modal opens
   useEffect(() => {
     if (item) {
-      const imgs = Array.isArray(item.images) && item.images.length > 0 
-        ? [...item.images] 
+      const imgs = Array.isArray(item.images) && item.images.length > 0
+        ? [...item.images]
         : (item.cover_image ? [item.cover_image] : []);
       setEditData({
         title: item.title || '',
         category: item.category || '未分类',
         author: item.author || '',
-        repo_url: item.repo_url || item.install_command || '',
+        repo_url: item.repo_url || '',
         description: item.description || '',
         prompt: item.prompt || '',
+        install_command: item.install_command || '',
+        command: item.command || '',
         tags: Array.isArray(item.tags) ? [...item.tags] : [],
         images: imgs,
         cover_image: item.cover_image || imgs[0] || ''
@@ -91,6 +98,8 @@ export function DetailModal({
     setTagInput('');
     setNewImageUrl('');
     setTagSuggestionsOpen(false);
+    // 切换关联条目/重新打开时内容区回顶，避免用户停在上一条目的滚动位置 (#3)
+    if (contentScrollRef.current) contentScrollRef.current.scrollTop = 0;
   }, [item, isOpen]);
 
   // Esc 关闭弹窗。三种情况让位：lightbox 自己接管、标签下拉自己接管、
@@ -105,6 +114,26 @@ export function DetailModal({
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [isOpen, lightboxOpen, tagSuggestionsOpen, isEditing, onClose]);
+
+  // 弹窗打开时锁住背景滚动，行为与 ImageLightbox 保持一致 (#3)。
+  // lightboxOpen 加入依赖：lightbox 关闭时会无条件把 overflow 置回 ''，
+  // 借助 React 子组件 effect 先于父组件提交的顺序，这里重新上锁。
+  // cleanup 里无条件清空而不是「还原 prev」：ImageLightbox 用的就是清空约定，
+  // 嵌套开关时 prev 会捕获到对方设的 'hidden'，关掉弹窗后把 body 留在 overflow:hidden
+  // （实测泄漏过）。两个组件共用同一个约定才不会互相踩。
+  useEffect(() => {
+    if (!isOpen) return;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, [isOpen, lightboxOpen]);
+
+  // 打开时把焦点交给弹窗本体，关闭时还原到打开前的焦点元素 (#5)
+  useEffect(() => {
+    if (!isOpen) return;
+    previousFocusRef.current = document.activeElement;
+    modalBodyRef.current?.focus();
+    return () => { previousFocusRef.current?.focus?.(); };
+  }, [isOpen]);
 
   // --- Obsidian-Style Tag Handlers ---
   const tagSuggestions = useMemo(() => {
@@ -218,11 +247,18 @@ export function DetailModal({
       author: editData.author.trim() || item.author || '开源社区',
       repo_url: editData.repo_url.trim(),
       description: editData.description.trim(),
-      prompt: editData.prompt.trim(),
       tags: editData.tags,
       images: editData.images,
       cover_image: editData.cover_image || editData.images[0] || ''
     };
+    // skill 类型用 install_command/command，其余类型用 prompt——
+    // 别把 skill 用不到的空 prompt 写回去，也别给非 skill 条目凭空塞 install_command (#1)
+    if (item.type === 'skill') {
+      updatedItem.install_command = editData.install_command.trim();
+      updatedItem.command = editData.command.trim();
+    } else {
+      updatedItem.prompt = editData.prompt.trim();
+    }
 
     if (onSave) {
       onSave(updatedItem);
@@ -312,11 +348,17 @@ export function DetailModal({
         className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 overflow-y-auto animate-fadeIn"
         onPointerDown={(e) => { backdropDownRef.current = e.target === e.currentTarget; }}
         onClick={(e) => {
+          if (isEditing) return; // 编辑中不让背景点击吞掉未保存的改动，退出要显式点「取消」(#2)
           if (e.target === e.currentTarget && backdropDownRef.current) onClose();
         }}
       >
-        <div 
-          className="relative w-full max-w-4xl lg:max-w-5xl bg-white dark:bg-[#101014] rounded-2xl sm:rounded-3xl shadow-2xl border border-black/[0.08] dark:border-white/[0.12] overflow-hidden my-auto max-h-[92vh] flex flex-col text-[#1d1d1f] dark:text-zinc-100"
+        <div
+          ref={modalBodyRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={mainTitle || item.title}
+          tabIndex={-1}
+          className="relative w-full max-w-4xl lg:max-w-5xl bg-white dark:bg-[#101014] rounded-2xl sm:rounded-3xl shadow-2xl border border-black/[0.08] dark:border-white/[0.12] overflow-hidden my-auto max-h-[92vh] flex flex-col text-[#1d1d1f] dark:text-zinc-100 focus:outline-none"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
@@ -372,18 +414,22 @@ export function DetailModal({
                 </>
               )}
 
-              <button
-                onClick={onClose}
-                className="p-1.5 rounded-xl hover:bg-black/[0.05] dark:hover:bg-white/[0.08] text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-white transition-all cursor-pointer active:scale-95"
-                title="关闭"
-              >
-                <X className="w-4 h-4" />
-              </button>
+              {/* 编辑中不给关闭入口：Esc 和背景遮罩都已守住未保存的改动，
+                  X 再放行就等于留了个静默丢弃的后门。此时 header 已有「取消」和「保存修改」两个明确出口。 */}
+              {!isEditing && (
+                <button
+                  onClick={onClose}
+                  className="p-1.5 rounded-xl hover:bg-black/[0.05] dark:hover:bg-white/[0.08] text-[#86868b] hover:text-[#1d1d1f] dark:hover:text-white transition-all cursor-pointer active:scale-95"
+                  title="关闭"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
             </div>
           </div>
 
           {/* Scrollable Content Body */}
-          <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5">
+          <div ref={contentScrollRef} className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5">
             
             {/* ========================================================= */}
             {/* EDIT MODE FORM                                             */}
@@ -562,19 +608,49 @@ export function DetailModal({
                     />
                   </div>
 
-                  {/* Prompt */}
-                  <div className="space-y-1">
-                    <label className="text-xs font-semibold text-[#1d1d1f] dark:text-white">
-                      完整提示词 / 调用指令 (Prompt / Command)
-                    </label>
-                    <textarea
-                      rows={4}
-                      value={editData.prompt}
-                      onChange={(e) => setEditData({ ...editData, prompt: e.target.value })}
-                      placeholder="输入完整的生图 Prompt、调用指令或安装代码..."
-                      className="w-full p-3.5 rounded-xl bg-[#f8f8fa] dark:bg-[#16161c] border border-black/[0.08] dark:border-white/[0.1] text-xs sm:text-sm font-mono text-[#1d1d1f] dark:text-white outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 resize-y"
-                    />
-                  </div>
+                  {/* Prompt (style/tool) 或 终端安装指令 + 对话触发指令 (skill) —
+                      skill 的只读视图不渲染 item.prompt，填在这里保存了也不会显示 (#1) */}
+                  {item.type === 'skill' ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                      <div className="space-y-1">
+                        <label className="text-xs font-semibold text-[#1d1d1f] dark:text-white">
+                          终端安装指令 (install_command)
+                        </label>
+                        <input
+                          type="text"
+                          value={editData.install_command}
+                          onChange={(e) => setEditData({ ...editData, install_command: e.target.value })}
+                          placeholder="如：npx skills add owner/repo"
+                          className="w-full px-3.5 py-2 rounded-xl bg-[#f8f8fa] dark:bg-[#16161c] border border-black/[0.08] dark:border-white/[0.1] text-xs sm:text-sm font-mono text-[#1d1d1f] dark:text-white outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+                        />
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-xs font-semibold text-[#1d1d1f] dark:text-white">
+                          对话触发指令 (command)
+                        </label>
+                        <input
+                          type="text"
+                          value={editData.command}
+                          onChange={(e) => setEditData({ ...editData, command: e.target.value })}
+                          placeholder="如：使用 $slug 处理这张照片"
+                          className="w-full px-3.5 py-2 rounded-xl bg-[#f8f8fa] dark:bg-[#16161c] border border-black/[0.08] dark:border-white/[0.1] text-xs sm:text-sm font-mono text-[#1d1d1f] dark:text-white outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="space-y-1">
+                      <label className="text-xs font-semibold text-[#1d1d1f] dark:text-white">
+                        完整提示词 / 调用指令 (Prompt / Command)
+                      </label>
+                      <textarea
+                        rows={4}
+                        value={editData.prompt}
+                        onChange={(e) => setEditData({ ...editData, prompt: e.target.value })}
+                        placeholder="输入完整的生图 Prompt、调用指令或安装代码..."
+                        className="w-full p-3.5 rounded-xl bg-[#f8f8fa] dark:bg-[#16161c] border border-black/[0.08] dark:border-white/[0.1] text-xs sm:text-sm font-mono text-[#1d1d1f] dark:text-white outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 resize-y"
+                      />
+                    </div>
+                  )}
                 </div>
 
                 {/* 3. Obsidian-Style Tag Manager */}

@@ -2,6 +2,7 @@
 /**
  * Data Schema & Integrity Validator for Skills Gallery
  * Usage: node scripts/validate_data.js
+ *        node scripts/validate_data.js --check-links   (额外探活 repo_url / website_url，需联网)
  */
 
 import fs from 'fs';
@@ -12,6 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const DATA_PATH = path.resolve(__dirname, '../public/skills_data.json');
+const CHECK_LINKS = process.argv.includes('--check-links');
 
 console.log('🔍 正在校验数据完整性与格式规范...');
 console.log(`📁 数据源文件: ${DATA_PATH}`);
@@ -127,7 +129,95 @@ if (errors.length > 0) {
   console.error(`\n❌ 数据校验未通过! 共发现 ${errors.length} 处阻断错误:`);
   errors.forEach(e => console.error('  ' + e));
   process.exit(1);
-} else {
-  console.log('\n✅ 恭喜！数据校验全部通过，结构 100% 规范符合开源标准！\n');
+}
+
+console.log('\n✅ 结构校验通过（未含链接可达性，跑 --check-links 检查）\n');
+
+if (!CHECK_LINKS) {
   process.exit(0);
 }
+
+// --- 可选：链接可达性探活 (--check-links) ---
+// ponytail: 无重试/无缓存的一次性探活，规模再大再加
+const LINK_CONCURRENCY = 6;
+const LINK_TIMEOUT_MS = 10000;
+
+async function fetchWithTimeout(url, method) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), LINK_TIMEOUT_MS);
+  try {
+    return await fetch(url, { method, redirect: 'follow', signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function checkLinks() {
+  const urlMap = new Map(); // url -> [{id, title, field}]
+  data.forEach(item => {
+    ['repo_url', 'website_url'].forEach(field => {
+      const url = item[field];
+      if (url && typeof url === 'string') {
+        if (!urlMap.has(url)) urlMap.set(url, []);
+        urlMap.get(url).push({ id: item.id, title: item.title, field });
+      }
+    });
+  });
+
+  const urls = [...urlMap.keys()];
+  console.log(`🔗 正在探活 ${urls.length} 个去重链接 (并发 ${LINK_CONCURRENCY})...`);
+
+  const badLinks = [];    // 任何非 2xx/3xx
+  const unknownLinks = []; // 网络本身失败 (DNS/超时/TLS)，不计入失败
+
+  async function checkOne(url) {
+    try {
+      let res = await fetchWithTimeout(url, 'HEAD');
+      if (res.status === 405 || res.status === 501) {
+        res = await fetchWithTimeout(url, 'GET'); // HEAD 不被支持时回退 GET
+      }
+      if (!(res.status >= 200 && res.status < 400)) {
+        badLinks.push({ url, status: res.status });
+      }
+    } catch (err) {
+      unknownLinks.push({ url, reason: err.message || String(err) });
+    }
+  }
+
+  let cursor = 0;
+  async function worker() {
+    while (cursor < urls.length) {
+      await checkOne(urls[cursor++]);
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(LINK_CONCURRENCY, urls.length) }, worker));
+
+  const confirmedDead = badLinks.filter(d => d.status === 404 || d.status === 410);
+  const uncertainBad = badLinks.filter(d => d.status !== 404 && d.status !== 410);
+
+  const printBad = (label, list) => {
+    console.log(`\n${label} ${list.length} 个:`);
+    list.forEach(({ url, status }) => {
+      urlMap.get(url).forEach(it => {
+        console.log(`  [${it.id}] ${it.title} (${it.field}) → ${url} → HTTP ${status}`);
+      });
+    });
+  };
+
+  if (confirmedDead.length > 0) printBad('❌ 确认失效 (404/410)', confirmedDead);
+  if (uncertainBad.length > 0) printBad('⚠️  状态异常但未确认失效 (可能是限流/风控，非 404/410)', uncertainBad);
+
+  if (unknownLinks.length > 0) {
+    console.log(`\n⚠️  ${unknownLinks.length} 个链接无法确认 (DNS/超时/TLS 等网络问题，不计入失败):`);
+    unknownLinks.forEach(({ url, reason }) => console.log(`  ${url} → ${reason}`));
+  }
+
+  if (badLinks.length === 0 && unknownLinks.length === 0) {
+    console.log('\n✅ 链接可达性检查通过，全部可访问。');
+  }
+
+  return confirmedDead.length > 0;
+}
+
+const hasConfirmedDeadLinks = await checkLinks();
+process.exit(hasConfirmedDeadLinks ? 1 : 0);

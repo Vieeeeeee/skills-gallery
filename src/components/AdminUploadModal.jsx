@@ -59,9 +59,13 @@ export function AdminUploadModal({
           duplicateCount > 0 ? `跳过 ${duplicateCount} 条已存在的条目` : ''
         ].filter(Boolean).join('，');
         setParseResult({
-          success: true,
+          // 零新增不是成功：App 的 handleAppendItems 在 addedCount 为 0 时直接 return，
+          // 压根没落库，面板不能还挂着绿色成功态说「已存入并生效」。
+          success: addedCount > 0,
           count: addedCount,
-          message: `新增 ${addedCount} 条${details ? `，${details}` : ''}。`
+          message: addedCount > 0
+            ? `新增 ${addedCount} 条${details ? `，${details}` : ''}。`
+            : `没有新增任何条目${details ? `：${details}` : '：内容已全部存在'}。`
         });
       } else if (file.name.endsWith('.docx')) {
         const mammothModule = await import('mammoth');
@@ -103,9 +107,11 @@ export function AdminUploadModal({
         if (extracted.length > 0) {
           const addedCount = onAppendItems(extracted);
           setParseResult({
-            success: true,
+            success: addedCount > 0,
             count: addedCount,
-            message: `成功从 Docx 文档中解析并追加 ${addedCount} 条新内容！`
+            message: addedCount > 0
+              ? `成功从 Docx 文档中解析并追加 ${addedCount} 条新内容！`
+              : `从 Docx 解析出 ${extracted.length} 条，但都已存在，没有新增。`
           });
         } else {
           setParseResult({

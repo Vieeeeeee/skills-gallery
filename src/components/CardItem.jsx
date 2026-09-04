@@ -112,12 +112,28 @@ export function CardItem({
     return 'from-[#f8f9fa] via-[#f1f3f5] to-[#e9ecef] text-[#343a40]';
   };
 
+  const handleCardKeyDown = (e) => {
+    // 只响应落在卡片本身上的按键。卡片里嵌着 GitHub 链接和复制/编辑/删除按钮，
+    // 它们的 onClick 有 stopPropagation 但 keydown 没有：不加这个守卫，
+    // Tab 到 GitHub 链接按 Enter 会同时开新标签页和详情弹窗；
+    // Tab 到复制按钮按空格会被这里的 preventDefault 吃掉激活，变成只开弹窗不复制。
+    if (e.target !== e.currentTarget) return;
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onSelect(item);
+    }
+  };
+
   // List View
   if (viewMode === 'list') {
     return (
-      <div 
+      <div
         onClick={() => onSelect(item)}
-        className="group flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-3.5 bg-white dark:bg-[#141417] hover:bg-[#fafafc] dark:hover:bg-[#1c1c22] border border-black/[0.06] dark:border-white/[0.08] hover:border-black/[0.12] dark:hover:border-white/[0.16] rounded-xl sm:rounded-2xl transition-all gap-2.5 sm:gap-3 cursor-pointer shadow-[0_2px_8px_rgba(0,0,0,0.02)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.3)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.04)] h-full mb-0"
+        onKeyDown={handleCardKeyDown}
+        role="button"
+        tabIndex={0}
+        aria-label={mainTitle || item.title}
+        className="group flex flex-col sm:flex-row sm:items-center justify-between p-3 sm:p-3.5 bg-white dark:bg-[#141417] hover:bg-[#fafafc] dark:hover:bg-[#1c1c22] border border-black/[0.06] dark:border-white/[0.08] hover:border-black/[0.12] dark:hover:border-white/[0.16] rounded-xl sm:rounded-2xl transition-all gap-2.5 sm:gap-3 cursor-pointer shadow-[0_2px_8px_rgba(0,0,0,0.02)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.3)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.04)] h-full mb-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 dark:focus-visible:ring-indigo-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#141417]"
       >
         <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0 flex-1">
           <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-[#f5f5f7] dark:bg-white/[0.06] border border-black/[0.04] dark:border-white/[0.06] flex items-center justify-center shrink-0 text-[#6e6e73] dark:text-zinc-400 group-hover:text-[#1d1d1f] dark:group-hover:text-white transition-colors">
@@ -189,9 +205,13 @@ export function CardItem({
 
   // Pinterest Masonry Card (Natural Aspect Ratio, No Crop)
   return (
-    <div 
+    <div
       onClick={() => onSelect(item)}
-      className="break-inside-avoid mb-2 sm:mb-4.5 group relative flex flex-col bg-white dark:bg-[#141417] hover:bg-[#fafafc] dark:hover:bg-[#1c1c22] border border-black/[0.06] dark:border-white/[0.08] hover:border-black/[0.14] dark:hover:border-white/[0.18] rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.09)] hover:-translate-y-0.5 cursor-pointer"
+      onKeyDown={handleCardKeyDown}
+      role="button"
+      tabIndex={0}
+      aria-label={mainTitle || item.title}
+      className="break-inside-avoid mb-2 sm:mb-4.5 group relative flex flex-col bg-white dark:bg-[#141417] hover:bg-[#fafafc] dark:hover:bg-[#1c1c22] border border-black/[0.06] dark:border-white/[0.08] hover:border-black/[0.14] dark:hover:border-white/[0.18] rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-300 shadow-[0_2px_10px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.35)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.09)] hover:-translate-y-0.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 dark:focus-visible:ring-indigo-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#141417]"
     >
       {/* Visual Cover Area: Natural Auto Height without Hard Crop */}
       <div className="relative w-full overflow-hidden bg-[#f5f5f7] dark:bg-[#101014] border-b border-black/[0.04] dark:border-white/[0.06]">
@@ -254,8 +274,10 @@ export function CardItem({
 
           {/* Author & ID Row */}
           <div className="flex items-center justify-between gap-1 mt-1 sm:mt-1.5 text-[10px] sm:text-[11px] text-[#86868b] dark:text-zinc-400">
-            <span className="text-[#515154] dark:text-zinc-300 font-medium truncate max-w-[70%] flex items-center gap-1">
-              @{authorDisplay}
+            {/* truncate 必须落在真正装文本的元素上：text-overflow 对 display:flex 的容器不生效，
+                直接挂在外层会变成硬裁没有省略号（长署名如「威比 Hunter Wei.（抖音、小红书同名）」尤其明显）。 */}
+            <span className="text-[#515154] dark:text-zinc-300 font-medium min-w-0 sm:max-w-[70%] flex items-center gap-1 overflow-hidden">
+              <span className="truncate min-w-0">@{authorDisplay}</span>
               {item.repo_url && (
                 <a
                   href={item.repo_url}
@@ -269,7 +291,9 @@ export function CardItem({
                 </a>
               )}
             </span>
-            <span className="font-mono text-[#86868b] dark:text-zinc-500 shrink-0 text-[10px]">
+            {/* ID 是内部调试用的 slug，优先级低于署名：允许它收缩截断，
+                否则长 ID（如 wibi-electric-blue-halftone-poster）会把署名挤到只剩几十像素。 */}
+            <span className="hidden sm:block font-mono text-[#86868b] dark:text-zinc-500 text-[10px] truncate min-w-0 max-w-[45%] text-right">
               {item.id}
             </span>
           </div>

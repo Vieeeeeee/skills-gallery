@@ -25,7 +25,7 @@ npx wrangler pages deploy dist --project-name=skills-gallery
 
 - **核心框架**: React 19 + Vite 6 + TailwindCSS 3.4
 - **图标系统**: Lucide React
-- **数据单源**: `public/skills_data.json` (1,083 条目，含 999 视觉风格、76 Agent 技能、8 工具)
+- **数据单源**: `public/skills_data.json` (1,079 条目，含 999 视觉风格、72 Agent 技能、8 工具)
 - **部署平台**: Cloudflare Pages (`https://skills-gallery-bs1.pages.dev`)
 
 ## 核心组件与布局分工
@@ -34,7 +34,7 @@ npx wrangler pages deploy dist --project-name=skills-gallery
 - `src/components/Navbar.jsx`: 顶部常驻导航栏，支持全局搜索（`/` 快捷聚焦）、速写本模式切换、分类筛选、交流群入口。
 - `src/components/CardItem.jsx`: 画廊瀑布流卡片，分流渲染 Style（海报）、Skill（智能体终端卡）、Tool（工具卡）。
 - `src/utils/copy.js`: **全站唯一的剪贴板出口**。`navigator.clipboard` 在微信内置浏览器等 WebView 里可能不存在或被拒绝，直接调用会静默失败甚至让 UI 谎报「已复制」。任何新增的复制动作都必须走 `copyText()` 并处理它的 false 返回值，禁止直接调 `navigator.clipboard`。
-- `src/utils/search.js`: 搜索语料按条目缓存在 WeakMap 里（不缓存的话每次按键要为 1083 条重拼全文，实测 20ms/键）。新增可搜字段时记得同步 `getCorpus()`。
+- `src/utils/search.js`: 搜索语料按条目缓存在 WeakMap 里（不缓存的话每次按键要为 1079 条重拼全文，实测 20ms/键）。新增可搜字段时记得同步 `getCorpus()`。
 - `src/components/AboutModal.jsx`: 聚合呈现社群共建致谢（@我的世界皓宸）、微信二维码与微信号 `Wibi2077` 复制、Wibi X 及原创认领通道。
 - `src/components/sketchbook/SketchbookView.jsx`: MengTo 拟真 3D 实体手账速写本，支持 18-Strip 真实纸弧度弯曲翻页、28px 统一精致控件、纯文字下划线动效与右下角实体放大镜。
 - `src/components/sketchbook/sketchbook.css`: 速写本核心物理样式。**注意：`.sb-3d` 采用视口反推尺寸公式 `calc((100vh - 260px) * 1.419)`，严禁改为定高 flex-grow，否则会导致书本垂直穿透溢出打架。**

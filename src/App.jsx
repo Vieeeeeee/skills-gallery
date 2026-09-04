@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { Navbar } from './components/Navbar';
 import { CategoryFilter } from './components/CategoryFilter';
 import { CardItem } from './components/CardItem';
@@ -17,6 +17,8 @@ import { STORAGE_KEYS, readStorage, writeStorage, removeStorage } from './utils/
 import { Sparkles, Palette, Terminal, Wrench, SearchX, RefreshCw, ChevronDown, X, QrCode, ArrowUp, AlertTriangle } from 'lucide-react';
 
 const PAGE_SIZE = 24;
+// 发布新数据时把这个版本号 +1：所有做过本地编辑的用户会被解锁回官方数据。
+const DATA_VERSION = 'v14';
 
 // Helper to check if an item is created by Wibi
 export const isWibiItem = (item) => {
@@ -84,6 +86,8 @@ export function App() {
   const [selectedTag, setSelectedTag] = useState('');
   const [isBookmarkOnly, setIsBookmarkOnly] = useState(false);
   const [viewMode, setViewMode] = useState('grid');
+  // Tailwind sm 断点（640px）：决定只挂载移动端 2 列版还是桌面端 masonry 版，避免两套同时渲染
+  const [isNarrow, setIsNarrow] = useState(() => window.innerWidth < 640);
   const [appMode, setAppMode] = useState(() => {
     const saved = readStorage(STORAGE_KEYS.appMode);
     return saved === 'sketchbook' ? 'sketchbook' : 'gallery';
@@ -147,6 +151,8 @@ export function App() {
   const showToast = (message, type = 'success') => {
     setToast({ message, type, id: Date.now() });
   };
+  // useCallback：稳定 onClose 的引用，否则 Toast.jsx 的自动关闭计时器每次 App 重渲染都会被重置
+  const handleCloseToast = useCallback(() => setToast(null), []);
 
   // Initial Load: Always load fresh clean dataset on startup; preserve only explicit admin edits
   useEffect(() => {
@@ -156,7 +162,7 @@ export function App() {
         const currentVersion = readStorage(STORAGE_KEYS.dataVersion);
         const localData = readStorage(STORAGE_KEYS.data);
 
-        if (isCustomModified && currentVersion === 'v14' && localData) {
+        if (isCustomModified && currentVersion === DATA_VERSION && localData) {
           try {
             const parsed = assertSkillsData(JSON.parse(localData));
             setSkills(curateAndInterleaveSkills(parsed, false));
@@ -177,7 +183,11 @@ export function App() {
         const curated = curateAndInterleaveSkills(data, false);
         setSkills(curated);
         setLoadError(null);
-        writeStorage(STORAGE_KEYS.dataVersion, 'v14');
+        // 清掉本地快照与修改标记：否则下次发布新版本号时，已修改过本地数据的用户
+        // 会被 isCustomModified 守卫拦住，只解锁一次又退回旧快照，永久错过新内容。
+        removeStorage(STORAGE_KEYS.data);
+        removeStorage(STORAGE_KEYS.dataModified);
+        writeStorage(STORAGE_KEYS.dataVersion, DATA_VERSION);
       } catch (err) {
         console.error('Failed to load initial data:', err);
         setLoadError(err.message || '未知错误');
@@ -192,7 +202,7 @@ export function App() {
     // Secret Admin URL Trigger (?admin=true or #admin)
     try {
       const params = new URLSearchParams(window.location.search);
-      if (params.get('admin') === 'true' || window.location.hash === '#admin' || window.location.pathname.endsWith('/admin')) {
+      if (params.get('admin') === 'true' || window.location.hash === '#admin') {
         setIsAuthModalOpen(true);
       }
     } catch (e) {
@@ -200,8 +210,14 @@ export function App() {
     }
   }, []);
 
-  // Save App Mode
+  // Save App Mode (skip when the mobile safety guard force-switched it below — that's
+  // a device limitation, not the user changing their mind, so it must not be persisted)
+  const forcedGalleryRef = useRef(false);
   useEffect(() => {
+    if (forcedGalleryRef.current) {
+      forcedGalleryRef.current = false;
+      return;
+    }
     writeStorage(STORAGE_KEYS.appMode, appMode);
   }, [appMode]);
 
@@ -313,12 +329,14 @@ export function App() {
     };
   }, [hasMore, loading, appMode, filteredSkills.length]);
 
-  // Related items for detail modal
+  // Related items for detail modal: prefer same category, only fall back to same type to fill up to 3
   const relatedItems = useMemo(() => {
     if (!selectedItem) return [];
-    return skills.filter(
-      (s) => s.id !== selectedItem.id && (s.category === selectedItem.category || s.type === selectedItem.type)
-    );
+    const pool = skills.filter((s) => s.id !== selectedItem.id);
+    const sameCat = pool.filter((s) => s.category === selectedItem.category);
+    if (sameCat.length >= 3) return sameCat.slice(0, 3);
+    const sameType = pool.filter((s) => s.type === selectedItem.type && s.category !== selectedItem.category);
+    return [...sameCat, ...sameType].slice(0, 3);
   }, [skills, selectedItem]);
 
   // Actions
@@ -374,8 +392,11 @@ export function App() {
   const handleAppendItems = (newItems) => {
     const existingIds = new Set(skills.map((s) => s.id));
     const toAdd = newItems.filter((it) => !existingIds.has(it.id));
-    const merged = [...toAdd, ...skills];
-    saveSkillsData(merged);
+    if (toAdd.length === 0) {
+      showToast('没有新增条目：上传的内容已全部存在', 'info');
+      return 0; // 一条都没新增就不落库，避免白白把用户钉死在当前数据快照上
+    }
+    saveSkillsData([...toAdd, ...skills]);
     showToast(`成功新增 ${toAdd.length} 个条目！`);
     return toAdd.length;
   };
@@ -435,7 +456,9 @@ export function App() {
   // On mobile (< 768px), automatically stay in buttery-smooth native gallery view.
   useEffect(() => {
     const handleResize = () => {
+      setIsNarrow(window.innerWidth < 640);
       if (window.innerWidth < 768 && appMode === 'sketchbook') {
+        forcedGalleryRef.current = true;
         setAppMode('gallery');
       }
     };
@@ -448,7 +471,7 @@ export function App() {
     <div className="min-h-screen flex flex-col bg-[#f5f5f7] dark:bg-[#09090b] text-[#1d1d1f] dark:text-zinc-100 selection:bg-indigo-500/20 selection:text-indigo-900 transition-colors duration-200 overflow-x-hidden w-full max-w-[100vw]">
       
       {/* Toast */}
-      <Toast toast={toast} onClose={() => setToast(null)} />
+      <Toast toast={toast} onClose={handleCloseToast} />
 
       {/* Standalone Full-Screen MengTo Sketchbook Mode */}
       {appMode === 'sketchbook' ? (
@@ -706,9 +729,9 @@ export function App() {
 
         {/* Responsive Feed View (Mobile: 2 Flex Columns | Tablet: 3 Multi-Columns | Desktop: 4 Multi-Columns) */}
         {!loading && appMode === 'gallery' && viewMode === 'grid' && (
-          <>
-            {/* Mobile View: Dedicated 2-Column Flexbox Waterfall (100% immune to WebKit multi-column paint bugs) */}
-            <div className="sm:hidden flex gap-2 items-start w-full">
+          isNarrow ? (
+            /* Mobile View: Dedicated 2-Column Flexbox Waterfall (100% immune to WebKit multi-column paint bugs) */
+            <div className="flex gap-2 items-start w-full">
               <div className="flex-1 min-w-0 flex flex-col gap-2">
                 {displayedSkills
                   .filter((_, i) => i % 2 === 0)
@@ -758,9 +781,9 @@ export function App() {
                   ))}
               </div>
             </div>
-
-            {/* Desktop View (sm+): Multi-column Masonry (3 cols on tablet, 4 cols on desktop) */}
-            <div className="hidden sm:block sm:columns-3 lg:columns-4 gap-4.5">
+          ) : (
+            /* Desktop View (sm+): Multi-column Masonry (3 cols on tablet, 4 cols on desktop) */
+            <div className="columns-3 lg:columns-4 gap-4.5">
               {displayedSkills.map((item, index) => (
                 <CardItem
                   key={item.id}
@@ -782,7 +805,7 @@ export function App() {
                 />
               ))}
             </div>
-          </>
+          )
         )}
 
         {/* List View (2-Column Responsive Grid) */}

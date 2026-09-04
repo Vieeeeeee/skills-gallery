@@ -1350,27 +1350,6 @@
     "install_command": "npx skills add Lixorn/deconstructed-duotone-poster"
   },
   {
-    "id": "skill-017",
-    "title": "xxd-panel",
-    "type": "skill",
-    "category": "国风与水墨",
-    "author": "nevertoday",
-    "repo_url": "https://github.com/nevertoday/xxd-panel",
-    "command": "使用 $xxd-panel 处理这张照片",
-    "tags": [
-      "国风美学",
-      "面板排版",
-      "新中式",
-      "开源Skill"
-    ],
-    "description": "专为新中式、国风传统美学设计的图文排版面板。传统宣纸纹理底色结合优雅书法标题与留白秩序。",
-    "cover_image": "",
-    "images": [],
-    "accent_color": "#8C3B34",
-    "gradient": "from-[#2C302E]/90 via-[#3A403D]/80 to-[#1E2220]",
-    "install_command": "npx skills add nevertoday/xxd-panel"
-  },
-  {
     "id": "skill-018",
     "title": "muted-zine-poster-v01",
     "type": "skill",
@@ -1537,27 +1516,6 @@
     "accent_color": "#38A3A5",
     "gradient": "from-[#1F3338]/90 via-[#254247]/80 to-[#142226]",
     "install_command": "npx skills add cyberlesterr/paper-collage-video"
-  },
-  {
-    "id": "skill-032",
-    "title": "ShortVideoDictor",
-    "type": "skill",
-    "category": "AI 视频与动效",
-    "author": "wddxh",
-    "repo_url": "https://github.com/wddxh/ShortVideoDictor",
-    "command": "使用 $ShortVideoDictor 编写短视频口播文案",
-    "tags": [
-      "多Agent协作",
-      "短视频导演",
-      "自动化剧本",
-      "开源Skill"
-    ],
-    "description": "五个 AI 子代理协作架构：Director 统筹审核、Writer 写小说、Scriptwriter 拆分镜，实现全自动短视频创作流水线。",
-    "cover_image": "",
-    "images": [],
-    "accent_color": "#38A3A5",
-    "gradient": "from-[#1F3338]/90 via-[#254247]/80 to-[#142226]",
-    "install_command": "npx skills add wddxh/ShortVideoDictor"
   },
   {
     "id": "skill-033",
@@ -1747,48 +1705,6 @@
     "accent_color": "#2A9D8F",
     "gradient": "from-[#1D3533]/90 via-[#244542]/80 to-[#132322]",
     "install_command": "npx skills add clockless-org/html-anything"
-  },
-  {
-    "id": "skill-044",
-    "title": "career-ops",
-    "type": "skill",
-    "category": "职场与思考",
-    "author": "Community",
-    "repo_url": "https://github.com/career-ops/career-ops",
-    "command": "使用 $career-ops 规划职业与优化简历",
-    "tags": [
-      "ATS优化",
-      "简历看板",
-      "求职全流程",
-      "职场提效"
-    ],
-    "description": "求职全流程自动化系统。岗位批量匹配度扫描、ATS 友好型简历量化改写以及多平台投递进度追踪看板。",
-    "cover_image": "",
-    "images": [],
-    "accent_color": "#5E6472",
-    "gradient": "from-[#282C35]/90 via-[#333842]/80 to-[#1B1D24]",
-    "install_command": "npx skills add career-ops/career-ops"
-  },
-  {
-    "id": "skill-045",
-    "title": "interview-coach-skill",
-    "type": "skill",
-    "category": "职场与思考",
-    "author": "Community",
-    "repo_url": "https://github.com/interview-coach/interview-coach-skill",
-    "command": "使用 $interview-coach-skill 进行模拟面试辅导",
-    "tags": [
-      "模拟面试",
-      "STAR法则",
-      "五维评分",
-      "职场提效"
-    ],
-    "description": "五维度专业模拟面试官。自适应多轮深挖提问，针对回答给出 STAR 原则量化重写建议与个人故事库搭建指导。",
-    "cover_image": "",
-    "images": [],
-    "accent_color": "#5E6472",
-    "gradient": "from-[#282C35]/90 via-[#333842]/80 to-[#1B1D24]",
-    "install_command": "npx skills add interview-coach/interview-coach-skill"
   },
   {
     "id": "skill-046",

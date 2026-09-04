@@ -11,7 +11,7 @@ import {
   Check,
   ExternalLink
 } from 'lucide-react';
-import { generateSpreadImage, cleanTitle } from './spreadGenerator';
+import { generateSpreadImage, cleanTitle, clearSpreadCache, MAX_SPREADS } from './spreadGenerator';
 import { copyText } from '../../utils/copy';
 
 const N = 18;           // strips — enough for a smooth curve
@@ -20,7 +20,6 @@ const BETA = 0.60;      // peak curl of arc
 const TILT_X = 4.5, TILT_Y = 7;
 const ZOOM_MIN = 0.9, ZOOM_MAX = 1.5;
 const MAG = 2.3;
-const MAX_SPREADS = 60;   // 速写本一次最多铺 60 页（每页要现画一张 1760x1240 画布）
 
 export function SketchbookView({
   items = [],
@@ -42,6 +41,14 @@ export function SketchbookView({
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Release every cached spread's blob: URL when leaving the sketchbook for
+  // good (not on every category switch — [pages] effect below handles that
+  // via the cache's own LRU cap instead, so mid-session filtering doesn't
+  // throw away pages the user might filter back to).
+  useEffect(() => {
+    return () => clearSpreadCache();
   }, []);
 
   const containerRef = useRef(null);
@@ -132,18 +139,10 @@ export function SketchbookView({
           setActiveItem(spreadList[0]);
         }
       }
-
-      // Idle-time background preheating for the rest of pages
-      setTimeout(async () => {
-        for (let i = 3; i < spreadItems.length; i++) {
-          if (!isMounted) break;
-          const it = spreadItems[i];
-          if (!spreadList[i].url) {
-            const url = await generateSpreadImage(it, i);
-            if (url) spreadList[i].url = url;
-          }
-        }
-      }, 400);
+      // Remaining pages are generated on demand as they're turned to
+      // (imgEl below) plus a ±1-page idle-time prefetch around whichever
+      // page is active (prefetchNeighbors in the effect below) — no more
+      // bulk-generating the whole book up front.
     }
 
     loadPages();
@@ -197,7 +196,11 @@ export function SketchbookView({
       im.draggable = false;
       im.alt = cleanTitle(pages[i]?.title) || '';
       im.src = pages[i]?.url || '/sketchbook/blank-sketchbook.webp';
-      if (pages[i] && !pages[i].url && true) {
+      if (pages[i]) {
+        // Always touch generateSpreadImage, even when pages[i].url is
+        // already set: a cache hit is a cheap Map lookup and it moves this
+        // page to most-recently-used, so a page currently on screen never
+        // becomes the LRU cache's eviction target (see spreadGenerator.js).
         generateSpreadImage(pages[i], pages[i].spreadIndex ?? i).then(url => {
           if (url) {
             pages[i].url = url;
@@ -281,11 +284,36 @@ export function SketchbookView({
       capIn.style.opacity = inn.toFixed(3);
     }
 
+    // Idle-time prefetch of the pages either side of targetIdx, so flipping
+    // forward/back usually lands on an already-warm page. Low priority on
+    // purpose — it must never compete with the turn animation for the
+    // main thread the way the old bulk-preheat loop did.
+    // 记下句柄并在 cleanup 里取消：不取消的话，切分类后过期的回调仍会跑，
+    // 为已经被 setPages 换掉的旧册白画一页、还占一个缓存位。
+    let prefetchHandle = null;
+    const cancelRic = window.cancelIdleCallback || clearTimeout;
+    function prefetchNeighbors(targetIdx) {
+      const ric = window.requestIdleCallback || ((fn) => setTimeout(fn, 200));
+      if (prefetchHandle !== null) cancelRic(prefetchHandle);
+      prefetchHandle = ric(() => {
+        prefetchHandle = null;
+        [(targetIdx + 1) % M, (targetIdx - 1 + M) % M].forEach((i) => {
+          const p = pages[i];
+          if (p && !p.url) {
+            generateSpreadImage(p, p.spreadIndex ?? i).then((url) => {
+              if (url) p.url = url;
+            });
+          }
+        });
+      });
+    }
+
     function syncActivePage(targetIdx) {
       const page = pages[targetIdx];
       if (page) {
         setActiveItem(page);
       }
+      prefetchNeighbors(targetIdx);
     }
 
     function caption() {
@@ -401,7 +429,8 @@ export function SketchbookView({
         im.src = pages[idx]?.url || '/sketchbook/blank-sketchbook.webp';
         im.alt = cleanTitle(pages[idx]?.title);
         im.draggable = false;
-        if (pages[idx] && !pages[idx].url && true) {
+        if (pages[idx]) {
+          // Same touch-on-display reasoning as imgEl() above.
           generateSpreadImage(pages[idx], pages[idx].spreadIndex ?? idx).then(url => {
             if (url) {
               pages[idx].url = url;
@@ -774,6 +803,7 @@ export function SketchbookView({
       window.removeEventListener('pointermove', onLoupeMove);
       window.removeEventListener('pointerup', onLoupeUp);
       if (raf) cancelAnimationFrame(raf);
+      if (prefetchHandle !== null) cancelRic(prefetchHandle);
     };
   }, [pages]);
 
@@ -946,8 +976,8 @@ export function SketchbookView({
 
       {/* Hero 3D Sketchbook Section */}
       <section className="sb-hero">
-        <img className="sb-botany l" src="/sketchbook/botany-left.png" alt="" aria-hidden="true" />
-        <img className="sb-botany r" src="/sketchbook/botany-right.png" alt="" aria-hidden="true" />
+        <img className="sb-botany l" src="/sketchbook/botany-left.webp" alt="" aria-hidden="true" />
+        <img className="sb-botany r" src="/sketchbook/botany-right.webp" alt="" aria-hidden="true" />
 
         <p className="sb-hero-kicker">
           AI VISUAL STYLES & OPEN SOURCE SKILLS · SKETCHBOOK EDITION

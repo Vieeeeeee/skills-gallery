@@ -12,8 +12,70 @@ const SPREAD_W = 1760;
 const SPREAD_H = 1240;
 const HALF_W = SPREAD_W / 2; // 880px
 
+// LRU cache of blob: URLs, capped so a 12-category browsing session doesn't
+// pin hundreds of never-revisited pages in memory (cacheKey embeds the
+// filtered-list position, so switching category reshuffles keys and orphans
+// the old ones — the cap+revoke below reclaims them instead of leaking).
+// 速写本一次最多铺多少页（每页要现画一张 1760x1240 画布）。
+// 放在这里而不是 SketchbookView：它和下面的 CACHE_LIMIT 之间有个必须成立的不变量，
+// 两个常量隔在两个文件里，改一个忘另一个就会静默复活下面那个 bug。
+export const MAX_SPREADS = 60;
+
 const spreadCache = new Map();
+// 必须 >= MAX_SPREADS：SketchbookView 的 pages[i].url 持有的是缓存 URL 的副本，
+// 缓存淘汰会 revoke 掉 blob，但那份副本不会被置空，于是变成死链接 —— 而
+// prefetchNeighbors 的守卫是 `!p.url`，死链接是 truthy，那些页永远不会被重新烘热，
+// 往回翻就是白页。上限设成一整册的页数后，同一册内不再淘汰，淘汰只发生在切分类时
+// （那时 setPages 已经换掉整个 pages 数组，不存在悬空引用）。
+// 实测单页 WebP blob 90~151KB（均值 109KB），60 页约 6.4MB 二进制，不占 JS 堆。
+const CACHE_LIMIT = MAX_SPREADS;
 let baseTemplateImg = null;
+// 同一个 cacheKey 的并发调用共用一个 Promise：翻页结束的 paint() 和下一次翻页开始的
+// imgEl() 会对同一页各发一次，撞上就会多跑一整张 1760x1240 的同步绘制，
+// 且后写入的 URL 会把先写入的顶掉却不 revoke（真泄漏）。窗口是整个编码时长（约 420ms），
+// 用户 400ms 内连翻两页就能撞上，不是罕见路径。
+const inFlight = new Map();
+
+function cacheKeyFor(item, index) {
+  return item.id + '_' + index;
+}
+
+// Touch-on-access：命中时把 key 移到 MRU。注意它只保证「这个 cache key 不会被选中淘汰」，
+// 保证不了外部持有的 URL 副本（如 SketchbookView 的 pages[i].url）不悬空——那是靠
+// CACHE_LIMIT >= MAX_SPREADS 来保证的，别把两件事混为一谈。
+function cacheGet(key) {
+  if (!spreadCache.has(key)) return undefined;
+  const url = spreadCache.get(key);
+  spreadCache.delete(key);
+  spreadCache.set(key, url); // move to MRU (end of Map = insertion order)
+  return url;
+}
+
+function cacheSet(key, url) {
+  spreadCache.set(key, url);
+  if (spreadCache.size > CACHE_LIMIT) {
+    const oldestKey = spreadCache.keys().next().value;
+    const oldestUrl = spreadCache.get(oldestKey);
+    spreadCache.delete(oldestKey);
+    if (oldestUrl) URL.revokeObjectURL(oldestUrl);
+  }
+}
+
+// Revoke every cached blob: URL. Call when leaving the sketchbook entirely.
+export function clearSpreadCache() {
+  for (const url of spreadCache.values()) {
+    URL.revokeObjectURL(url);
+  }
+  spreadCache.clear();
+}
+
+function canvasToObjectURL(canvas, type, quality) {
+  return new Promise((resolve) => {
+    canvas.toBlob((blob) => {
+      resolve(blob ? URL.createObjectURL(blob) : null);
+    }, type, quality);
+  });
+}
 
 // Preload the lightweight 46KB blank sketchbook template
 function getBaseTemplate() {
@@ -44,13 +106,32 @@ export function cleanTitle(raw) {
     .trim();
 }
 
+// 取一页 spread 的 blob: URL。三级：缓存命中 → 已在生成中就复用同一个 Promise → 现画。
 export async function generateSpreadImage(item, index) {
   if (!item) return null;
-  const cacheKey = item.id + '_' + index;
-  if (spreadCache.has(cacheKey)) {
-    return spreadCache.get(cacheKey);
+  const cacheKey = cacheKeyFor(item, index);
+  const cached = cacheGet(cacheKey);
+  if (cached !== undefined) {
+    return cached;
   }
+  const pending = inFlight.get(cacheKey);
+  if (pending) return pending;
 
+  // catch 收在这里：job 是共享的，一次绘制失败会把同一个 rejected promise 分发给
+  // 所有并发调用者，而三处调用点都只挂了 .then —— 不收就是 N 条 unhandled rejection。
+  const job = drawSpread(item, index, cacheKey).catch((err) => {
+    console.error('生成速写本页面失败:', err);
+    return null;
+  });
+  inFlight.set(cacheKey, job);
+  try {
+    return await job;
+  } finally {
+    inFlight.delete(cacheKey);
+  }
+}
+
+async function drawSpread(item, index, cacheKey) {
   // Create offscreen canvas
   const canvas = document.createElement('canvas');
   canvas.width = SPREAD_W;
@@ -83,9 +164,14 @@ export async function generateSpreadImage(item, index) {
   // 3. Draw Clean, Balanced Text Page
   drawCleanSerifTextPage(ctx, item, index, textBounds);
 
-  const dataUrl = canvas.toDataURL('image/webp', 0.88);
-  spreadCache.set(cacheKey, dataUrl);
-  return dataUrl;
+  // 必须用 WebP：底图 blank-sketchbook.webp 四周本来就是透明的（实测四角 rgba(0,0,0,0)），
+  // 书本的 3D 阴影和纸张边缘要从这些透明像素透上来。换成 JPEG 会把透明填成纯黑，
+  // 每一页都被黑框包住、阴影全被遮死——这个回归实测复现过，别再改回 JPEG。
+  // 编码慢（~420ms）已经不在关键路径上：现在是按需生成 + 空闲时段预取邻页，
+  // 且 toBlob 的编码不占用调用方的 tick。
+  const url = await canvasToObjectURL(canvas, 'image/webp', 0.88);
+  if (url) cacheSet(cacheKey, url);
+  return url;
 }
 
 /**

@@ -4,6 +4,11 @@ Agent 纯手工把关审校：60+ 款真实开源 Skill 与 12 款实用设计/�
 - 彻底剔除假链接、指令噪音与截断标题
 - 准确绑定 GitHub / Gitee 仓库、真实作者与可执行指令
 - 为每款 Skill 分配精准的分类、标签与 100 字内核心功能介绍
+
+注意：这是首发时的一次性摄取脚本，不写 public/skills_data.json，不在构建链路里。
+2026-09-04 上线前审查探活发现 skill-017/032/044/045 的 GitHub 仓库已 404，
+已从数据和本脚本中一并删除。重跑本脚本前请先跑 `node scripts/validate_data.js --check-links`，
+别把失效仓库再请回来。
 """
 
 import os
@@ -248,19 +253,6 @@ def get_verified_skills_and_tools():
             "images": []
         },
         {
-            "id": "skill-017",
-            "title": "xxd-panel",
-            "type": "skill",
-            "category": "国风与水墨",
-            "author": "nevertoday",
-            "repo_url": "https://github.com/nevertoday/xxd-panel",
-            "command": "npx skills add nevertoday/xxd-panel",
-            "tags": ["国风美学", "面板排版", "新中式", "开源Skill"],
-            "description": "专为新中式、国风传统美学设计的图文排版面板。传统宣纸纹理底色结合优雅书法标题与留白秩序。",
-            "cover_image": "",
-            "images": []
-        },
-        {
             "id": "skill-018",
             "title": "muted-zine-poster-v01",
             "type": "skill",
@@ -462,19 +454,6 @@ def get_verified_skills_and_tools():
             "images": []
         },
         {
-            "id": "skill-032",
-            "title": "ShortVideoDictor",
-            "type": "skill",
-            "category": "AI 视频与动效",
-            "author": "wddxh",
-            "repo_url": "https://github.com/wddxh/ShortVideoDictor",
-            "command": "npx skills add wddxh/ShortVideoDictor",
-            "tags": ["多Agent协作", "短视频导演", "自动化剧本", "开源Skill"],
-            "description": "五个 AI 子代理协作架构：Director 统筹审核、Writer 写小说、Scriptwriter 拆分镜，实现全自动短视频创作流水线。",
-            "cover_image": "",
-            "images": []
-        },
-        {
             "id": "skill-033",
             "title": "OpenMontage",
             "type": "skill",
@@ -631,32 +610,6 @@ def get_verified_skills_and_tools():
         # =====================================================================
         # 4. 职场、思考模型与专业领域 (Thinking & Career Agents)
         # =====================================================================
-        {
-            "id": "skill-044",
-            "title": "career-ops",
-            "type": "skill",
-            "category": "职场与思考",
-            "author": "Community",
-            "repo_url": "https://github.com/career-ops/career-ops",
-            "command": "npx skills add career-ops",
-            "tags": ["ATS优化", "简历看板", "求职全流程", "职场提效"],
-            "description": "求职全流程自动化系统。岗位批量匹配度扫描、ATS 友好型简历量化改写以及多平台投递进度追踪看板。",
-            "cover_image": "",
-            "images": []
-        },
-        {
-            "id": "skill-045",
-            "title": "interview-coach-skill",
-            "type": "skill",
-            "category": "职场与思考",
-            "author": "Community",
-            "repo_url": "https://github.com/interview-coach/interview-coach-skill",
-            "command": "npx skills add interview-coach-skill",
-            "tags": ["模拟面试", "STAR法则", "五维评分", "职场提效"],
-            "description": "五维度专业模拟面试官。自适应多轮深挖提问，针对回答给出 STAR 原则量化重写建议与个人故事库搭建指导。",
-            "cover_image": "",
-            "images": []
-        },
         {
             "id": "skill-046",
             "title": "cc-thinking-skills",

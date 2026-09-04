@@ -37,3 +37,7 @@ PROGRESS.md
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Python 字节码缓存
+__pycache__/
+*.pyc
